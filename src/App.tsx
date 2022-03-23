@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer, useState } from 'react';
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
-function App() {
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+// import { DispatchContext, StateContext, LanguageContext, defaultStore } from './store'
+// import { stateReducer } from './reducer'
+
+import HomePage from './pages/home';
+import Layout from './layout';
+
+// import { LOCALES } from "./i18n/locales";
+// import { messages } from "./i18n/messages";
+// import { IntlProvider } from "react-intl";
+
+const App = () => {
+  // const [state, dispatch] = useReducer(stateReducer, defaultStore)
+  // const [currentLocale, setCurrentLocale] = useState(LOCALES.RUSSIAN)
+
+  // const changeLocale = (localeCode: string) => {
+  //   setCurrentLocale(localeCode)
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <IntlProvider messages={messages[currentLocale]} defaultLocale={currentLocale} locale={LOCALES.RUSSIAN}>
+    //     <LanguageContext.Provider value={{ currentLocale, changeLocale }}>
+    //         <DispatchContext.Provider value={dispatch}>
+    //             <StateContext.Provider value={state}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    //                 </StateContext.Provider>
+    //             </DispatchContext.Provider>
+    //         </LanguageContext.Provider>
+    // </IntlProvider>
   );
 }
 
