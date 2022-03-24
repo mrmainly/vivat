@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-import { AppBar, Toolbar, MenuItem, Box, Drawer, IconButton, Container, TextField } from '@mui/material'
+import { AppBar, Toolbar, MenuItem, Box, Drawer, IconButton, Container, TextField, Grid } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 
-import { MyText } from '..'
+import { MyText, MySelect, MyLink } from '..'
+import drawer_links from '../../local_data/drawer_links'
 
 const Main = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -62,6 +63,10 @@ const BottomBarItem = styled(Box)(({ theme }) => ({
     display: 'flex',
 }))
 
+const MidleBarItemSelect = styled(Grid)(({ theme }) => ({
+
+}))
+
 
 const Header = () => {
     const [state, setState] = useState({
@@ -70,6 +75,13 @@ const Header = () => {
     });
     const navigate = useNavigate()
     const { mobileView, drawerOpen } = state;
+
+    const handleDrawerOpen = () =>
+        setState((prevState) => ({ ...prevState, drawerOpen: true }));
+    const handleDrawerClose = () =>
+        setState((prevState) => ({ ...prevState, drawerOpen: false }))
+
+    const array = ['asd', 'asd']
 
     useEffect(() => {
         const setResponsiveness = () => {
@@ -110,8 +122,24 @@ const Header = () => {
                     <MidleBarItem>
                         <img src="/img/Frame60.png" />
                     </MidleBarItem>
-                    <MidleBarItem>
+                    <MidleBarItem sx={{ width: '100%', ml: 2, mr: 2 }}>
+                        <MidleBarItemSelect container >
+                            {/* <Grid item lg={6} xl={6}>
+                                <MySelect title="Якутск" defaultValue="asd">
+                                    {array.map((item, index) => (
+                                        <MenuItem key={index}>{item}</MenuItem>
+                                    ))}
+                                </MySelect>
+                                <MySelect title="Якутск" defaultValue="asd">
+                                    {array.map((item, index) => (
+                                        <MenuItem key={index}>{item}</MenuItem>
+                                    ))}
+                                </MySelect>
+                            </Grid>
+                            <Grid item lg={6} xl={6}>
 
+                            </Grid> */}
+                        </MidleBarItemSelect>
                     </MidleBarItem>
                     <MidleBarItem>
                         <img src="/img/_x0020_1.png" />
@@ -121,8 +149,8 @@ const Header = () => {
                 <BorderLine />
                 <BottomBar>
                     <BottomBarItem sx={{ mr: 5 }}>
-                        <IconButton color="primary" aria-label="upload picture" component="span">
-                            <MenuIcon sx={{ color: '#55CD61' }} />
+                        <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleDrawerOpen}>
+                            <MenuIcon sx={{ color: '#55CD61' }} fontSize="large" />
                         </IconButton>
                     </BottomBarItem>
                     <BottomBarItem sx={{ width: '100%' }}>
@@ -140,10 +168,6 @@ const Header = () => {
         )
     }
     const Mobile = () => {
-        const handleDrawerOpen = () =>
-            setState((prevState) => ({ ...prevState, drawerOpen: true }));
-        const handleDrawerClose = () =>
-            setState((prevState) => ({ ...prevState, drawerOpen: false }));
         return (
             <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', }}>
 
@@ -157,6 +181,22 @@ const Header = () => {
                     {mobileView ? Mobile() : Desktop()}
                 </Toolbar>
             </Container>
+            <Drawer
+                {...{
+                    anchor: "left",
+                    open: drawerOpen,
+                    onClose: handleDrawerClose,
+                }}
+            >
+                <Box style={{
+                    width: 250, padding: 15, display: 'flex', flexDirection: 'column',
+                    height: '100%', alignItems: 'center'
+                }}>
+                    {drawer_links.map((item, index) => (
+                        <MyLink href={item.to} key={index}>{item.label}</MyLink>
+                    ))}
+                </Box>
+            </Drawer>
         </AppBar>
     )
 }

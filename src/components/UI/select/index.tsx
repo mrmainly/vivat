@@ -10,17 +10,17 @@ import { MySelectProps } from '../../../interface'
 //     padding: 10
 // })
 
-export default forwardRef<HTMLInputElement, MySelectProps>(function MySelect({ options, defaultValue, variant, title, ref, children, ...props }) {
+export default forwardRef<HTMLInputElement, MySelectProps>(function MySelect({ defaultValue, variant, title, ref, children, ...props }) {
     return (
         <TextField
             id="filled-select-currency-native"
             select
             label={title}
             fullWidth
-            variant="outlined"
-            margin="normal"
+            variant="filled"
             defaultValue={defaultValue}
             inputRef={ref}
+            size="small"
             {...props}
         >
             {children}

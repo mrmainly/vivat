@@ -39,7 +39,6 @@ interface ButtonProps {
 
 interface MySelectProps {
     variant?: string,
-    options: any,
     title: string,
     sx?: any,
     placeholder?: string,
@@ -48,10 +47,31 @@ interface MySelectProps {
     children?: any
 }
 
+interface MyContainerProps {
+    children: any,
+    wrapper: boolean,
+    bgImg?: any,
+    sx?: any,
+    lg?: number,
+    xl?: number,
+    sm?: number,
+    md?: number,
+    xs?: number,
+    minHeight?: number
+}
+
+interface MyLinkProps {
+    children: any,
+    href: string,
+    sx?: any
+}
+
 export type {
     MyTextProps,
     InputProps,
     FormProps,
     MySelectProps,
-    ButtonProps
+    ButtonProps,
+    MyContainerProps,
+    MyLinkProps
 }
