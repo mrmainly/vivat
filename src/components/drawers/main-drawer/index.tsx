@@ -1,13 +1,18 @@
 import React from 'react'
 
-import { Drawer, Box } from '@mui/material'
+import { Drawer, Box, IconButton } from '@mui/material'
 
-import { MyLink, BorderLine } from '..'
-import drawer_links from '../../local_data/drawer_links'
-import drawer_elements from '../../local_data/drawer_elements'
-import { MyDrawerProps } from '../../interface'
+import { MyLink, BorderLine } from '../..'
+import drawer_links from '../../../local_data/drawer_links'
+import drawer_elements from '../../../local_data/drawer_elements'
+import { MyDrawerProps } from '../../../interface'
 
-const MyDrawer: React.FC<MyDrawerProps> = ({ handleDrawerClose, drawerOpen }) => {
+const MainDrawer: React.FC<MyDrawerProps> = ({ setState, drawerOpen }) => {
+    const handleDrawerOpen = () =>
+        setState((prevState: any) => ({ ...prevState, drawerOpen: true }));
+
+    const handleDrawerClose = () =>
+        setState((prevState: any) => ({ ...prevState, drawerOpen: false }))
     return (
         <Drawer
             {...{
@@ -21,6 +26,9 @@ const MyDrawer: React.FC<MyDrawerProps> = ({ handleDrawerClose, drawerOpen }) =>
                 width: 300, padding: 15, display: 'flex', flexDirection: 'column',
                 height: '100%',
             }}>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <IconButton onClick={() => handleDrawerClose()}><img src="/img/Close_round_light.png" /></IconButton>
+                </Box>
                 <Box>
                     <BorderLine sx={{ mb: 2, mt: 2 }} />
                     {drawer_elements.map((item: any, index: number) => (
@@ -40,4 +48,4 @@ const MyDrawer: React.FC<MyDrawerProps> = ({ handleDrawerClose, drawerOpen }) =>
     )
 }
 
-export default MyDrawer
+export default MainDrawer

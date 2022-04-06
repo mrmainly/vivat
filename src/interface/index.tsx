@@ -67,7 +67,7 @@ interface MyLinkProps {
 }
 
 interface MyDrawerProps {
-    handleDrawerClose: any,
+    setState: any,
     drawerOpen: any
 }
 

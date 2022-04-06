@@ -5,9 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 
-import { MyText, MySelect, MyLink, MyDrawer, BorderLine } from '..'
-
-
+import { MyText, MySelect, MyLink, MyDrawer, BorderLine, ProfileDrawer } from '..'
 
 const Main = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -66,14 +64,13 @@ const Header = () => {
     const [state, setState] = useState({
         mobileView: false,
         drawerOpen: false,
+        drawerProfileOpen: false
     });
     const navigate = useNavigate()
-    const { mobileView, drawerOpen } = state;
+    const { mobileView, drawerOpen, drawerProfileOpen } = state;
 
     const handleDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: true }));
-    const handleDrawerClose = () =>
-        setState((prevState) => ({ ...prevState, drawerOpen: false }))
 
     const array = ['asd', 'asd']
 
@@ -156,11 +153,11 @@ const Header = () => {
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Message_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/File_dock_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Favorite_light.png" /></IconButton>
-                        <IconButton size="small" sx={{ mr: 1 }}><img src="/img/User_cicrle_light.png" /></IconButton>
+                        <IconButton size="small" sx={{ mr: 1 }} onClick={() => setState((prevState) => ({ ...prevState, drawerProfileOpen: true }))}><img src="/img/User_cicrle_light.png" /></IconButton>
                         <MenuItem sx={{ mr: 1 }} onClick={() => navigate('/basket')}><img src="/img/Frame954.png" /></MenuItem>
                     </BottomBarItem>
                 </BottomBar>
-            </Main>
+            </Main >
         )
     }
     const Mobile = () => {
@@ -175,7 +172,8 @@ const Header = () => {
             <Container>
                 {mobileView ? Mobile() : Desktop()}
             </Container>
-            <MyDrawer handleDrawerClose={handleDrawerClose} drawerOpen={drawerOpen} />
+            <MyDrawer setState={setState} drawerOpen={drawerOpen} />
+            <ProfileDrawer setState={setState} drawerOpen={drawerProfileOpen} />
         </AppBar>
     )
 }
