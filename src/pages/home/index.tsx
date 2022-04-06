@@ -6,10 +6,10 @@ import product_data from '../../local_data/product_data'
 
 const Home = () => {
     return (
-        <MyContainer wrapper={false}>
+        <div>
             <ProductCardsSlider title="Популярные товары" data={product_data} />
             <ProductCardsSlider title="Товары дня" data={product_data} />
-        </MyContainer>
+        </div>
     )
 }
 

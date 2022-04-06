@@ -4,13 +4,10 @@ import { Outlet } from 'react-router-dom'
 import { styled } from '@mui/system'
 import { Box } from '@mui/material'
 
-import { Header, Footer } from '../components'
+import { Header, Footer, MyContainer } from '../components'
 
 const Main = styled(Box)(({ theme }) => ({
-    minHeight: '100vh',
-    overflow: 'hidden',
-    background: '#F7F9F7',
-    paddingBottom: 80
+
 }))
 
 const Layout: React.FC = () => {
@@ -18,9 +15,13 @@ const Layout: React.FC = () => {
         <div>
             <Header />
             {/* <Notification /> */}
-            <Main>
+            <MyContainer wrapper={true} minHeight={600} sx={{
+                overflow: 'hidden',
+                background: '#F7F9F7',
+                pb: 8,
+            }}>
                 <Outlet />
-            </Main>
+            </MyContainer>
             <Footer />
             {/* <Footer /> */}
         </div>

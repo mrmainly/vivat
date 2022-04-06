@@ -6,10 +6,8 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 // import { DispatchContext, StateContext, LanguageContext, defaultStore } from './store'
 // import { stateReducer } from './reducer'
 
-import HomePage from './pages/home';
 import Layout from './layout';
-import Basket from './pages/basket'
-
+import { Home, SignIn, SignUp, Basket } from './pages'
 // import { LOCALES } from "./i18n/locales";
 // import { messages } from "./i18n/messages";
 // import { IntlProvider } from "react-intl";
@@ -30,8 +28,10 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
+          <Route index element={<Home />} />
           <Route element={<Basket />} path="/basket" />
+          <Route element={<SignIn />} path="/signIn" />
+          <Route element={<SignUp />} path="/signUp" />
         </Route>
       </Routes>
     </BrowserRouter>
