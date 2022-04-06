@@ -1,11 +1,14 @@
 import React from 'react'
 
-import { MyContainer, GoodsCard } from '../../components'
+import { MyContainer, ProductCard } from '../../components'
+import { ProductCardsSlider } from '../../constructor'
+import product_data from '../../local_data/product_data'
 
 const Home = () => {
     return (
         <MyContainer wrapper={false}>
-            <GoodsCard description='Крем детский для ежедневного ухода за атопичной кож' img="/img/151985591896.jpg" id={1} price="1723" specialText='Специальное предложение; можно сэкономить' specialPrice={1982} />
+            <ProductCardsSlider title="Популярные товары" data={product_data} />
+            <ProductCardsSlider title="Товары дня" data={product_data} />
         </MyContainer>
     )
 }

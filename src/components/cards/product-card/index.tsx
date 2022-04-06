@@ -4,7 +4,7 @@ import { Card, Box, IconButton, MenuItem } from '@mui/material'
 import { styled } from '@mui/system'
 
 import { GoodsCardProps } from '../../../interface'
-import { MyText, MyButton } from '../../../components'
+import { MyText, MyButton } from '../..'
 
 const Root = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -15,6 +15,7 @@ const Root = styled(Box)(({ theme }) => ({
     background: '#FFFFFF',
     marginTop: 20,
     padding: 20,
+    marginRight: 10
 }))
 
 const Img = styled('img')(({ theme }) => ({
@@ -31,7 +32,7 @@ const CombinedBox = styled(Box)(({ theme }) => ({
     marginTop: 5
 }))
 
-const GoodsCard: React.FC<GoodsCardProps> = ({ img, description, price, specialPrice, specialText }) => {
+const ProductCard: React.FC<GoodsCardProps> = ({ img, description, price, specialPrice, specialText }) => {
     return (
         <Root>
             <Img src={img} />
@@ -76,4 +77,4 @@ const GoodsCard: React.FC<GoodsCardProps> = ({ img, description, price, specialP
     )
 }
 
-export default GoodsCard
+export default ProductCard

@@ -9,7 +9,8 @@ import { Header, Footer } from '../components'
 const Main = styled(Box)(({ theme }) => ({
     minHeight: '100vh',
     overflow: 'hidden',
-    background: '#F7F9F7'
+    background: '#F7F9F7',
+    paddingBottom: 80
 }))
 
 const Layout: React.FC = () => {

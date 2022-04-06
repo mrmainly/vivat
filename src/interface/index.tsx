@@ -80,12 +80,17 @@ interface MainCardsConstructorProps {
 }
 
 interface GoodsCardProps {
-    img?: any,
+    img?: string,
     description?: string,
-    specialPrice?: number,
+    specialPrice?: number | string,
     specialText?: string,
-    id: number,
+    id: number | string,
     price?: number | string
+}
+
+interface ProductSliderProps {
+    title: string,
+    data: any
 }
 
 export type {
@@ -99,5 +104,6 @@ export type {
     MyDrawerProps,
     BorderLineProps,
     MainCardsConstructorProps,
-    GoodsCardProps
+    GoodsCardProps,
+    ProductSliderProps
 }

@@ -7,7 +7,7 @@ import MyLink from './link'
 import MyDrawer from './drawer'
 import BorderLine from './borderLine'
 import Footer from './footer'
-import GoodsCard from './cards/goods-card'
+import ProductCard from './cards/product-card'
 import MyButton from './UI/button'
 
 export {
@@ -20,6 +20,6 @@ export {
     MyDrawer,
     BorderLine,
     Footer,
-    GoodsCard,
+    ProductCard,
     MyButton
 }
