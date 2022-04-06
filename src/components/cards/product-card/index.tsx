@@ -21,8 +21,8 @@ const Root = styled(Box)(({ theme }) => ({
 const Img = styled('img')(({ theme }) => ({
     width: '100%',
     height: 170,
-    filter: 'drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.1))',
-    objectFit: 'cover'
+    objectFit: 'cover',
+    boxShadow: '1px 1px 11px -3px rgba(34, 60, 80, 0.2)'
 }))
 
 const CombinedBox = styled(Box)(({ theme }) => ({
