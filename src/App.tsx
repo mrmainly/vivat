@@ -8,6 +8,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 
 import HomePage from './pages/home';
 import Layout from './layout';
+import Basket from './pages/basket'
 
 // import { LOCALES } from "./i18n/locales";
 // import { messages } from "./i18n/messages";
@@ -30,6 +31,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route element={<Basket />} path="/basket" />
         </Route>
       </Routes>
     </BrowserRouter>

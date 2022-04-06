@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
-import { AppBar, Toolbar, MenuItem, Box, Drawer, IconButton, Container, TextField, Grid } from '@mui/material'
+import { AppBar, Toolbar, MenuItem, Box, IconButton, Container, TextField, Grid } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 
-import { MyText, MySelect, MyLink } from '..'
-import drawer_links from '../../local_data/drawer_links'
+import { MyText, MySelect, MyLink, MyDrawer, BorderLine } from '..'
+
+
 
 const Main = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -30,13 +31,6 @@ const TopBarItem = styled(Box)(({ theme }) => ({
     alignItems: 'center',
 }))
 
-const BorderLine = styled(Box)(({ theme }) => ({
-    width: '100%',
-    background: '#d4d4d4',
-    height: 1,
-    transform: 'scaleY(0.5)',
-    marginTop: 5
-}))
 
 const MidleBar = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -120,7 +114,9 @@ const Header = () => {
                 <BorderLine />
                 <MidleBar>
                     <MidleBarItem>
-                        <img src="/img/Frame60.png" />
+                        <MenuItem onClick={() => navigate('/')}>
+                            <img src="/img/Frame60.png" />
+                        </MenuItem>
                     </MidleBarItem>
                     <MidleBarItem sx={{ width: '100%', ml: 2, mr: 2 }}>
                         <MidleBarItemSelect container >
@@ -161,7 +157,7 @@ const Header = () => {
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/File_dock_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Favorite_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/User_cicrle_light.png" /></IconButton>
-                        <MenuItem sx={{ mr: 1 }}><img src="/img/Frame954.png" /></MenuItem>
+                        <MenuItem sx={{ mr: 1 }} onClick={() => navigate('/basket')}><img src="/img/Frame954.png" /></MenuItem>
                     </BottomBarItem>
                 </BottomBar>
             </Main>
@@ -177,26 +173,9 @@ const Header = () => {
     return (
         <AppBar position="static" sx={{ bgcolor: 'white', color: '#222222' }}>
             <Container>
-                <Toolbar>
-                    {mobileView ? Mobile() : Desktop()}
-                </Toolbar>
+                {mobileView ? Mobile() : Desktop()}
             </Container>
-            <Drawer
-                {...{
-                    anchor: "left",
-                    open: drawerOpen,
-                    onClose: handleDrawerClose,
-                }}
-            >
-                <Box style={{
-                    width: 250, padding: 15, display: 'flex', flexDirection: 'column',
-                    height: '100%', alignItems: 'center'
-                }}>
-                    {drawer_links.map((item, index) => (
-                        <MyLink href={item.to} key={index}>{item.label}</MyLink>
-                    ))}
-                </Box>
-            </Drawer>
+            <MyDrawer handleDrawerClose={handleDrawerClose} drawerOpen={drawerOpen} />
         </AppBar>
     )
 }

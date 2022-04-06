@@ -66,6 +66,28 @@ interface MyLinkProps {
     sx?: any
 }
 
+interface MyDrawerProps {
+    handleDrawerClose: any,
+    drawerOpen: any
+}
+
+interface BorderLineProps {
+    sx: any
+}
+
+interface MainCardsConstructorProps {
+
+}
+
+interface GoodsCardProps {
+    img?: any,
+    description?: string,
+    specialPrice?: number,
+    specialText?: string,
+    id: number,
+    price?: number | string
+}
+
 export type {
     MyTextProps,
     InputProps,
@@ -73,5 +95,9 @@ export type {
     MySelectProps,
     ButtonProps,
     MyContainerProps,
-    MyLinkProps
+    MyLinkProps,
+    MyDrawerProps,
+    BorderLineProps,
+    MainCardsConstructorProps,
+    GoodsCardProps
 }
