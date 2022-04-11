@@ -132,6 +132,42 @@ const Header = () => {
                             <Grid item lg={6} xl={6}>
 
                             </Grid> */}
+                            <Grid item xs={6}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', }}>
+                                    <img src="/img/Vector.png" style={{ marginLeft: 8, marginRight: 8 }} />
+                                    <Box>
+                                        <MyText>Якутск</MyText>
+                                        <MyText variant="body2" sx={{ color: '#999999' }}>Город</MyText>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <img src="/img/Frame.png" />
+                                    <Box>
+                                        <MyText>8 800 800-80-80</MyText>
+                                        <MyText variant="body2" sx={{ color: '#999999' }}>Заказать звонок</MyText>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+                                    <img src="/img/Frame212.png" />
+                                    <Box>
+                                        <MyText>Дзержинского, 34</MyText>
+                                        <MyText variant="body2" sx={{ color: '#999999' }}>Адрес аптеки</MyText>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+                                    <img src="/img/FramePhone.png" />
+                                    <Box>
+                                        <MyText>8 800 800-80-80</MyText>
+                                        <MyText variant="body2" sx={{ color: '#999999' }}>Заказать звонок</MyText>
+                                    </Box>
+                                </Box>
+                            </Grid>
                         </MidleBarItemSelect>
                     </MidleBarItem>
                     <MidleBarItem>

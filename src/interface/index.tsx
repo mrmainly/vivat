@@ -13,7 +13,7 @@ interface InputProps {
     ref: any,
     label?: any,
     sx?: any,
-    variant: any,
+    variant?: any,
     rows?: number,
     id?: any,
     multiline?: any,

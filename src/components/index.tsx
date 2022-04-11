@@ -10,6 +10,7 @@ import Footer from './footer'
 import ProductCard from './cards/product-card'
 import MyButton from './UI/button'
 import ProfileDrawer from './drawers/profile-drawer'
+import Input from './UI/input'
 
 export {
     Header,
@@ -23,5 +24,6 @@ export {
     Footer,
     ProductCard,
     MyButton,
-    ProfileDrawer
+    ProfileDrawer,
+    Input
 }
