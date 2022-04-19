@@ -7,7 +7,9 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 // import { stateReducer } from './reducer'
 
 import Layout from './layout';
-import { Home, SignIn, SignUp, Basket, SignUpVerification, SignUpData } from './pages'
+import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail } from './pages'
+import ROUTES from './routes';
+
 // import { LOCALES } from "./i18n/locales";
 // import { messages } from "./i18n/messages";
 // import { IntlProvider } from "react-intl";
@@ -27,13 +29,10 @@ const App = () => {
     //             <StateContext.Provider value={state}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path={ROUTES.HOME} element={<Layout />}>
           <Route index element={<Home />} />
-          <Route element={<Basket />} path="/basket" />
-          <Route element={<SignIn />} path="/signIn" />
-          <Route element={<SignUp />} path="/signUp" />
-          <Route element={<SignUpVerification />} path="/sign-up-verification" />
-          <Route element={<SignUpData />} path="/sign-up-data" />
+          <Route element={<Basket />} path={ROUTES.BASKET} />
+          <Route path={ROUTES.PRODUCT_DETAIL} element={<ProductDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

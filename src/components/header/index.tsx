@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 
 import { MyText, MySelect, MyLink, MyDrawer, BorderLine, ProfileDrawer } from '..'
+import ROUTES from '../../routes';
 
 const Main = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -111,7 +112,7 @@ const Header = () => {
                 <BorderLine />
                 <MidleBar>
                     <MidleBarItem>
-                        <MenuItem onClick={() => navigate('/')}>
+                        <MenuItem onClick={() => navigate(ROUTES.HOME)}>
                             <img src="/img/Frame60.png" />
                         </MenuItem>
                     </MidleBarItem>
@@ -190,7 +191,7 @@ const Header = () => {
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/File_dock_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Favorite_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }} onClick={() => setState((prevState) => ({ ...prevState, drawerProfileOpen: true }))}><img src="/img/User_cicrle_light.png" /></IconButton>
-                        <MenuItem sx={{ mr: 1 }} onClick={() => navigate('/basket')}><img src="/img/Frame954.png" /></MenuItem>
+                        <MenuItem sx={{ mr: 1 }} onClick={() => navigate(ROUTES.BASKET)}><img src="/img/Frame954.png" /></MenuItem>
                     </BottomBarItem>
                 </BottomBar>
             </Main >
