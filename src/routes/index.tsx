@@ -1,6 +1,6 @@
 enum ROUTES {
     HOME = '/',
-    PRODUCT_DETAIL = '/product-detail/:id',
+    PRODUCT_DETAIL = '/product-detail',
     BASKET = '/basket'
 }
 

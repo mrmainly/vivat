@@ -19,6 +19,7 @@ const Layout: React.FC = () => {
                 overflow: 'hidden',
                 background: '#F7F9F7',
                 pb: 8,
+                pt: 3
             }}>
                 <Outlet />
             </MyContainer>

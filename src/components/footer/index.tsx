@@ -20,94 +20,106 @@ const GridItem = styled(Grid)(({ theme }) => ({
 const Footer = () => {
     const Array = [
         {
-            title: 'Каталог товаров',
+            title: 'ПОМОЩЬ',
             columns: [
                 {
-                    label: 'Лекарственные препараты',
+                    label: 'Как сделать заказ',
                     href: '/'
                 },
                 {
-                    label: 'БАД',
+                    label: 'Оплата и бронирование',
                     href: '/'
                 },
                 {
-                    label: 'Медицинские изделия',
+                    label: 'Доставка',
                     href: '/'
                 },
                 {
-                    label: 'Медтехника',
-                    href: '/'
-                },
-            ]
-        },
-        {
-            title: '',
-            columns: [
-                {
-                    label: 'Гигиена',
-                    href: '/'
-                },
-                {
-                    label: 'Мама и малыш',
-                    href: '/'
-                },
-                {
-                    label: 'Гигиена',
-                    href: '/'
-                },
-                {
-                    label: 'Здоровое питание',
-                    href: '/'
-                },
-            ]
-        },
-        {
-            title: 'Компания',
-            columns: [
-                {
-                    label: 'О компании',
-                    href: '/'
-                },
-                {
-                    label: 'Адреса аптек',
-                    href: '/'
-                },
-            ]
-        },
-        {
-            title: 'Покупателям',
-            columns: [
-                {
-                    label: 'Как оформить заказ',
-                    href: '/'
-                },
-                {
-                    label: 'Программа лояльности',
-                    href: '/'
-                },
-                {
-                    label: 'Бонусная программа',
-                    href: '/'
-                },
-                {
-                    label: 'Личный кабинет',
+                    label: 'Новости',
                     href: '/'
                 },
                 {
                     label: 'Политика конфиденциальности',
                     href: '/'
                 },
+                {
+                    label: 'Работа',
+                    href: '/'
+                },
+                {
+                    label: 'Обратная связь',
+                    href: '/'
+                },
             ]
         },
+        {
+            title: 'О НАС',
+            columns: [
+                {
+                    label: 'О компании',
+                    href: '/'
+                },
+                {
+                    label: 'Контакты',
+                    href: '/'
+                },
+                {
+                    label: 'Оставить отзыв',
+                    href: '/'
+                },
+                {
+                    label: 'Контакты',
+                    href: '/'
+                },
+            ]
+        },
+        // {
+        //     title: 'Компания',
+        //     columns: [
+        //         {
+        //             label: 'О компании',
+        //             href: '/'
+        //         },
+        //         {
+        //             label: 'Адреса аптек',
+        //             href: '/'
+        //         },
+        //     ]
+        // },
+        // {
+        //     title: 'Покупателям',
+        //     columns: [
+        //         {
+        //             label: 'Как оформить заказ',
+        //             href: '/'
+        //         },
+        //         {
+        //             label: 'Программа лояльности',
+        //             href: '/'
+        //         },
+        //         {
+        //             label: 'Бонусная программа',
+        //             href: '/'
+        //         },
+        //         {
+        //             label: 'Личный кабинет',
+        //             href: '/'
+        //         },
+        //         {
+        //             label: 'Политика конфиденциальности',
+        //             href: '/'
+        //         },
+        //     ]
+        // },
     ]
     return (
         <MyContainer wrapper={true} sx={{
-            bgcolor: '#48B453',
+            bgcolor: 'white',
             minHeight: 300,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'white'
+            color: '#55CD61'
         }}>
             <Grid container sx={{ mb: 2 }}>
                 {Array.map((item, index) => (
@@ -118,7 +130,7 @@ const Footer = () => {
                             flexDirection: 'column',
                         }}>
                             {item.columns.map((item, index) => (
-                                <Link to={item.href} key={index} style={{ marginTop: 10, textDecoration: 'none', color: 'white', width: 'max-width' }}>{item.label}</Link>
+                                <Link to={item.href} key={index} style={{ marginTop: 10, textDecoration: 'none', color: '#55CD61', width: 'max-width' }}>{item.label}</Link>
                             ))}
                         </Box>
                     </GridItem>

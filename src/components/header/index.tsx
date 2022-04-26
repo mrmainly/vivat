@@ -67,13 +67,12 @@ const Header = () => {
         drawerOpen: false,
         drawerProfileOpen: false
     });
+
     const navigate = useNavigate()
     const { mobileView, drawerOpen, drawerProfileOpen } = state;
 
     const handleDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: true }));
-
-    const array = ['asd', 'asd']
 
     useEffect(() => {
         const setResponsiveness = () => {

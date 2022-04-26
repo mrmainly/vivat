@@ -1,10 +1,13 @@
 import React from 'react'
 
-import { Card, Box, IconButton, MenuItem } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
 import { styled } from '@mui/system'
+import { useNavigate } from 'react-router-dom'
 
 import { GoodsCardProps } from '../../../interface'
 import { MyText, MyButton } from '../..'
+import ROUTES from '../../../routes'
+import ThemeMain from '../../../theme'
 
 const Root = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -32,7 +35,8 @@ const CombinedBox = styled(Box)(({ theme }) => ({
     marginTop: 5
 }))
 
-const ProductCard: React.FC<GoodsCardProps> = ({ img, description, price, specialPrice, specialText }) => {
+const ProductCard: React.FC<GoodsCardProps> = ({ img, description, price, specialPrice, specialText, id }) => {
+    const navigate = useNavigate()
     return (
         <Root>
             <Img src={img} />
@@ -70,7 +74,7 @@ const ProductCard: React.FC<GoodsCardProps> = ({ img, description, price, specia
             </CombinedBox>
             <MyText variant="body2" sx={{ color: '#EB5757' }}>{specialText}</MyText>
             <CombinedBox>
-                <MyButton sx={{ width: 130 }} size="medium">В корзину</MyButton>
+                <MyButton sx={{ width: 130 }} size="medium" onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`)}>В корзину</MyButton>
                 <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Favorite_light.png" /></IconButton>
             </CombinedBox>
         </Root>

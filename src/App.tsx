@@ -32,7 +32,7 @@ const App = () => {
         <Route path={ROUTES.HOME} element={<Layout />}>
           <Route index element={<Home />} />
           <Route element={<Basket />} path={ROUTES.BASKET} />
-          <Route path={ROUTES.PRODUCT_DETAIL} element={<ProductDetail />} />
+          <Route path={`${ROUTES.PRODUCT_DETAIL}/:id`} element={<ProductDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>
