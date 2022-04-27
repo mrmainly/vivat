@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { styled } from '@mui/system'
 import { Box } from '@mui/material'
 
-import { Header, Footer, MyContainer, SignInModal } from '../components'
+import { Header, Footer, MyContainer, SignInModal, SignUpModal } from '../components'
 
 const Main = styled(Box)(({ theme }) => ({
 
@@ -16,6 +16,7 @@ const Layout: React.FC = () => {
             <Header />
             {/* <Notification /> */}
             <SignInModal />
+            <SignUpModal />
             <MyContainer wrapper={true} minHeight={600} sx={{
                 overflow: 'hidden',
                 background: '#F7F9F7',

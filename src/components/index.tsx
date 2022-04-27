@@ -13,6 +13,7 @@ import ProfileDrawer from './drawers/profile-drawer'
 import Input from './UI/input'
 import TabsProductCard from './tabs/tabs-product-card'
 import SignInModal from './modals/sign-in'
+import SignUpModal from './modals/sign-up'
 
 export {
     Header,
@@ -29,5 +30,6 @@ export {
     ProfileDrawer,
     Input,
     TabsProductCard,
-    SignInModal
+    SignInModal,
+    SignUpModal
 }

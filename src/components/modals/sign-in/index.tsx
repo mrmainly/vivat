@@ -59,7 +59,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 export default function SignIn() {
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
-
+    console.log(state)
     const handleClose = () => {
         dispatch({ type: 'auth_modal', payload: { sign_in: false } })
     };
@@ -91,7 +91,7 @@ export default function SignIn() {
                             <MyButton style={{ marginTop: 10 }} fullWidth>Войти</MyButton>
                         </Form>
                         <BorderLine sx={{ mt: 2, mb: 2, width: 100 }} />
-                        <MyButton fullWidth>Регистрация</MyButton>
+                        <MyButton fullWidth onClick={() => dispatch({ type: 'auth_modal', payload: { sign_in: false, sign_up: true } })}>Регистрация</MyButton>
                         <MenuItem sx={{ mt: 1.5, color: ThemeMain.palette.primary.main }}>Продолжить без авторизации</MenuItem>
                     </Box>
                 </ModalContent>
