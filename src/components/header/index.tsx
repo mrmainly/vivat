@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import { AppBar, Toolbar, MenuItem, Box, IconButton, Container, TextField, Grid } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 
 import { MyText, MySelect, MyLink, MyDrawer, BorderLine, ProfileDrawer } from '..'
+import { DispatchContext } from '../../store'
 import ROUTES from '../../routes';
 
 const Main = styled(Box)(({ theme }) => ({
@@ -67,9 +68,9 @@ const Header = () => {
         drawerOpen: false,
         drawerProfileOpen: false
     });
-
     const navigate = useNavigate()
     const { mobileView, drawerOpen, drawerProfileOpen } = state;
+    const dispatch = useContext(DispatchContext)
 
     const handleDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: true }));
@@ -189,7 +190,7 @@ const Header = () => {
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Message_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/File_dock_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Favorite_light.png" /></IconButton>
-                        <IconButton size="small" sx={{ mr: 1 }} onClick={() => setState((prevState) => ({ ...prevState, drawerProfileOpen: true }))}><img src="/img/User_cicrle_light.png" /></IconButton>
+                        <IconButton size="small" sx={{ mr: 1 }} onClick={() => dispatch({ type: 'auth_modal', payload: { sign_in: true } })}><img src="/img/User_cicrle_light.png" /></IconButton>
                         <MenuItem sx={{ mr: 1 }} onClick={() => navigate(ROUTES.BASKET)}><img src="/img/Frame954.png" /></MenuItem>
                     </BottomBarItem>
                 </BottomBar>

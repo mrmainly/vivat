@@ -3,43 +3,30 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-// import { DispatchContext, StateContext, LanguageContext, defaultStore } from './store'
-// import { stateReducer } from './reducer'
+import { DispatchContext, StateContext, defaultStore } from './store'
+import { stateReducer } from './reducer'
 
 import Layout from './layout';
 import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail } from './pages'
 import ROUTES from './routes';
 
-// import { LOCALES } from "./i18n/locales";
-// import { messages } from "./i18n/messages";
-// import { IntlProvider } from "react-intl";
-
 const App = () => {
-  // const [state, dispatch] = useReducer(stateReducer, defaultStore)
-  // const [currentLocale, setCurrentLocale] = useState(LOCALES.RUSSIAN)
-
-  // const changeLocale = (localeCode: string) => {
-  //   setCurrentLocale(localeCode)
-  // }
+  const [state, dispatch] = useReducer(stateReducer, defaultStore)
 
   return (
-    // <IntlProvider messages={messages[currentLocale]} defaultLocale={currentLocale} locale={LOCALES.RUSSIAN}>
-    //     <LanguageContext.Provider value={{ currentLocale, changeLocale }}>
-    //         <DispatchContext.Provider value={dispatch}>
-    //             <StateContext.Provider value={state}>
-    <BrowserRouter>
-      <Routes>
-        <Route path={ROUTES.HOME} element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route element={<Basket />} path={ROUTES.BASKET} />
-          <Route path={`${ROUTES.PRODUCT_DETAIL}/:id`} element={<ProductDetail />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-    //                 </StateContext.Provider>
-    //             </DispatchContext.Provider>
-    //         </LanguageContext.Provider>
-    // </IntlProvider>
+    <DispatchContext.Provider value={dispatch}>
+      <StateContext.Provider value={state}>
+        <BrowserRouter>
+          <Routes>
+            <Route path={ROUTES.HOME} element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route element={<Basket />} path={ROUTES.BASKET} />
+              <Route path={`${ROUTES.PRODUCT_DETAIL}/:id`} element={<ProductDetail />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </StateContext.Provider>
+    </DispatchContext.Provider>
   );
 }
 

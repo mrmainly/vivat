@@ -119,7 +119,8 @@ const Footer = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#55CD61'
+            color: '#55CD61',
+            padding: 2
         }}>
             <Grid container sx={{ mb: 2 }}>
                 {Array.map((item, index) => (

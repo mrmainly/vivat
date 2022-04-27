@@ -1,16 +1,12 @@
 import React from 'react';
 
 export const defaultStore = {
-    alert: {
-        status: '',
-        text: '',
-        active: false
+    auth_modal: {
+        sign_in: false,
+        sign_up: false,
+        forgot: false
     },
-    tournamentId: {
-        id: 0
-    },
-};
-
+}
 
 
 export const StateContext = React.createContext({} as any);

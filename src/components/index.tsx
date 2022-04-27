@@ -12,6 +12,7 @@ import MyButton from './UI/button'
 import ProfileDrawer from './drawers/profile-drawer'
 import Input from './UI/input'
 import TabsProductCard from './tabs/tabs-product-card'
+import SignInModal from './modals/sign-in'
 
 export {
     Header,
@@ -27,5 +28,6 @@ export {
     MyButton,
     ProfileDrawer,
     Input,
-    TabsProductCard
+    TabsProductCard,
+    SignInModal
 }
