@@ -4,6 +4,7 @@ import { Drawer, Box, MenuItem, IconButton } from '@mui/material'
 
 import { MyLink, BorderLine, MyText } from '../..'
 import { MyDrawerProps } from '../../../interface'
+import ROUTES from '../../../routes'
 
 const ProfileDrawer: React.FC<MyDrawerProps> = ({ setState, drawerOpen }) => {
     const handleDrawerClose = () =>
@@ -27,7 +28,7 @@ const ProfileDrawer: React.FC<MyDrawerProps> = ({ setState, drawerOpen }) => {
                     <MyText variant="h6" sx={{ ml: 1 }}>Иванов иван иванович</MyText>
                 </Box>
                 <BorderLine sx={{ mb: 2, mt: 2 }} />
-                <MyLink href="" sx={{ color: '#20B12E' }}>МОИ ЗАКАЗЫ</MyLink>
+                <MyLink href={ROUTES.MYORDERS} sx={{ color: '#20B12E' }}>МОИ ЗАКАЗЫ</MyLink>
                 <MyLink href="" sx={{ color: '#20B12E', mt: 1 }}>МОИ ДАННЫЕ</MyLink>
                 <MyLink href="" sx={{ color: '#20B12E', mt: 1 }}>ПРОГРАММА ЛОЯЛЬНОСТИ</MyLink>
                 <BorderLine sx={{ mb: 2, mt: 2 }} />

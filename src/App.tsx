@@ -22,6 +22,10 @@ const App = () => {
               <Route index element={<Home />} />
               <Route element={<Basket />} path={ROUTES.BASKET} />
               <Route path={`${ROUTES.PRODUCT_DETAIL}/:id`} element={<ProductDetail />} />
+
+              <Route element={<MyOrders  />} path={ROUTES.MYORDERS} />
+              <Route element={<BasicInformation />} path={ROUTES.BASICINFORMATION} />
+              <Route element={<ChangePassword />} path={ROUTES.CHANGEPASSWORD} />
             </Route>
           </Routes>
         </BrowserRouter>

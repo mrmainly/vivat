@@ -18,7 +18,9 @@ interface InputProps {
     id?: any,
     multiline?: any,
     type?: string,
-    required?: any
+    required?: any,
+    size?: any,
+    margin?: any
 }
 
 interface FormProps {
@@ -80,6 +82,15 @@ interface MainCardsConstructorProps {
 
 }
 
+interface ProfileSideBarProps {
+    title?: string
+}
+
+interface ToggleButtonProps {
+    sx?: any,
+
+}
+
 interface GoodsCardProps {
     img?: string,
     description?: string,
@@ -106,5 +117,7 @@ export type {
     BorderLineProps,
     MainCardsConstructorProps,
     GoodsCardProps,
-    ProductSliderProps
+    ProductSliderProps,
+    ProfileSideBarProps,
+    ToggleButtonProps
 }

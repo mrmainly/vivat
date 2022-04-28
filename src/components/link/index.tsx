@@ -11,7 +11,7 @@ const MyLink: React.FC<MyLinkProps> = ({ href, children, ...props }) => {
         color: 'black',
         textDecoration: 'none'
     }))
-    return <MenuItem><CusLink to={href} {...props}>{children}</CusLink></MenuItem>
+    return <CusLink to={href} {...props}><MenuItem>{children}</MenuItem></CusLink>
 }
 
 export default MyLink

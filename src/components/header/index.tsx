@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 
-import { MyText, MySelect, MyLink, MyDrawer, BorderLine, ProfileDrawer } from '..'
+import { MyText, MyLink, MyDrawer, BorderLine, ProfileDrawer } from '..'
 import { DispatchContext } from '../../store'
 import ROUTES from '../../routes';
 
@@ -117,7 +117,7 @@ const Header = () => {
                         </MenuItem>
                     </MidleBarItem>
                     <MidleBarItem sx={{ width: '100%', ml: 2, mr: 2 }}>
-                        <MidleBarItemSelect container >
+                        <MidleBarItemSelect container>
                             {/* <Grid item lg={6} xl={6}>
                                 <MySelect title="Якутск" defaultValue="asd">
                                     {array.map((item, index) => (
@@ -134,7 +134,7 @@ const Header = () => {
 
                             </Grid> */}
                             <Grid item xs={6}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', ml: 7.2 }}>
                                     <img src="/img/Vector.png" style={{ marginLeft: 8, marginRight: 8 }} />
                                     <Box>
                                         <MyText>Якутск</MyText>
@@ -142,7 +142,7 @@ const Header = () => {
                                     </Box>
                                 </Box>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                     <img src="/img/Frame.png" />
                                     <Box>
@@ -151,7 +151,7 @@ const Header = () => {
                                     </Box>
                                 </Box>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
                                     <img src="/img/Frame212.png" />
                                     <Box>
@@ -160,7 +160,7 @@ const Header = () => {
                                     </Box>
                                 </Box>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
                                     <img src="/img/FramePhone.png" />
                                     <Box>
@@ -190,7 +190,14 @@ const Header = () => {
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Message_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/File_dock_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Favorite_light.png" /></IconButton>
-                        <IconButton size="small" sx={{ mr: 1 }} onClick={() => dispatch({ type: 'auth_modal', payload: { sign_in: true } })}><img src="/img/User_cicrle_light.png" /></IconButton>
+                        <IconButton
+                            size="small"
+                            sx={{ mr: 1 }}
+                            onClick={() => {
+                                // dispatch({ type: 'auth_modal', payload: { sign_in: true } })
+                                setState((prevState) => ({ ...prevState, drawerProfileOpen: true }))
+                            }}
+                        ><img src="/img/User_cicrle_light.png" /></IconButton>
                         <MenuItem sx={{ mr: 1 }} onClick={() => navigate(ROUTES.BASKET)}><img src="/img/Frame954.png" /></MenuItem>
                     </BottomBarItem>
                 </BottomBar>

@@ -7,6 +7,7 @@ import { InputProps } from '../../../interface'
 export default forwardRef<HTMLInputElement, InputProps>(function Input(props, ref) {
     return (
         <TextField
+            sx={{ bgcolor: 'white' }}
             margin="normal"
             fullWidth
             inputRef={ref}

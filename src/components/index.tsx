@@ -14,6 +14,10 @@ import Input from './UI/input'
 import TabsProductCard from './tabs/tabs-product-card'
 import SignInModal from './modals/sign-in'
 import SignUpModal from './modals/sign-up'
+import ProfileSideBar from './sidebars/profile-sidebar'
+import MyOrdersTable from './tables/my-orders-table'
+import ForgotPasswordModal from './modals/forgot-password'
+import ToggleButton from './UI/toggle-button'
 
 export {
     Header,
@@ -31,5 +35,9 @@ export {
     Input,
     TabsProductCard,
     SignInModal,
-    SignUpModal
+    SignUpModal,
+    ProfileSideBar,
+    MyOrdersTable,
+    ForgotPasswordModal,
+    ToggleButton
 }

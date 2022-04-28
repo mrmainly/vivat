@@ -1,33 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import { Outlet } from 'react-router-dom'
-import { styled } from '@mui/system'
-import { Box } from '@mui/material'
+import BasicLayout from './BasicLayout'
+import ProfileLayout from './ProfileLayout'
 
-import { Header, Footer, MyContainer, SignInModal, SignUpModal } from '../components'
+const Layout = () => {
+    const location = useLocation()
+    useEffect(() => {
 
-const Main = styled(Box)(({ theme }) => ({
-
-}))
-
-const Layout: React.FC = () => {
+    }, [location])
     return (
-        <div>
-            <Header />
-            {/* <Notification /> */}
-            <SignInModal />
-            <SignUpModal />
-            <MyContainer wrapper={true} minHeight={600} sx={{
-                overflow: 'hidden',
-                background: '#F7F9F7',
-                pb: 8,
-                pt: 3
-            }}>
-                <Outlet />
-            </MyContainer>
-            <Footer />
-            {/* <Footer /> */}
-        </div>
+        <>
+            <BasicLayout />
+        </>
     )
 }
 

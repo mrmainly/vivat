@@ -59,7 +59,6 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 export default function SignUp() {
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
-    console.log(state)
     const handleClose = () => {
         dispatch({ type: 'auth_modal', payload: { sign_up: false } })
     };
