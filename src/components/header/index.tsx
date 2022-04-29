@@ -4,6 +4,7 @@ import { AppBar, Toolbar, MenuItem, Box, IconButton, Container, TextField, Grid 
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
+import cookie from 'js-cookie'
 
 import { MyText, MyLink, MyDrawer, BorderLine, ProfileDrawer } from '..'
 import { DispatchContext } from '../../store'
@@ -68,6 +69,7 @@ const Header = () => {
         drawerOpen: false,
         drawerProfileOpen: false
     });
+    const jwttoken = cookie.get('jwttoken')
     const navigate = useNavigate()
     const { mobileView, drawerOpen, drawerProfileOpen } = state;
     const dispatch = useContext(DispatchContext)
@@ -194,8 +196,9 @@ const Header = () => {
                             size="small"
                             sx={{ mr: 1 }}
                             onClick={() => {
-                                // dispatch({ type: 'auth_modal', payload: { sign_in: true } })
-                                setState((prevState) => ({ ...prevState, drawerProfileOpen: true }))
+                                jwttoken
+                                    ? setState((prevState) => ({ ...prevState, drawerProfileOpen: true }))
+                                    : dispatch({ type: 'auth_modal', payload: { sign_in: true } })
                             }}
                         ><img src="/img/User_cicrle_light.png" /></IconButton>
                         <MenuItem sx={{ mr: 1 }} onClick={() => navigate(ROUTES.BASKET)}><img src="/img/Frame954.png" /></MenuItem>

@@ -1,12 +1,15 @@
 import React from 'react'
 
 import { Drawer, Box, MenuItem, IconButton } from '@mui/material'
+import cookie from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
 import { MyLink, BorderLine, MyText } from '../..'
 import { MyDrawerProps } from '../../../interface'
 import ROUTES from '../../../routes'
 
 const ProfileDrawer: React.FC<MyDrawerProps> = ({ setState, drawerOpen }) => {
+    const navigate = useNavigate()
     const handleDrawerClose = () =>
         setState((prevState: any) => ({ ...prevState, drawerProfileOpen: false }))
     return (
@@ -32,7 +35,11 @@ const ProfileDrawer: React.FC<MyDrawerProps> = ({ setState, drawerOpen }) => {
                 <MyLink href="" sx={{ color: '#20B12E', mt: 1 }}>МОИ ДАННЫЕ</MyLink>
                 <MyLink href="" sx={{ color: '#20B12E', mt: 1 }}>ПРОГРАММА ЛОЯЛЬНОСТИ</MyLink>
                 <BorderLine sx={{ mb: 2, mt: 2 }} />
-                <MenuItem>Выйти</MenuItem>
+                <MenuItem onClick={() => {
+                    cookie.remove('jwttoken')
+                    handleDrawerClose()
+                    navigate('/')
+                }}>Выйти</MenuItem>
             </Box>
         </Drawer>
     )

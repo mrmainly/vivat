@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React from 'react';
 
+import cookie from 'js-cookie'
+import ROUTES from '../routes';
+
 const testURL = 'http://127.0.0.1:8000/'
-const publicURL = 'https://xn-----8kcahlfadeo7a1bpea7akm5f8g.xn--p1ai/'
+const publicURL = 'http://xn----7sbbagaytx2c4ad.xn--p1ai/'
 
 const api = (url) => {
     const token = cookie.get('jwttoken')
@@ -33,10 +36,9 @@ class API {
             password: password
         }).then(res => {
             cookie.set('jwttoken', res.data.token)
-            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'авторизация прошла успешно' } })
-            navigate('/form-profile')
+            dispatch({ type: 'auth_modal', payload: { sign_in: false } })
             console.log(res)
-        }).catch(() => { dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'такого пользователя не существует' } }) })
+        }).catch((error) => alert('все плохо'))
     }
     register(data, dispatch, navigate) {
         api('api/v1/users/registration').post(null, data).then(res => {

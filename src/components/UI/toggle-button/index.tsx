@@ -5,7 +5,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { ToggleButtonProps } from '../../../interface';
 
 const MyToggleButton: React.FC<ToggleButtonProps> = ({ ...props }) => {
-    const [alignment, setAlignment] = React.useState('Email');
+    const [alignment, setAlignment] = React.useState('phone');
 
     const handleChange = (
         event: React.MouseEvent<HTMLElement>,

@@ -2,10 +2,13 @@ import React, { useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { Dialog, DialogTitle, DialogContent, IconButton, MenuItem, Box } from '@mui/material'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { StateContext, DispatchContext } from '../../../store';
-import { Form, Input, MyButton, MyLink, MyText, BorderLine } from '../..'
+import { Form, Input, MyButton, MyLink, MyText, BorderLine, ToggleButton } from '../..'
 import ThemeMain from '../../../theme'
+import API from '../../../api'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -57,11 +60,19 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export default function SignIn() {
+    const navigate = useNavigate()
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
+    const { register, handleSubmit } = useForm({
+        mode: "onBlur"
+    })
     const handleClose = () => {
         dispatch({ type: 'auth_modal', payload: { sign_in: false } })
     };
+
+    const onSubmit = (data: any) => {
+        API.getToken({ ...data }, dispatch, navigate)
+    }
 
     return (
         <div>
@@ -77,15 +88,16 @@ export default function SignIn() {
                     <MyText sx={{ textAlign: 'center' }}>
                         Если у вас есть учётная запись, авторизуйтесь, используя адрес электронной почты (email) или телефон
                     </MyText>
+                    <ToggleButton sx={{ mt: 2 }} />
                     <Box sx={{
                         width: 261,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center'
                     }}>
-                        <Form>
-                            <Input label="Телефон" />
-                            <Input label="Пароль" />
+                        <Form onSubmit={handleSubmit(onSubmit)}>
+                            <Input label="Телефон" {...register('username')} />
+                            <Input label="Пароль" {...register('password')} type="password" />
                             <MenuItem sx={{ mt: 1, color: ThemeMain.palette.primary.main, display: 'flex', justifyContent: 'center' }} onClick={() => dispatch({ type: 'auth_modal', payload: { sign_in: false, sign_up: false, forgot: true } })}>Забыли пароль?</MenuItem>
                             <MyButton style={{ marginTop: 10 }} fullWidth>Войти</MyButton>
                         </Form>

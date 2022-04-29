@@ -3,6 +3,7 @@ import React from 'react'
 import { MenuItem, Box } from '@mui/material'
 import { styled } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
+import cookie from 'js-cookie'
 
 import { BorderLine, MyText } from '../..'
 import { ProfileSideBarProps } from '../../../interface'
@@ -45,7 +46,10 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
                         {item.label}
                     </MenuItem>
                 ))}
-                <MenuItem sx={{ pl: 2.4, height: 56 }}>
+                <MenuItem sx={{ pl: 2.4, height: 56 }} onClick={() => {
+                    cookie.remove('jwttoken')
+                    navigate('/')
+                }}>
                     Выйти
                 </MenuItem>
             </Menu>
