@@ -14,16 +14,7 @@ const HomeSlider = () => {
         speed: 500,
         slidesToScroll: 1,
         slidesToShow: 1,
-        dotsClass: "slick-dots slick-thumb",
-        appendDots: (dots: any) => <ul style={{ background: 'black', top: 372, height: 'max-content' }}>{dots}</ul>,
-        customPaging: (i: any) => (
-            <div style={{
-                height: 10,
-                width: 20
-            }}>
-                {i}
-            </div>
-        )
+        appendDots: (dots: any) => <ul style={{ top: 370, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(52,52,52,0.4)' }}>{dots}</ul>,
     };
     const data = ['Rectangle4014', 'Rectangle4014']
     return (
@@ -34,7 +25,10 @@ const HomeSlider = () => {
                         key={index}
                         sx={{
                             background: `url(/img/${item}.png)`,
-                            height: 400
+                            height: 400,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center'
                         }}>
 
                     </Box>

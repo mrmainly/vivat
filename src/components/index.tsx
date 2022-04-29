@@ -1,4 +1,4 @@
-import Header from './header'
+import Header from './navbars/header'
 import MyText from './text'
 import MyContainer from './container'
 import MySelect from './UI/select'
@@ -18,6 +18,7 @@ import ProfileSideBar from './sidebars/profile-sidebar'
 import MyOrdersTable from './tables/my-orders-table'
 import ForgotPasswordModal from './modals/forgot-password'
 import ToggleButton from './UI/toggle-button'
+import MobileDown from './navbars/mobile_down'
 
 export {
     Header,
@@ -39,5 +40,6 @@ export {
     ProfileSideBar,
     MyOrdersTable,
     ForgotPasswordModal,
-    ToggleButton
+    ToggleButton,
+    MobileDown
 }

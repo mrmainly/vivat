@@ -17,6 +17,13 @@ const GridItem = styled(Grid)(({ theme }) => ({
     },
 }))
 
+const FooterBox = styled(Box)(({ theme }) => ({
+    background: 'white',
+    [theme.breakpoints.down('md')]: {
+        display: 'none'
+    },
+}))
+
 const Footer = () => {
     const Array = [
         {
@@ -113,33 +120,35 @@ const Footer = () => {
         // },
     ]
     return (
-        <MyContainer wrapper={true} sx={{
-            bgcolor: 'white',
-            minHeight: 300,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#55CD61',
-            padding: 2
-        }}>
-            <Grid container sx={{ mb: 2 }}>
-                {Array.map((item, index) => (
-                    <GridItem item key={index} lg={3} xl={3} md={3} sm={6} xs={12}>
-                        <MyText variant="h6">{item.title}</MyText>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                        }}>
-                            {item.columns.map((item, index) => (
-                                <Link to={item.href} key={index} style={{ marginTop: 10, textDecoration: 'none', color: '#55CD61', width: 'max-width' }}>{item.label}</Link>
-                            ))}
-                        </Box>
-                    </GridItem>
-                ))}
-            </Grid>
-            <BorderLine />
-            <MyText sx={{ mt: 2 }}>© 2021 Да здравствует здоровье «Vivat»</MyText>
-        </MyContainer>
+        <FooterBox>
+            <MyContainer wrapper={false} sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: 300,
+                color: '#55CD61',
+                padding: 2,
+                flexDirection: 'column'
+            }}>
+                <Grid container sx={{ mb: 2 }}>
+                    {Array.map((item, index) => (
+                        <GridItem item key={index} lg={3} xl={3} md={3} sm={6} xs={12}>
+                            <MyText variant="h6">{item.title}</MyText>
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                            }}>
+                                {item.columns.map((item, index) => (
+                                    <Link to={item.href} key={index} style={{ marginTop: 10, textDecoration: 'none', color: '#55CD61', width: 'max-width' }}>{item.label}</Link>
+                                ))}
+                            </Box>
+                        </GridItem>
+                    ))}
+                </Grid>
+                <BorderLine />
+                <MyText sx={{ mt: 2 }}>© 2021 Да здравствует здоровье «Vivat»</MyText>
+            </MyContainer>
+        </FooterBox>
     )
 }
 
