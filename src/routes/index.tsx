@@ -10,7 +10,8 @@ enum ROUTES {
     WORK = '/work',
     CONTACTS = '/contacts',
     BOOKING = '/booking',
-    STOCK = '/stock'
+    STOCK = '/stock',
+    ORDER = '/order'
 }
 
 export default ROUTES;

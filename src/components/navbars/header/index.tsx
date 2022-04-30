@@ -113,7 +113,7 @@ const Header = () => {
                             <MenuItem>
                                 <MyText variant="body1">8 (914) 225-25-25</MyText>
                             </MenuItem>
-                            <MenuItem>
+                            <MenuItem onClick={() => navigate(ROUTES.ORDER)}>
                                 <MyText variant="body1">Как сделать заказ</MyText>
                             </MenuItem>
                         </TopBarItem>

@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { Dialog, DialogTitle, DialogContent, IconButton, MenuItem, Box } from '@mui/material'
+import { useForm } from 'react-hook-form'
 
 import { StateContext, DispatchContext } from '../../../store';
 import { Form, Input, MyButton, MyLink, MyText, BorderLine } from '../..'
 import ThemeMain from '../../../theme'
+import API from '../../../api'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -59,6 +61,12 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 export default function SignUp() {
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
+    const { register, handleSubmit } = useForm({
+        mode: "onBlur"
+    })
+    const onSubmit = (data: any) => {
+        API.register({ ...data }, dispatch)
+    }
     const handleClose = () => {
         dispatch({ type: 'auth_modal', payload: { sign_up: false } })
     };
@@ -82,7 +90,9 @@ export default function SignUp() {
                         paddingBottom: 2
                     }}>
                         <Form>
-                            <Input label="Введите Ваш номер телефона" />
+                            <Input label="Введите ваш номер телефона" />
+                            <Input label="Пароль" />
+                            <Input label="Повторить пароль" />
                             <MyButton style={{ marginTop: 10 }} fullWidth>Получить код</MyButton>
                         </Form>
                     </Box>

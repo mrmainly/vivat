@@ -11,6 +11,7 @@ import Work from './info-screens/work'
 import Contacts from './info-screens/contacts'
 import Booking from './info-screens/booking'
 import Stock from './info-screens/stock'
+import Order from './info-screens/order'
 
 import BasicInformation from './profile/basic-information'
 import ChangePassword from './profile/change-password'
@@ -33,5 +34,6 @@ export {
     Work,
     Contacts,
     Booking,
-    Stock
+    Stock,
+    Order
 }

@@ -41,9 +41,9 @@ class API {
         }).catch((error) => alert('все плохо'))
     }
     register(data, dispatch, navigate) {
-        api('api/v1/users/registration').post(null, data).then(res => {
+        api('api/v1/users/register/').post(null, data).then(res => {
             navigate('/login')
-            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'регистрация прошла успешно' } })
+            alert('все хорошо')
         }).catch((error) => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'такой пользователь уже существует' } }))
     }
     forgotPassword(data, dispatch, navigate) {

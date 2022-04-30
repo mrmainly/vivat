@@ -13,7 +13,7 @@ interface InfoBlogProps {
 const Main = styled(Box)(({ theme }) => ({
     padding: 20,
     background: 'white',
-    minHeight: 800,
+    minHeight: 600,
     borderRadius: 12,
     marginTop: 20
 }))

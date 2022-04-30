@@ -5,6 +5,7 @@ import { styled } from '@mui/system'
 import { Link } from 'react-router-dom'
 
 import { MyContainer, MyText, BorderLine } from '..'
+import ROUTES from '../../routes'
 
 const GridItem = styled(Grid)(({ theme }) => ({
     marginTop: 10,
@@ -31,15 +32,15 @@ const Footer = () => {
             columns: [
                 {
                     label: 'Как сделать заказ',
-                    href: '/'
+                    href: ROUTES.ORDER
                 },
                 {
                     label: 'Оплата и бронирование',
-                    href: '/'
+                    href: ROUTES.BOOKING
                 },
                 {
                     label: 'Доставка',
-                    href: '/'
+                    href: ROUTES.DELIVERY
                 },
                 {
                     label: 'Новости',
@@ -51,7 +52,7 @@ const Footer = () => {
                 },
                 {
                     label: 'Работа',
-                    href: '/'
+                    href: ROUTES.WORK
                 },
                 {
                     label: 'Обратная связь',
@@ -64,11 +65,11 @@ const Footer = () => {
             columns: [
                 {
                     label: 'О компании',
-                    href: '/'
+                    href: ROUTES.TEAM
                 },
                 {
                     label: 'Контакты',
-                    href: '/'
+                    href: ROUTES.CONTACTS
                 },
                 {
                     label: 'Оставить отзыв',
@@ -76,7 +77,7 @@ const Footer = () => {
                 },
                 {
                     label: 'Контакты',
-                    href: '/'
+                    href: ROUTES.CONTACTS
                 },
             ]
         },
