@@ -7,7 +7,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { DispatchContext, StateContext, defaultStore } from './store'
 import { stateReducer } from './reducer'
 import Layout from './layout';
-import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail } from './pages'
+import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail, Team, Delivery, Work, Contacts, Booking, Stock } from './pages'
 import ROUTES from './routes';
 
 const App = () => {
@@ -25,6 +25,12 @@ const App = () => {
               <Route element={<MyOrders />} path={ROUTES.MYORDERS} />
               <Route element={<BasicInformation />} path={ROUTES.BASICINFORMATION} />
               <Route element={<ChangePassword />} path={ROUTES.CHANGEPASSWORD} />
+              <Route element={<Team />} path={ROUTES.TEAM} />
+              <Route element={<Delivery />} path={ROUTES.DELIVERY} />
+              <Route element={<Work />} path={ROUTES.WORK} />
+              <Route element={<Contacts />} path={ROUTES.CONTACTS} />
+              <Route element={<Booking />} path={ROUTES.BOOKING} />
+              <Route element={<Stock />} path={ROUTES.STOCK} />
             </Route>
           </Routes>
         </BrowserRouter>

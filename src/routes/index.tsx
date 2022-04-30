@@ -4,7 +4,13 @@ enum ROUTES {
     BASKET = '/basket',
     MYORDERS = '/profile-my-orders',
     BASICINFORMATION = '/profile-basic-information',
-    CHANGEPASSWORD = '/profile-change-password'
+    CHANGEPASSWORD = '/profile-change-password',
+    TEAM = '/team',
+    DELIVERY = '/delivery',
+    WORK = '/work',
+    CONTACTS = '/contacts',
+    BOOKING = '/booking',
+    STOCK = '/stock'
 }
 
 export default ROUTES;

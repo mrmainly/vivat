@@ -1,15 +1,17 @@
+import ROUTES from "../routes"
+
 const drawer_links = [
     {
         label: 'Доставка',
-        to: ''
+        to: ROUTES.DELIVERY
     },
     {
         label: 'Оплата и бронирование',
-        to: ''
+        to: ROUTES.BOOKING
     },
     {
         label: 'Акции',
-        to: ''
+        to: ROUTES.STOCK
     },
     {
         label: 'Скидки',
@@ -17,11 +19,11 @@ const drawer_links = [
     },
     {
         label: 'О компании',
-        to: ''
+        to: ROUTES.TEAM
     },
     {
         label: 'Работа',
-        to: ''
+        to: ROUTES.WORK
     },
     {
         label: 'Новости',
@@ -29,7 +31,7 @@ const drawer_links = [
     },
     {
         label: 'Контакты',
-        to: ''
+        to: ROUTES.CONTACTS
     },
     {
         label: 'Обратная свзяь',

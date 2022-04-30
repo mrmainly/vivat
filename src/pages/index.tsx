@@ -5,6 +5,13 @@ import SignUp from './sign-up/signUp'
 import SignUpVerification from './sign-up/signUpVerification'
 import SignUpData from './sign-up/signUpData'
 
+import Team from './info-screens/team'
+import Delivery from './info-screens/delivery'
+import Work from './info-screens/work'
+import Contacts from './info-screens/contacts'
+import Booking from './info-screens/booking'
+import Stock from './info-screens/stock'
+
 import BasicInformation from './profile/basic-information'
 import ChangePassword from './profile/change-password'
 import MyOrders from './profile/my-orders'
@@ -20,5 +27,11 @@ export {
     BasicInformation,
     ChangePassword,
     MyOrders,
-    ProductDetail
+    ProductDetail,
+    Team,
+    Delivery,
+    Work,
+    Contacts,
+    Booking,
+    Stock
 }

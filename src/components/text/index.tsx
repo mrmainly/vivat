@@ -7,6 +7,7 @@ import { styled } from '@mui/system'
 
 const MyText: React.FC<MyTextProps> = ({ children, lg, md, xs, sm, xl, ...props }) => {
     const Text = styled(Typography)(({ theme }) => ({
+        fontFamily: 'Montserrat',
         [theme.breakpoints.down('lg')]: {
             fontSize: lg ? lg : ''
         },
