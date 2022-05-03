@@ -6,6 +6,9 @@ export const defaultStore = {
         sign_up: false,
         forgot: false
     },
+    register: {
+        danger_text: false
+    }
 }
 
 

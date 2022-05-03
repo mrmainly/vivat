@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { Dialog, DialogTitle, DialogContent, IconButton, MenuItem, Box } from '@mui/material'
@@ -59,13 +59,20 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export default function SignUp() {
+    const [passwordText, setPasswordText] = useState(false)
+    const [dangerText, setDangerText] = useState(false)
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
     const { register, handleSubmit } = useForm({
         mode: "onBlur"
     })
     const onSubmit = (data: any) => {
-        API.register({ ...data }, dispatch)
+        if (data.password == data.forgot_password) {
+            API.register({ ...data }, dispatch)
+            setPasswordText(false)
+        } else {
+            setPasswordText(true)
+        }
     }
     const handleClose = () => {
         dispatch({ type: 'auth_modal', payload: { sign_up: false } })
@@ -89,10 +96,16 @@ export default function SignUp() {
                         alignItems: 'center',
                         paddingBottom: 2
                     }}>
-                        <Form>
-                            <Input label="Введите ваш номер телефона" />
-                            <Input label="Пароль" />
-                            <Input label="Повторить пароль" />
+                        {passwordText ?
+                            <p>Пароль не подошел</p>
+                            : ''}
+                        {state.register.danger_text ?
+                            <p>Пользователь с таким телефоном уже зарегистрирован. Необходимо <span style={{ color: ThemeMain.palette.primary.main }}>авторизоваться.</span></p>
+                            : ''}
+                        <Form onSubmit={handleSubmit(onSubmit)}>
+                            <Input label="Введите ваш номер телефона" {...register('phone')} />
+                            <Input label="Пароль" {...register('password')} type="password" />
+                            <Input label="Повторить пароль" {...register('forgot_password')} type="password" />
                             <MyButton style={{ marginTop: 10 }} fullWidth>Получить код</MyButton>
                         </Form>
                     </Box>

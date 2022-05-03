@@ -5,6 +5,10 @@ export const stateReducer = (state: any, action: any) => {
             break;
         case 'auth_modal':
             return { ...state, auth_modal: action.payload }
+            break;
+        case 'register':
+            return { ...state, register: action.payload }
+            break;
         default:
             throw new Error();
     }
