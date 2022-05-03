@@ -58,8 +58,8 @@ class API {
     }
     putAccountUser(data, dispatch) {
         api('api/v1/users/profile/update/').put(null, data).then(res => {
-            alert('обновил')
-        }).catch(() => alert('не обновил'))
+            dispatch({ type: 'profile_modal', payload: { status: 'success', open: true } })
+        }).catch(() => dispatch({ type: 'profile_modal', payload: { status: 'error', open: true } }))
     }
 }
 

@@ -8,6 +8,10 @@ export const defaultStore = {
     },
     register: {
         danger_text: false
+    },
+    profile_modal: {
+        status: '',
+        open: false
     }
 }
 

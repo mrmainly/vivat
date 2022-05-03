@@ -9,6 +9,8 @@ export const stateReducer = (state: any, action: any) => {
         case 'register':
             return { ...state, register: action.payload }
             break;
+        case 'profile_modal':
+            return { ...state, profile_modal: action.payload }
         default:
             throw new Error();
     }

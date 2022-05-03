@@ -18,6 +18,7 @@ import MyOrdersTable from './tables/my-orders-table'
 import ForgotPasswordModal from './modals/forgot-password'
 import ToggleButton from './UI/toggle-button'
 import MobileDown from './navbars/mobile_down'
+import ProfileUpdateModal from './modals/profile-update-modal'
 
 export {
     Header,
@@ -39,5 +40,6 @@ export {
     MyOrdersTable,
     ForgotPasswordModal,
     ToggleButton,
-    MobileDown
+    MobileDown,
+    ProfileUpdateModal
 }
