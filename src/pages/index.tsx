@@ -1,10 +1,6 @@
 import Home from './home'
 import Basket from './basket'
 import IssueOrdering from './issue-ordering'
-import SignIn from './signIn'
-import SignUp from './sign-up/signUp'
-import SignUpVerification from './sign-up/signUpVerification'
-import SignUpData from './sign-up/signUpData'
 
 import Team from './info-screens/team'
 import Delivery from './info-screens/delivery'
@@ -22,10 +18,6 @@ import ProductDetail from './product-detail'
 export {
     Home,
     Basket,
-    SignIn,
-    SignUp,
-    SignUpVerification,
-    SignUpData,
     BasicInformation,
     ChangePassword,
     MyOrders,

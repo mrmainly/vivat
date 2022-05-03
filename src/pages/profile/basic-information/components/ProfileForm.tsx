@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormControlLabel, Checkbox } from '@mui/material'
 
 import { Form, Input, MyButton, MyText } from '../../../../components'
 import ThemeMain from '../../../../theme'
+import API from '../../../../api'
 
 const ProfileForm = () => {
+    useEffect(() => {
+        API.getAccountUser().then(res => {
+            console.log('res', res)
+        })
+    }, [])
     return (
         <div>
             <Form sx={{ width: 350 }}>
