@@ -36,13 +36,13 @@ class API {
             password: password
         }).then(res => {
             cookie.set('jwttoken', res.data.token)
-            dispatch({ type: 'auth_modal', payload: { sign_in: false } })
+            dispatch({ type: 'auth_modal', payload: { sign_in: false, forgot: false, sign_up: false } })
             console.log(res)
         }).catch((error) => alert('все плохо'))
     }
     register(data, dispatch, navigate) {
         api('api/v1/users/register/').post(null, data).then(res => {
-            dispatch({ type: 'auth_modal', payload: { sign_up: false, sign_in: true } })
+            dispatch({ type: 'auth_modal', payload: { sign_up: false, sign_in: true, forgot: false } })
         }).catch((error) => dispatch({ type: 'register', payload: { danger_text: true } }))
     }
     forgotPassword(data, dispatch, navigate) {

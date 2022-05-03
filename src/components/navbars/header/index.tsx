@@ -208,7 +208,7 @@ const Header = () => {
                                 onClick={() => {
                                     jwttoken
                                         ? setState((prevState) => ({ ...prevState, drawerProfileOpen: true }))
-                                        : dispatch({ type: 'auth_modal', payload: { sign_in: true } })
+                                        : dispatch({ type: 'auth_modal', payload: { sign_in: true, sign_up: false, forgot: false } })
                                 }}
                             ><img src="/img/User_cicrle_light.png" /></IconButton>
                             <MenuItem onClick={() => navigate(ROUTES.BASKET)}><img src="/img/Frame954.png" /></MenuItem>

@@ -75,7 +75,7 @@ export default function SignUp() {
         }
     }
     const handleClose = () => {
-        dispatch({ type: 'auth_modal', payload: { sign_up: false } })
+        dispatch({ type: 'auth_modal', payload: { sign_in: false, sign_up: false, forgot: false } })
     };
 
     return (
