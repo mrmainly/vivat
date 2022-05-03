@@ -51,6 +51,16 @@ class API {
             navigate('/login')
         }).catch(error => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: ' Пароль не был восстановлен. Указанный номер телефона не зарегистрирован. Пожалуйста проверьте верно ли указан номер.' } }))
     }
+
+    async getAccountUser() {
+        let result = await api(`api/v1/users/profile/`).get(null)
+        return result
+    }
+    putAccountUser(data, dispatch) {
+        api('api/v1/users/profile/update/').put(null, data).then(res => {
+            alert('обновил')
+        }).catch(() => alert('не обновил'))
+    }
 }
 
 export default new API()

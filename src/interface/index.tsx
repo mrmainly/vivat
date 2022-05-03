@@ -1,6 +1,9 @@
+import React, { ReactNode } from 'react'
+import { SxProps } from '@mui/system';
+
 interface MyTextProps {
-    children: any,
-    sx?: any,
+    children: ReactNode[] | ReactNode,
+    sx?: SxProps,
     lg?: number,
     xl?: number,
     sm?: number,
@@ -12,7 +15,7 @@ interface MyTextProps {
 interface InputProps {
     ref: any,
     label?: any,
-    sx?: any,
+    sx?: SxProps,
     variant?: any,
     rows?: number,
     id?: any,
@@ -24,17 +27,17 @@ interface InputProps {
 }
 
 interface FormProps {
-    children: any,
-    sx?: any,
+    children: ReactNode[] | ReactNode,
+    sx?: SxProps,
     onSubmit?: any
 }
 
 interface ButtonProps {
-    children: any,
+    children: ReactNode[] | ReactNode,
     onClick?: () => void,
     variant?: string,
-    style?: any,
-    sx?: any,
+    style?: React.CSSProperties,
+    sx?: SxProps,
     color?: any,
     size?: any,
     fullWidth?: any
@@ -43,18 +46,18 @@ interface ButtonProps {
 interface MySelectProps {
     variant?: string,
     title: string,
-    sx?: any,
+    sx?: SxProps,
     placeholder?: string,
     ref?: any,
     defaultValue: string,
-    children?: any
+    children?: ReactNode[] | ReactNode
 }
 
 interface MyContainerProps {
-    children: any,
+    children: ReactNode[] | ReactNode,
     wrapper: boolean,
     bgImg?: any,
-    sx?: any,
+    sx?: SxProps,
     lg?: number,
     xl?: number,
     sm?: number,
@@ -64,9 +67,9 @@ interface MyContainerProps {
 }
 
 interface MyLinkProps {
-    children: any,
+    children: ReactNode[] | ReactNode,
     href: string,
-    sx?: any
+    sx?: SxProps
 }
 
 interface MyDrawerProps {
@@ -75,7 +78,7 @@ interface MyDrawerProps {
 }
 
 interface BorderLineProps {
-    sx: any
+    sx: SxProps
 }
 
 interface MainCardsConstructorProps {
@@ -87,7 +90,7 @@ interface ProfileSideBarProps {
 }
 
 interface ToggleButtonProps {
-    sx?: any,
+    sx?: SxProps,
 
 }
 

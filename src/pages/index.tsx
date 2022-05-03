@@ -1,5 +1,6 @@
 import Home from './home'
 import Basket from './basket'
+import IssueOrdering from './issue-ordering'
 import SignIn from './signIn'
 import SignUp from './sign-up/signUp'
 import SignUpVerification from './sign-up/signUpVerification'
@@ -35,5 +36,6 @@ export {
     Contacts,
     Booking,
     Stock,
-    Order
+    Order,
+    IssueOrdering
 }

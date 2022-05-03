@@ -11,7 +11,8 @@ enum ROUTES {
     CONTACTS = '/contacts',
     BOOKING = '/booking',
     STOCK = '/stock',
-    ORDER = '/order'
+    ORDER = '/order',
+    ISSUE_ORDERING = '/issue-ordering'
 }
 
 export default ROUTES;
