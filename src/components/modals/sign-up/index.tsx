@@ -60,7 +60,6 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 export default function SignUp() {
     const [passwordText, setPasswordText] = useState(false)
-    const [dangerText, setDangerText] = useState(false)
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
     const { register, handleSubmit } = useForm({

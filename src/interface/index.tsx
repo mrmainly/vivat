@@ -23,7 +23,11 @@ interface InputProps {
     type?: string,
     required?: any,
     size?: any,
-    margin?: any
+    margin?: any,
+    InputLabelProps?: {
+        shrink: boolean
+    }
+    defaultValue?: any
 }
 
 interface FormProps {
