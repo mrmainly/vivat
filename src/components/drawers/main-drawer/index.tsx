@@ -1,27 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Drawer, Box, IconButton } from '@mui/material'
 
 import { MyLink, BorderLine } from '../..'
 import drawer_links from '../../../local_data/drawer_links'
 import drawer_elements from '../../../local_data/drawer_elements'
-import { MyDrawerProps } from '../../../interface'
+import { DispatchContext, StateContext } from '../../../store'
 
-const MainDrawer: React.FC<MyDrawerProps> = ({ setState, drawerOpen }) => {
-    const handleDrawerOpen = () =>
-        setState((prevState: any) => ({ ...prevState, drawerOpen: true }));
+const MainDrawer = () => {
+    const state = useContext(StateContext)
+    const dispatch = useContext(DispatchContext)
 
-    const handleDrawerClose = () =>
-        setState((prevState: any) => ({ ...prevState, drawerOpen: false }))
+    const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false } })
     return (
         <Drawer
             {...{
                 anchor: "left",
-                open: drawerOpen,
+                open: state.drawers.main_drawer,
                 onClose: handleDrawerClose,
             }}
         >
-
             <Box style={{
                 width: 300, padding: 15, display: 'flex', flexDirection: 'column',
                 height: '100%',

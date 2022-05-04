@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { AppBar, MenuItem, Box, IconButton, Container, TextField, Grid, Button } from '@mui/material'
+import { AppBar, MenuItem, Box, IconButton, Container, TextField, Grid, Button, fabClasses } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 import cookie from 'js-cookie'
 import ThemeMain from '../../../theme'
 
-import { MyText, MyLink, MyDrawer, BorderLine, ProfileDrawer, MyButton } from '../..'
+import { MyText, MyDrawer, BorderLine, ProfileDrawer } from '../..'
 import { DispatchContext } from '../../../store'
 import ROUTES from '../../../routes';
 
@@ -188,7 +188,7 @@ const Header = () => {
                     <BorderLine />
                     <BottomBar>
                         <BottomBarItem sx={{ mr: 2 }}>
-                            <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleDrawerOpen}>
+                            <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: true } })}>
                                 <MenuIcon sx={{ color: '#55CD61' }} fontSize="large" />
                             </IconButton>
                         </BottomBarItem>
@@ -207,7 +207,7 @@ const Header = () => {
                                 sx={{ mr: 0.5 }}
                                 onClick={() => {
                                     jwttoken
-                                        ? setState((prevState) => ({ ...prevState, drawerProfileOpen: true }))
+                                        ? dispatch({ type: 'drawers', payload: { profile_drawer: true, main_drawer: false } })
                                         : dispatch({ type: 'auth_modal', payload: { sign_in: true, sign_up: false, forgot: false } })
                                 }}
                             ><img src="/img/User_cicrle_light.png" /></IconButton>
@@ -222,7 +222,7 @@ const Header = () => {
         return (
             <Box style={{ height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box sx={{ display: 'flex' }}>
-                    <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleDrawerOpen}>
+                    <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: true } })}>
                         <MenuIcon sx={{ color: '#55CD61' }} fontSize="large" />
                     </IconButton>
                     <MenuItem>
@@ -242,8 +242,6 @@ const Header = () => {
             <AppBar position="static" sx={{ bgcolor: 'white', color: '#222222', boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.25);' }}>
                 {mobileView ? Mobile() : Desktop()}
             </AppBar>
-            <MyDrawer setState={setState} drawerOpen={drawerOpen} />
-            <ProfileDrawer setState={setState} drawerOpen={drawerProfileOpen} />
         </>
     )
 }

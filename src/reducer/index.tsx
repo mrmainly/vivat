@@ -11,6 +11,9 @@ export const stateReducer = (state: any, action: any) => {
             break;
         case 'profile_modal':
             return { ...state, profile_modal: action.payload }
+            break;
+        case 'drawers':
+            return { ...state, drawers: action.payload }
         default:
             throw new Error();
     }

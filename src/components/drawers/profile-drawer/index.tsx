@@ -1,22 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Drawer, Box, MenuItem, IconButton } from '@mui/material'
 import cookie from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 
 import { MyLink, BorderLine, MyText } from '../..'
-import { MyDrawerProps } from '../../../interface'
+import { StateContext, DispatchContext } from '../../../store'
 import ROUTES from '../../../routes'
 
-const ProfileDrawer: React.FC<MyDrawerProps> = ({ setState, drawerOpen }) => {
+const ProfileDrawer = () => {
     const navigate = useNavigate()
-    const handleDrawerClose = () =>
-        setState((prevState: any) => ({ ...prevState, drawerProfileOpen: false }))
+    const state = useContext(StateContext)
+    const dispatch = useContext(DispatchContext)
+
+    const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false } })
+
     return (
         <Drawer
             {...{
                 anchor: "right",
-                open: drawerOpen,
+                open: state.drawers.profile_drawer,
                 onClose: handleDrawerClose,
             }}
         >

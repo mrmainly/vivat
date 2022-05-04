@@ -6,6 +6,10 @@ export const defaultStore = {
         sign_up: false,
         forgot: false
     },
+    drawers: {
+        profile_drawer: false,
+        main_drawer: false
+    },
     register: {
         danger_text: false
     },

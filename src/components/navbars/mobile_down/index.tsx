@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
-import { Box, IconButton, Grid } from '@mui/material'
-import { AddBox } from '@mui/icons-material'
+import { Box, IconButton } from '@mui/material'
 import { styled } from '@mui/system'
+
+import { DispatchContext } from '../../../store'
 import MyContainer from '../../container'
 
 const MobileBox = styled(Box)(({ theme }) => ({
@@ -16,6 +17,8 @@ const MobileBox = styled(Box)(({ theme }) => ({
 }))
 
 const MobileDown = () => {
+    const dispatch = useContext(DispatchContext)
+
     const icon_data = [
         {
             icon: '/img/darhboard.png',
@@ -47,7 +50,7 @@ const MobileDown = () => {
                 }}>
                     {icon_data.map((item, index) => (
                         <Box sx={{ display: 'flex', justifyContent: 'center' }} key={index}>
-                            <IconButton><img src={item.icon} /></IconButton>
+                            <IconButton onClick={() => dispatch({ type: 'drawers', payload: { profile_drawer: true, main_drawer: false } })}><img src={item.icon} /></IconButton>
                         </Box>
                     ))}
                 </Box>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { FormControlLabel, Checkbox, TextField, Box, CircularProgress } from '@mui/material'
 import { styled } from '@mui/system'
-import { useForm } from 'react-hook-form'
 
-import { Form, Input, MyButton, MyText, ProfileUpdateModal } from '../../../../components'
+import { MyButton, MyText, ProfileUpdateModal } from '../../../../components'
 import ThemeMain from '../../../../theme'
 import { DispatchContext } from '../../../../store'
 import API from '../../../../api'
@@ -23,12 +22,8 @@ const ProfileForm = () => {
 
     const dispatch = useContext(DispatchContext)
 
-    const { register, handleSubmit } = useForm({
-        mode: "onBlur",
-    })
     const getAccountUser = () => {
         API.getAccountUser().then(res => {
-            console.log('res', res)
             const data = res.data
             setPhone(data.phone)
             setFirstName(data.first_name)

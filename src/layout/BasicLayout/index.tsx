@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Outlet, useLocation } from 'react-router-dom'
 
-import { Header, Footer, MyContainer, SignInModal, SignUpModal, ForgotPasswordModal, MobileDown } from '../../components'
+import { Header, Footer, MyContainer, SignInModal, SignUpModal, ForgotPasswordModal, MobileDown, ProfileDrawer, MyDrawer } from '../../components'
 import { HomeSlider } from '../../constructor'
 
 const BasicLayout = () => {
@@ -14,6 +14,8 @@ const BasicLayout = () => {
             <SignInModal />
             <SignUpModal />
             <ForgotPasswordModal />
+            <ProfileDrawer />
+            <MyDrawer />
             {location.pathname === '/' ? <HomeSlider /> : ''}
             <MyContainer wrapper={true} minHeight={600} sx={{
                 background: '#F7F9F7',
