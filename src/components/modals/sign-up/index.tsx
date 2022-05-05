@@ -60,17 +60,34 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 export default function SignUp() {
     const [passwordText, setPasswordText] = useState(false)
+    const [v1, setV1] = useState(true)
+    const [verifyVersion, setVerifyVersion] = useState(false)
+    const [passwordV, setPasswordV] = useState(false)
+
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
     const { register, handleSubmit } = useForm({
         mode: "onBlur"
     })
     const onSubmit = (data: any) => {
-        if (data.password == data.forgot_password) {
-            API.register({ ...data }, dispatch)
-            setPasswordText(false)
+        API.sendRegister({ ...data }, dispatch)
+    }
+    const onSubmitVerify = (data: any) => {
+        API.sendVerifyCode({ ...data }, dispatch)
+    }
+    const onSubmitPassword = (data: any) => {
+        if (state.verify_code.code !== '') {
+            if (data.password == data.forgot_password) {
+                API.sendPassword({
+                    password: data.password,
+                    code: state.verify_code.code
+                }, dispatch)
+                setPasswordText(false)
+            } else {
+                setPasswordText(true)
+            }
         } else {
-            setPasswordText(true)
+            alert('нету кода')
         }
     }
     const handleClose = () => {
@@ -87,33 +104,70 @@ export default function SignUp() {
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Регистрация
                 </BootstrapDialogTitle>
-                <ModalContent dividers>
-                    <Box sx={{
-                        width: 261,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        paddingBottom: 2
-                    }}>
-                        {passwordText ?
-                            <p>Пароль не подошел</p>
-                            : ''}
-                        {state.register.danger_text ?
-                            <p>Пользователь с таким телефоном уже зарегистрирован. Необходимо <span style={{ color: ThemeMain.palette.primary.main }}>авторизоваться.</span></p>
-                            : ''}
-                        <Form onSubmit={handleSubmit(onSubmit)}>
-                            <Input label="Введите ваш номер телефона" {...register('phone')} />
-                            <Input label="Пароль" {...register('password')} type="password" />
-                            <Input label="Повторить пароль" {...register('forgot_password')} type="password" />
-                            <MyButton style={{ marginTop: 10 }} fullWidth>Получить код</MyButton>
-                        </Form>
-                    </Box>
-                </ModalContent>
-                {/* <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
-                        Save changes
-                    </Button>
-                </DialogActions> */}
+                {state.register_version.v1 &&
+                    <ModalContent dividers>
+                        <Box sx={{
+                            width: 261,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            paddingBottom: 2
+                        }}>
+                            {state.register.danger_text ?
+                                <p>Пользователь с таким телефоном уже зарегистрирован. Необходимо <span style={{ color: ThemeMain.palette.primary.main }}>авторизоваться.</span></p>
+                                : ''}
+                            <Form onSubmit={handleSubmit(onSubmit)}>
+                                <Input label="Введите ваш номер телефона" {...register('phone')} />
+                                <MyButton style={{ marginTop: 10 }} fullWidth>Получить код</MyButton>
+                            </Form>
+                        </Box>
+                    </ModalContent>
+                }
+                {state.register_version.verify_version &&
+                    <ModalContent dividers>
+                        <Box sx={{
+                            width: 261,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            paddingBottom: 2
+                        }}>
+                            {passwordText ?
+                                <p>Пароль не подошел</p>
+                                : ''}
+                            {state.register.danger_text ?
+                                <p>Пользователь с таким телефоном уже зарегистрирован. Необходимо <span style={{ color: ThemeMain.palette.primary.main }}>авторизоваться.</span></p>
+                                : ''}
+                            <Form onSubmit={handleSubmit(onSubmitVerify)}>
+                                <Input label="SMS код" {...register('code')} />
+                                <MyButton style={{ marginTop: 10 }} fullWidth>Получить код</MyButton>
+                            </Form>
+                        </Box>
+                    </ModalContent>
+                }
+                {state.register_version.password_version &&
+                    <ModalContent dividers>
+                        <Box sx={{
+                            width: 261,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            paddingBottom: 2
+                        }}>
+                            {passwordText ?
+                                <p>Пароль не подошел</p>
+                                : ''}
+                            {state.register.danger_text ?
+                                <p>Пользователь с таким телефоном уже зарегистрирован. Необходимо <span style={{ color: ThemeMain.palette.primary.main }}>авторизоваться.</span></p>
+                                : ''}
+                            <Form onSubmit={handleSubmit(onSubmitPassword)}>
+                                <Input label="Пароль" {...register('password')} type="password" />
+                                <Input label="Повторить пароль" {...register('forgot_password')} type="password" />
+                                <MyButton style={{ marginTop: 10 }} fullWidth>Получить код</MyButton>
+                            </Form>
+                        </Box>
+                    </ModalContent>
+                }
             </BootstrapDialog>
         </div>
     );

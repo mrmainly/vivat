@@ -16,7 +16,20 @@ export const defaultStore = {
     profile_modal: {
         status: '',
         open: false
-    }
+    },
+    verify_code: {
+        code: '',
+    },
+    register_version: {
+        v1: true,
+        password_version: false,
+        verify_version: false
+    },
+    noti: {
+        status: '',
+        text: '',
+        active: false
+    },
 }
 
 

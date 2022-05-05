@@ -19,6 +19,8 @@ import ForgotPasswordModal from './modals/forgot-password'
 import ToggleButton from './UI/toggle-button'
 import MobileDown from './navbars/mobile_down'
 import ProfileUpdateModal from './modals/profile-update-modal'
+import BasketCard from './cards/basket-card'
+import Notification from './notification'
 
 export {
     Header,
@@ -41,5 +43,7 @@ export {
     ForgotPasswordModal,
     ToggleButton,
     MobileDown,
-    ProfileUpdateModal
+    ProfileUpdateModal,
+    BasketCard,
+    Notification
 }
