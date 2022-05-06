@@ -7,7 +7,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { DispatchContext, StateContext, defaultStore } from './store'
 import { stateReducer } from './reducer'
 import Layout from './layout';
-import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail, Order, Team, Delivery, Work, Contacts, Booking, Stock, IssueOrdering } from './pages'
+import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail, Order, Team, Delivery, Work, Contacts, Booking, Stock, IssueOrdering, Blog, BlogDetail, BlogTheme } from './pages'
 import ROUTES from './routes';
 
 const App = () => {
@@ -37,6 +37,9 @@ const App = () => {
               <Route element={<Stock />} path={ROUTES.STOCK} />
               <Route element={<Order />} path={ROUTES.ORDER} />
 
+              <Route element={<Blog />} path={ROUTES.BLOG} />
+              <Route element={<BlogTheme />} path={ROUTES.BLOG_THEME} />
+              <Route element={<BlogDetail />} path={`${ROUTES.BLOG_DETAIL}/:id`} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -15,6 +15,10 @@ import ChangePassword from './profile/change-password'
 import MyOrders from './profile/my-orders'
 import ProductDetail from './product-detail'
 
+import BlogDetail from './blog/blogDetail'
+import Blog from './blog'
+import BlogTheme from './blog/themeBlog'
+
 export {
     Home,
     Basket,
@@ -29,5 +33,8 @@ export {
     Booking,
     Stock,
     Order,
-    IssueOrdering
+    IssueOrdering,
+    BlogTheme,
+    Blog,
+    BlogDetail
 }

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { StateContext, DispatchContext } from '../../../store';
-import { Form, Input, MyButton, MyLink, MyText, BorderLine, ToggleButton } from '../..'
+import { Form, Input, MyButton, MyText, BorderLine } from '../..'
 import ThemeMain from '../../../theme'
 import API from '../../../api'
 
@@ -87,7 +87,6 @@ export default function SignIn() {
                     <MyText sx={{ textAlign: 'center' }}>
                         Если у вас есть учётная запись, авторизуйтесь, используя адрес электронной почты (email) или телефон
                     </MyText>
-                    <ToggleButton sx={{ mt: 2 }} />
                     <Box sx={{
                         width: 261,
                         display: 'flex',
