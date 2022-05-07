@@ -23,6 +23,8 @@ import BasketCard from './cards/basket-card'
 import Notification from './notification'
 import PharmacySideBar from './sidebars/pharmacy-sidebar'
 import WorkCard from './cards/work-card'
+import FavoritesDrawer from './drawers/favorites-drawer'
+import PharmacyContactsCard from './cards/pharmacy-contacts-card'
 
 export {
     Header,
@@ -49,5 +51,7 @@ export {
     BasketCard,
     Notification,
     PharmacySideBar,
-    WorkCard
+    WorkCard,
+    FavoritesDrawer,
+    PharmacyContactsCard
 }

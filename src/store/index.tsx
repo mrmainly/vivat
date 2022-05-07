@@ -8,7 +8,8 @@ export const defaultStore = {
     },
     drawers: {
         profile_drawer: false,
-        main_drawer: false
+        main_drawer: false,
+        favorites_drawer: false
     },
     register: {
         danger_text: false

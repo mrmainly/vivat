@@ -7,8 +7,9 @@ import { useNavigate } from 'react-router-dom'
 import { MyLink, BorderLine, MyText } from '../..'
 import { StateContext, DispatchContext } from '../../../store'
 import ROUTES from '../../../routes'
+import ThemeMain from '../../../theme'
 
-const ProfileDrawer = () => {
+const FavoritesDrawer = () => {
     const navigate = useNavigate()
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
@@ -19,33 +20,24 @@ const ProfileDrawer = () => {
         <Drawer
             {...{
                 anchor: "right",
-                open: state.drawers.profile_drawer,
+                open: state.drawers.favorites_drawer,
                 onClose: handleDrawerClose,
             }}
         >
             <Box style={{
-                width: 300, padding: 15, height: '100%', color: '#20B12E'
+                width: 300, padding: 30, height: '100%'
             }}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
                     <IconButton onClick={() => handleDrawerClose()}><img src="/img/Close_round_light.png" /></IconButton>
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', ml: 1.5 }}>
-                    <img src="/img/User_cicrle_light.png" />
-                    <MyText variant="h6" sx={{ ml: 1 }}>Иванов иван иванович</MyText>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <img src="/img/Favorite_light.png" />
+                    <MyText variant="h6" sx={{ ml: 1, color: ThemeMain.palette.primary.main }}>Избранные товары</MyText>
                 </Box>
-                <BorderLine sx={{ mb: 2, mt: 2 }} />
-                <MyLink href={ROUTES.MYORDERS} sx={{ color: '#20B12E' }}>МОИ ЗАКАЗЫ</MyLink>
-                <MyLink href={ROUTES.BASICINFORMATION} sx={{ color: '#20B12E', mt: 1 }}>МОИ ДАННЫЕ</MyLink>
-                <MyLink href="" sx={{ color: '#20B12E', mt: 1 }}>ПРОГРАММА ЛОЯЛЬНОСТИ</MyLink>
-                <BorderLine sx={{ mb: 2, mt: 2 }} />
-                <MenuItem onClick={() => {
-                    cookie.remove('jwttoken')
-                    handleDrawerClose()
-                    navigate('/')
-                }}>Выйти</MenuItem>
+                <MyText variant="body1" sx={{ mt: 1.5 }}><span>4</span> товара</MyText>
             </Box>
         </Drawer>
     )
 }
 
-export default ProfileDrawer
+export default FavoritesDrawer

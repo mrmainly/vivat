@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Outlet, useLocation } from 'react-router-dom'
 
-import { Header, Footer, MyContainer, SignInModal, SignUpModal, ForgotPasswordModal, MobileDown, ProfileDrawer, MyDrawer, Notification } from '../../components'
+import { Header, Footer, MyContainer, SignInModal, SignUpModal, ForgotPasswordModal, MobileDown, ProfileDrawer, MyDrawer, Notification, FavoritesDrawer } from '../../components'
 import { HomeSlider } from '../../constructor'
 
 const BasicLayout = () => {
@@ -10,10 +10,11 @@ const BasicLayout = () => {
     return (
         <div style={{ overflow: 'hidden', }}>
             <Header />
-            {/* <Notification /> */}
+            <Notification />
             <SignInModal />
             <SignUpModal />
             <ForgotPasswordModal />
+            <FavoritesDrawer />
             <Notification />
             <ProfileDrawer />
             <MyDrawer />

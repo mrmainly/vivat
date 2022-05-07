@@ -11,7 +11,7 @@ const MainDrawer = () => {
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
 
-    const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false } })
+    const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: false } })
     return (
         <Drawer
             {...{

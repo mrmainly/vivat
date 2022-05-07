@@ -188,7 +188,7 @@ const Header = () => {
                     <BorderLine />
                     <BottomBar>
                         <BottomBarItem sx={{ mr: 2 }}>
-                            <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: true } })}>
+                            <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: true, favorites_drawer: false } })}>
                                 <MenuIcon sx={{ color: '#55CD61' }} fontSize="large" />
                             </IconButton>
                         </BottomBarItem>
@@ -201,13 +201,19 @@ const Header = () => {
                             </Button>
                             {/* <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Message_light.png" /></IconButton>
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/File_dock_light.png" /></IconButton> */}
-                            <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Favorite_light.png" /></IconButton>
+                            <IconButton size="small" sx={{ mr: 1 }} onClick={() => {
+                                jwttoken
+                                    ? dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: true } })
+                                    : dispatch({ type: 'auth_modal', payload: { sign_in: true, sign_up: false, forgot: false } })
+                            }}>
+                                <img src="/img/Favorite_light.png" />
+                            </IconButton>
                             <IconButton
                                 size="small"
                                 sx={{ mr: 0.5 }}
                                 onClick={() => {
                                     jwttoken
-                                        ? dispatch({ type: 'drawers', payload: { profile_drawer: true, main_drawer: false } })
+                                        ? dispatch({ type: 'drawers', payload: { profile_drawer: true, main_drawer: false, favorites_drawer: false } })
                                         : dispatch({ type: 'auth_modal', payload: { sign_in: true, sign_up: false, forgot: false } })
                                 }}
                             ><img src="/img/User_cicrle_light.png" /></IconButton>
