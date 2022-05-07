@@ -15,7 +15,10 @@ enum ROUTES {
     ISSUE_ORDERING = '/issue-ordering',
     BLOG = '/blog',
     BLOG_THEME = '/blog-theme',
-    BLOG_DETAIL = '/blog-detail'
+    BLOG_DETAIL = '/blog-detail',
+    VIVAT_INFO = '/vivat-info',
+    OFFICE_WORK = '/office-work',
+    PHARMACY_WORK = '/pharmacy-work'
 }
 
 export default ROUTES;

@@ -19,6 +19,10 @@ import BlogDetail from './blog/blogDetail'
 import Blog from './blog'
 import BlogTheme from './blog/themeBlog'
 
+import VivatInfo from './pharmacy/vivat-info'
+import OfficeWork from './pharmacy/office-work'
+import PharmacyWork from './pharmacy/pharmacy-work'
+
 export {
     Home,
     Basket,
@@ -36,5 +40,8 @@ export {
     IssueOrdering,
     BlogTheme,
     Blog,
-    BlogDetail
+    BlogDetail,
+    VivatInfo,
+    OfficeWork,
+    PharmacyWork
 }

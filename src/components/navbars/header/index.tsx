@@ -102,7 +102,7 @@ const Header = () => {
                             <MenuItem>
                                 <MyText variant="body1">Якутск</MyText>
                             </MenuItem>
-                            <MenuItem>
+                            <MenuItem onClick={() => navigate(ROUTES.VIVAT_INFO)}>
                                 <MyText variant="body1">Наши аптеки</MyText>
                             </MenuItem>
                         </TopBarItem>

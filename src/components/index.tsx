@@ -21,6 +21,8 @@ import MobileDown from './navbars/mobile_down'
 import ProfileUpdateModal from './modals/profile-update-modal'
 import BasketCard from './cards/basket-card'
 import Notification from './notification'
+import PharmacySideBar from './sidebars/pharmacy-sidebar'
+import WorkCard from './cards/work-card'
 
 export {
     Header,
@@ -45,5 +47,7 @@ export {
     MobileDown,
     ProfileUpdateModal,
     BasketCard,
-    Notification
+    Notification,
+    PharmacySideBar,
+    WorkCard
 }

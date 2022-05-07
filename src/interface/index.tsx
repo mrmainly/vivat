@@ -9,7 +9,8 @@ interface MyTextProps {
     sm?: number,
     md?: number,
     xs?: number,
-    variant?: any
+    variant?: any,
+    style?: any
 }
 
 interface InputProps {
@@ -112,6 +113,13 @@ interface ProductSliderProps {
     data: any
 }
 
+interface WorkCardProps {
+    title: string,
+    price: number | string,
+    city: string
+}
+
+
 export type {
     MyTextProps,
     InputProps,
@@ -126,5 +134,6 @@ export type {
     GoodsCardProps,
     ProductSliderProps,
     ProfileSideBarProps,
-    ToggleButtonProps
+    ToggleButtonProps,
+    WorkCardProps
 }
