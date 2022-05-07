@@ -22,6 +22,10 @@ import BlogTheme from './blog/themeBlog'
 import VivatInfo from './pharmacy/vivat-info'
 import OfficeWork from './pharmacy/office-work'
 import PharmacyWork from './pharmacy/pharmacy-work'
+import CreateResume from './pharmacy/create-resume'
+import PharmacyContacts from './pharmacy/pharmacy-contacts'
+import WorkPage from './pharmacy/work-page'
+import VideoVivat from './pharmacy/video-vivat'
 
 export {
     Home,
@@ -43,5 +47,9 @@ export {
     BlogDetail,
     VivatInfo,
     OfficeWork,
-    PharmacyWork
+    PharmacyWork,
+    CreateResume,
+    PharmacyContacts,
+    VideoVivat,
+    WorkPage
 }

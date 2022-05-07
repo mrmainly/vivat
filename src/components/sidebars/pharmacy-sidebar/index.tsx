@@ -29,7 +29,7 @@ const PharmacySideBar = () => {
     const menuItems = [
         {
             label: 'Работа',
-            to: ''
+            to: ROUTES.WORK_PAGE
         },
         {
             label: 'Преимущества работы в Виват',
@@ -45,15 +45,15 @@ const PharmacySideBar = () => {
         },
         {
             label: 'Видео о Виват',
-            to: ''
+            to: ROUTES.VIDEO_VIVAT
         },
         {
             label: 'Создать резюме',
-            to: ''
+            to: ROUTES.CREATE_RESUME
         },
         {
             label: 'Контакты',
-            to: ''
+            to: ROUTES.PHARMACY_CONTACTS
         },
     ]
     return (

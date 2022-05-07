@@ -7,7 +7,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { DispatchContext, StateContext, defaultStore } from './store'
 import { stateReducer } from './reducer'
 import Layout from './layout';
-import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail, Order, Team, Delivery, Work, Contacts, Booking, Stock, IssueOrdering, Blog, BlogDetail, BlogTheme, VivatInfo, OfficeWork, PharmacyWork } from './pages'
+import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail, Order, Team, Delivery, Work, Contacts, Booking, Stock, IssueOrdering, Blog, BlogDetail, BlogTheme, VivatInfo, OfficeWork, PharmacyWork, CreateResume, VideoVivat, WorkPage, PharmacyContacts } from './pages'
 import ROUTES from './routes';
 
 const App = () => {
@@ -44,6 +44,10 @@ const App = () => {
               <Route element={<VivatInfo />} path={ROUTES.VIVAT_INFO} />
               <Route element={<OfficeWork />} path={ROUTES.OFFICE_WORK} />
               <Route element={<PharmacyWork />} path={ROUTES.PHARMACY_WORK} />
+              <Route element={<CreateResume />} path={ROUTES.CREATE_RESUME} />
+              <Route element={<WorkPage />} path={ROUTES.WORK_PAGE} />
+              <Route element={<PharmacyContacts />} path={ROUTES.PHARMACY_CONTACTS} />
+              <Route element={<VideoVivat />} path={ROUTES.VIDEO_VIVAT} />
             </Route>
           </Routes>
         </BrowserRouter>

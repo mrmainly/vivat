@@ -18,7 +18,11 @@ enum ROUTES {
     BLOG_DETAIL = '/blog-detail',
     VIVAT_INFO = '/vivat-info',
     OFFICE_WORK = '/office-work',
-    PHARMACY_WORK = '/pharmacy-work'
+    PHARMACY_WORK = '/pharmacy-work',
+    VIDEO_VIVAT = '/video-vivat',
+    CREATE_RESUME = '/create-resume',
+    WORK_PAGE = '/work-page',
+    PHARMACY_CONTACTS = '/pharmacy-contacts'
 }
 
 export default ROUTES;
