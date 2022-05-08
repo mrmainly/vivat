@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, IconButton } from '@mui/material'
 
 import { BorderLine, MyText, MyButton } from '../..'
+import { DispatchContext } from '../../../store'
 import ThemeMain from '../../../theme'
+import API from '../../../api'
 
 interface FavoritesCardProps {
     title: string,
@@ -10,10 +12,13 @@ interface FavoritesCardProps {
     deliveryStatus: boolean,
     price: number,
     number: any,
-    id: number
+    id: number,
+    discountVal?: number
 }
 
-const FavoritesCard: React.FC<FavoritesCardProps> = ({ title, stock, deliveryStatus, price, number, id }) => {
+const FavoritesCard: React.FC<FavoritesCardProps> = ({ title, stock, deliveryStatus, price, number, id, discountVal }) => {
+    const dispatch = useContext(DispatchContext)
+
     return (
         <Box sx={{ mt: 2 }}>
             <BorderLine sx={{ mb: 2 }} />
@@ -34,19 +39,26 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({ title, stock, deliverySta
                     <MyText variant="body2" sx={{ color: 'red' }}>Возможна доставка курьером</MyText>
                 }
             </Box>
-            <Box sx={{ display: 'flex', mt: 1 }}>
+            {discountVal
+                ?
+                <Box sx={{ display: 'flex', mt: 1 }}>
+                    <MyText variant="h6" sx={{ fontWeight: 600 }}>{discountVal}₽</MyText>
+                    <MyText variant="body2" sx={{
+                        textDecoration: 'line-through',
+                        color: '#999999',
+                        ml: 1.6
+                    }}>
+                        {price} ₽
+                    </MyText>
+                </Box>
+                :
                 <MyText variant="h6" sx={{ fontWeight: 600 }}>{price}₽</MyText>
-                <MyText variant="body2" sx={{
-                    textDecoration: 'line-through',
-                    color: '#999999',
-                    ml: 1.6
-                }}>620 ₽</MyText>
-            </Box>
+            }
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <MyButton size="medium">
                     Добавить в корзину
                 </MyButton>
-                <IconButton size="small">
+                <IconButton size="small" onClick={() => API.deleteFavorite(id, dispatch)}>
                     <img src="/img/Close_round_light.png" />
                 </IconButton>
             </Box>

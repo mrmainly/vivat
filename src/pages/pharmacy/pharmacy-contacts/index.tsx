@@ -17,15 +17,15 @@ const PharmacyContacts = () => {
                             id="demo-simple-select"
                             label="Якутск"
                         >
-                            <MenuItem value={10}>Якутск</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={'Якутск'}>Якутск</MenuItem>
+                            <MenuItem value={'qwe'}>Twenty</MenuItem>
                         </Select>
                     </FormControl>
                 } />
                 <Grid container spacing={3} sx={{ mt: 1 }}>
                     {pharmacy_data.map((item, index) => (
-                        <Grid item>
-                            <PharmacyContactsCard {...item} key={index} />
+                        <Grid item key={index}>
+                            <PharmacyContactsCard {...item} />
                         </Grid>
                     ))}
                 </Grid>

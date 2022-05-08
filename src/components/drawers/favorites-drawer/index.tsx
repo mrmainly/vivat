@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { Drawer, Box, IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
@@ -6,11 +6,21 @@ import { useNavigate } from 'react-router-dom'
 import { MyText, FavoritesCard } from '../..'
 import { StateContext, DispatchContext } from '../../../store'
 import ThemeMain from '../../../theme'
+import API from '../../../api'
 
 const FavoritesDrawer = () => {
+    const [data, setData] = useState([])
+
     const navigate = useNavigate()
     const state = useContext(StateContext)
     const dispatch = useContext(DispatchContext)
+
+    useEffect(() => {
+        API.getFavorites().then(res => {
+            setData(res.data)
+            console.log(res.data)
+        })
+    }, [])
 
     const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: false } })
     const cards = [
@@ -65,10 +75,10 @@ const FavoritesDrawer = () => {
                     <img src="/img/Favorite_light.png" />
                     <MyText variant="h6" sx={{ ml: 1, color: ThemeMain.palette.primary.main }}>Избранные товары</MyText>
                 </Box>
-                <MyText variant="body1" sx={{ mt: 1.5 }}><span>4</span> товара</MyText>
-                {cards.map((item, index) => (
+                <MyText variant="body1" sx={{ mt: 1.5 }}><span>{data.length}</span> товара</MyText>
+                {data.length !== 0 ? data.map((item, index) => (
                     <FavoritesCard {...item} key={index} />
-                ))}
+                )) : 'Нет избранных товаров'}
             </Box>
         </Drawer>
     )

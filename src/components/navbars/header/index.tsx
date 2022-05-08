@@ -196,7 +196,7 @@ const Header = () => {
                             <TextField variant="outlined" label="Поиск лекарства" size="small" fullWidth />
                         </BottomBarItem>
                         <BottomBarItem sx={{ ml: 2 }}>
-                            <Button sx={{ color: ThemeMain.palette.primary.main, borderColor: ThemeMain.palette.primary.main, width: 'max-content', mr: 1 }} variant="outlined">
+                            <Button sx={{ color: ThemeMain.palette.primary.main, borderColor: ThemeMain.palette.primary.main, width: 'max-content', mr: 1, borderRadius: 8 }} variant="outlined">
                                 Статус заказа
                             </Button>
                             {/* <IconButton size="small" sx={{ mr: 1 }}><img src="/img/Message_light.png" /></IconButton>

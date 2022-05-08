@@ -68,9 +68,18 @@ class API {
         return result
     }
     putAccountUser(data, dispatch) {
-        api('api/v1/users/profile/update/').put(null, data).then(res => {
+        api('api/v1/users/profile/update/').patch(null, data).then(res => {
             dispatch({ type: 'profile_modal', payload: { status: 'success', open: true } })
         }).catch(() => dispatch({ type: 'profile_modal', payload: { status: 'error', open: true } }))
+    }
+    async getFavorites() {
+        let result = await api(`api/v1/favorites/favorite/list/`).get(null)
+        return result
+    }
+    deleteFavorite(id, dispatch) {
+        api(`api/v1/favorites/favorite/delete/${id}`).delete(null).then(res => {
+            dispatch({ type: 'notification', payload: { status: 'sussess', active: true, text: 'true' } })
+        }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: ' error' } }))
     }
 }
 
