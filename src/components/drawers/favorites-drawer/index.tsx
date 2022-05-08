@@ -1,12 +1,10 @@
 import React, { useContext } from 'react'
 
-import { Drawer, Box, MenuItem, IconButton } from '@mui/material'
-import cookie from 'js-cookie'
+import { Drawer, Box, IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-import { MyLink, BorderLine, MyText } from '../..'
+import { MyText, FavoritesCard } from '../..'
 import { StateContext, DispatchContext } from '../../../store'
-import ROUTES from '../../../routes'
 import ThemeMain from '../../../theme'
 
 const FavoritesDrawer = () => {
@@ -15,7 +13,40 @@ const FavoritesDrawer = () => {
     const dispatch = useContext(DispatchContext)
 
     const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: false } })
-
+    const cards = [
+        {
+            title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
+            stock: false,
+            deliveryStatus: true,
+            price: 200,
+            number: 2,
+            id: 1
+        },
+        {
+            title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
+            stock: true,
+            deliveryStatus: true,
+            price: 200,
+            number: 2,
+            id: 1
+        },
+        {
+            title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
+            stock: true,
+            deliveryStatus: true,
+            price: 200,
+            number: 2,
+            id: 1
+        },
+        {
+            title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
+            stock: true,
+            deliveryStatus: true,
+            price: 200,
+            number: 2,
+            id: 1
+        }
+    ]
     return (
         <Drawer
             {...{
@@ -35,6 +66,9 @@ const FavoritesDrawer = () => {
                     <MyText variant="h6" sx={{ ml: 1, color: ThemeMain.palette.primary.main }}>Избранные товары</MyText>
                 </Box>
                 <MyText variant="body1" sx={{ mt: 1.5 }}><span>4</span> товара</MyText>
+                {cards.map((item, index) => (
+                    <FavoritesCard {...item} key={index} />
+                ))}
             </Box>
         </Drawer>
     )

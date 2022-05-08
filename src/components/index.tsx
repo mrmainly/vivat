@@ -25,6 +25,7 @@ import PharmacySideBar from './sidebars/pharmacy-sidebar'
 import WorkCard from './cards/work-card'
 import FavoritesDrawer from './drawers/favorites-drawer'
 import PharmacyContactsCard from './cards/pharmacy-contacts-card'
+import FavoritesCard from './cards/favorites-card'
 
 export {
     Header,
@@ -53,5 +54,6 @@ export {
     PharmacySideBar,
     WorkCard,
     FavoritesDrawer,
-    PharmacyContactsCard
+    PharmacyContactsCard,
+    FavoritesCard
 }
