@@ -78,8 +78,13 @@ class API {
     }
     deleteFavorite(id, dispatch) {
         api(`api/v1/favorites/favorite/delete/${id}`).delete(null).then(res => {
-            dispatch({ type: 'notification', payload: { status: 'sussess', active: true, text: 'true' } })
-        }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: ' error' } }))
+            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'Товар удален' } })
+        }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не удален' } }))
+    }
+    transferFavorite(id, dispatch) {
+        api(`api/v1/favorites/favorite/transfer/${id}`).post(null).then(res => {
+            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'Товар добавлен в корзину' } })
+        }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не найден' } }))
     }
 }
 

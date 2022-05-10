@@ -27,6 +27,8 @@ import PharmacyContacts from './pharmacy/pharmacy-contacts'
 import WorkPage from './pharmacy/work-page'
 import VideoVivat from './pharmacy/video-vivat'
 
+import ProductPage from './product-page'
+
 export {
     Home,
     Basket,
@@ -51,5 +53,6 @@ export {
     CreateResume,
     PharmacyContacts,
     VideoVivat,
-    WorkPage
+    WorkPage,
+    ProductPage
 }

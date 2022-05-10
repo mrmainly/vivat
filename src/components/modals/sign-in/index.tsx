@@ -74,42 +74,40 @@ export default function SignIn() {
         API.getToken({ ...data }, dispatch, navigate)
     }
     return (
-        <div>
-            <BootstrapDialog
-                onClose={handleClose}
-                aria-labelledby="customized-dialog-title"
-                open={state.auth_modal.sign_in}
-            >
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Авторизация
-                </BootstrapDialogTitle>
-                <ModalContent dividers>
-                    <MyText sx={{ textAlign: 'center' }}>
-                        Если у вас есть учётная запись, авторизуйтесь, используя адрес электронной почты (email) или телефон
-                    </MyText>
-                    <Box sx={{
-                        width: 261,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center'
-                    }}>
-                        <Form onSubmit={handleSubmit(onSubmit)}>
-                            <Input label="Телефон" {...register('username')} />
-                            <Input label="Пароль" {...register('password')} type="password" />
-                            <MenuItem sx={{ mt: 1, color: ThemeMain.palette.primary.main, display: 'flex', justifyContent: 'center' }} onClick={() => dispatch({ type: 'auth_modal', payload: { sign_in: false, sign_up: false, forgot: true } })}>Забыли пароль?</MenuItem>
-                            <MyButton style={{ marginTop: 10 }} fullWidth>Войти</MyButton>
-                        </Form>
-                        <BorderLine sx={{ mt: 2, mb: 2, width: 100 }} />
-                        <MyButton fullWidth onClick={() => dispatch({ type: 'auth_modal', payload: { sign_in: false, sign_up: true, forgot: false } })}>Регистрация</MyButton>
-                        <MenuItem sx={{ mt: 1.5, color: ThemeMain.palette.primary.main }}>Продолжить без авторизации</MenuItem>
-                    </Box>
-                </ModalContent>
-                {/* <DialogActions>
+        <BootstrapDialog
+            onClose={handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={state.auth_modal.sign_in}
+        >
+            <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                Авторизация
+            </BootstrapDialogTitle>
+            <ModalContent dividers>
+                <MyText sx={{ textAlign: 'center' }}>
+                    Если у вас есть учётная запись, авторизуйтесь, используя адрес электронной почты (email) или телефон
+                </MyText>
+                <Box sx={{
+                    width: 261,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                        <Input label="Телефон" {...register('username')} />
+                        <Input label="Пароль" {...register('password')} type="password" />
+                        <MenuItem sx={{ mt: 1, color: ThemeMain.palette.primary.main, display: 'flex', justifyContent: 'center' }} onClick={() => dispatch({ type: 'auth_modal', payload: { sign_in: false, sign_up: false, forgot: true } })}>Забыли пароль?</MenuItem>
+                        <MyButton style={{ marginTop: 10 }} fullWidth>Войти</MyButton>
+                    </Form>
+                    <BorderLine sx={{ mt: 2, mb: 2, width: 100 }} />
+                    <MyButton fullWidth onClick={() => dispatch({ type: 'auth_modal', payload: { sign_in: false, sign_up: true, forgot: false } })}>Регистрация</MyButton>
+                    <MenuItem sx={{ mt: 1.5, color: ThemeMain.palette.primary.main }}>Продолжить без авторизации</MenuItem>
+                </Box>
+            </ModalContent>
+            {/* <DialogActions>
                     <Button autoFocus onClick={handleClose}>
                         Save changes
                     </Button>
                 </DialogActions> */}
-            </BootstrapDialog>
-        </div>
+        </BootstrapDialog>
     );
 }

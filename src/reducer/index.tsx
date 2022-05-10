@@ -3,6 +3,7 @@ export const stateReducer = (state: any, action: any) => {
         case 'notification':
             return { ...state, noti: action.payload }
         case 'auth_modal':
+            console.log('auth_modal')
             return { ...state, auth_modal: action.payload }
         case 'register':
             return { ...state, register: action.payload }
@@ -15,6 +16,7 @@ export const stateReducer = (state: any, action: any) => {
         case 'register_version':
             return { ...state, register_version: action.payload }
         case 'notification':
+            console.log('ens')
             return { ...state, noti: action.payload }
         default:
             throw new Error();

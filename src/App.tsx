@@ -7,7 +7,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { DispatchContext, StateContext, defaultStore } from './store'
 import { stateReducer } from './reducer'
 import Layout from './layout';
-import { Home, Basket, MyOrders, BasicInformation, ChangePassword, ProductDetail, Order, Team, Delivery, Work, Contacts, Booking, Stock, IssueOrdering, Blog, BlogDetail, BlogTheme, VivatInfo, OfficeWork, PharmacyWork, CreateResume, VideoVivat, WorkPage, PharmacyContacts } from './pages'
+import { Home, Basket, MyOrders, ProductPage, BasicInformation, ChangePassword, ProductDetail, Order, Team, Delivery, Work, Contacts, Booking, Stock, IssueOrdering, Blog, BlogDetail, BlogTheme, VivatInfo, OfficeWork, PharmacyWork, CreateResume, VideoVivat, WorkPage, PharmacyContacts } from './pages'
 import ROUTES from './routes';
 
 const App = () => {
@@ -22,6 +22,7 @@ const App = () => {
               <Route element={<Basket />} path={ROUTES.BASKET} />
               <Route path={`${ROUTES.PRODUCT_DETAIL}/:id`} element={<ProductDetail />} />
               <Route element={<IssueOrdering />} path={ROUTES.ISSUE_ORDERING} />
+              <Route element={<ProductPage />} path={ROUTES.PRODUCT_PAGE} />
 
               {/* profile */}
               <Route element={<MyOrders />} path={ROUTES.MYORDERS} />

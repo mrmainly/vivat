@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Outlet, useLocation } from 'react-router-dom'
 
 import { Header, Footer, MyContainer, SignInModal, SignUpModal, ForgotPasswordModal, MobileDown, ProfileDrawer, MyDrawer, Notification, FavoritesDrawer } from '../../components'
 import { HomeSlider } from '../../constructor'
+import { StateContext } from '../../store'
 
 const BasicLayout = () => {
     const location = useLocation()
+    const state = useContext(StateContext)
     return (
-        <div style={{ overflow: 'hidden', }}>
+        <div style={{ overflow: 'hidden' }}>
             <Header />
             <Notification />
             <SignInModal />
             <SignUpModal />
             <ForgotPasswordModal />
-            <FavoritesDrawer />
+            {state.drawers.favorites_drawer && <FavoritesDrawer />}
             <Notification />
             <ProfileDrawer />
             <MyDrawer />

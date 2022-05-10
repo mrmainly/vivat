@@ -55,7 +55,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({ title, stock, deliverySta
                 <MyText variant="h6" sx={{ fontWeight: 600 }}>{price}₽</MyText>
             }
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <MyButton size="medium">
+                <MyButton size="medium" onClick={() => API.transferFavorite(id, dispatch)}>
                     Добавить в корзину
                 </MyButton>
                 <IconButton size="small" onClick={() => API.deleteFavorite(id, dispatch)}>

@@ -22,7 +22,8 @@ enum ROUTES {
     VIDEO_VIVAT = '/video-vivat',
     CREATE_RESUME = '/create-resume',
     WORK_PAGE = '/work-page',
-    PHARMACY_CONTACTS = '/pharmacy-contacts'
+    PHARMACY_CONTACTS = '/pharmacy-contacts',
+    PRODUCT_PAGE = '/product-page'
 }
 
 export default ROUTES;

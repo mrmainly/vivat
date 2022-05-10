@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { AppBar, MenuItem, Box, IconButton, Container, TextField, Grid, Button, fabClasses } from '@mui/material'
+import { AppBar, MenuItem, Box, IconButton, Container, TextField, Grid, Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 import cookie from 'js-cookie'
 import ThemeMain from '../../../theme'
 
-import { MyText, MyDrawer, BorderLine, ProfileDrawer } from '../..'
+import { MyText, BorderLine, } from '../..'
 import { DispatchContext } from '../../../store'
 import ROUTES from '../../../routes';
 
@@ -72,12 +72,10 @@ const IconButtomBagLight = styled(IconButton)(({ theme }) => ({
 const Header = () => {
     const [state, setState] = useState({
         mobileView: false,
-        drawerOpen: false,
-        drawerProfileOpen: false
     });
     const jwttoken = cookie.get('jwttoken')
     const navigate = useNavigate()
-    const { mobileView, drawerOpen, drawerProfileOpen } = state;
+    const { mobileView } = state;
     const dispatch = useContext(DispatchContext)
 
     const handleDrawerOpen = () =>
