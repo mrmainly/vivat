@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, MenuItem } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
 
 import product_data from '../../local_data/product_data'
-import { MyContainer, BasketCard, MyText } from '../../components'
+import { BasketCard, MyText } from '../../components'
 import { ProductCardsSlider } from '../../constructor'
 import API from '../../api'
 
@@ -11,7 +11,11 @@ const Basket = () => {
     const count_product = 8
     const general_price = 8196
 
-
+    useEffect(() => {
+        API.getOrdersList().then(res => {
+            console.log(res)
+        })
+    }, [])
     return (
         <Box>
             <MyText variant="h6">Корзина</MyText>

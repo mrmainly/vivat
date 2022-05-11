@@ -4,11 +4,9 @@ import { FormControlLabel, Checkbox, TextField, Box, CircularProgress } from '@m
 import { styled } from '@mui/system'
 
 import { ProfileSideBar, MyButton, MyText, ProfileUpdateModal } from '../../../components'
-import ProfileForm from './components/ProfileForm'
 import API from '../../../api'
 import ThemeMain from '../../../theme'
 import { DispatchContext } from '../../../store'
-
 
 const Main = styled(Box)(({ theme }) => ({
     display: 'flex',

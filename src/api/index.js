@@ -73,21 +73,21 @@ class API {
         }).catch(() => dispatch({ type: 'profile_modal', payload: { status: 'error', open: true } }))
     }
     async getFavorites() {
-        let result = await api(`api/v1/favorites/favorite/list/`).get(null)
+        let result = await api(`api/v1/favorites/`).get(null)
         return result
     }
     deleteFavorite(id, dispatch) {
-        api(`api/v1/favorites/favorite/delete/${id}`).delete(null).then(res => {
+        api(`api/v1/favorites/${id}`).delete(null).then(res => {
             dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'Товар удален' } })
         }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не удален' } }))
     }
     transferFavorite(id, dispatch) {
-        api(`api/v1/favorites/favorite/transfer/${id}`).post(null).then(res => {
+        api(`api/v1/favorites/transfer/${id}`).post(null).then(res => {
             dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'Товар добавлен в корзину' } })
         }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не найден' } }))
     }
     async getOrdersList() {
-        let result = await api(`api/v1/orders/items/list/`).get(null)
+        let result = await api(`api/v1/orders/`).get(null)
         return result
     }
     sendPhoneMailForgotPassword(data, type, dispatch) {

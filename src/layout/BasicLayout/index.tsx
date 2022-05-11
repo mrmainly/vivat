@@ -17,7 +17,7 @@ const BasicLayout = () => {
             <Notification />
             <SignInModal />
             <SignUpModal />
-            <ForgotPasswordModal />
+            {state.auth_modal.forgot && <ForgotPasswordModal />}
             <Notification />
             {location.pathname === '/' ? <HomeSlider /> : ''}
             <MyContainer wrapper={true} minHeight={600} sx={{

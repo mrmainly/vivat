@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { MyContainer, ProductCard } from '../../components'
 import { ProductCardsSlider } from '../../constructor'
 import product_data from '../../local_data/product_data'
 

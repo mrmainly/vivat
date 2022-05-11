@@ -21,6 +21,22 @@ const Main = styled(Box)(({ theme }) => ({
     width: '100%',
 }))
 
+const DesktopWrapper = styled(Container)(({ theme }) => ({
+    [theme.breakpoints.down('md')]: {
+        display: 'none'
+    },
+}))
+
+const MobileWrapper = styled(Container)(({ theme }) => ({
+    display: 'none',
+    [theme.breakpoints.down('md')]: {
+        height: 60,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+}))
+
 const TopBar = styled(Box)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-between',
@@ -73,14 +89,13 @@ const MidleBarItemSelect = styled(Grid)(({ theme }) => ({
 
 const Header = () => {
     const [state, setState] = useState({
-        mobileView: false,
         drawerOpen: false,
         drawerProfileOpen: false,
         drawerFavoritesOpen: false
     });
     const jwttoken = cookie.get('jwttoken')
     const navigate = useNavigate()
-    const { mobileView, drawerOpen, drawerProfileOpen, drawerFavoritesOpen } = state;
+    const { drawerOpen, drawerProfileOpen, drawerFavoritesOpen } = state;
     const dispatch = useContext(DispatchContext)
 
     const handleDrawerClose = () =>
@@ -98,19 +113,19 @@ const Header = () => {
     const handleFavoritesDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerFavoritesOpen: true }));
 
-    useEffect(() => {
-        const setResponsiveness = () => {
-            return window.innerWidth < 994
-                ? setState((prevState) => ({ ...prevState, mobileView: true }))
-                : setState((prevState) => ({ ...prevState, mobileView: false }));
-        };
-        setResponsiveness();
-        window.addEventListener("resize", () => setResponsiveness());
-    }, []);
+    // useEffect(() => {
+    //     const setResponsiveness = () => {
+    //         return window.innerWidth < 994
+    //             ? setState((prevState) => ({ ...prevState, mobileView: true }))
+    //             : setState((prevState) => ({ ...prevState, mobileView: false }));
+    //     };
+    //     setResponsiveness();
+    //     window.addEventListener("resize", () => setResponsiveness());
+    // }, []);
 
     const Desktop = () => {
         return (
-            <Container>
+            <DesktopWrapper>
                 <Main aria-label="mailbox folders">
                     <TopBar >
                         <TopBarItem>
@@ -236,12 +251,12 @@ const Header = () => {
                         </BottomBarItem>
                     </BottomBar>
                 </Main >
-            </Container>
+            </DesktopWrapper>
         )
     }
     const Mobile = () => {
         return (
-            <Box style={{ height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <MobileWrapper>
                 <Box sx={{ display: 'flex' }}>
                     <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => handleDrawerOpen()}>
                         <MenuIcon sx={{ color: '#55CD61' }} fontSize="large" />
@@ -255,13 +270,14 @@ const Header = () => {
                         Статус заказа
                     </Button>
                 </Box>
-            </Box>
+            </MobileWrapper>
         )
     }
     return (
         <>
             <AppBar position="static" sx={{ bgcolor: 'white', color: '#222222', boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.25);' }}>
-                {mobileView ? Mobile() : Desktop()}
+                <Desktop />
+                <Mobile />
             </AppBar>
             <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
             <ProfileDrawer state={drawerProfileOpen} handleClose={handleProfileDrawerClose} />
