@@ -64,11 +64,11 @@ class API {
         }).catch((error) => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: ' error' } }))
     }
     async getAccountUser() {
-        let result = await api(`api/v1/users/profile/`).get(null)
+        let result = await api(`api/v1/users/me/`).get(null)
         return result
     }
     putAccountUser(data, dispatch) {
-        api('api/v1/users/profile/update/').patch(null, data).then(res => {
+        api('api/v1/users/me/').patch(null, data).then(res => {
             dispatch({ type: 'profile_modal', payload: { status: 'success', open: true } })
         }).catch(() => dispatch({ type: 'profile_modal', payload: { status: 'error', open: true } }))
     }
@@ -89,6 +89,44 @@ class API {
     async getOrdersList() {
         let result = await api(`api/v1/orders/items/list/`).get(null)
         return result
+    }
+    sendPhoneMailForgotPassword(data, type, dispatch) {
+        const result = api(type == 'phone'
+            ?
+            `api/v1/users/reset_phone/`
+            :
+            'api/v1/users/reset_email/'
+        ).post(null, type == 'phone'
+            ?
+            { phone: data.phone }
+            :
+            { email: data.email }
+        )
+            .then(res => {
+                return res.data
+            }).catch((error) => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: type === 'phone' ? 'Номер телефона не найден' : 'Электронная почта не найдена' } }))
+        return result
+    }
+    sendVerifyCodeForgot(data, dispatch) {
+        const result = api('api/v1/users/code/2/verify/')
+            .post(null, data)
+            .then(res => {
+                return res.data
+            })
+            .catch(error => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Не правильный код' } }))
+        return result
+    }
+    reset_password(data, dispatch) {
+        api('api/v1/users/reset_password/')
+            .post(null,
+                {
+                    code: data.code,
+                    password: data.password
+                })
+            .then(res => {
+                dispatch({ type: 'auth_modal', payload: { sign_up: false, sign_in: true, forgot: false } })
+            })
+            .catch(error => console.log(error))
     }
 }
 

@@ -101,6 +101,8 @@ interface ProfileSideBarProps {
 
 interface ToggleButtonProps {
     sx?: SxProps,
+    toggleState: any,
+    setToggleState: any
 
 }
 

@@ -4,20 +4,19 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import { ToggleButtonProps } from '../../../interface';
 
-const MyToggleButton: React.FC<ToggleButtonProps> = ({ ...props }) => {
-    const [alignment, setAlignment] = React.useState('phone');
+const MyToggleButton: React.FC<ToggleButtonProps> = ({ toggleState, setToggleState, ...props }) => {
 
     const handleChange = (
         event: React.MouseEvent<HTMLElement>,
         newAlignment: string,
     ) => {
-        setAlignment(newAlignment);
+        setToggleState(newAlignment);
     };
 
     return (
         <ToggleButtonGroup
             color="primary"
-            value={alignment}
+            value={toggleState}
             exclusive
             onChange={handleChange}
             {...props}

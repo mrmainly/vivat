@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { AppBar, MenuItem, Box, IconButton, Container, TextField, Grid, Button, fabClasses } from '@mui/material'
+import { AppBar, MenuItem, Box, IconButton, Container, TextField, Grid, Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 import cookie from 'js-cookie'
-import ThemeMain from '../../../theme'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+import ThemeMain from '../../../theme'
 import { MyText, MyDrawer, BorderLine, ProfileDrawer, FavoritesDrawer } from '../..'
 import { DispatchContext } from '../../../store'
 import ROUTES from '../../../routes';
@@ -63,11 +65,11 @@ const MidleBarItemSelect = styled(Grid)(({ theme }) => ({
 
 }))
 
-const IconButtomBagLight = styled(IconButton)(({ theme }) => ({
-    [theme.breakpoints.down('sm')]: {
-        display: 'none'
-    },
-}))
+// const IconButtomBagLight = styled(IconButton)(({ theme }) => ({
+//     [theme.breakpoints.down('sm')]: {
+//         display: 'none'
+//     },
+// }))
 
 const Header = () => {
     const [state, setState] = useState({
@@ -219,7 +221,7 @@ const Header = () => {
                                     ? handleFavoritesDrawerOpen()
                                     : dispatch({ type: 'auth_modal', payload: { sign_in: true, sign_up: false, forgot: false } })
                             }}>
-                                <img src="/img/Favorite_light.png" />
+                                <FavoriteBorderIcon sx={{ color: '#55CD61' }} fontSize="large" />
                             </IconButton>
                             <IconButton
                                 size="small"
@@ -229,7 +231,7 @@ const Header = () => {
                                         ? handleProfileDrawerOpen()
                                         : dispatch({ type: 'auth_modal', payload: { sign_in: true, sign_up: false, forgot: false } })
                                 }}
-                            ><img src="/img/User_cicrle_light.png" /></IconButton>
+                            ><AccountCircleIcon sx={{ color: '#55CD61' }} fontSize="large" /></IconButton>
                             <MenuItem onClick={() => navigate(ROUTES.BASKET)}><img src="/img/Frame954.png" /></MenuItem>
                         </BottomBarItem>
                     </BottomBar>
@@ -263,7 +265,7 @@ const Header = () => {
             </AppBar>
             <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
             <ProfileDrawer state={drawerProfileOpen} handleClose={handleProfileDrawerClose} />
-            <FavoritesDrawer state={drawerFavoritesOpen} handleClose={handleFavoritesDrawerClose} />
+            {drawerFavoritesOpen && <FavoritesDrawer state={drawerFavoritesOpen} handleClose={handleFavoritesDrawerClose} />}
         </>
     )
 }
