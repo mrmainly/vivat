@@ -5,10 +5,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import product_data from '../../local_data/product_data'
 import { MyContainer, BasketCard, MyText } from '../../components'
 import { ProductCardsSlider } from '../../constructor'
+import API from '../../api'
 
 const Basket = () => {
     const count_product = 8
     const general_price = 8196
+
+
     return (
         <Box>
             <MyText variant="h6">Корзина</MyText>

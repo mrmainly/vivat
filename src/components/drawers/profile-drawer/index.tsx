@@ -5,29 +5,25 @@ import cookie from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 
 import { MyLink, BorderLine, MyText } from '../..'
-import { StateContext, DispatchContext } from '../../../store'
 import ROUTES from '../../../routes'
+import { ModalAndDrawer } from '../../../interface'
 
-const ProfileDrawer = () => {
+const ProfileDrawer: React.FC<ModalAndDrawer> = ({ state, handleClose }) => {
     const navigate = useNavigate()
-    const state = useContext(StateContext)
-    const dispatch = useContext(DispatchContext)
-
-    const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: false } })
 
     return (
         <Drawer
             {...{
                 anchor: "right",
-                open: state.drawers.profile_drawer,
-                onClose: handleDrawerClose,
+                open: state,
+                onClose: handleClose,
             }}
         >
             <Box style={{
                 width: 300, padding: 15, height: '100%', color: '#20B12E'
             }}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-                    <IconButton onClick={() => handleDrawerClose()}><img src="/img/Close_round_light.png" /></IconButton>
+                    <IconButton onClick={() => handleClose()}><img src="/img/Close_round_light.png" /></IconButton>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', ml: 1.5 }}>
                     <img src="/img/User_cicrle_light.png" />
@@ -40,7 +36,7 @@ const ProfileDrawer = () => {
                 <BorderLine sx={{ mb: 2, mt: 2 }} />
                 <MenuItem onClick={() => {
                     cookie.remove('jwttoken')
-                    handleDrawerClose()
+                    handleClose()
                     navigate('/')
                 }}>Выйти</MenuItem>
             </Box>

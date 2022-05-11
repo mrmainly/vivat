@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Box, IconButton } from '@mui/material'
 import { styled } from '@mui/system'
 
 import { DispatchContext } from '../../../store'
 import MyContainer from '../../container'
+import { ProfileDrawer } from '../..'
 
 const MobileBox = styled(Box)(({ theme }) => ({
     background: 'white',
@@ -17,6 +18,10 @@ const MobileBox = styled(Box)(({ theme }) => ({
 }))
 
 const MobileDown = () => {
+    const [profileDrawer, setProfileDrawer] = useState(false)
+
+    const handleProfileDrawerClose = () => setProfileDrawer(false)
+
     const dispatch = useContext(DispatchContext)
 
     const icon_data = [
@@ -50,11 +55,12 @@ const MobileDown = () => {
                 }}>
                     {icon_data.map((item, index) => (
                         <Box sx={{ display: 'flex', justifyContent: 'center' }} key={index}>
-                            <IconButton onClick={() => dispatch({ type: 'drawers', payload: { profile_drawer: true, main_drawer: false } })}><img src={item.icon} /></IconButton>
+                            <IconButton onClick={() => setProfileDrawer(true)}><img src={item.icon} /></IconButton>
                         </Box>
                     ))}
                 </Box>
             </MyContainer>
+            <ProfileDrawer state={profileDrawer} handleClose={handleProfileDrawerClose} />
         </MobileBox>
     )
 }

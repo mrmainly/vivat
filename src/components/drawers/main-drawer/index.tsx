@@ -7,17 +7,22 @@ import drawer_links from '../../../local_data/drawer_links'
 import drawer_elements from '../../../local_data/drawer_elements'
 import { DispatchContext, StateContext } from '../../../store'
 
-const MainDrawer = () => {
-    const state = useContext(StateContext)
-    const dispatch = useContext(DispatchContext)
+interface MainDrawerProps {
+    state: any,
+    handleClose: any
+}
 
-    const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: false } })
+const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
+    // const state = useContext(StateContext)
+    // const dispatch = useContext(DispatchContext)
+
+    // const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: false } })
     return (
         <Drawer
             {...{
                 anchor: "left",
-                open: state.drawers.main_drawer,
-                onClose: handleDrawerClose,
+                open: state,
+                onClose: handleClose,
             }}
         >
             <Box style={{
@@ -25,7 +30,7 @@ const MainDrawer = () => {
                 height: '100%',
             }}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <IconButton onClick={() => handleDrawerClose()}><img src="/img/Close_round_light.png" /></IconButton>
+                    <IconButton onClick={() => handleClose()}><img src="/img/Close_round_light.png" /></IconButton>
                 </Box>
                 <Box>
                     <BorderLine sx={{ mb: 2, mt: 2 }} />

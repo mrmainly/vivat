@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { AppBar, MenuItem, Box, IconButton, Container, TextField, Grid, Button } from '@mui/material'
+import { AppBar, MenuItem, Box, IconButton, Container, TextField, Grid, Button, fabClasses } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom'
 import { styled } from '@mui/system'
 import cookie from 'js-cookie'
 import ThemeMain from '../../../theme'
 
-import { MyText, BorderLine, } from '../..'
+import { MyText, MyDrawer, BorderLine, ProfileDrawer, FavoritesDrawer } from '../..'
 import { DispatchContext } from '../../../store'
 import ROUTES from '../../../routes';
 
@@ -72,14 +72,29 @@ const IconButtomBagLight = styled(IconButton)(({ theme }) => ({
 const Header = () => {
     const [state, setState] = useState({
         mobileView: false,
+        drawerOpen: false,
+        drawerProfileOpen: false,
+        drawerFavoritesOpen: false
     });
     const jwttoken = cookie.get('jwttoken')
     const navigate = useNavigate()
-    const { mobileView } = state;
+    const { mobileView, drawerOpen, drawerProfileOpen, drawerFavoritesOpen } = state;
     const dispatch = useContext(DispatchContext)
 
+    const handleDrawerClose = () =>
+        setState((prevState) => ({ ...prevState, drawerOpen: false }));
     const handleDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: true }));
+
+    const handleProfileDrawerClose = () =>
+        setState((prevState) => ({ ...prevState, drawerProfileOpen: false }));
+    const handleProfileDrawerOpen = () =>
+        setState((prevState) => ({ ...prevState, drawerProfileOpen: true }));
+
+    const handleFavoritesDrawerClose = () =>
+        setState((prevState) => ({ ...prevState, drawerFavoritesOpen: false }));
+    const handleFavoritesDrawerOpen = () =>
+        setState((prevState) => ({ ...prevState, drawerFavoritesOpen: true }));
 
     useEffect(() => {
         const setResponsiveness = () => {
@@ -186,7 +201,7 @@ const Header = () => {
                     <BorderLine />
                     <BottomBar>
                         <BottomBarItem sx={{ mr: 2 }}>
-                            <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: true, favorites_drawer: false } })}>
+                            <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => handleDrawerOpen()}>
                                 <MenuIcon sx={{ color: '#55CD61' }} fontSize="large" />
                             </IconButton>
                         </BottomBarItem>
@@ -201,7 +216,7 @@ const Header = () => {
                         <IconButton size="small" sx={{ mr: 1 }}><img src="/img/File_dock_light.png" /></IconButton> */}
                             <IconButton size="small" sx={{ mr: 1 }} onClick={() => {
                                 jwttoken
-                                    ? dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: true } })
+                                    ? handleFavoritesDrawerOpen()
                                     : dispatch({ type: 'auth_modal', payload: { sign_in: true, sign_up: false, forgot: false } })
                             }}>
                                 <img src="/img/Favorite_light.png" />
@@ -211,7 +226,7 @@ const Header = () => {
                                 sx={{ mr: 0.5 }}
                                 onClick={() => {
                                     jwttoken
-                                        ? dispatch({ type: 'drawers', payload: { profile_drawer: true, main_drawer: false, favorites_drawer: false } })
+                                        ? handleProfileDrawerOpen()
                                         : dispatch({ type: 'auth_modal', payload: { sign_in: true, sign_up: false, forgot: false } })
                                 }}
                             ><img src="/img/User_cicrle_light.png" /></IconButton>
@@ -226,7 +241,7 @@ const Header = () => {
         return (
             <Box style={{ height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box sx={{ display: 'flex' }}>
-                    <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: true } })}>
+                    <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => handleDrawerOpen()}>
                         <MenuIcon sx={{ color: '#55CD61' }} fontSize="large" />
                     </IconButton>
                     <MenuItem>
@@ -246,6 +261,9 @@ const Header = () => {
             <AppBar position="static" sx={{ bgcolor: 'white', color: '#222222', boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.25);' }}>
                 {mobileView ? Mobile() : Desktop()}
             </AppBar>
+            <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
+            <ProfileDrawer state={drawerProfileOpen} handleClose={handleProfileDrawerClose} />
+            <FavoritesDrawer state={drawerFavoritesOpen} handleClose={handleFavoritesDrawerClose} />
         </>
     )
 }

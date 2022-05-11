@@ -86,6 +86,10 @@ class API {
             dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'Товар добавлен в корзину' } })
         }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не найден' } }))
     }
+    async getOrdersList() {
+        let result = await api(`api/v1/orders/items/list/`).get(null)
+        return result
+    }
 }
 
 export default new API()

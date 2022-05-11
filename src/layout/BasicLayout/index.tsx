@@ -1,12 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Outlet, useLocation } from 'react-router-dom'
 
-import { Header, Footer, MyContainer, SignInModal, SignUpModal, ForgotPasswordModal, MobileDown, ProfileDrawer, MyDrawer, Notification, FavoritesDrawer } from '../../components'
+import { Header, Footer, MyContainer, SignInModal, SignUpModal, ForgotPasswordModal, MobileDown, ProfileDrawer, Notification, FavoritesDrawer } from '../../components'
 import { HomeSlider } from '../../constructor'
 import { StateContext } from '../../store'
 
 const BasicLayout = () => {
+    const [auth, setAuth] = useState(false)
+
     const location = useLocation()
     const state = useContext(StateContext)
     return (
@@ -16,10 +18,7 @@ const BasicLayout = () => {
             <SignInModal />
             <SignUpModal />
             <ForgotPasswordModal />
-            {state.drawers.favorites_drawer && <FavoritesDrawer />}
             <Notification />
-            <ProfileDrawer />
-            <MyDrawer />
             {location.pathname === '/' ? <HomeSlider /> : ''}
             <MyContainer wrapper={true} minHeight={600} sx={{
                 background: '#F7F9F7',

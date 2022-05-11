@@ -13,6 +13,11 @@ interface MyTextProps {
     style?: any
 }
 
+interface ModalAndDrawer {
+    state: any,
+    handleClose: any
+}
+
 interface InputProps {
     ref: any,
     label?: any,
@@ -135,5 +140,6 @@ export type {
     ProductSliderProps,
     ProfileSideBarProps,
     ToggleButtonProps,
-    WorkCardProps
+    WorkCardProps,
+    ModalAndDrawer
 }

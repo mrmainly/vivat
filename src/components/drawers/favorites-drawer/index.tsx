@@ -8,12 +8,15 @@ import { StateContext, DispatchContext } from '../../../store'
 import ThemeMain from '../../../theme'
 import API from '../../../api'
 
-const FavoritesDrawer = () => {
+interface MainDrawerProps {
+    state: any,
+    handleClose: any
+}
+
+const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [data, setData] = useState([])
 
-    const navigate = useNavigate()
-    const state = useContext(StateContext)
-    const dispatch = useContext(DispatchContext)
+    // const dispatch = useContext(DispatchContext)
 
     useEffect(() => {
         API.getFavorites().then(res => {
@@ -21,55 +24,53 @@ const FavoritesDrawer = () => {
             console.log(res.data)
         })
     }, [])
-
-    const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: false } })
-    const cards = [
-        {
-            title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
-            stock: false,
-            deliveryStatus: true,
-            price: 200,
-            number: 2,
-            id: 1
-        },
-        {
-            title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
-            stock: true,
-            deliveryStatus: true,
-            price: 200,
-            number: 2,
-            id: 1
-        },
-        {
-            title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
-            stock: true,
-            deliveryStatus: true,
-            price: 200,
-            number: 2,
-            id: 1
-        },
-        {
-            title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
-            stock: true,
-            deliveryStatus: true,
-            price: 200,
-            number: 2,
-            id: 1
-        }
-    ]
+    // const cards = [
+    //     {
+    //         title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
+    //         stock: false,
+    //         deliveryStatus: true,
+    //         price: 200,
+    //         number: 2,
+    //         id: 1
+    //     },
+    //     {
+    //         title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
+    //         stock: true,
+    //         deliveryStatus: true,
+    //         price: 200,
+    //         number: 2,
+    //         id: 1
+    //     },
+    //     {
+    //         title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
+    //         stock: true,
+    //         deliveryStatus: true,
+    //         price: 200,
+    //         number: 2,
+    //         id: 1
+    //     },
+    //     {
+    //         title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
+    //         stock: true,
+    //         deliveryStatus: true,
+    //         price: 200,
+    //         number: 2,
+    //         id: 1
+    //     }
+    // ]
     return (
         <Drawer
             {...{
                 anchor: "right",
-                open: state.drawers.favorites_drawer,
-                onClose: handleDrawerClose,
+                open: state,
+                onClose: handleClose,
             }}
         >
             <Box style={{
                 width: 300, padding: 30, height: '100%'
             }}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-                    <IconButton onClick={() => handleDrawerClose()}><img src="/img/Close_round_light.png" /></IconButton>
+                    <IconButton onClick={() => handleClose()}><img src="/img/Close_round_light.png" /></IconButton>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <img src="/img/Favorite_light.png" />
