@@ -20,6 +20,9 @@ export const stateReducer = (state: any, action: any) => {
             break;
         case 'register_version':
             return { ...state, register_version: action.payload }
+            break;
+        case 'count':
+            return { ...state, count: action.payload }
         default:
             throw new Error();
     }

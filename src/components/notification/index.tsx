@@ -38,7 +38,7 @@ export default function Notification() {
         <div>
             <Snackbar
                 open={state.noti.active}
-                autoHideDuration={15000}
+                autoHideDuration={8000}
                 onClose={handleClose}
                 action={action}
                 anchorOrigin={{

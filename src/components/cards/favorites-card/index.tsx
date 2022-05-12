@@ -13,10 +13,11 @@ interface FavoritesCardProps {
     price: number,
     number: any,
     id: number,
-    discountVal?: number
+    discountVal?: number,
+    count: number
 }
 
-const FavoritesCard: React.FC<FavoritesCardProps> = ({ title, stock, deliveryStatus, price, number, id, discountVal }) => {
+const FavoritesCard: React.FC<FavoritesCardProps> = ({ title, stock, deliveryStatus, price, number, id, discountVal, count }) => {
     const dispatch = useContext(DispatchContext)
 
     return (
@@ -58,7 +59,9 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({ title, stock, deliverySta
                 <MyButton size="medium" onClick={() => API.transferFavorite(id, dispatch)}>
                     Добавить в корзину
                 </MyButton>
-                <IconButton size="small" onClick={() => API.deleteFavorite(id, dispatch)}>
+                <IconButton size="small" onClick={() =>
+                    API.deleteFavorite(id, dispatch)
+                }>
                     <img src="/img/Close_round_light.png" />
                 </IconButton>
             </Box>

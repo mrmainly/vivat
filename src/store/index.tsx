@@ -11,6 +11,9 @@ export const defaultStore = {
         main_drawer: false,
         favorites_drawer: false
     },
+    count: {
+        value: 0
+    },
     register: {
         danger_text: false
     },

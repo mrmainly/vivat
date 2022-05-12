@@ -78,7 +78,7 @@ class API {
     }
     deleteFavorite(id, dispatch) {
         api(`api/v1/favorites/${id}`).delete(null).then(res => {
-            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'Товар удален' } })
+
         }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не удален' } }))
     }
     transferFavorite(id, dispatch) {
@@ -87,7 +87,7 @@ class API {
         }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не найден' } }))
     }
     async getOrdersList() {
-        let result = await api(`api/v1/orders/`).get(null)
+        let result = await api(`api/v1/orders/cart/`).get(null)
         return result
     }
     sendPhoneMailForgotPassword(data, type, dispatch) {

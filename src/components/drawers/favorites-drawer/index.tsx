@@ -16,48 +16,17 @@ interface MainDrawerProps {
 const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [data, setData] = useState([])
 
+    let count = 0
+
     // const dispatch = useContext(DispatchContext)
 
     useEffect(() => {
-        API.getFavorites().then(res => {
-            setData(res.data)
-            console.log(res.data)
-        })
+        API.getFavorites()
+            .then(res => {
+                setData(res.data)
+            })
     }, [])
-    // const cards = [
-    //     {
-    //         title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
-    //         stock: false,
-    //         deliveryStatus: true,
-    //         price: 200,
-    //         number: 2,
-    //         id: 1
-    //     },
-    //     {
-    //         title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
-    //         stock: true,
-    //         deliveryStatus: true,
-    //         price: 200,
-    //         number: 2,
-    //         id: 1
-    //     },
-    //     {
-    //         title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
-    //         stock: true,
-    //         deliveryStatus: true,
-    //         price: 200,
-    //         number: 2,
-    //         id: 1
-    //     },
-    //     {
-    //         title: 'Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч',
-    //         stock: true,
-    //         deliveryStatus: true,
-    //         price: 200,
-    //         number: 2,
-    //         id: 1
-    //     }
-    // ]
+
     return (
         <Drawer
             {...{
@@ -78,7 +47,7 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                 </Box>
                 <MyText variant="body1" sx={{ mt: 1.5 }}><span>{data.length}</span> товара</MyText>
                 {data.length !== 0 ? data.map((item, index) => (
-                    <FavoritesCard {...item} key={index} />
+                    <FavoritesCard {...item} key={index} count={count} />
                 )) : 'Нет избранных товаров'}
             </Box>
         </Drawer>

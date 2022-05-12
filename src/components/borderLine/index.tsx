@@ -3,8 +3,6 @@ import React from 'react'
 import { Box } from '@mui/material'
 import { styled } from '@mui/system'
 
-import { BorderLineProps } from '../../interface'
-
 const BorderLineStyle = styled(Box)(({ theme }) => ({
     width: '100%',
     background: '#d4d4d4',

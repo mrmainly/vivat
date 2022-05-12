@@ -16,8 +16,17 @@ const Root = styled(Box)(({ theme }) => ({
     height: 136,
     padding: 16,
 }))
+interface BasketProps {
+    price: any,
+    GoodsCode: number,
+    id: number,
+    discountVal: number,
+    discountPr: number,
+    order: number,
+    qnt: number
+}
 
-const BasketCard = () => {
+const BasketCard: React.FC<BasketProps> = ({ price, qnt, GoodsCode, discountVal, discountPr, order, id }) => {
     return (
         <Root>
             <Box sx={{ display: 'flex', width: '100%' }}>
@@ -35,6 +44,7 @@ const BasketCard = () => {
                     <MyText variant="body2">Производитель:<span style={{ marginLeft: 15 }}>Nurofenproizvoditel</span></MyText>
                     <MyText variant="body2">Код товара:<span style={{ marginLeft: 15 }}>322</span></MyText>
                     <MyText variant="body2" sx={{ color: '#55CD61' }}>В наличии</MyText>
+                    {price}
                 </Box>
             </Box>
             <Box>
