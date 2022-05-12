@@ -17,13 +17,13 @@ const Root = styled(Box)(({ theme }) => ({
     padding: 16,
 }))
 interface BasketProps {
-    price: any,
-    GoodsCode: number,
-    id: number,
-    discountVal: number,
-    discountPr: number,
-    order: number,
-    qnt: number
+    price?: any,
+    GoodsCode?: number,
+    id?: number,
+    discountVal?: number,
+    discountPr?: number,
+    order?: number,
+    qnt?: number
 }
 
 const BasketCard: React.FC<BasketProps> = ({ price, qnt, GoodsCode, discountVal, discountPr, order, id }) => {

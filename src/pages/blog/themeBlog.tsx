@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ThemeBlog = () => {
-    return (
-        <div>
-            themeBlog
-        </div>
-    )
-}
+  return <div>themeBlog</div>;
+};
 
-export default ThemeBlog
+export default ThemeBlog;
