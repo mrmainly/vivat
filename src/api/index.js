@@ -128,6 +128,11 @@ class API {
             })
             .catch(error => console.log(error))
     }
+    deleteOrdersAll(dispatch) {
+        api(`api/v1/orders/cart/items/delete_all/`).delete(null).then(res => {
+            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'корзина удалена' } })
+        }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'корзина не удалена' } }))
+    }
 }
 
 export default new API()

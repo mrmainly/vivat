@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const IssueOrdering = () => {
-    return (
-        <div>
-            issue ordering
-        </div>
-    )
-}
+  return <div>issue ordering</div>;
+};
 
-export default IssueOrdering
+export default IssueOrdering;

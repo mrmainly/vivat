@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React from "react";
 
-import BasicLayout from './BasicLayout'
+import BasicLayout from "./BasicLayout";
 
 const Layout = () => {
-    return (
-        <>
-            <BasicLayout />
-        </>
-    )
-}
+  return (
+    <>
+      <BasicLayout />
+    </>
+  );
+};
 
-export default Layout
+export default Layout;

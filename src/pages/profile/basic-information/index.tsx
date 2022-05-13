@@ -30,6 +30,13 @@ const InputProfile = styled(TextField)(({ theme }) => ({
   background: "white",
 }));
 
+const ProfileForm = styled(Box)(({ theme }) => ({
+  width: 350,
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
+}));
+
 const BasicInformation = () => {
   const [phone, setPhone] = useState("");
   const [lastName, setLastName] = useState("");
@@ -46,6 +53,7 @@ const BasicInformation = () => {
       setLoading(true);
       await API.getAccountUser().then((res) => {
         const data = res.data;
+        console.log(data);
         setPhone(data.phone);
         setFirstName(data.first_name);
         setLastName(data.last_name);
@@ -77,7 +85,7 @@ const BasicInformation = () => {
     <Main>
       <ProfileSideBar title="Основная информация" />
       <Box sx={{ mt: 6.3, width: "100%" }}>
-        <Box sx={{ width: 350 }}>
+        <ProfileForm>
           <ProfileUpdateModal />
           {loading ? (
             <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -151,7 +159,7 @@ const BasicInformation = () => {
               </MyButton>
             </>
           )}
-        </Box>
+        </ProfileForm>
       </Box>
     </Main>
   );

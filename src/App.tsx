@@ -33,6 +33,7 @@ import {
   VideoVivat,
   WorkPage,
   PharmacyContacts,
+  BasketForm,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -46,6 +47,7 @@ const App = () => {
             <Route path={ROUTES.HOME} element={<Layout />}>
               <Route index element={<Home />} />
               <Route element={<Basket />} path={ROUTES.BASKET} />
+              <Route element={<BasketForm />} path={ROUTES.BASKET_FORM} />
               <Route
                 path={`${ROUTES.PRODUCT_DETAIL}/:id`}
                 element={<ProductDetail />}
