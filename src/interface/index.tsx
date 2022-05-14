@@ -1,131 +1,129 @@
-import React, { ReactNode } from 'react'
-import { SxProps } from '@mui/system';
+import React, { ReactNode } from "react";
+import { SxProps } from "@mui/system";
 
 interface MyTextProps {
-    children: ReactNode[] | ReactNode,
-    sx?: SxProps,
-    lg?: number,
-    xl?: number,
-    sm?: number,
-    md?: number,
-    xs?: number,
-    variant?: any,
-    style?: any
+    children: ReactNode[] | ReactNode;
+    sx?: SxProps;
+    lg?: number;
+    xl?: number;
+    sm?: number;
+    md?: number;
+    xs?: number;
+    variant?: any;
+    style?: any;
 }
 
 interface ModalAndDrawer {
-    state: any,
-    handleClose: any
+    state: any;
+    handleClose: any;
 }
 
 interface InputProps {
-    ref: any,
-    label?: any,
-    sx?: SxProps,
-    variant?: any,
-    rows?: number,
-    id?: any,
-    multiline?: any,
-    type?: string,
-    required?: any,
-    size?: any,
-    margin?: any,
+    ref: any;
+    label?: any;
+    sx?: SxProps;
+    variant?: any;
+    rows?: number;
+    id?: any;
+    multiline?: any;
+    type?: string;
+    required?: any;
+    size?: any;
+    margin?: any;
     InputLabelProps?: {
-        shrink: boolean
-    }
-    defaultValue?: any
+        shrink: boolean;
+    };
+    defaultValue?: any;
 }
 
 interface FormProps {
-    children: ReactNode[] | ReactNode,
-    sx?: SxProps,
-    onSubmit?: any
+    children: ReactNode[] | ReactNode;
+    sx?: SxProps;
+    onSubmit?: any;
 }
 
 interface ButtonProps {
-    children: ReactNode[] | ReactNode,
-    onClick?: () => void,
-    variant?: string,
-    style?: React.CSSProperties,
-    sx?: SxProps,
-    color?: any,
-    size?: any,
-    fullWidth?: any
+    children: ReactNode[] | ReactNode;
+    onClick?: () => void;
+    variant?: string;
+    style?: React.CSSProperties;
+    sx?: SxProps;
+    color?: any;
+    size?: any;
+    fullWidth?: any;
 }
 
 interface MySelectProps {
-    variant?: string,
-    title: string,
-    sx?: SxProps,
-    placeholder?: string,
-    ref?: any,
-    defaultValue: string,
-    children?: ReactNode[] | ReactNode
+    variant?: string;
+    title: string;
+    sx?: SxProps;
+    placeholder?: string;
+    ref?: any;
+    defaultValue: string;
+    children?: ReactNode[] | ReactNode;
 }
 
 interface MyContainerProps {
-    children: ReactNode[] | ReactNode,
-    wrapper: boolean,
-    bgImg?: any,
-    sx?: SxProps,
-    lg?: number,
-    xl?: number,
-    sm?: number,
-    md?: number,
-    xs?: number,
-    minHeight?: number
+    children: ReactNode[] | ReactNode;
+    wrapper: boolean;
+    bgImg?: any;
+    sx?: SxProps;
+    lg?: number;
+    xl?: number;
+    sm?: number;
+    md?: number;
+    xs?: number;
+    minHeight?: number;
 }
 
 interface MyLinkProps {
-    children: ReactNode[] | ReactNode,
-    href: string,
-    sx?: SxProps
+    children: ReactNode[] | ReactNode;
+    href: string;
+    sx?: SxProps;
 }
 
 interface MyDrawerProps {
-    setState: any,
-    drawerOpen: any
+    setState: any;
+    drawerOpen: any;
 }
 
 interface BorderLineProps {
-    sx: SxProps
+    sx: SxProps;
 }
 
 interface MainCardsConstructorProps {
-
+    data: any;
 }
 
 interface ProfileSideBarProps {
-    title?: string
+    title?: string;
 }
 
 interface ToggleButtonProps {
-    sx?: SxProps,
-    toggleState: any,
-    setToggleState: any
-
+    sx?: SxProps;
+    toggleState: any;
+    setToggleState: any;
 }
 
 interface GoodsCardProps {
-    img?: string,
-    description?: string,
-    specialPrice?: number | string,
-    specialText?: string,
-    id: number | string,
-    price?: number | string
+    img?: string;
+    description?: string;
+    specialPrice?: number | string;
+    specialText?: string;
+    id: number | string;
+    price?: number | string;
 }
 
 interface ProductSliderProps {
-    title: string,
-    data: any
+    title: string;
+    data: any;
 }
 
 interface WorkCardProps {
-    title: string,
-    price: number | string,
-    city: string
+    title: string;
+    city: string | number;
+    id: number;
 }
-
 
 export type {
     MyTextProps,
@@ -143,5 +141,5 @@ export type {
     ProfileSideBarProps,
     ToggleButtonProps,
     WorkCardProps,
-    ModalAndDrawer
-}
+    ModalAndDrawer,
+};

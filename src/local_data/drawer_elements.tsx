@@ -1,52 +1,54 @@
-const drawer_elements = [
-    {
-        label: 'САМОЕ АКТУАЛЬНОЕ',
-        to: ''
-    },
-    {
-        label: 'ПРОГРАММЫ ЗДОРОВЬЯ',
-        to: ''
-    },
-    {
-        label: 'ЛЕКАРСТВЕННЫЕ ПРЕПАРАТЫ',
-        to: ''
-    },
-    {
-        label: 'ФИТОПРЕПАРАТЫ',
-        to: ''
-    },
-    {
-        label: 'ВИТАМИНЫ И БАДЫ',
-        to: ''
-    },
-    {
-        label: 'ПЛАНИРОВАНИЕ СЕМЬИ',
-        to: ''
-    },
-    {
-        label: 'МАМА И МАЛЫШ',
-        to: ''
-    },
-    {
-        label: 'МЕДИЦИНСКИЕ ИЗДЕЛИЯ',
-        to: ''
-    },
-    {
-        label: 'ПРИБОРЫ МЕДИЦИНСКИЕ',
-        to: ''
-    },
-    {
-        label: 'ГИГИЕНА, КРАСОТА И УХОД',
-        to: ''
-    },
-    {
-        label: 'СПОРТ И ФИТНЕС',
-        to: ''
-    },
-    {
-        label: 'ОПТИКА И КОНТАКТНАЯ КОРРЕ...',
-        to: ''
-    },
-]
+import ROUTES from "../routes";
 
-export default drawer_elements
+const drawer_elements = [
+  {
+    label: "САМОЕ АКТУАЛЬНОЕ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "ПРОГРАММЫ ЗДОРОВЬЯ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "ЛЕКАРСТВЕННЫЕ ПРЕПАРАТЫ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "ФИТОПРЕПАРАТЫ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "ВИТАМИНЫ И БАДЫ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "ПЛАНИРОВАНИЕ СЕМЬИ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "МАМА И МАЛЫШ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "МЕДИЦИНСКИЕ ИЗДЕЛИЯ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "ПРИБОРЫ МЕДИЦИНСКИЕ",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "ГИГИЕНА, КРАСОТА И УХОД",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "СПОРТ И ФИТНЕС",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+  {
+    label: "ОПТИКА И КОНТАКТНАЯ КОРРЕ...",
+    to: ROUTES.PRODUCT_PAGE,
+  },
+];
+
+export default drawer_elements;

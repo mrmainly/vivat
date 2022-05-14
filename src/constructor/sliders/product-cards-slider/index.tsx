@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
-import { Box } from '@mui/material'
-import Slider from 'react-slick'
+import { Box } from "@mui/material";
+import Slider from "react-slick";
 
-import { ProductCard, MyText } from '../../../components'
-import { ProductSliderProps } from '../../../interface'
+import { ProductCard, MyText, CatalogCard } from "../../../components";
+import { ProductSliderProps } from "../../../interface";
 
 const ProductCardsSlider: React.FC<ProductSliderProps> = ({ title, data }) => {
     const settings = {
@@ -14,18 +14,26 @@ const ProductCardsSlider: React.FC<ProductSliderProps> = ({ title, data }) => {
         speed: 500,
         slidesToScroll: 1,
         slidesToShow: 1,
-        variableWidth: true
+        variableWidth: true,
     };
     return (
         <Box sx={{ mt: 3 }}>
             <MyText variant="h5">{title}</MyText>
             <Slider {...settings}>
                 {data.map((item: any, index: number) => (
-                    <ProductCard key={index} id={item.id} specialPrice={item.specialPrice} specialText={item.specialText} img={item.img} description={item.description} price={item.price} />
+                    <ProductCard
+                        key={index}
+                        id={item.id}
+                        specialPrice={item.specialPrice}
+                        specialText={item.specialText}
+                        img={item.img}
+                        description={item.description}
+                        price={item.price}
+                    />
                 ))}
             </Slider>
-        </Box >
-    )
-}
+        </Box>
+    );
+};
 
-export default ProductCardsSlider
+export default ProductCardsSlider;

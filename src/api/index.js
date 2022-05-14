@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React from 'react';
+import cookie from "js-cookie";
 
-import cookie from 'js-cookie'
 import ROUTES from '../routes';
+
 
 const testURL = 'http://127.0.0.1:8000/'
 const publicURL = 'http://xn----7sbbagaytx2c4ad.xn--p1ai/'
@@ -30,73 +31,54 @@ const api = (url) => {
 }
 
 class API {
-    getToken({ username, password }, dispatch, navigate) {
-        api('api/v1/users/login').post(null, {
+    //sign-in
+     getToken({ username, password }, dispatch) {
+       const result = api('api/v1/users/login/').post({
             username: username,
             password: password
-        }).then(res => {
-            cookie.set('jwttoken', res.data.token)
-            dispatch({ type: 'auth_modal', payload: { sign_in: false, forgot: false, sign_up: false } })
-            console.log(res)
-        }).catch((error) => alert('все плохо'))
-    }
-    forgotPassword(data, dispatch, navigate) {
-        api('api/v1/users/refresh-password').post(null, data).then(res => {
-            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'В ближайшее время на ваш телефон придет смс сообщение с новым паролем.' } })
-            navigate('/login')
-        }).catch(error => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: ' Пароль не был восстановлен. Указанный номер телефона не зарегистрирован. Пожалуйста проверьте верно ли указан номер.' } }))
-    }
-    sendRegister(data, dispatch) {
-        api('api/v1/users/code/1/send/').post(null, data).then(res => {
-            dispatch({ type: 'verify_code', payload: { code: res.data.code } })
-            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: `ваш пароль: ${res.data.code}` } })
-            dispatch({ type: 'register_version', payload: { v1: false, verify_version: true, password_version: false } })
-        }).catch(error => dispatch({ type: 'register', payload: { danger_text: true } }))
-    }
-    sendVerifyCode(data, dispatch) {
-        api('api/v1/users/code/2/verify/').post(null, data).then(res => {
-            dispatch({ type: 'register_version', payload: { v1: false, verify_version: false, password_version: true } })
-        }).catch(error => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: ' error' } }))
-    }
-    sendPassword(data, dispatch) {
-        api('api/v1/users/code/3/set_password/').post(null, data).then(res => {
-            dispatch({ type: 'auth_modal', payload: { sign_up: false, sign_in: true, forgot: false } })
-        }).catch((error) => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: ' error' } }))
-    }
-    async getAccountUser() {
-        let result = await api(`api/v1/users/me/`).get(null)
+        })
         return result
     }
-    putAccountUser(data, dispatch) {
-        api('api/v1/users/me/').patch(null, data).then(res => {
-            dispatch({ type: 'profile_modal', payload: { status: 'success', open: true } })
-        }).catch(() => dispatch({ type: 'profile_modal', payload: { status: 'error', open: true } }))
-    }
-    async getFavorites() {
-        let result = await api(`api/v1/favorites/`).get(null)
-        return result
-    }
-    deleteFavorite(id, dispatch) {
-        api(`api/v1/favorites/${id}`).delete(null).then(res => {
 
-        }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не удален' } }))
-    }
-    transferFavorite(id, dispatch) {
-        api(`api/v1/favorites/transfer/${id}`).post(null).then(res => {
-            dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'Товар добавлен в корзину' } })
-        }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Товар не найден' } }))
-    }
-    async getOrdersList() {
-        let result = await api(`api/v1/orders/cart/`).get(null)
+
+    //sign-up
+    sendRegister(data) {
+       const result = api('api/v1/users/code/1/send/').post(data)
+       return result
+    } 
+    
+    sendPassword(data) {
+       const result = api('api/v1/users/code/3/set_password/').post(data)
         return result
     }
-    sendPhoneMailForgotPassword(data, type, dispatch) {
+
+
+    //verifi code
+    sendVerifyCode(data) {
+        const result = api('api/v1/users/code/2/verify/').post(data)
+         return result
+     }
+
+
+    //me
+    async getAccountUser() {
+        let result = await api(`api/v1/users/me/`).get()
+        return result
+    }
+    putAccountUser(data) {
+       const result = api('api/v1/users/me/').patch(data)
+        return result
+    }
+
+
+    //forgot
+    sendPhoneMailForgotPassword(data, type) {
         const result = api(type == 'phone'
             ?
             `api/v1/users/reset_phone/`
             :
             'api/v1/users/reset_email/'
-        ).post(null, type == 'phone'
+        ).post( type == 'phone'
             ?
             { phone: data.phone }
             :
@@ -104,34 +86,67 @@ class API {
         )
             .then(res => {
                 return res.data
-            }).catch((error) => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: type === 'phone' ? 'Номер телефона не найден' : 'Электронная почта не найдена' } }))
-        return result
-    }
-    sendVerifyCodeForgot(data, dispatch) {
-        const result = api('api/v1/users/code/2/verify/')
-            .post(null, data)
-            .then(res => {
-                return res.data
             })
-            .catch(error => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'Не правильный код' } }))
         return result
     }
-    reset_password(data, dispatch) {
-        api('api/v1/users/reset_password/')
-            .post(null,
+
+    reset_password(data) {
+       return api('api/v1/users/reset_password/')
+            .post(
                 {
                     code: data.code,
                     password: data.password
                 })
-            .then(res => {
-                dispatch({ type: 'auth_modal', payload: { sign_up: false, sign_in: true, forgot: false } })
-            })
-            .catch(error => console.log(error))
     }
+
+
+    //orders || basket
+    async getOrdersList() {
+        let result = await api(`api/v1/orders/cart/`).get()
+        return result
+    }
+
     deleteOrdersAll(dispatch) {
-        api(`api/v1/orders/cart/items/delete_all/`).delete(null).then(res => {
+        api(`api/v1/orders/cart/items/delete_all/`).delete().then(res => {
             dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'корзина удалена' } })
         }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'корзина не удалена' } }))
+    }
+
+    sendOrder(data) {
+        const result = api('api/v1/orders/cart/complete/')
+            .post( data)
+            .then(res => {
+                return res.data
+            })
+            .catch(error => console.log(error))
+        return result
+    }
+
+
+    //favorites
+    async getFavorites() {
+        let result = await api(`api/v1/favorites/`).get()
+        return result
+    }
+
+    deleteFavorite(id, ) {
+       return api(`api/v1/favorites/${id}`).delete()
+    }
+
+    transferFavorite(id, dispatch) {
+       return api(`api/v1/favorites/transfer/${id}`).post()
+    }
+
+    
+    //employments
+    async getEmployments() {
+        let result = await api(`api/v1/employments/`).get()
+        return result
+    }
+
+    async getEmploymentsDetail(id) {
+        let result = await api(`api/v1/employments/${id}/`).get()
+        return result
     }
 }
 
