@@ -24,19 +24,30 @@ const Basket = () => {
     useEffect(() => {
         const getOrders = async () => {
             setLoading(true);
-            await API.getOrdersList().then((res) => {
-                console.log("data", res.data.items);
-                setData(res.data.items);
-            });
+            await API.getOrdersList()
+                .then((res) => {
+                    console.log("data", res.data.items);
+                    setData(res.data.items);
+                })
+                .catch((error) => console.log(error));
+            setLoading(false);
         };
         getOrders();
-        setLoading(false);
     }, []);
     return (
         <Box>
             <MyText variant="h6">Корзина</MyText>
             {loading ? (
-                <CircularProgress sx={{ mt: 2 }} />
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        mt: 5,
+                        mb: 5,
+                    }}
+                >
+                    <CircularProgress sx={{ mt: 2 }} />
+                </Box>
             ) : (
                 <>
                     {data.length > 0 ? (
@@ -66,10 +77,14 @@ const Basket = () => {
                                 </MenuItem>
                             </Box>
                             {data.map((item: any, index: number) => (
-                                <BasketCard key={index} price={item.price} />
+                                <BasketCard key={index} {...item} />
                             ))}
                             <Box
-                                sx={{ display: "flex", justifyContent: "end" }}
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "end",
+                                    mt: 3,
+                                }}
                             >
                                 <MyText
                                     variant="h6"

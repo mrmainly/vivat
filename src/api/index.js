@@ -32,8 +32,8 @@ const api = (url) => {
 
 class API {
     //sign-in
-     getToken({ username, password }, dispatch) {
-       const result = api('api/v1/users/login/').post({
+     getToken({ username, password }) {
+       const result = api('api/v1/users/login/').post(null, {
             username: username,
             password: password
         })
@@ -43,19 +43,19 @@ class API {
 
     //sign-up
     sendRegister(data) {
-       const result = api('api/v1/users/code/1/send/').post(data)
+       const result = api('api/v1/users/code/1/send/').post(null,data)
        return result
     } 
     
     sendPassword(data) {
-       const result = api('api/v1/users/code/3/set_password/').post(data)
+       const result = api('api/v1/users/code/3/set_password/').post(null,data)
         return result
     }
 
 
     //verifi code
     sendVerifyCode(data) {
-        const result = api('api/v1/users/code/2/verify/').post(data)
+        const result = api('api/v1/users/code/2/verify/').post(null, data)
          return result
      }
 
@@ -66,7 +66,7 @@ class API {
         return result
     }
     putAccountUser(data) {
-       const result = api('api/v1/users/me/').patch(data)
+       const result = api('api/v1/users/me/').patch(null, data)
         return result
     }
 
@@ -78,21 +78,18 @@ class API {
             `api/v1/users/reset_phone/`
             :
             'api/v1/users/reset_email/'
-        ).post( type == 'phone'
+        ).post(null,type == 'phone'
             ?
             { phone: data.phone }
             :
             { email: data.email }
         )
-            .then(res => {
-                return res.data
-            })
         return result
     }
 
     reset_password(data) {
        return api('api/v1/users/reset_password/')
-            .post(
+            .post(null,
                 {
                     code: data.code,
                     password: data.password
@@ -107,20 +104,25 @@ class API {
     }
 
     deleteOrdersAll(dispatch) {
-        api(`api/v1/orders/cart/items/delete_all/`).delete().then(res => {
+        api(`api/v1/orders/cart/items/delete_all/`).delete(null).then(res => {
             dispatch({ type: 'notification', payload: { status: 'success', active: true, text: 'корзина удалена' } })
         }).catch(() => dispatch({ type: 'notification', payload: { status: 'error', active: true, text: 'корзина не удалена' } }))
     }
 
     sendOrder(data) {
         const result = api('api/v1/orders/cart/complete/')
-            .post( data)
+            .post(null, data)
             .then(res => {
                 return res.data
             })
             .catch(error => console.log(error))
         return result
     }
+
+    deleteProductItem(id) {
+        return api(`api/v1/orders/items/${id}/`).delete(null)
+     }
+
 
 
     //favorites
@@ -129,7 +131,7 @@ class API {
         return result
     }
 
-    deleteFavorite(id, ) {
+    deleteFavorite(id) {
        return api(`api/v1/favorites/${id}`).delete()
     }
 

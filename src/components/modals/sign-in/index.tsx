@@ -86,7 +86,7 @@ export default function SignIn() {
     };
 
     const onSubmit = (data: any) => {
-        API.getToken({ ...data }, dispatch)
+        API.getToken({ ...data })
             .then((res) => {
                 toast.success("авторизация прошла успешно");
                 cookie.set("jwttoken", res.data.token);
