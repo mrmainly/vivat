@@ -41,7 +41,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
         API.deleteFavorite(id)
             .then(() => {
                 toast.success("Товар удален");
-                status(true);
+                // status(true);
             })
             .catch(() => toast.error("Товар не удален"));
     };
