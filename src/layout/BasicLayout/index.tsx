@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { injectStyle } from "react-toastify/dist/inject-style";
 
+import "./layout.css";
 import {
     Header,
     Footer,
@@ -18,14 +18,13 @@ import { StateContext } from "../../store";
 const BasicLayout = () => {
     const location = useLocation();
     const state = useContext(StateContext);
-    injectStyle();
 
     return (
         <div style={{ overflow: "hidden" }}>
+            <ToastContainer autoClose={1000} />
             <Header />
             <SignInModal />
             <SignUpModal />
-            <ToastContainer autoClose={1000} />
             {state.auth_modal.forgot && <ForgotPasswordModal />}
             {location.pathname === "/" ? <HomeSlider /> : ""}
             <MyContainer
