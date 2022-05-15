@@ -46,7 +46,7 @@ const Basket = () => {
                         mb: 5,
                     }}
                 >
-                    <CircularProgress sx={{ mt: 2 }} />
+                    <CircularProgress />
                 </Box>
             ) : (
                 <>
@@ -103,7 +103,7 @@ const Basket = () => {
                             </Box>
                         </>
                     ) : (
-                        "Нету"
+                        <MyText variant="h6">У вас нету заказов</MyText>
                     )}
                 </>
             )}

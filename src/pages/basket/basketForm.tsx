@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Grid,
     FormControl,
@@ -36,6 +36,15 @@ const InfoBlog = styled(Box)(({ theme }) => ({
 }));
 
 const BasketForm = () => {
+    // const [phone, setPhone] = useState("");
+    // const [firstName, setFirstName] = useState("");
+    // const [lastName, setLastName] = useState("");
+    // const [mail, setMail] = useState("");
+
+    // useEffect(() => {
+    //     API.
+    // }, [])
+
     return (
         <>
             <MyText variant="h5">Оформление заказа</MyText>

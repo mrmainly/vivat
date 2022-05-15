@@ -110,12 +110,7 @@ class API {
     }
 
     sendOrder(data) {
-        const result = api('api/v1/orders/cart/complete/')
-            .post(null, data)
-            .then(res => {
-                return res.data
-            })
-            .catch(error => console.log(error))
+        const result = api('api/v1/orders/cart/complete/').post(null, data)
         return result
     }
 
@@ -132,11 +127,11 @@ class API {
     }
 
     deleteFavorite(id) {
-       return api(`api/v1/favorites/${id}`).delete()
+       return api(`api/v1/favorites/${id}/`).delete()
     }
 
     transferFavorite(id, dispatch) {
-       return api(`api/v1/favorites/transfer/${id}`).post()
+       return api(`api/v1/favorites/transfer/${id}/`).post()
     }
 
     
