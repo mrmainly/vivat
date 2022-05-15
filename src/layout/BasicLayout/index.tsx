@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { injectStyle } from "react-toastify/dist/inject-style";
+import "react-toastify/dist/ReactToastify.minimal.css";
 
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -19,7 +19,6 @@ import { StateContext } from "../../store";
 const BasicLayout = () => {
     const location = useLocation();
     const state = useContext(StateContext);
-    injectStyle();
 
     return (
         <div style={{ overflow: "hidden" }}>
