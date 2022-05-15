@@ -123,15 +123,9 @@ const Header = () => {
     const handleFavoritesDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerFavoritesOpen: true }));
 
-    const midleItems = [
-        {
-            icon: "",
-        },
-    ];
-
     const Desktop = () => {
         return (
-            <DesktopWrapper maxWidth="xl">
+            <DesktopWrapper>
                 <Main aria-label="mailbox folders">
                     <TopBar>
                         <TopBarItem>
@@ -407,12 +401,11 @@ const Header = () => {
                 state={drawerProfileOpen}
                 handleClose={handleProfileDrawerClose}
             />
-            {drawerFavoritesOpen && (
-                <FavoritesDrawer
-                    state={drawerFavoritesOpen}
-                    handleClose={handleFavoritesDrawerClose}
-                />
-            )}
+
+            <FavoritesDrawer
+                state={drawerFavoritesOpen}
+                handleClose={handleFavoritesDrawerClose}
+            />
         </>
     );
 };

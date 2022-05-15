@@ -60,12 +60,10 @@ const MyContainer: React.FC<MyContainerProps> = ({
         <>
             {wrapper ? (
                 <WrapperContainer {...props}>
-                    <Container maxWidth="xl">{children}</Container>
+                    <Container>{children}</Container>
                 </WrapperContainer>
             ) : (
-                <CustomContainer {...props} maxWidth="xl">
-                    {children}
-                </CustomContainer>
+                <CustomContainer {...props}>{children}</CustomContainer>
             )}
         </>
     );

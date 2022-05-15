@@ -18,7 +18,6 @@ import {
 } from "../../../components";
 import API from "../../../api";
 import ThemeMain from "../../../theme";
-import { DispatchContext } from "../../../store";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -46,13 +45,6 @@ const BasicInformation = () => {
     const [patronymic, setPatronymic] = useState("");
     const [mail, setMail] = useState("");
     const [loading, setLoading] = useState(false);
-    const [notiStatus, setNotiStatus] = useState(false);
-
-    const dispatch = useContext(DispatchContext);
-
-    const handleClose = () => {
-        setNotiStatus(false);
-    };
 
     useEffect(() => {
         const getAccount = async () => {

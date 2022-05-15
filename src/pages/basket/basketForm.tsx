@@ -11,6 +11,7 @@ import {
     Checkbox,
     FormGroup,
     Box,
+    TextField,
 } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -35,15 +36,32 @@ const InfoBlog = styled(Box)(({ theme }) => ({
     },
 }));
 
-const BasketForm = () => {
-    // const [phone, setPhone] = useState("");
-    // const [firstName, setFirstName] = useState("");
-    // const [lastName, setLastName] = useState("");
-    // const [mail, setMail] = useState("");
+const InputProfile = styled(TextField)(({ theme }) => ({
+    background: "white",
+}));
 
-    // useEffect(() => {
-    //     API.
-    // }, [])
+const BasketForm = () => {
+    const [phone, setPhone] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [mail, setMail] = useState("");
+    const [adress, setAdress] = useState("");
+    const [commend, setCommend] = useState("");
+    const [payment, setPayment] = useState("");
+
+    useEffect(() => {
+        API.getAccountUser()
+            .then((res) => {
+                const data = res.data;
+                setPhone(data.phone);
+                setFirstName(data.first_name);
+                setLastName(data.last_name);
+                setMail(data.email);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     return (
         <>
@@ -64,10 +82,30 @@ const BasketForm = () => {
                         Контактные данные
                     </MyText>
                     <Form sx={{ display: "flex", flexDirection: "column" }}>
-                        <Input label="Номер телефона" />
-                        <Input label="Имя" />
-                        <Input label="Фамилия" />
-                        <Input label="Электронная почта" />
+                        <InputProfile
+                            label="Телефон"
+                            fullWidth
+                            value={phone}
+                            margin="normal"
+                        />
+                        <InputProfile
+                            label="Имя"
+                            fullWidth
+                            value={firstName}
+                            margin="normal"
+                        />
+                        <InputProfile
+                            label="Фамилия"
+                            fullWidth
+                            value={lastName}
+                            margin="normal"
+                        />
+                        <InputProfile
+                            label="Электронная почта"
+                            fullWidth
+                            value={mail}
+                            margin="normal"
+                        />
                         <FormControl
                             fullWidth
                             margin="normal"

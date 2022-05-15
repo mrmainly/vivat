@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import "./layout.css";
 import {
@@ -20,7 +21,7 @@ const BasicLayout = () => {
 
     return (
         <div style={{ overflow: "hidden" }}>
-            {/* <ToastContainer autoClose={1000} /> */}
+            <ToastContainer autoClose={1000} />
             <Header />
             <SignInModal />
             <SignUpModal />

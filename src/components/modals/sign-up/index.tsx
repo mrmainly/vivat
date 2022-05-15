@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 import { StateContext, DispatchContext } from "../../../store";
 import { Form, Input, MyButton, MyLink, MyText, BorderLine } from "../..";
@@ -183,6 +184,17 @@ export default function SignUp() {
                                         style={{
                                             color: ThemeMain.palette.primary
                                                 .main,
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={() => {
+                                            dispatch({
+                                                type: "auth_modal",
+                                                payload: {
+                                                    sign_up: false,
+                                                    sign_in: true,
+                                                    forgot: false,
+                                                },
+                                            });
                                         }}
                                     >
                                         авторизоваться.
@@ -215,22 +227,6 @@ export default function SignUp() {
                             }}
                         >
                             {passwordText ? <p>Пароль не подошел</p> : ""}
-                            {state.register.danger_text ? (
-                                <p>
-                                    Пользователь с таким телефоном уже
-                                    зарегистрирован. Необходимо{" "}
-                                    <span
-                                        style={{
-                                            color: ThemeMain.palette.primary
-                                                .main,
-                                        }}
-                                    >
-                                        авторизоваться.
-                                    </span>
-                                </p>
-                            ) : (
-                                ""
-                            )}
                             <Form onSubmit={handleSubmit(onSubmitVerify)}>
                                 <Input label="SMS код" {...register("code")} />
                                 <MyButton style={{ marginTop: 10 }} fullWidth>
@@ -252,22 +248,6 @@ export default function SignUp() {
                             }}
                         >
                             {passwordText ? <p>Пароль не подошел</p> : ""}
-                            {state.register.danger_text ? (
-                                <p>
-                                    Пользователь с таким телефоном уже
-                                    зарегистрирован. Необходимо{" "}
-                                    <span
-                                        style={{
-                                            color: ThemeMain.palette.primary
-                                                .main,
-                                        }}
-                                    >
-                                        авторизоваться.
-                                    </span>
-                                </p>
-                            ) : (
-                                ""
-                            )}
                             <Form onSubmit={handleSubmit(onSubmitPassword)}>
                                 <Input
                                     label="Пароль"
