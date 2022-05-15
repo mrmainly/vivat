@@ -22,24 +22,13 @@ const Root = styled(CardActionArea)(({ theme }) => ({
 const WorkCard: React.FC<WorkCardProps> = ({ title, city, id }) => {
     const navigate = useNavigate();
 
-    const getCity = () => {
-        switch (city) {
-            case 1:
-                return "Якутск";
-                break;
-            case 2:
-                return "Москва";
-            default:
-                alert("Нету города");
-        }
-    };
     return (
         <Root onClick={() => navigate(`${ROUTES.PHARMACY_DETAIL_WORK}/${id}`)}>
             <MyText variant="h6" sx={{ color: ThemeMain.palette.primary.main }}>
                 {title}
             </MyText>
             <MyText variant="body1" sx={{ color: "#343434" }}>
-                {getCity()}
+                {city.name}
             </MyText>
             {/* <MyText variant="body1" sx={{ color: "#343434" }}>
                 Зарплата: от<span>{price}</span>

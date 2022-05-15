@@ -1,31 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 
-import { Drawer, Box, IconButton } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { Drawer, Box, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-import { MyText, FavoritesCard } from '../..'
-import { StateContext, DispatchContext } from '../../../store'
-import ThemeMain from '../../../theme'
-import API from '../../../api'
+import { MyText, FavoritesCard } from "../..";
+import { StateContext, DispatchContext } from "../../../store";
+import ThemeMain from "../../../theme";
+import API from "../../../api";
 
 interface MainDrawerProps {
-    state: any,
-    handleClose: any
+    state: any;
+    handleClose: any;
 }
 
 const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+    const [status, setStatus] = useState(false);
 
-    let count = 0
+    let count = 0;
 
     // const dispatch = useContext(DispatchContext)
 
     useEffect(() => {
-        API.getFavorites()
-            .then(res => {
-                setData(res.data)
-            })
-    }, [])
+        API.getFavorites().then((res) => {
+            setData(res.data);
+            console.log(res);
+        });
+    }, []);
 
     return (
         <Drawer
@@ -35,23 +36,45 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                 onClose: handleClose,
             }}
         >
-            <Box style={{
-                width: 300, padding: 30, height: '100%'
-            }}>
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-                    <IconButton onClick={() => handleClose()}><img src="/img/Close_round_light.png" /></IconButton>
+            <Box
+                style={{
+                    width: 300,
+                    padding: 30,
+                    height: "100%",
+                }}
+            >
+                <Box
+                    sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}
+                >
+                    <IconButton onClick={() => handleClose()}>
+                        <img src="/img/Close_round_light.png" />
+                    </IconButton>
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
                     <img src="/img/Favorite_light.png" />
-                    <MyText variant="h6" sx={{ ml: 1, color: ThemeMain.palette.primary.main }}>Избранные товары</MyText>
+                    <MyText
+                        variant="h6"
+                        sx={{ ml: 1, color: ThemeMain.palette.primary.main }}
+                    >
+                        Избранные товары
+                    </MyText>
                 </Box>
-                <MyText variant="body1" sx={{ mt: 1.5 }}><span>{data.length}</span> товара</MyText>
-                {data.length !== 0 ? data.map((item, index) => (
-                    <FavoritesCard {...item} key={index} count={count} />
-                )) : 'Нет избранных товаров'}
+                <MyText variant="body1" sx={{ mt: 1.5 }}>
+                    <span>{data.length}</span> товара
+                </MyText>
+                {data.length !== 0
+                    ? data.map((item, index) => (
+                          <FavoritesCard
+                              {...item}
+                              key={index}
+                              count={count}
+                              status={setStatus}
+                          />
+                      ))
+                    : "Нет избранных товаров"}
             </Box>
         </Drawer>
-    )
-}
+    );
+};
 
-export default FavoritesDrawer
+export default FavoritesDrawer;

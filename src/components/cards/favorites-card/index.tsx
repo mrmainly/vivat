@@ -15,6 +15,7 @@ interface FavoritesCardProps {
     id: number;
     discountVal?: number;
     count: number;
+    status?: any;
 }
 
 const FavoritesCard: React.FC<FavoritesCardProps> = ({
@@ -26,6 +27,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     id,
     discountVal,
     count,
+    status,
 }) => {
     const TransferFavorite = () => {
         API.transferFavorite(id)
@@ -39,6 +41,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
         API.deleteFavorite(id)
             .then(() => {
                 toast.success("Товар удален");
+                status(true);
             })
             .catch(() => toast.error("Товар не удален"));
     };

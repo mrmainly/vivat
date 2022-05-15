@@ -11,7 +11,6 @@ import {
     Box,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 import { StateContext, DispatchContext } from "../../../store";
 import { toast } from "react-toastify";
@@ -40,7 +39,28 @@ const ModalContent = styled(DialogContent)(({ theme }) => ({
     flexDirection: "column",
     alignItems: "center",
     [theme.breakpoints.down("sm")]: {
-        width: 250,
+        width: 300,
+    },
+}));
+
+const FormWrapper = styled(Box)(({ theme }) => ({
+    width: 261,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+        width: 221,
+    },
+}));
+
+const DialogTitleStyle = styled(DialogTitle)(({ theme }) => ({
+    background: "#f5f5f5",
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+        width: 300,
     },
 }));
 
@@ -48,31 +68,36 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     const { children, onClose, ...other } = props;
 
     return (
-        <DialogTitle
-            sx={{ m: 0, p: 2, bgcolor: "#f5f5f5", textAlign: "center" }}
+        <DialogTitleStyle
             {...other}
+            sx={{ m: 0, p: 2, bgcolor: "#f5f5f5", textAlign: "center" }}
         >
-            {children}
+            <Box
+                sx={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    ml: 4,
+                }}
+            >
+                {children}
+            </Box>
             {onClose ? (
                 <IconButton
                     aria-label="close"
                     onClick={onClose}
                     sx={{
-                        position: "absolute",
-                        right: 8,
-                        top: 8,
                         color: (theme) => theme.palette.grey[500],
                     }}
                 >
                     <CloseIcon />
                 </IconButton>
             ) : null}
-        </DialogTitle>
+        </DialogTitleStyle>
     );
 };
 
 export default function SignIn() {
-    const navigate = useNavigate();
     const state = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
     const { register, handleSubmit } = useForm({
@@ -112,18 +137,11 @@ export default function SignIn() {
                 Авторизация
             </BootstrapDialogTitle>
             <ModalContent dividers>
-                <MyText sx={{ textAlign: "center" }}>
+                <MyText sx={{ textAlign: "center" }} variant="body1" sm={16}>
                     Если у вас есть учётная запись, авторизуйтесь, используя
                     адрес электронной почты (email) или телефон
                 </MyText>
-                <Box
-                    sx={{
-                        width: 261,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
+                <FormWrapper>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         <Input label="Телефон" {...register("username")} />
                         <Input
@@ -176,7 +194,7 @@ export default function SignIn() {
                     >
                         Продолжить без авторизации
                     </MenuItem>
-                </Box>
+                </FormWrapper>
             </ModalContent>
             {/* <DialogActions>
                     <Button autoFocus onClick={handleClose}>

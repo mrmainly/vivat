@@ -28,11 +28,20 @@ const Main = styled(Box)(({ theme }) => ({
 const PharmacyWork = () => {
     const [works, setWorks] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [cities, setCities] = useState([{ name: "" }]);
+    const [city, setCity] = useState("");
 
     useEffect(() => {
+        const getCity = () => {
+            API.getCity()
+                .then((res) => {
+                    setCities(res.data);
+                })
+                .catch((error) => console.log(error));
+        };
         const getEmployments = async () => {
             setLoading(true);
-            await API.getEmployments()
+            await API.getEmployments(city)
                 .then((res) => {
                     console.log(res.data);
                     setWorks(res.data);
@@ -42,8 +51,11 @@ const PharmacyWork = () => {
                 });
             setLoading(false);
         };
+        getCity();
         getEmployments();
-    }, []);
+    }, [city]);
+
+    useEffect(() => {}, []);
 
     return (
         <Wrapper title="Работа в аптеке">
@@ -56,14 +68,21 @@ const PharmacyWork = () => {
                             sx={{ width: 150, bgcolor: "white", ml: 1 }}
                             size="small"
                         >
-                            <InputLabel>Якутск</InputLabel>
+                            <InputLabel>Города</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                label="Якутск"
+                                label="Города"
+                                defaultValue={cities[0].name}
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
                             >
-                                <MenuItem value={10}>Якутск</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
+                                {cities.map((item: any, index: number) => (
+                                    <MenuItem value={item.name} key={index}>
+                                        {item.name}
+                                    </MenuItem>
+                                ))}
+                                <MenuItem value={""}>Все города</MenuItem>
                             </Select>
                         </FormControl>
                     }

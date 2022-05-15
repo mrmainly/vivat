@@ -121,7 +121,7 @@ interface ProductSliderProps {
 
 interface WorkCardProps {
     title: string;
-    city: string | number;
+    city: any;
     id: number;
 }
 

@@ -38,7 +38,19 @@ const ModalContent = styled(DialogContent)(({ theme }) => ({
     flexDirection: "column",
     alignItems: "center",
     [theme.breakpoints.down("sm")]: {
-        width: 250,
+        width: 300,
+    },
+}));
+
+const DialogTitleStyle = styled(DialogTitle)(({ theme }) => ({
+    background: "#f5f5f5",
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+        width: 300,
+        fontSize: 16,
     },
 }));
 
@@ -46,26 +58,33 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     const { children, onClose, ...other } = props;
 
     return (
-        <DialogTitle
-            sx={{ m: 0, p: 2, bgcolor: "#f5f5f5", textAlign: "center" }}
+        <DialogTitleStyle
             {...other}
+            sx={{ m: 0, p: 2, bgcolor: "#f5f5f5", textAlign: "center" }}
         >
-            {children}
+            <Box
+                sx={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    ml: 4,
+                }}
+            >
+                {children}
+            </Box>
+
             {onClose ? (
                 <IconButton
                     aria-label="close"
                     onClick={onClose}
                     sx={{
-                        position: "absolute",
-                        right: 8,
-                        top: 8,
                         color: (theme) => theme.palette.grey[500],
                     }}
                 >
                     <CloseIcon />
                 </IconButton>
             ) : null}
-        </DialogTitle>
+        </DialogTitleStyle>
     );
 };
 

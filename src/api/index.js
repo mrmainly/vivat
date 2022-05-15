@@ -43,8 +43,8 @@ class API {
 
     //sign-up
     sendRegister(data) {
-       const result = api('api/v1/users/code/1/send/').post(null,data)
-       return result
+       return api('api/v1/users/code/1/send/').post(null,data)
+      
     } 
     
     sendPassword(data) {
@@ -136,13 +136,20 @@ class API {
 
     
     //employments
-    async getEmployments() {
-        let result = await api(`api/v1/employments/`).get()
+    async getEmployments(city) {
+        let result = await api(`api/v1/employments/?city_name=${city}`).get()
         return result
     }
 
     async getEmploymentsDetail(id) {
         let result = await api(`api/v1/employments/${id}/`).get()
+        return result
+    }
+
+
+    //city
+    async getCity() {
+        let result = await api(`api/v1/cities/city/list/`).get()
         return result
     }
 }
