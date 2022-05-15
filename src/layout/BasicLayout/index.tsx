@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
-import "react-toastify/dist/ReactToastify.minimal.css";
-
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.minimal.css";
 
 import {
     Header,
