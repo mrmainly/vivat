@@ -125,6 +125,15 @@ interface WorkCardProps {
     id: number;
 }
 
+interface BlogCardProps {
+    description?: string;
+    views?: number | string;
+    img?: string;
+    date?: string;
+    tag?: string;
+    type?: string;
+}
+
 export type {
     MyTextProps,
     InputProps,
@@ -142,4 +151,5 @@ export type {
     ToggleButtonProps,
     WorkCardProps,
     ModalAndDrawer,
+    BlogCardProps,
 };

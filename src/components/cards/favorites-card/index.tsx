@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, IconButton } from "@mui/material";
 import { toast } from "react-toastify";
 
 import { BorderLine, MyText, MyButton } from "../..";
+import { DispatchContext } from "../../../store";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 
@@ -16,6 +17,7 @@ interface FavoritesCardProps {
     discountVal?: number;
     count: number;
     status?: any;
+    setStatus?: any;
 }
 
 const FavoritesCard: React.FC<FavoritesCardProps> = ({
@@ -26,13 +28,14 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     number,
     id,
     discountVal,
-    count,
     status,
+    setStatus,
 }) => {
     const TransferFavorite = () => {
         API.transferFavorite(id)
             .then((res) => {
                 toast.success("Товар добавлен в корзину");
+                setStatus(`favorite ${status + 1}`);
             })
             .catch(() => toast.error("Товар не найден"));
     };
@@ -41,9 +44,11 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
         API.deleteFavorite(id)
             .then(() => {
                 toast.success("Товар удален");
-                // status(true);
+                setStatus(`delete ${status + 1}`);
             })
-            .catch(() => toast.error("Товар не удален"));
+            .catch(() => {
+                toast.error("Товар не удален");
+            });
     };
 
     return (

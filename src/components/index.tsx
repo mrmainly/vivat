@@ -27,6 +27,8 @@ import PharmacyContactsCard from "./cards/pharmacy-contacts-card";
 import FavoritesCard from "./cards/favorites-card";
 import CatalogFilterSideBar from "./sidebars/catalog-filter-sidebar";
 import CatalogCard from "./cards/catalog-card";
+import BlogCard from "./cards/blog-card";
+import BlogCardMain from "./cards/blog-card-main";
 
 export {
     Header,
@@ -58,4 +60,6 @@ export {
     FavoritesCard,
     CatalogFilterSideBar,
     CatalogCard,
+    BlogCard,
+    BlogCardMain,
 };

@@ -21,12 +21,8 @@ import Blog from "./blog";
 import BlogTheme from "./blog/themeBlog";
 
 import VivatInfo from "./pharmacy/vivat-info";
-import OfficeWork from "./pharmacy/office-work";
 import PharmacyWork from "./pharmacy/pharmacy-work";
-import CreateResume from "./pharmacy/create-resume";
 import PharmacyContacts from "./pharmacy/pharmacy-contacts";
-import WorkPage from "./pharmacy/work-page";
-import VideoVivat from "./pharmacy/video-vivat";
 import PharmacyDetailWork from "./pharmacy/pharmacy-work/detail";
 
 import ProductPage from "./product-page";
@@ -51,12 +47,8 @@ export {
     Blog,
     BlogDetail,
     VivatInfo,
-    OfficeWork,
     PharmacyWork,
-    CreateResume,
     PharmacyContacts,
-    VideoVivat,
-    WorkPage,
     ProductPage,
     PharmacyDetailWork,
 };

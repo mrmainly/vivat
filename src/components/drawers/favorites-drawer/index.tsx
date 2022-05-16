@@ -15,18 +15,13 @@ interface MainDrawerProps {
 
 const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [data, setData] = useState([]);
-    const [status, setStatus] = useState(false);
-
-    let count = 0;
-
-    // const dispatch = useContext(DispatchContext)
+    const [status, setStatus] = useState("");
 
     useEffect(() => {
         API.getFavorites().then((res) => {
             setData(res.data);
-            console.log(res);
         });
-    }, []);
+    }, [status]);
 
     return (
         <Drawer
@@ -67,8 +62,8 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                           <FavoritesCard
                               {...item}
                               key={index}
-                              count={count}
-                              status={setStatus}
+                              status={status}
+                              setStatus={setStatus}
                           />
                       ))
                     : "Нет избранных товаров"}

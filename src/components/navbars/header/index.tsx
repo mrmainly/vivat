@@ -129,9 +129,6 @@ const Header = () => {
                 <Main aria-label="mailbox folders">
                     <TopBar>
                         <TopBarItem>
-                            <MenuItem>
-                                <MyText variant="body1">Якутск</MyText>
-                            </MenuItem>
                             <MenuItem
                                 onClick={() => navigate(ROUTES.VIVAT_INFO)}
                             >
@@ -155,7 +152,7 @@ const Header = () => {
                         </TopBarItem>
                     </TopBar>
                     <BorderLine />
-                    <MidleBar>
+                    {/* <MidleBar>
                         <MidleBarItem>
                             <MenuItem onClick={() => navigate(ROUTES.HOME)}>
                                 <img src="/img/Frame60.png" />
@@ -163,7 +160,7 @@ const Header = () => {
                         </MidleBarItem>
                         <MidleBarItem sx={{ width: "100%", ml: 2, mr: 2 }}>
                             <MidleBarItemSelect container>
-                                {/* <Grid item lg={6} xl={6}>
+                                <Grid item lg={6} xl={6}>
                                 <MySelect title="Якутск" defaultValue="asd">
                                     {array.map((item, index) => (
                                         <MenuItem key={index}>{item}</MenuItem>
@@ -177,7 +174,7 @@ const Header = () => {
                             </Grid>
                             <Grid item lg={6} xl={6}>
 
-                            </Grid> */}
+                            </Grid>
                                 <GridMidle item xs={6}>
                                     <Box
                                         sx={{
@@ -262,7 +259,7 @@ const Header = () => {
                             <img src="/img/Frame949.png" />
                         </MidleBarItem>
                     </MidleBar>
-                    <BorderLine />
+                    <BorderLine /> */}
                     <BottomBar>
                         <BottomBarItem sx={{ mr: 2 }}>
                             <IconButton
@@ -342,7 +339,20 @@ const Header = () => {
                                     fontSize="large"
                                 />
                             </IconButton>
-                            <MenuItem onClick={() => navigate(ROUTES.BASKET)}>
+                            <MenuItem
+                                onClick={() => {
+                                    jwttoken
+                                        ? navigate(ROUTES.BASKET)
+                                        : dispatch({
+                                              type: "auth_modal",
+                                              payload: {
+                                                  sign_in: true,
+                                                  sign_up: false,
+                                                  forgot: false,
+                                              },
+                                          });
+                                }}
+                            >
                                 <img src="/img/Frame954.png" />
                             </MenuItem>
                         </BottomBarItem>

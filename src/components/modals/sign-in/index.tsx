@@ -189,11 +189,6 @@ export default function SignIn() {
                     >
                         Регистрация
                     </MyButton>
-                    <MenuItem
-                        sx={{ mt: 1.5, color: ThemeMain.palette.primary.main }}
-                    >
-                        Продолжить без авторизации
-                    </MenuItem>
                 </FormWrapper>
             </ModalContent>
             {/* <DialogActions>

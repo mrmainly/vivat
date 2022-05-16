@@ -27,6 +27,8 @@ interface BasketProps {
     discountPr?: number;
     order?: number;
     qnt?: number;
+    status?: any;
+    setStatus?: any;
 }
 
 const BasketCard: React.FC<BasketProps> = ({
@@ -37,11 +39,14 @@ const BasketCard: React.FC<BasketProps> = ({
     discountPr,
     order,
     id,
+    status,
+    setStatus,
 }) => {
     const deleteProduct = () => {
         API.deleteProductItem(id)
             .then((res) => {
-                console.log(res);
+                toast.success("Товар удален");
+                setStatus(status + 1);
             })
             .catch((err) => {
                 toast.error("Товар не удален");

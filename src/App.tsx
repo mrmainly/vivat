@@ -27,11 +27,7 @@ import {
     BlogDetail,
     BlogTheme,
     VivatInfo,
-    OfficeWork,
     PharmacyWork,
-    CreateResume,
-    VideoVivat,
-    WorkPage,
     PharmacyContacts,
     BasketForm,
     PharmacyDetailWork,
@@ -111,30 +107,17 @@ const App = () => {
                                 element={<VivatInfo />}
                                 path={ROUTES.VIVAT_INFO}
                             />
-                            <Route
-                                element={<OfficeWork />}
-                                path={ROUTES.OFFICE_WORK}
-                            />
+
                             <Route
                                 element={<PharmacyWork />}
                                 path={ROUTES.PHARMACY_WORK}
                             />
-                            <Route
-                                element={<CreateResume />}
-                                path={ROUTES.CREATE_RESUME}
-                            />
-                            <Route
-                                element={<WorkPage />}
-                                path={ROUTES.WORK_PAGE}
-                            />
+
                             <Route
                                 element={<PharmacyContacts />}
                                 path={ROUTES.PHARMACY_CONTACTS}
                             />
-                            <Route
-                                element={<VideoVivat />}
-                                path={ROUTES.VIDEO_VIVAT}
-                            />
+
                             <Route
                                 element={<PharmacyDetailWork />}
                                 path={`${ROUTES.PHARMACY_DETAIL_WORK}/:id`}

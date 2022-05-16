@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Box, MenuItem, CircularProgress } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import product_data from "../../local_data/product_data";
 import { BasketCard, MyText, MyButton } from "../../components";
@@ -13,6 +14,7 @@ import ROUTES from "../../routes";
 const Basket = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState(1);
 
     const navigate = useNavigate();
 
@@ -26,14 +28,25 @@ const Basket = () => {
             setLoading(true);
             await API.getOrdersList()
                 .then((res) => {
-                    console.log("data", res.data.items);
-                    setData(res.data.items);
+                    if (res) {
+                        console.log("data", res.data.items);
+                        setData(res.data?.items);
+                    }
                 })
                 .catch((error) => console.log(error));
             setLoading(false);
         };
         getOrders();
-    }, []);
+    }, [status]);
+
+    const deleteBasket = () => {
+        API.deleteOrdersAll()
+            .then(() => {
+                setStatus(status + 1);
+                toast.success("Корзина удалена");
+            })
+            .catch(() => toast.error("Что то пошло не так"));
+    };
     return (
         <Box>
             <MyText variant="h6">Корзина</MyText>
@@ -68,16 +81,19 @@ const Basket = () => {
                                 </MyText>
                                 <MenuItem
                                     sx={{ color: "#FE5860" }}
-                                    onClick={() =>
-                                        API.deleteOrdersAll(dispatch)
-                                    }
+                                    onClick={deleteBasket}
                                 >
                                     Очистить корзину{" "}
                                     <CloseIcon sx={{ ml: 1 }} />
                                 </MenuItem>
                             </Box>
                             {data.map((item: any, index: number) => (
-                                <BasketCard key={index} {...item} />
+                                <BasketCard
+                                    key={index}
+                                    {...item}
+                                    status={status}
+                                    setStatus={setStatus}
+                                />
                             ))}
                             <Box
                                 sx={{

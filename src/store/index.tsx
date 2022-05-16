@@ -26,6 +26,9 @@ export const defaultStore = {
         password_version: false,
         verify_version: false,
     },
+    status_favorite: {
+        status: "",
+    },
 };
 
 export const StateContext = React.createContext({} as any);
