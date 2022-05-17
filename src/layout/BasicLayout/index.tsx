@@ -32,8 +32,6 @@ const BasicLayout = () => {
                 minHeight={600}
                 sx={{
                     background: "#F7F9F7",
-                    pb: 8,
-                    pt: 3,
                 }}
             >
                 <Outlet />

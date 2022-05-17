@@ -18,6 +18,9 @@ const MobileBox = styled(Box)(({ theme }) => ({
         display: "block",
     },
     boxShadow: "0px -1px 12px rgba(0, 0, 0, 0.1)",
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
 }));
 
 const MobileDown = () => {

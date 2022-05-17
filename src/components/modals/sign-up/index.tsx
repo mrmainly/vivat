@@ -11,10 +11,10 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import InputMask from "react-input-mask";
 
 import { StateContext, DispatchContext } from "../../../store";
-import { Form, Input, MyButton, MyLink, MyText, BorderLine } from "../..";
+import { Form, Input, MyButton } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 
@@ -221,10 +221,21 @@ export default function SignUp() {
                                 ""
                             )}
                             <Form onSubmit={handleSubmit(onSubmit)}>
-                                <Input
-                                    label="Введите ваш номер телефона"
+                                <InputMask
+                                    mask="79999999999"
+                                    disabled={false}
                                     {...register("phone")}
-                                />
+                                    required
+                                >
+                                    {() => (
+                                        <Input
+                                            {...register("phone")}
+                                            id="phone"
+                                            label="Телефон"
+                                            required
+                                        />
+                                    )}
+                                </InputMask>
                                 <MyButton style={{ marginTop: 10 }} fullWidth>
                                     Получить код
                                 </MyButton>
@@ -245,7 +256,11 @@ export default function SignUp() {
                         >
                             {passwordText ? <p>Пароль не подошел</p> : ""}
                             <Form onSubmit={handleSubmit(onSubmitVerify)}>
-                                <Input label="SMS код" {...register("code")} />
+                                <Input
+                                    label="SMS код"
+                                    {...register("code")}
+                                    required
+                                />
                                 <MyButton style={{ marginTop: 10 }} fullWidth>
                                     Получить код
                                 </MyButton>
@@ -270,11 +285,13 @@ export default function SignUp() {
                                     label="Пароль"
                                     {...register("password")}
                                     type="password"
+                                    required
                                 />
                                 <Input
                                     label="Повторить пароль"
                                     {...register("forgot_password")}
                                     type="password"
+                                    required
                                 />
                                 <MyButton style={{ marginTop: 10 }} fullWidth>
                                     Получить код

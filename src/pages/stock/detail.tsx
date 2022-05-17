@@ -5,6 +5,8 @@ import { styled } from "@mui/system";
 
 import { MyText } from "../../components";
 import ThemeMain from "../../theme";
+import { MainCardsConstructor, ProductCardsSlider } from "../../constructor";
+import product_data from "../../local_data/product_data";
 
 const Img = styled("img")(({ theme }) => ({
     width: "100%",
@@ -15,8 +17,8 @@ const Img = styled("img")(({ theme }) => ({
 
 const StockDetail = () => {
     return (
-        <Box>
-            <Grid container spacing={2}>
+        <Box sx={{ mt: 5 }}>
+            <Grid container spacing={4}>
                 <Grid item lg={4} xl={4} md={5} sm={12} xs={12}>
                     <Img src="/img/depositphotos.jpg" />
                 </Grid>
@@ -59,6 +61,10 @@ const StockDetail = () => {
                     </MyText>
                 </Grid>
             </Grid>
+            <ProductCardsSlider
+                title="Товары, участвующие в акции"
+                data={product_data}
+            />
         </Box>
     );
 };

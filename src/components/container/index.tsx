@@ -22,6 +22,8 @@ const MyContainer: React.FC<MyContainerProps> = ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         minHeight: minHeight ? minHeight : 100,
+        paddingTop: 30,
+        paddingBottom: 80,
         [theme.breakpoints.down("lg")]: {
             minHeight: lg ? lg : "",
         },

@@ -93,6 +93,8 @@ interface BorderLineProps {
 
 interface MainCardsConstructorProps {
     data: any;
+    title?: string;
+    sx?: SxProps;
 }
 
 interface ProfileSideBarProps {

@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import InputMask from "react-input-mask";
 
 import { StateContext, DispatchContext } from "../../../store";
 import { toast } from "react-toastify";
@@ -149,11 +150,26 @@ export default function SignIn() {
                 </MyText>
                 <FormWrapper>
                     <Form onSubmit={handleSubmit(onSubmit)}>
-                        <Input label="Телефон" {...register("username")} />
+                        <InputMask
+                            mask="79999999999"
+                            disabled={false}
+                            {...register("username")}
+                            required
+                        >
+                            {() => (
+                                <Input
+                                    {...register("username")}
+                                    id="phone"
+                                    label="Телефон"
+                                    required
+                                />
+                            )}
+                        </InputMask>
                         <Input
                             label="Пароль"
                             {...register("password")}
                             type="password"
+                            required
                         />
                         <MenuItem
                             sx={{

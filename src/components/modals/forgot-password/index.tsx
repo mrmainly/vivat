@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import InputMask from "react-input-mask";
 
 import { StateContext, DispatchContext } from "../../../store";
 import { Form, Input, MyButton, MyText, ToggleButton } from "../..";
@@ -261,12 +262,24 @@ export default function ForgotPassword() {
                                     <Input
                                         label="Электронная почта"
                                         {...register("email")}
+                                        required
                                     />
                                 ) : (
-                                    <Input
-                                        label="Номер телефона"
+                                    <InputMask
+                                        mask="79999999999"
+                                        disabled={false}
                                         {...register("phone")}
-                                    />
+                                        required
+                                    >
+                                        {() => (
+                                            <Input
+                                                {...register("phone")}
+                                                id="phone"
+                                                label="Телефон"
+                                                required
+                                            />
+                                        )}
+                                    </InputMask>
                                 )}
                                 <MyButton style={{ marginTop: 10 }} fullWidth>
                                     Восстановить пароль

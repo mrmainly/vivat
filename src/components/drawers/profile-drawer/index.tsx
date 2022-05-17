@@ -37,7 +37,9 @@ const ProfileDrawer: React.FC<ModalAndDrawer> = ({ state, handleClose }) => {
                 <Box sx={{ display: "flex", alignItems: "center", ml: 1.5 }}>
                     <img src="/img/User_cicrle_light.png" />
                     <MyText variant="h6" sx={{ ml: 1 }}>
-                        {cookie.get("name")}
+                        {cookie.get("name")
+                            ? cookie.get("name")
+                            : "Заполните профиль"}
                     </MyText>
                 </Box>
                 <BorderLine sx={{ mb: 2, mt: 2 }} />
