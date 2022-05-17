@@ -71,7 +71,7 @@ const MidleBar = styled(Box)(({ theme }) => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    padding: 5,
+    height: 105,
 }));
 
 const MidleBarItem = styled(Box)(({ theme }) => ({
@@ -152,114 +152,64 @@ const Header = () => {
                         </TopBarItem>
                     </TopBar>
                     <BorderLine />
-                    {/* <MidleBar>
+                    <MidleBar>
                         <MidleBarItem>
                             <MenuItem onClick={() => navigate(ROUTES.HOME)}>
-                                <img src="/img/Frame60.png" />
+                                <img
+                                    src="/img/Frame60.png"
+                                    style={{ height: 90 }}
+                                />
                             </MenuItem>
                         </MidleBarItem>
                         <MidleBarItem sx={{ width: "100%", ml: 2, mr: 2 }}>
-                            <MidleBarItemSelect container>
-                                <Grid item lg={6} xl={6}>
-                                <MySelect title="Якутск" defaultValue="asd">
-                                    {array.map((item, index) => (
-                                        <MenuItem key={index}>{item}</MenuItem>
-                                    ))}
-                                </MySelect>
-                                <MySelect title="Якутск" defaultValue="asd">
-                                    {array.map((item, index) => (
-                                        <MenuItem key={index}>{item}</MenuItem>
-                                    ))}
-                                </MySelect>
-                            </Grid>
-                            <Grid item lg={6} xl={6}>
-
-                            </Grid>
-                                <GridMidle item xs={6}>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                        }}
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <img src="/img/Frame3.png" />
+                                <Box>
+                                    <MyText>Якутск</MyText>
+                                    <MyText
+                                        variant="body2"
+                                        sx={{ color: "#999999" }}
                                     >
-                                        <img src="/img/Frame3.png" />
-                                        <Box>
-                                            <MyText>Якутск</MyText>
-                                            <MyText
-                                                variant="body2"
-                                                sx={{ color: "#999999" }}
-                                            >
-                                                Город
-                                            </MyText>
-                                        </Box>
-                                    </Box>
-                                </GridMidle>
-                                <GridMidle item xs={6}>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                        }}
+                                        Город
+                                    </MyText>
+                                </Box>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    ml: 3,
+                                }}
+                            >
+                                <img src="/img/Frame212.png" />
+                                <Box>
+                                    <MyText>Лермонтова 38</MyText>
+                                    <MyText
+                                        variant="body2"
+                                        sx={{ color: "#999999" }}
                                     >
-                                        <img src="/img/Frame.png" />
-                                        <Box>
-                                            <MyText>8 800 800-80-80</MyText>
-                                            <MyText
-                                                variant="body2"
-                                                sx={{ color: "#999999" }}
-                                            >
-                                                Заказать звонок
-                                            </MyText>
-                                        </Box>
-                                    </Box>
-                                </GridMidle>
-                                <GridMidle item xs={6}>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                        }}
-                                    >
-                                        <img src="/img/Frame212.png" />
-                                        <Box>
-                                            <MyText>Лермонтова 38</MyText>
-                                            <MyText
-                                                variant="body2"
-                                                sx={{ color: "#999999" }}
-                                            >
-                                                Адрес аптеки
-                                            </MyText>
-                                        </Box>
-                                    </Box>
-                                </GridMidle>
-                                <GridMidle item xs={6}>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            mt: 1,
-                                        }}
-                                    >
-                                        <img src="/img/FramePhone.png" />
-                                        <Box>
-                                            <MyText>8 800 800-80-80</MyText>
-                                            <MyText
-                                                variant="body2"
-                                                sx={{ color: "#999999" }}
-                                            >
-                                                Заказать звонок
-                                            </MyText>
-                                        </Box>
-                                    </Box>
-                                </GridMidle>
-                            </MidleBarItemSelect>
+                                        Адрес аптеки
+                                    </MyText>
+                                </Box>
+                            </Box>
                         </MidleBarItem>
                         <MidleBarItem>
-                            <img src="/img/_x0020_1.png" />
-                            <img src="/img/Frame949.png" />
+                            <img
+                                src="/img/_x0020_1.png"
+                                style={{ height: 103, width: 92 }}
+                            />
+                            <img
+                                src="/img/Frame949.png"
+                                style={{ height: 90 }}
+                            />
                         </MidleBarItem>
                     </MidleBar>
-                    <BorderLine /> */}
+                    <BorderLine />
                     <BottomBar>
                         <BottomBarItem sx={{ mr: 2 }}>
                             <IconButton

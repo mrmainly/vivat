@@ -1,46 +1,46 @@
-import ROUTES from "../routes"
+import ROUTES from "../routes";
 
 const drawer_links = [
     {
-        label: 'Доставка',
-        to: ROUTES.DELIVERY
+        label: "Доставка",
+        to: ROUTES.DELIVERY,
     },
     {
-        label: 'Оплата и бронирование',
-        to: ROUTES.BOOKING
+        label: "Оплата и бронирование",
+        to: ROUTES.BOOKING,
     },
     {
-        label: 'Акции',
-        to: ROUTES.STOCK
+        label: "Акции",
+        to: ROUTES.STOCK,
     },
     {
-        label: 'Скидки',
-        to: ''
+        label: "Скидки",
+        to: "",
     },
     {
-        label: 'О компании',
-        to: ROUTES.TEAM
+        label: "О компании",
+        to: ROUTES.TEAM,
     },
     {
-        label: 'Работа',
-        to: ROUTES.WORK
+        label: "Работа",
+        to: ROUTES.WORK,
     },
     {
-        label: 'Новости',
-        to: ''
+        label: "Новости",
+        to: ROUTES.BLOG,
     },
     {
-        label: 'Контакты',
-        to: ROUTES.CONTACTS
+        label: "Контакты",
+        to: ROUTES.CONTACTS,
     },
     {
-        label: 'Обратная свзяь',
-        to: ''
+        label: "Обратная свзяь",
+        to: "",
     },
     {
-        label: 'Отправить рецепт',
-        to: ''
+        label: "Отправить рецепт",
+        to: "",
     },
-]
+];
 
-export default drawer_links
+export default drawer_links;

@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Grid, MenuItem } from "@mui/material";
 import { styled } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 import { BlogCard, MyText, BlogCardMain } from "../../components";
+import ROUTES from "../../routes";
 
 const BlogMenuItem = styled(MenuItem)(({ theme }) => ({
     width: "max-content",
@@ -10,6 +12,8 @@ const BlogMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const Blog = () => {
+    const navigate = useNavigate();
+
     const data = [
         {
             description:
@@ -61,7 +65,13 @@ const Blog = () => {
                 sx={{ display: "flex", justifyContent: "center" }}
             >
                 <Grid item lg={3.5} xl={3.5} md={4} sm={12} xs={12}>
-                    <BlogMenuItem>
+                    <BlogMenuItem
+                        onClick={() =>
+                            navigate(ROUTES.BLOG_THEME, {
+                                state: { name: "Популярное" },
+                            })
+                        }
+                    >
                         <MyText variant="h5">Популярное</MyText>
                     </BlogMenuItem>
                     <Grid container spacing={2}>

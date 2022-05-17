@@ -8,7 +8,8 @@ import Delivery from "./info-screens/delivery";
 import Work from "./info-screens/work";
 import Contacts from "./info-screens/contacts";
 import Booking from "./info-screens/booking";
-import Stock from "./info-screens/stock";
+import Stock from "./stock";
+import StockDetail from "./stock/detail";
 import Order from "./info-screens/order";
 
 import BasicInformation from "./profile/basic-information";
@@ -51,4 +52,5 @@ export {
     PharmacyContacts,
     ProductPage,
     PharmacyDetailWork,
+    StockDetail,
 };

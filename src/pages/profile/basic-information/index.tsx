@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
+import cookie from "js-cookie";
 
 import {
     ProfileSideBar,
@@ -58,6 +59,10 @@ const BasicInformation = () => {
                 setMail(data.email);
                 setPatronymic(data.patronymic);
                 setDate(data.birth_date);
+                cookie.set(
+                    "name",
+                    `${data.first_name} ${data.last_name} ${data.patronymic}`
+                );
             });
             setLoading(false);
         };

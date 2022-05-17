@@ -29,6 +29,9 @@ import CatalogFilterSideBar from "./sidebars/catalog-filter-sidebar";
 import CatalogCard from "./cards/catalog-card";
 import BlogCard from "./cards/blog-card";
 import BlogCardMain from "./cards/blog-card-main";
+import BlogCardTheme from "./cards/blog-card-theme";
+import Tag from "./tag";
+import StockCard from "./cards/stock-card";
 
 export {
     Header,
@@ -62,4 +65,7 @@ export {
     CatalogCard,
     BlogCard,
     BlogCardMain,
+    BlogCardTheme,
+    Tag,
+    StockCard,
 };

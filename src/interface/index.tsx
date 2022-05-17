@@ -132,6 +132,15 @@ interface BlogCardProps {
     date?: string;
     tag?: string;
     type?: string;
+    id?: number;
+}
+
+interface StockCardProps {
+    img: string;
+    text: string;
+    dateStart?: string;
+    dateEnd?: string;
+    id: number;
 }
 
 export type {
@@ -152,4 +161,5 @@ export type {
     WorkCardProps,
     ModalAndDrawer,
     BlogCardProps,
+    StockCardProps,
 };

@@ -26,6 +26,7 @@ enum ROUTES {
     PRODUCT_PAGE = "/product-page",
     BASKET_FORM = "/basket-form",
     PHARMACY_DETAIL_WORK = "/pharmacy-detail-work",
+    STOCK_DETAIL = "/stock-detail",
 }
 
 export default ROUTES;

@@ -3,7 +3,7 @@ import React from "react";
 import { Box, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { MyText } from "../..";
+import { MyText, Tag } from "../..";
 import ThemeMain from "../../../theme";
 import { BlogCardProps } from "../../../interface";
 
@@ -33,15 +33,6 @@ const Img = styled("img")(({ theme }) => ({
     objectFit: "cover",
 }));
 
-const Tag = styled(Box)(({ theme }) => ({
-    padding: 5,
-    background:
-        "linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), #55CD61",
-    width: "max-content",
-    borderRadius: 8,
-    color: ThemeMain.palette.primary.main,
-}));
-
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
@@ -50,7 +41,7 @@ const Main = styled(Box)(({ theme }) => ({
     height: 210,
 }));
 
-const BlogCardMain: React.FC<BlogCardProps> = () => {
+const BlogCardMain: React.FC<BlogCardProps> = ({ tag }) => {
     const text =
         "Что нужно знать о аллергии? фыф фывфы asdasdasd sadas  asdasd  ";
 

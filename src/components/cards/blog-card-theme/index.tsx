@@ -4,11 +4,12 @@ import { Box, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
-import { MyText, Tag } from "../..";
+import { MyText } from "../..";
+import ThemeMain from "../../../theme";
 import { BlogCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
 
-const BlogCard: React.FC<BlogCardProps> = ({
+const BlogCardTheme: React.FC<BlogCardProps> = ({
     description,
     tag,
     img,
@@ -27,7 +28,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
         borderRadius: "12px 0",
         justifyContent: "start",
         width: "100%",
-        flexDirection: type == "v2" ? "column" : "row",
+        flexDirection: "row",
+        marginTop: 10,
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column",
             justifyContent: "center",
@@ -35,9 +37,9 @@ const BlogCard: React.FC<BlogCardProps> = ({
     }));
 
     const Img = styled("img")(({ theme }) => ({
-        height: type == "v2" ? 118 : 139,
+        height: 210,
         objectFit: "cover",
-        width: type == "v2" ? "100%" : 120,
+        width: 200,
         borderTopLeftRadius: 10,
         borderTopRightRadius: type == "v2" ? 10 : "",
         [theme.breakpoints.down("sm")]: {
@@ -48,35 +50,50 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
     const TextWrapper = styled(Box)(({ theme }) => ({
         overflow: "hidden",
-        height: 40,
+        height: 96,
+        marginTop: 8,
+        [theme.breakpoints.down("sm")]: {
+            height: 120,
+            paddingRight: 10,
+        },
+    }));
+
+    const Tag = styled(Box)(({ theme }) => ({
+        padding: 5,
+        background:
+            "linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), #55CD61",
+        width: "max-content",
+        borderRadius: 8,
+        color: ThemeMain.palette.primary.main,
     }));
 
     const Main = styled(Box)(({ theme }) => ({
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        height: 106,
+        minHeight: 180,
         padding: 10,
+        width: "100%",
+        marginLeft: 15,
     }));
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
             <Img src={img} />
             <Main>
-                <Tag>{tag}</Tag>
+                <MyText variant="body2" sx={{ color: "gray" }}>
+                    {date}
+                </MyText>
+                <MyText variant="h6">
+                    Что нужно знать о аллергии? фыф фывфы вфывфы
+                </MyText>
                 <TextWrapper>
-                    <MyText variant="body2">{description}...</MyText>
+                    <MyText variant="body1">{description}</MyText>
                 </TextWrapper>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <MyText variant="body2" sx={{ color: "gray" }}>
-                        {date}
-                    </MyText>
-                    <MyText variant="body2" sx={{ color: "gray" }}>
-                        {views}
-                    </MyText>
-                </Box>
+                <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                ></Box>
             </Main>
         </Root>
     );
 };
 
-export default BlogCard;
+export default BlogCardTheme;

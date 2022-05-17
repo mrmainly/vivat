@@ -31,6 +31,7 @@ import {
     PharmacyContacts,
     BasketForm,
     PharmacyDetailWork,
+    StockDetail,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -91,6 +92,10 @@ const App = () => {
                                 path={ROUTES.BOOKING}
                             />
                             <Route element={<Stock />} path={ROUTES.STOCK} />
+                            <Route
+                                element={<StockDetail />}
+                                path={`${ROUTES.STOCK_DETAIL}/:id`}
+                            />
                             <Route element={<Order />} path={ROUTES.ORDER} />
 
                             <Route element={<Blog />} path={ROUTES.BLOG} />

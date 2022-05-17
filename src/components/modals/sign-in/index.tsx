@@ -11,12 +11,14 @@ import {
     Box,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import { StateContext, DispatchContext } from "../../../store";
 import { toast } from "react-toastify";
 import { Form, Input, MyButton, MyText, BorderLine } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
+import ROUTES from "../../../routes";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -100,6 +102,9 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 export default function SignIn() {
     const state = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
+
+    const navigate = useNavigate();
+
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });
@@ -119,6 +124,7 @@ export default function SignIn() {
                     type: "auth_modal",
                     payload: { sign_in: false, forgot: false, sign_up: false },
                 });
+                navigate(ROUTES.BASICINFORMATION);
             })
             .catch((error) => {
                 toast.error("такого пользователя не существует");
