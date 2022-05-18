@@ -130,9 +130,9 @@ interface WorkCardProps {
 interface BlogCardProps {
     description?: string;
     views?: number | string;
-    img?: string;
+    image?: string;
     date?: string;
-    tag?: string;
+    topic?: string;
     type?: string;
     id?: number;
 }

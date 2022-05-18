@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
+import { useParams } from "react-router-dom";
 
 import { MyText, Tag } from "../../components";
+import API from "../../api";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -31,43 +33,77 @@ const Img = styled("img")(({ theme }) => ({
     },
 }));
 
+interface DataProps {
+    name: string;
+}
+
 const BlogDetail = () => {
+    const [data, setData] = useState<any>();
+    const [loading, setLoading] = useState(false);
+
+    const params = useParams();
+
+    useEffect(() => {
+        const getBlogDetail = async () => {
+            setLoading(true);
+            await API.getBlogDetail(params.id)
+                .then((res) => {
+                    console.log(res);
+                    setData(res.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            setLoading(false);
+        };
+        getBlogDetail();
+    }, []);
+
     return (
         <Root>
-            <MyText
-                variant="h5"
-                sx={{
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                }}
-            >
-                Что нужно знать о аллергии? фыф фывфы вфывфы вфыв фывфыфыв фыв
-                фыв фыв фыпаы asdasd asdasdasd
-            </MyText>
-            <MyText variant="h6" sx={{ mt: 1, mb: 1, color: "gray" }}>
-                Иванов Иван Иванович
-            </MyText>
-            <Tag>Здоровье</Tag>
-            <Img src="/img/Frame83.png" />
-            <Box sx={{ display: "flex", color: "gray" }}>
-                <MyText variant="body1" sx={{ mr: 8 }}>
-                    15.10.2021
-                </MyText>
-                <MyText variant="body1">200</MyText>
-            </Box>
-            <Box
-                sx={{
-                    height: 500,
-                    background: "white",
-                    padding: 2,
-                    borderRadius: 5,
-                    mt: 2.5,
-                    width: "90%",
-                }}
-            >
-                asdasdasdasdasdasdsa
-            </Box>
+            {loading ? (
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+                    <CircularProgress />
+                </Box>
+            ) : data ? (
+                <>
+                    <MyText
+                        variant="h5"
+                        sx={{
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                        }}
+                    >
+                        {data.name}
+                    </MyText>
+                    <MyText variant="h6" sx={{ mt: 1, mb: 1, color: "gray" }}>
+                        {`${data.author.last_name} ${data.author.first_name}`}
+                    </MyText>
+                    <Tag>{data.topic}</Tag>
+                    <Img src="/img/Frame83.png" />
+                    <Box sx={{ display: "flex", color: "gray" }}>
+                        <MyText variant="body1" sx={{ mr: 8 }}>
+                            {data.date}
+                        </MyText>
+                        <MyText variant="body1">{data.views}</MyText>
+                    </Box>
+                    <Box
+                        sx={{
+                            height: 500,
+                            background: "white",
+                            padding: 2,
+                            borderRadius: 5,
+                            mt: 2.5,
+                            width: "90%",
+                        }}
+                    >
+                        {data.description}
+                    </Box>
+                </>
+            ) : (
+                ""
+            )}
         </Root>
     );
 };

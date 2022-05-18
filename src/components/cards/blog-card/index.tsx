@@ -10,8 +10,8 @@ import ROUTES from "../../../routes";
 
 const BlogCard: React.FC<BlogCardProps> = ({
     description,
-    tag,
-    img,
+    topic,
+    image,
     views,
     date,
     type,
@@ -60,21 +60,28 @@ const BlogCard: React.FC<BlogCardProps> = ({
     }));
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
-            <Img src={img} />
-            <Main>
-                <Tag>{tag}</Tag>
-                <TextWrapper>
-                    <MyText variant="body2">{description}...</MyText>
-                </TextWrapper>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <MyText variant="body2" sx={{ color: "gray" }}>
-                        {date}
-                    </MyText>
-                    <MyText variant="body2" sx={{ color: "gray" }}>
-                        {views}
-                    </MyText>
-                </Box>
-            </Main>
+            <Img src={image} />
+            <Box sx={{ width: "100%" }}>
+                <Main>
+                    <Tag>{topic}</Tag>
+                    <TextWrapper>
+                        <MyText variant="body2">{description}...</MyText>
+                    </TextWrapper>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <MyText variant="body2" sx={{ color: "gray" }}>
+                            {date}
+                        </MyText>
+                        <MyText variant="body2" sx={{ color: "gray" }}>
+                            {views}
+                        </MyText>
+                    </Box>
+                </Main>
+            </Box>
         </Root>
     );
 };

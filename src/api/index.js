@@ -150,6 +150,18 @@ class API {
         let result = await api(`api/v1/cities/city/list/`).get()
         return result
     }
+
+
+    //blog
+    async getBlog(query) {
+        let result = await api(`api/v1/blogs/${query ? `?query=${query}` : ''}`).get()
+        return result
+    }
+
+    async getBlogDetail(id) {
+        let result = await api(`api/v1/blogs/${id}/`).get()
+        return result
+    }
 }
 
 export default new API()

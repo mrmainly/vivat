@@ -2,10 +2,12 @@ import React from "react";
 
 import { Box, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 import { MyText, Tag } from "../..";
 import ThemeMain from "../../../theme";
 import { BlogCardProps } from "../../../interface";
+import ROUTES from "../../../routes";
 
 const Root = styled(CardActionArea)(({ theme }) => ({
     display: "flex",
@@ -14,6 +16,7 @@ const Root = styled(CardActionArea)(({ theme }) => ({
     background: "#FFFFFF",
     borderRadius: 12,
     height: 503,
+    width: "100%",
     flexDirection: "column",
     [theme.breakpoints.down("sm")]: {
         display: "none",
@@ -22,11 +25,11 @@ const Root = styled(CardActionArea)(({ theme }) => ({
 
 const TextWrapper = styled(Box)(({ theme }) => ({
     overflow: "hidden",
-    height: 60,
+    height: 46,
 }));
 
 const Img = styled("img")(({ theme }) => ({
-    height: 400,
+    height: 360,
     width: "100%",
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
@@ -38,32 +41,49 @@ const Main = styled(Box)(({ theme }) => ({
     flexDirection: "column",
     justifyContent: "space-between",
     padding: 10,
-    height: 210,
+    height: "100%",
 }));
 
-const BlogCardMain: React.FC<BlogCardProps> = ({ tag }) => {
-    const text =
-        "Что нужно знать о аллергии? фыф фывфы asdasdasd sadas  asdasd  ";
+const BlogCardMain: React.FC<BlogCardProps> = ({
+    description,
+    topic,
+    image,
+    views,
+    date,
+    type,
+    id,
+}) => {
+    const navigate = useNavigate();
 
-    const date = "15.10.2021";
-    const views = "200";
     return (
-        <Root>
-            <Img src="/img/depositphotos.jpg" />
-            <Main>
-                <Tag>Здоровье</Tag>
-                <TextWrapper>
-                    <MyText variant="body1">{text}...</MyText>
-                </TextWrapper>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <MyText variant="body2" sx={{ color: "gray" }}>
-                        {date}
-                    </MyText>
-                    <MyText variant="body2" sx={{ color: "gray" }}>
-                        {views}
-                    </MyText>
-                </Box>
-            </Main>
+        <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
+            <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai/${image}`} />
+            <Box sx={{ width: "100%", height: "100%", pb: 2 }}>
+                <Main>
+                    <Tag>{topic}</Tag>
+                    <TextWrapper>
+                        <MyText variant="body1">
+                            asddasd asdasdtuytsduASTDIuyatsliduyALISUYDLiasy
+                            iuyaWED Uyiasiudy LAIUSYD uqy uyasiuydiAUIDasdiUSA
+                            YLiasu dUAYSDL uyalsiy dlAIUSYD osaid
+                            IASYDLoaiusyedlAOIYDoas d...
+                        </MyText>
+                    </TextWrapper>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <MyText variant="body2" sx={{ color: "gray" }}>
+                            {date}
+                        </MyText>
+                        <MyText variant="body2" sx={{ color: "gray" }}>
+                            {views}
+                        </MyText>
+                    </Box>
+                </Main>
+            </Box>
         </Root>
     );
 };

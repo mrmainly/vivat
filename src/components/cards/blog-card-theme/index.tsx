@@ -11,8 +11,7 @@ import ROUTES from "../../../routes";
 
 const BlogCardTheme: React.FC<BlogCardProps> = ({
     description,
-    tag,
-    img,
+    image,
     views,
     date,
     type,
@@ -77,7 +76,7 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({
     }));
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
-            <Img src={img} />
+            <Img src={image} />
             <Main>
                 <MyText variant="body2" sx={{ color: "gray" }}>
                     {date}
