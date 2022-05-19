@@ -55,8 +55,6 @@ const PharmacyWork = () => {
         getEmployments();
     }, [city]);
 
-    useEffect(() => {}, []);
-
     return (
         <Wrapper title="Работа в аптеке">
             <Main>

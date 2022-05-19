@@ -57,17 +57,12 @@ const BlogCardMain: React.FC<BlogCardProps> = ({
 
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
-            <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai/${image}`} />
+            <Img src="/img/depositphotos.jpg" />
             <Box sx={{ width: "100%", height: "100%", pb: 2 }}>
                 <Main>
                     <Tag>{topic}</Tag>
                     <TextWrapper>
-                        <MyText variant="body1">
-                            asddasd asdasdtuytsduASTDIuyatsliduyALISUYDLiasy
-                            iuyaWED Uyiasiudy LAIUSYD uqy uyasiuydiAUIDasdiUSA
-                            YLiasu dUAYSDL uyalsiy dlAIUSYD osaid
-                            IASYDLoaiusyedlAOIYDoas d...
-                        </MyText>
+                        <MyText variant="body1">{description}</MyText>
                     </TextWrapper>
                     <Box
                         sx={{

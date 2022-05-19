@@ -72,6 +72,7 @@ const BlogDetail = () => {
                         sx={{
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
+
                             overflow: "hidden",
                         }}
                     >

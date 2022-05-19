@@ -144,24 +144,6 @@ const BasicInformation = () => {
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
                             />
-                            <FormControlLabel
-                                sx={{ mt: 1.5 }}
-                                control={<Checkbox defaultChecked />}
-                                label={
-                                    <MyText>
-                                        Я соглашаюсь с{" "}
-                                        <span
-                                            style={{
-                                                color: ThemeMain.palette.primary
-                                                    .main,
-                                            }}
-                                        >
-                                            политикой обработчки персональных
-                                            данных.
-                                        </span>
-                                    </MyText>
-                                }
-                            />
                             <MyButton
                                 style={{ marginTop: 15 }}
                                 fullWidth

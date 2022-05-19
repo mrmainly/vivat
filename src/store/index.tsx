@@ -26,8 +26,9 @@ export const defaultStore = {
         password_version: false,
         verify_version: false,
     },
-    status_favorite: {
-        status: "",
+    status_product: {
+        v1: false,
+        v2: false,
     },
 };
 

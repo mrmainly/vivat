@@ -1,5 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Box, Grid, MenuItem, Button, CircularProgress } from "@mui/material";
+import React, { useEffect, useState, useCallback } from "react";
+import {
+    Box,
+    Grid,
+    MenuItem,
+    CircularProgress,
+    FormControl,
+    FormControlLabel,
+    InputLabel,
+    Select,
+} from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
@@ -12,76 +21,62 @@ const BlogMenuItem = styled(MenuItem)(({ theme }) => ({
     marginBottom: 10,
 }));
 
+const BoxTheme = styled(Box)(({ theme }) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+}));
+
 const Blog = () => {
     const [popularity, setPopularity] = useState([]);
     const [created, setCreated] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [topics, setTopics] = useState([{ topic: "" }]);
+    const [topic, setTopic] = useState("");
+    const [theme, setTheme] = useState([]);
 
     const navigate = useNavigate();
 
     const getBlog = async () => {
         setLoading(true);
-        await API.getBlog("popularity_all_time")
+        console.log("getBlog");
+        await API.getBlog("popularity_all_time", "query")
             .then((res) => {
                 setPopularity(res.data);
-                console.log(res);
             })
             .catch((error) => console.log(error));
 
-        await API.getBlog("created")
+        await API.getBlog("created", "query")
             .then((res) => {
                 setCreated(res.data);
             })
             .catch((error) => console.log(error));
+
+        await API.getTopic()
+            .then((res) => {
+                setTopics(res.data);
+            })
+            .catch((error) => console.log(error));
+
         setLoading(false);
     };
 
+    const getTheme = useCallback(() => {
+        API.getBlog(topic, "topic")
+            .then((res) => {
+                console.log("res theme", res);
+                setTheme(res.data);
+            })
+            .catch((error) => console.log(error));
+    }, [topic]);
+
     useEffect(() => {
         getBlog();
-    }, []);
+    }, ["ad"]);
 
-    const data = [
-        {
-            description:
-                " 1Что нужно знать о аллергии? фыф фывфы asdasdasd sadas  asdasd  ",
-            tag: "Здоровте",
-            img: "/img/depositphotos.jpg",
-            date: "15.10.2021",
-            views: "200",
-        },
-        {
-            description:
-                " 2Что нужно знать о аллергии? фыф фывфы asdasdasd sadas  asdasd  ",
-            tag: "Здоровте",
-            img: "/img/depositphotos.jpg",
-            date: "15.10.2021",
-            views: "200",
-        },
-        {
-            description:
-                "3 Что нужно знать о аллергии? фыф фывфы asdasdasd sadas  asdasd  ",
-            tag: "Здоровте",
-            img: "/img/depositphotos.jpg",
-            date: "15.10.2021",
-            views: "200",
-        },
-        {
-            description:
-                "4 Что нужно знать о аллергии? фыф фывфы asdasdasd sadas  asdasd  ",
-            tag: "Здоровте",
-            img: "/img/depositphotos.jpg",
-            date: "15.10.2021",
-            views: "200",
-        },
-        {
-            description:
-                "5 Что нужно знать о аллергии? фыф фывфы asdasdasd sadas  asdasd  ",
-            tag: "Здоровте",
-            img: "/img/depositphotos.jpg",
-            date: "15.10.2021",
-            views: "200",
-        },
-    ];
+    useEffect(() => {
+        getTheme();
+    }, [topic]);
 
     return (
         <>
@@ -160,16 +155,44 @@ const Blog = () => {
                     </Grid>
 
                     {/* Тема */}
-                    <BlogMenuItem sx={{ mt: 5 }}>
-                        <MyText variant="h5">Тема</MyText>
-                    </BlogMenuItem>
+                    <BoxTheme>
+                        <BlogMenuItem sx={{ mt: 5 }}>
+                            <MyText variant="h5">Тема</MyText>
+                        </BlogMenuItem>
+                        <FormControl
+                            sx={{ width: 150, bgcolor: "white", ml: 1 }}
+                            size="small"
+                        >
+                            <InputLabel>Темы</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                label="Темы"
+                                defaultValue={topics[0].topic}
+                                value={topic}
+                                onChange={(e) => setTopic(e.target.value)}
+                            >
+                                {topics.map((item: any, index: number) => (
+                                    <MenuItem value={item.topic} key={index}>
+                                        {item.topic}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </BoxTheme>
                     <Grid container spacing={2}>
                         <Grid item lg={5} xl={5} md={5} sm={5} xs={12}>
-                            <BlogCardMain />
+                            {theme.length > 0
+                                ? theme
+                                      .slice(0, 1)
+                                      .map((item, index) => (
+                                          <BlogCardMain key={index} {...item} />
+                                      ))
+                                : ""}
                         </Grid>
                         <Grid item lg={7} xl={7} md={7} sm={7} xs={12}>
                             <Grid container spacing={2}>
-                                {data.slice(0, 4).map((item, index) => (
+                                {theme.slice(1, 4).map((item, index) => (
                                     <Grid
                                         item
                                         key={index}

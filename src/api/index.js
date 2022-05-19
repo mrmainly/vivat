@@ -153,13 +153,29 @@ class API {
 
 
     //blog
-    async getBlog(query) {
-        let result = await api(`api/v1/blogs/${query ? `?query=${query}` : ''}`).get()
+    async getBlog(query, type) {
+        let result = await api(`api/v1/blogs/${type == 'query' ? query ? `?query=${query}` : '' : `?topic_query=${query}`}`).get()
         return result
     }
 
     async getBlogDetail(id) {
         let result = await api(`api/v1/blogs/${id}/`).get()
+        return result
+    }
+
+    async getTopic() {
+        let result = await api(`api/v1/blogs/topics/`).get()
+        return result
+    }
+
+    //promotion
+    async getPromotion() {
+        let result = await api(`api/v1/promotion/`).get()
+        return result
+    }
+
+    async getPromotionDetail(id) {
+        let result = await api(`api/v1/promotion/${id}`).get()
         return result
     }
 }

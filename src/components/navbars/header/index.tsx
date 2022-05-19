@@ -102,6 +102,7 @@ const Header = () => {
         drawerOpen: false,
         drawerProfileOpen: false,
         drawerFavoritesOpen: false,
+        statusProduct: false,
     });
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
@@ -242,6 +243,9 @@ const Header = () => {
                                     borderRadius: 8,
                                 }}
                                 variant="outlined"
+                                onClick={() => {
+                                    navigate(ROUTES.STATUS_PRODUCT);
+                                }}
                             >
                                 Статус заказа
                             </Button>
@@ -361,7 +365,6 @@ const Header = () => {
                 state={drawerProfileOpen}
                 handleClose={handleProfileDrawerClose}
             />
-
             <FavoritesDrawer
                 state={drawerFavoritesOpen}
                 handleClose={handleFavoritesDrawerClose}

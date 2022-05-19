@@ -12,11 +12,8 @@ export const stateReducer = (state: any, action: any) => {
             return { ...state, verify_code: action.payload };
         case "register_version":
             return { ...state, register_version: action.payload };
-        case "count":
-            return { ...state, count: action.payload };
-        case "status_favorite":
-            console.log("status");
-            return { ...state, status: action.payload };
+        case "status_product":
+            return { ...state, status_product: action.payload };
         default:
             throw new Error();
     }

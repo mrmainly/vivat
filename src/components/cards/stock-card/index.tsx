@@ -29,11 +29,12 @@ const TextWrapper = styled(Box)(({ theme }) => ({
 }));
 
 const StockCard: React.FC<StockCardProps> = ({
-    img,
-    text,
-    dateStart,
-    dateEnd,
+    image,
+    description,
+    date_start,
+    date_end,
     id,
+    city,
 }) => {
     const navigate = useNavigate();
 
@@ -42,7 +43,7 @@ const StockCard: React.FC<StockCardProps> = ({
             sx={{ borderRadius: 4, background: "white" }}
             onClick={() => navigate(`${ROUTES.STOCK_DETAIL}/${id}`)}
         >
-            <Img src={img} />
+            <Img src={""} />
             <Main>
                 <Box
                     sx={{
@@ -51,23 +52,23 @@ const StockCard: React.FC<StockCardProps> = ({
                     }}
                 >
                     <MyText variant="body2" sx={{ color: "#a1a1a1" }}>
-                        {dateStart}
+                        {date_start}
                     </MyText>
                     <MyText sx={{ color: "#a1a1a1", ml: 0.5, mr: 0.5 }}>
                         {"-"}
                     </MyText>
                     <MyText variant="body2" sx={{ color: "#a1a1a1" }}>
-                        {dateEnd}
+                        {date_end}
                     </MyText>
                 </Box>
                 <TextWrapper>
-                    <MyText
-                        variant="body2"
-                        sx={{ color: ThemeMain.palette.primary.main, mt: 1 }}
-                    >
-                        {text} sadasdasd asdasdasd qweqweqwe qwe qweqw eqwe
-                        qweqweqwe
-                    </MyText>
+                    <div
+                        style={{
+                            marginTop: 20,
+                            color: ThemeMain.palette.primary.main,
+                        }}
+                        dangerouslySetInnerHTML={{ __html: description }}
+                    ></div>
                 </TextWrapper>
             </Main>
         </CardActionArea>

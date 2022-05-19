@@ -32,6 +32,8 @@ import {
     BasketForm,
     PharmacyDetailWork,
     StockDetail,
+    StatusProduct,
+    StatusProductDetail,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -126,6 +128,15 @@ const App = () => {
                             <Route
                                 element={<PharmacyDetailWork />}
                                 path={`${ROUTES.PHARMACY_DETAIL_WORK}/:id`}
+                            />
+
+                            <Route
+                                element={<StatusProduct />}
+                                path={ROUTES.STATUS_PRODUCT}
+                            />
+                            <Route
+                                element={<StatusProductDetail />}
+                                path={`${ROUTES.STATUS_PRODUCT_DETAIL}/:id`}
                             />
                         </Route>
                     </Routes>

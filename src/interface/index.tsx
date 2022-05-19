@@ -138,11 +138,17 @@ interface BlogCardProps {
 }
 
 interface StockCardProps {
-    img: string;
-    text: string;
-    dateStart?: string;
-    dateEnd?: string;
+    image: string | null;
+    description: any;
+    date_start?: string;
+    date_end?: string;
     id: number;
+    city?: number;
+}
+
+interface MainDrawerProps {
+    state: any;
+    handleClose: any;
 }
 
 export type {
@@ -164,4 +170,5 @@ export type {
     ModalAndDrawer,
     BlogCardProps,
     StockCardProps,
+    MainDrawerProps,
 };

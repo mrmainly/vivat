@@ -8,13 +8,15 @@ import {
     IconButton,
     MenuItem,
     Box,
+    FormControlLabel,
+    Checkbox,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import InputMask from "react-input-mask";
 
 import { StateContext, DispatchContext } from "../../../store";
-import { Form, Input, MyButton } from "../..";
+import { Form, Input, MyButton, MyText } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 
@@ -236,7 +238,25 @@ export default function SignUp() {
                                         />
                                     )}
                                 </InputMask>
-                                <MyButton style={{ marginTop: 10 }} fullWidth>
+                                <FormControlLabel
+                                    sx={{ mt: 1.5 }}
+                                    control={<Checkbox defaultChecked />}
+                                    label={
+                                        <MyText>
+                                            Я соглашаюсь с{" "}
+                                            <span
+                                                style={{
+                                                    color: ThemeMain.palette
+                                                        .primary.main,
+                                                }}
+                                            >
+                                                политикой обработчки
+                                                персональных данных.
+                                            </span>
+                                        </MyText>
+                                    }
+                                />
+                                <MyButton style={{ marginTop: 20 }} fullWidth>
                                     Получить код
                                 </MyButton>
                             </Form>
