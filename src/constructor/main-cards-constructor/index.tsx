@@ -1,8 +1,14 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
+import { styled } from "@mui/system";
 
 import { MainCardsConstructorProps } from "../../interface";
 import { MyText, ProductCard, CatalogCard } from "../../components";
+
+const Root = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexWrap: "wrap",
+}));
 
 const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
     data,
@@ -11,24 +17,20 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
 }) => {
     return (
         <Box {...props}>
-            <MyText variant="h6" sx={{ mb: 2 }}>
-                {title}
-            </MyText>
-            <Grid container spacing={2}>
+            <MyText variant="h5">{title}</MyText>
+            <Root>
                 {data.map((item: any, index: number) => (
-                    <Grid item lg={3} xl={3} md={4} sm={6} xs={12}>
-                        <CatalogCard
-                            key={index}
-                            id={item.id}
-                            specialPrice={item.specialPrice}
-                            specialText={item.specialText}
-                            img={item.img}
-                            description={item.description}
-                            price={item.price}
-                        />
-                    </Grid>
+                    <CatalogCard
+                        key={index}
+                        id={item.id}
+                        specialPrice={item.specialPrice}
+                        specialText={item.specialText}
+                        img={item.img}
+                        description={item.description}
+                        price={item.price}
+                    />
                 ))}
-            </Grid>
+            </Root>
         </Box>
     );
 };

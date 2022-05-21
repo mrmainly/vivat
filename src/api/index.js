@@ -178,6 +178,18 @@ class API {
         let result = await api(`api/v1/promotion/${id}`).get()
         return result
     }
+
+     //my-status
+     async getMeStatus() {
+        let result = await api(`api/v1/orders/me/status/`).get()
+        return result
+    }
+
+    async getMeArchieve() {
+        let result = await api(`api/v1/orders/me/archieve/`).get()
+        return result
+    }
+
 }
 
 export default new API()

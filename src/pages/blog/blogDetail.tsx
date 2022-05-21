@@ -49,7 +49,7 @@ const BlogDetail = () => {
             await API.getBlogDetail(params.id)
                 .then((res) => {
                     console.log(res);
-                    setData(res.data);
+                    setData(res.data.results);
                 })
                 .catch((error) => {
                     console.log(error);

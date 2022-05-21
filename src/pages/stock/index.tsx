@@ -7,6 +7,7 @@ import {
     FormGroup,
     Checkbox,
     Pagination,
+    CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -16,14 +17,19 @@ import API from "../../api";
 const Stock = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [count, setCount] = useState<number>(0);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    let countNumber = Math.ceil(count / 10);
 
     useEffect(() => {
         const getPromotion = async () => {
             setLoading(true);
             await API.getPromotion()
                 .then((res) => {
-                    setData(res.data);
-                    console.log(res);
+                    setCount(res.data.count);
+                    setData(res.data.results);
+                    console.log("stick", res);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -33,64 +39,6 @@ const Stock = () => {
         getPromotion();
     }, []);
 
-    const data1 = [
-        {
-            img: "/img/depositphotos.jpg",
-            text: "Скидка до 25% на ффывфывфы фыв фыв фыв фы фывф ыфаы",
-            dateStart: "14 фев 2022",
-            dateEnd: "01 апр 2022",
-            id: 1,
-        },
-        {
-            img: "/img/depositphotos.jpg",
-            text: "Скидка до 25% на ффывфывфы фыв фыв фыв фы фывф ыфаы",
-            dateStart: "14 фев 2022",
-            dateEnd: "01 апр 2022",
-            id: 2,
-        },
-        {
-            img: "/img/depositphotos.jpg",
-            text: "Скидка до 25% на ффывфывфы фыв фыв фыв фы фывф ыфаы",
-            dateStart: "14 фев 2022",
-            dateEnd: "01 апр 2022",
-            id: 3,
-        },
-        {
-            img: "/img/depositphotos.jpg",
-            text: "Скидка до 25% на ффывфывфы фыв фыв фыв фы фывф ыфаы",
-            dateStart: "14 фев 2022",
-            dateEnd: "01 апр 2022",
-            id: 4,
-        },
-        {
-            img: "/img/depositphotos.jpg",
-            text: "Скидка до 25% на ффывфывфы фыв фыв фыв фы фывф ыфаы",
-            dateStart: "14 фев 2022",
-            dateEnd: "01 апр 2022",
-            id: 5,
-        },
-        {
-            img: "/img/depositphotos.jpg",
-            text: "Скидка до 25% на ффывфывфы фыв фыв фыв фы фывф ыфаы",
-            dateStart: "14 фев 2022",
-            dateEnd: "01 апр 2022",
-            id: 6,
-        },
-        {
-            img: "/img/depositphotos.jpg",
-            text: "Скидка до 25% на ффывфывфы фыв фыв фыв фы фывф ыфаы",
-            dateStart: "14 фев 2022",
-            dateEnd: "01 апр 2022",
-            id: 7,
-        },
-        {
-            img: "/img/depositphotos.jpg",
-            text: "Скидка до 25% на ффывфывфы фыв фыв фыв фы фывф ыфаы",
-            dateStart: "14 фев 2022",
-            dateEnd: "01 апр 2022",
-            id: 8,
-        },
-    ];
     return (
         <Box>
             <MyText variant="h5">Акции</MyText>
@@ -112,14 +60,34 @@ const Stock = () => {
                     label="Онлайн акция"
                 />
             </FormGroup> */}
-            <Grid container spacing={2} sx={{ mt: 2 }}>
-                {data.map((item, index) => (
-                    <Grid item lg={3} xl={3} md={4} sm={6} xs={12} key={index}>
-                        <StockCard {...item} />
+            {loading ? (
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
+                    <CircularProgress />
+                </Box>
+            ) : (
+                <>
+                    <Grid container spacing={2} sx={{ mt: 2 }}>
+                        {data.map((item, index) => (
+                            <Grid
+                                item
+                                lg={3}
+                                xl={3}
+                                md={4}
+                                sm={6}
+                                xs={12}
+                                key={index}
+                            >
+                                <StockCard {...item} />
+                            </Grid>
+                        ))}
                     </Grid>
-                ))}
-            </Grid>
-            <Pagination count={10} sx={{ mt: 3 }} />
+                    <Pagination
+                        style={{ marginTop: 20 }}
+                        count={countNumber}
+                        onChange={(event, value) => setCurrentPage(value)}
+                    />
+                </>
+            )}
         </Box>
     );
 };

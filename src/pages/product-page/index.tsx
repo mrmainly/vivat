@@ -13,10 +13,10 @@ const ProductPage = () => {
                 Каталог
             </MyText>
             <Grid container spacing={6}>
-                <Grid item lg={3} xl={3}>
+                <Grid item lg={3} xl={3} md={3}>
                     <CatalogFilterSideBar />
                 </Grid>
-                <Grid item lg={10} xl={10}>
+                <Grid item lg={9} xl={9} md={9}>
                     <MainCardsConstructor data={product_data} />
                 </Grid>
             </Grid>

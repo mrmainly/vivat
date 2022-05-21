@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 import { MyText } from "../../components";
 import ThemeMain from "../../theme";
-import { MainCardsConstructor, ProductCardsSlider } from "../../constructor";
+import { MainCardsConstructor } from "../../constructor";
 import product_data from "../../local_data/product_data";
 import API from "../../api";
 
@@ -24,9 +24,9 @@ const StockDetail = () => {
     const params = useParams();
 
     useEffect(() => {
-        const getEmploymentsDetail = () => {
+        const getEmploymentsDetail = async () => {
             setLoading(true);
-            API.getEmploymentsDetail(params.id)
+            await API.getPromotionDetail(params.id)
                 .then((res) => {
                     console.log(res);
                     setData(res.data);
@@ -40,7 +40,7 @@ const StockDetail = () => {
     return (
         <Box sx={{ mt: 5 }}>
             {loading ? (
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
                     <CircularProgress />
                 </Box>
             ) : data ? (
@@ -60,7 +60,7 @@ const StockDetail = () => {
                                     variant="body2"
                                     sx={{ color: "#a1a1a1" }}
                                 >
-                                    14 фев 2022
+                                    {data.date_start}
                                 </MyText>
                                 <MyText
                                     sx={{ color: "#a1a1a1", ml: 0.5, mr: 0.5 }}
@@ -71,7 +71,7 @@ const StockDetail = () => {
                                     variant="body2"
                                     sx={{ color: "#a1a1a1" }}
                                 >
-                                    01 апр 2022
+                                    {data.date_end}
                                 </MyText>
                             </Box>
                             <MyText
@@ -92,9 +92,10 @@ const StockDetail = () => {
                             ></div>
                         </Grid>
                     </Grid>
-                    <ProductCardsSlider
+                    <MainCardsConstructor
                         title="Товары, участвующие в акции"
-                        data={product_data}
+                        data={data.goods}
+                        sx={{ mt: 4 }}
                     />
                 </>
             ) : (

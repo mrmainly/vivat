@@ -6,7 +6,7 @@ const Main = styled(Box)(({ theme }) => ({
     background: "white",
     borderRadius: 12,
     minHeight: 800,
-    width: 293,
+    width: "100%",
     padding: 16,
 }));
 

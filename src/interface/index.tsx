@@ -114,6 +114,15 @@ interface GoodsCardProps {
     specialText?: string;
     id: number | string;
     price?: number | string;
+
+    // barcodes?: number;
+    // code?: string;
+    // mmmEn?: string;
+    // mnnRu?: string;
+    // name?: string;
+    // producer?: string;
+    // refId?: number;
+    // rv?: string;
 }
 
 interface ProductSliderProps {

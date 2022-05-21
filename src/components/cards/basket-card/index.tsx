@@ -46,7 +46,7 @@ const BasketCard: React.FC<BasketProps> = ({
         API.deleteProductItem(id)
             .then((res) => {
                 toast.success("Товар удален");
-                setStatus(status + 1);
+                setStatus(`delete_item_ ${status + 1}`);
             })
             .catch((err) => {
                 toast.error("Товар не удален");

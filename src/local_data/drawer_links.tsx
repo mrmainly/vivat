@@ -14,10 +14,6 @@ const drawer_links = [
         to: ROUTES.STOCK,
     },
     {
-        label: "Скидки",
-        to: "",
-    },
-    {
         label: "О компании",
         to: ROUTES.TEAM,
     },

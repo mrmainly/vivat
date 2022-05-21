@@ -16,6 +16,10 @@ const Root = styled(Box)(({ theme }) => ({
     // justifyContent: 'center',
     padding: 10,
     background: "#FFFFFF",
+    width: 180,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 5,
 }));
 
 const Img = styled("img")(({ theme }) => ({

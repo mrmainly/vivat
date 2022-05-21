@@ -14,7 +14,7 @@ import ROUTES from "../../routes";
 const Basket = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState(1);
+    const [status, setStatus] = useState("");
 
     const navigate = useNavigate();
 
@@ -28,10 +28,8 @@ const Basket = () => {
             setLoading(true);
             await API.getOrdersList()
                 .then((res) => {
-                    if (res) {
-                        console.log("data", res.data.items);
-                        setData(res.data?.items);
-                    }
+                    console.log("data", res.data.items);
+                    setData(res.data.items);
                 })
                 .catch((error) => console.log(error));
             setLoading(false);
@@ -41,8 +39,8 @@ const Basket = () => {
 
     const deleteBasket = () => {
         API.deleteOrdersAll()
-            .then(() => {
-                setStatus(status + 1);
+            .then((res) => {
+                setStatus(`delete_all ${status + 1}`);
                 toast.success("Корзина удалена");
             })
             .catch(() => toast.error("Что то пошло не так"));

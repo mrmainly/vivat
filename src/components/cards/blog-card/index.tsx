@@ -60,7 +60,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
     }));
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
-            <Img src="/img/depositphotos.jpg" />
+            <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
             <Box sx={{ width: "100%" }}>
                 <Main>
                     <Tag>{topic}</Tag>

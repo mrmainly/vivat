@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { BlogCard, MyText, BlogCardMain } from "../../components";
 import ROUTES from "../../routes";
 import API from "../../api";
+import ThemeMain from "./components/ThemeMain";
 
 const BlogMenuItem = styled(MenuItem)(({ theme }) => ({
     width: "max-content",
@@ -34,21 +35,22 @@ const Blog = () => {
     const [topics, setTopics] = useState([{ topic: "" }]);
     const [topic, setTopic] = useState("");
     const [theme, setTheme] = useState([]);
+    const [themeLoading, setThemeLoading] = useState(false);
 
     const navigate = useNavigate();
 
-    const getBlog = async () => {
-        setLoading(true);
+    const getBlog = useCallback(async () => {
         console.log("getBlog");
+        setLoading(true);
         await API.getBlog("popularity_all_time", "query")
             .then((res) => {
-                setPopularity(res.data);
+                setPopularity(res.data.results);
             })
             .catch((error) => console.log(error));
 
         await API.getBlog("created", "query")
             .then((res) => {
-                setCreated(res.data);
+                setCreated(res.data.results);
             })
             .catch((error) => console.log(error));
 
@@ -57,22 +59,21 @@ const Blog = () => {
                 setTopics(res.data);
             })
             .catch((error) => console.log(error));
-
         setLoading(false);
-    };
+    }, [""]);
 
     const getTheme = useCallback(() => {
         API.getBlog(topic, "topic")
             .then((res) => {
                 console.log("res theme", res);
-                setTheme(res.data);
+                setTheme(res.data.results);
             })
             .catch((error) => console.log(error));
     }, [topic]);
 
     useEffect(() => {
         getBlog();
-    }, ["ad"]);
+    }, [""]);
 
     useEffect(() => {
         getTheme();
@@ -95,7 +96,11 @@ const Blog = () => {
                             <BlogMenuItem
                                 onClick={() =>
                                     navigate(ROUTES.BLOG_THEME, {
-                                        state: { name: "Популярное" },
+                                        state: {
+                                            name: "Популярное",
+                                            value: "popularity_all_time",
+                                            type: "query",
+                                        },
                                     })
                                 }
                             >
@@ -131,7 +136,17 @@ const Blog = () => {
                                 : ""}
                         </Grid>
                         <Grid item lg={3.5} xl={3.5} md={4} sm={6} xs={12}>
-                            <BlogMenuItem>
+                            <BlogMenuItem
+                                onClick={() =>
+                                    navigate(ROUTES.BLOG_THEME, {
+                                        state: {
+                                            name: "Последние статьи",
+                                            value: "created",
+                                            type: "query",
+                                        },
+                                    })
+                                }
+                            >
                                 <MyText variant="h5">Последние статьи</MyText>
                             </BlogMenuItem>
                             <Grid container spacing={2}>
@@ -153,17 +168,31 @@ const Blog = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-
-                    {/* Тема */}
                     <BoxTheme>
-                        <BlogMenuItem sx={{ mt: 5 }}>
-                            <MyText variant="h5">Тема</MyText>
-                        </BlogMenuItem>
+                        {theme.slice(0, 1).map((item: any, index: number) => (
+                            <BlogMenuItem
+                                sx={{ mt: 5 }}
+                                key={index}
+                                onClick={() =>
+                                    navigate(ROUTES.BLOG_THEME, {
+                                        state: {
+                                            name: item.name,
+                                            value: item.name,
+                                            type: "theme",
+                                        },
+                                    })
+                                }
+                            >
+                                <MyText variant="h5">{item.topic}</MyText>
+                            </BlogMenuItem>
+                        ))}
                         <FormControl
                             sx={{ width: 150, bgcolor: "white", ml: 1 }}
                             size="small"
                         >
-                            <InputLabel>Темы</InputLabel>
+                            <InputLabel id="demo-simple-select-label">
+                                Темы
+                            </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
@@ -180,34 +209,20 @@ const Blog = () => {
                             </Select>
                         </FormControl>
                     </BoxTheme>
-                    <Grid container spacing={2}>
-                        <Grid item lg={5} xl={5} md={5} sm={5} xs={12}>
-                            {theme.length > 0
-                                ? theme
-                                      .slice(0, 1)
-                                      .map((item, index) => (
-                                          <BlogCardMain key={index} {...item} />
-                                      ))
-                                : ""}
-                        </Grid>
-                        <Grid item lg={7} xl={7} md={7} sm={7} xs={12}>
-                            <Grid container spacing={2}>
-                                {theme.slice(1, 4).map((item, index) => (
-                                    <Grid
-                                        item
-                                        key={index}
-                                        lg={6}
-                                        xl={6}
-                                        md={6}
-                                        sm={6}
-                                        xs={12}
-                                    >
-                                        <BlogCard {...item} type="v2" />
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                    {themeLoading ? (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                mt: 5,
+                            }}
+                        >
+                            <CircularProgress />
+                        </Box>
+                    ) : (
+                        <ThemeMain theme={theme} />
+                    )}
+                    {/* Тема */}
                 </Box>
             )}
         </>
