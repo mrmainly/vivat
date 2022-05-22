@@ -18,11 +18,12 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [status, setStatus] = useState("");
 
     useEffect(() => {
-        API.getFavorites().then((res) => {
-            setData(res.data);
-        });
+        API.getFavorites()
+            .then((res) => {
+                setData(res.data);
+            })
+            .catch((error) => console.log(error));
     }, [status]);
-
     return (
         <Drawer
             {...{

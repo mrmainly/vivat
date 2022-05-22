@@ -43,8 +43,7 @@ const PharmacyWork = () => {
             setLoading(true);
             await API.getEmployments(city)
                 .then((res) => {
-                    console.log(res.data);
-                    setWorks(res.data);
+                    setWorks(res.data.results);
                 })
                 .catch((error) => {
                     console.log("error", error);

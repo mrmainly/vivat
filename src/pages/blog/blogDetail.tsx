@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 import { MyText, Tag } from "../../components";
 import API from "../../api";
@@ -49,7 +50,7 @@ const BlogDetail = () => {
             await API.getBlogDetail(params.id)
                 .then((res) => {
                     console.log(res);
-                    setData(res.data.results);
+                    setData(res.data);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -87,20 +88,20 @@ const BlogDetail = () => {
                         <MyText variant="body1" sx={{ mr: 8 }}>
                             {data.date}
                         </MyText>
-                        <MyText variant="body1">{data.views}</MyText>
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <img
+                                src="/img/View.png"
+                                style={{ width: 20, height: 20 }}
+                            />
+                            <MyText variant="body1" sx={{ ml: 0.5 }}>
+                                {data.views}
+                            </MyText>
+                        </Box>
                     </Box>
-                    <Box
-                        sx={{
-                            height: 500,
-                            background: "white",
-                            padding: 2,
-                            borderRadius: 5,
-                            mt: 2.5,
-                            width: "90%",
-                        }}
-                    >
-                        {data.description}
-                    </Box>
+                    <div
+                        style={{ marginTop: 20, width: "90%" }}
+                        dangerouslySetInnerHTML={{ __html: data.description }}
+                    ></div>
                 </>
             ) : (
                 ""
