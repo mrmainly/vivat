@@ -65,7 +65,12 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 <Main>
                     <Tag>{topic}</Tag>
                     <TextWrapper>
-                        <MyText variant="body2">{description}...</MyText>
+                        <div
+                            style={{ fontSize: 17 }}
+                            dangerouslySetInnerHTML={{
+                                __html: description,
+                            }}
+                        ></div>
                     </TextWrapper>
                     <Box
                         sx={{

@@ -137,7 +137,7 @@ interface WorkCardProps {
 }
 
 interface BlogCardProps {
-    description?: string;
+    description?: any;
     views?: number | string;
     image?: string;
     date?: string;

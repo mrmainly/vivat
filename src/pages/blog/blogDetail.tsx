@@ -79,9 +79,16 @@ const BlogDetail = () => {
                     >
                         {data.name}
                     </MyText>
-                    <MyText variant="h6" sx={{ mt: 1, mb: 1, color: "gray" }}>
-                        {`${data.author.last_name} ${data.author.first_name}`}
-                    </MyText>
+                    {data.author ? (
+                        <MyText
+                            variant="h6"
+                            sx={{ mt: 1, mb: 1, color: "gray" }}
+                        >
+                            {`${data.author.last_name} ${data.author.first_name}`}
+                        </MyText>
+                    ) : (
+                        "Нету автора"
+                    )}
                     <Tag>{data.topic}</Tag>
                     <Img src="/img/Frame83.png" />
                     <Box sx={{ display: "flex", color: "gray" }}>
