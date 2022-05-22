@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import {
     AppBar,
@@ -27,6 +27,7 @@ import {
 } from "../..";
 import { DispatchContext } from "../../../store";
 import ROUTES from "../../../routes";
+import API from "../../../api";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -39,16 +40,6 @@ const Main = styled(Box)(({ theme }) => ({
 const DesktopWrapper = styled(Container)(({ theme }) => ({
     [theme.breakpoints.down("md")]: {
         display: "none",
-    },
-}));
-
-const MobileWrapper = styled(Container)(({ theme }) => ({
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-        height: 60,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
     },
 }));
 
@@ -104,6 +95,8 @@ const Header = () => {
         drawerFavoritesOpen: false,
         statusProduct: false,
     });
+    // const [data, setData] = useState([]);
+
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
     const { drawerOpen, drawerProfileOpen, drawerFavoritesOpen } = state;
@@ -123,6 +116,14 @@ const Header = () => {
         setState((prevState) => ({ ...prevState, drawerFavoritesOpen: false }));
     const handleFavoritesDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerFavoritesOpen: true }));
+    // useEffect(() => {
+    //     API.getFavorites()
+    //         .then((res) => {
+    //             console.log(res);
+    //             setData(res.data);
+    //         })
+    //         .catch((error) => console.log(error));
+    // }, []);
 
     const Desktop = () => {
         return (
@@ -315,38 +316,7 @@ const Header = () => {
             </DesktopWrapper>
         );
     };
-    const Mobile = () => {
-        return (
-            <MobileWrapper>
-                <Box sx={{ display: "flex" }}>
-                    <IconButton
-                        color="primary"
-                        aria-label="upload picture"
-                        component="span"
-                        onClick={() => handleDrawerOpen()}
-                    >
-                        <MenuIcon sx={{ color: "#55CD61" }} fontSize="large" />
-                    </IconButton>
-                    <MenuItem>
-                        <img src="/img/Frame60.png" style={{ height: 48 }} />
-                    </MenuItem>
-                </Box>
-                <Box sx={{ display: "flex" }}>
-                    <Button
-                        sx={{
-                            color: ThemeMain.palette.primary.main,
-                            borderColor: ThemeMain.palette.primary.main,
-                            width: "max-content",
-                            mr: 1,
-                        }}
-                        variant="outlined"
-                    >
-                        Статус заказа
-                    </Button>
-                </Box>
-            </MobileWrapper>
-        );
-    };
+
     return (
         <>
             <AppBar
@@ -358,17 +328,20 @@ const Header = () => {
                 }}
             >
                 <Desktop />
-                <Mobile />
             </AppBar>
             <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
             <ProfileDrawer
                 state={drawerProfileOpen}
                 handleClose={handleProfileDrawerClose}
             />
-            <FavoritesDrawer
-                state={drawerFavoritesOpen}
-                handleClose={handleFavoritesDrawerClose}
-            />
+            {jwttoken ? (
+                <FavoritesDrawer
+                    state={drawerFavoritesOpen}
+                    handleClose={handleFavoritesDrawerClose}
+                />
+            ) : (
+                ""
+            )}
         </>
     );
 };

@@ -33,7 +33,7 @@ const MobileDown = () => {
     const dispatch = useContext(DispatchContext);
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
-
+    console.log("mobile");
     return (
         <MobileBox>
             <MyContainer wrapper={false}>
@@ -102,10 +102,6 @@ const MobileDown = () => {
             <ProfileDrawer
                 state={profileDrawer}
                 handleClose={handleProfileDrawerClose}
-            />
-            <FavoritesDrawer
-                state={favoriteDrawer}
-                handleClose={handleFavoriteDrawerClose}
             />
         </MobileBox>
     );

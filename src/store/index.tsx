@@ -7,8 +7,6 @@ export const defaultStore = {
         forgot: false,
     },
     drawers: {
-        profile_drawer: false,
-        main_drawer: false,
         favorites_drawer: false,
     },
     register: {

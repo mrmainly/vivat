@@ -32,6 +32,7 @@ import BlogCardMain from "./cards/blog-card-main";
 import BlogCardTheme from "./cards/blog-card-theme";
 import Tag from "./tag";
 import StockCard from "./cards/stock-card";
+import Mobile from "./navbars/mobile";
 
 export {
     Header,
@@ -68,4 +69,5 @@ export {
     BlogCardTheme,
     Tag,
     StockCard,
+    Mobile,
 };

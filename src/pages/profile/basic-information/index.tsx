@@ -52,7 +52,6 @@ const BasicInformation = () => {
             setLoading(true);
             await API.getAccountUser().then((res) => {
                 const data = res.data;
-                console.log(data);
                 setPhone(data.phone);
                 setFirstName(data.first_name);
                 setLastName(data.last_name);

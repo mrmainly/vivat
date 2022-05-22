@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 
 import { Drawer, Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { MyText, FavoritesCard } from "../..";
-import { StateContext, DispatchContext } from "../../../store";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 
 interface MainDrawerProps {
-    state: any;
-    handleClose: any;
+    state?: any;
+    handleClose?: any;
 }
 
 const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
@@ -18,11 +17,15 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [status, setStatus] = useState("");
 
     useEffect(() => {
-        API.getFavorites()
-            .then((res) => {
-                setData(res.data);
-            })
-            .catch((error) => console.log(error));
+        const getFavorites = async () => {
+            API.getFavorites()
+                .then((res) => {
+                    console.log(res);
+                    setData(res.data);
+                })
+                .catch((error) => console.log(error));
+        };
+        getFavorites();
     }, [status]);
     return (
         <Drawer
