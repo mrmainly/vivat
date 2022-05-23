@@ -90,21 +90,21 @@ class API {
 
     //orders || basket
     async getOrdersList() {
-        let result = await api(`api/v1/orders/cart/`).get();
+        let result = await api(`api/v1/carts/`).get();
         return result;
     }
 
     deleteOrdersAll() {
-        return api(`api/v1/orders/cart/items/delete_all/`).delete(null);
+        return api(`api/v1/carts/delete_all_items/`).delete(null);
     }
 
     sendOrder(data) {
-        const result = api("api/v1/orders/cart/complete/").post(null, data);
+        const result = api("api/v1/carts/complete/").post(null, data);
         return result;
     }
 
     deleteProductItem(id) {
-        return api(`api/v1/orders/items/${id}/`).delete(null);
+        return api(`api/v1/carts/${id}/`).delete(null);
     }
 
     //favorites

@@ -35,7 +35,6 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
         API.transferFavorite(id)
             .then((res) => {
                 toast.success("Товар добавлен в корзину");
-                setStatus(`favorite ${status + 1}`);
             })
             .catch(() => toast.error("Товар не найден"));
     };

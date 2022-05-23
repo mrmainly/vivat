@@ -84,13 +84,15 @@ const BlogDetail = () => {
                             variant="h6"
                             sx={{ mt: 1, mb: 1, color: "gray" }}
                         >
-                            {`${data.author.last_name} ${data.author.first_name}`}
+                            {`${data.author.last_name} ${data.author.first_name} ${data.author.patronymic}`}
                         </MyText>
                     ) : (
                         "Нету автора"
                     )}
                     <Tag>{data.topic}</Tag>
-                    <Img src="/img/Frame83.png" />
+                    <Img
+                        src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`}
+                    />
                     <Box sx={{ display: "flex", color: "gray" }}>
                         <MyText variant="body1" sx={{ mr: 8 }}>
                             {data.date}

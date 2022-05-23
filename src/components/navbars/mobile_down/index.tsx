@@ -28,12 +28,11 @@ const MobileDown = () => {
     const [favoriteDrawer, setFavotiteDrawer] = useState(false);
 
     const handleProfileDrawerClose = () => setProfileDrawer(false);
-    const handleFavoriteDrawerClose = () => setProfileDrawer(false);
+    const handleFavoriteDrawerClose = () => setFavotiteDrawer(false);
 
     const dispatch = useContext(DispatchContext);
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
-    console.log("mobile");
     return (
         <MobileBox>
             <MyContainer wrapper={false}>

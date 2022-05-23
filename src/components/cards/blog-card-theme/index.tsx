@@ -76,7 +76,7 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({
     }));
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
-            <Img src={image} />
+            <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
             <Main>
                 <MyText variant="body2" sx={{ color: "gray" }}>
                     {date}
