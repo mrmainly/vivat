@@ -103,6 +103,14 @@ const MobileDown = () => {
                 state={profileDrawer}
                 handleClose={handleProfileDrawerClose}
             />
+            {favoriteDrawer ? (
+                <FavoritesDrawer
+                    state={favoriteDrawer}
+                    handleClose={handleFavoriteDrawerClose}
+                />
+            ) : (
+                ""
+            )}
         </MobileBox>
     );
 };

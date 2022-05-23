@@ -15,12 +15,10 @@ interface MainDrawerProps {
 const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState("");
-
     useEffect(() => {
         const getFavorites = async () => {
             API.getFavorites()
                 .then((res) => {
-                    console.log(res);
                     setData(res.data);
                 })
                 .catch((error) => console.log(error));

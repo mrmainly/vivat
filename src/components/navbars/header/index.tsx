@@ -334,7 +334,7 @@ const Header = () => {
                 state={drawerProfileOpen}
                 handleClose={handleProfileDrawerClose}
             />
-            {jwttoken ? (
+            {drawerFavoritesOpen ? (
                 <FavoritesDrawer
                     state={drawerFavoritesOpen}
                     handleClose={handleFavoritesDrawerClose}

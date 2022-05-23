@@ -11,7 +11,6 @@ import {
     SignUpModal,
     ForgotPasswordModal,
     MobileDown,
-    FavoritesDrawer,
     Mobile,
 } from "../../components";
 import { HomeSlider } from "../../constructor";
