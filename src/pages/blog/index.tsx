@@ -40,7 +40,6 @@ const Blog = () => {
     const navigate = useNavigate();
 
     const getBlog = useCallback(async () => {
-        console.log("getBlog");
         setLoading(true);
         await API.getBlog("popularity_all_time", "query")
             .then((res) => {
@@ -65,7 +64,6 @@ const Blog = () => {
     const getTheme = useCallback(() => {
         API.getBlog(topic, "topic")
             .then((res) => {
-                console.log("res theme", res);
                 setTheme(res.data.results);
             })
             .catch((error) => console.log(error));
@@ -177,7 +175,7 @@ const Blog = () => {
                                     navigate(ROUTES.BLOG_THEME, {
                                         state: {
                                             name: item.name,
-                                            value: item.name,
+                                            value: item.topic,
                                             type: "theme",
                                         },
                                     })
@@ -191,12 +189,12 @@ const Blog = () => {
                             size="small"
                         >
                             <InputLabel id="demo-simple-select-label">
-                                Темы
+                                {topics[0].topic}
                             </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                label="Темы"
+                                label={topics[0].topic}
                                 defaultValue={topics[0].topic}
                                 value={topic}
                                 onChange={(e) => setTopic(e.target.value)}

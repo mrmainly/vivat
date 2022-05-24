@@ -28,7 +28,6 @@ const ThemeBlog = () => {
             await API.getBlog(value, type)
                 .then((res) => {
                     setData(res.data.results);
-                    console.log(res);
                 })
                 .catch((error) => console.log(error));
             setLoading(false);

@@ -37,7 +37,6 @@ const PharmacyDetailWork = () => {
                         style={{ marginTop: 20 }}
                         dangerouslySetInnerHTML={{ __html: data.description }}
                     ></div>
-                    <MyButton style={{ marginTop: 40 }}>Откликнуться</MyButton>
                 </Box>
             ) : (
                 ""

@@ -49,7 +49,7 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({
 
     const TextWrapper = styled(Box)(({ theme }) => ({
         overflow: "hidden",
-        height: 96,
+        height: 98,
         marginTop: 8,
         [theme.breakpoints.down("sm")]: {
             height: 120,
@@ -85,7 +85,12 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({
                     Что нужно знать о аллергии? фыф фывфы вфывфы
                 </MyText>
                 <TextWrapper>
-                    <MyText variant="body1">{description}</MyText>
+                    <div
+                        style={{ fontSize: 17 }}
+                        dangerouslySetInnerHTML={{
+                            __html: description,
+                        }}
+                    ></div>
                 </TextWrapper>
                 <Box
                     sx={{ display: "flex", justifyContent: "space-between" }}
