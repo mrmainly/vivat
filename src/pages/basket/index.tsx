@@ -28,8 +28,10 @@ const Basket = () => {
             setLoading(true);
             await API.getOrdersList()
                 .then((res) => {
-                    console.log("data", res.data.items);
-                    setData(res.data.items);
+                    console.log("data", res);
+                    if (res.data.items) {
+                        setData(res.data.items);
+                    }
                 })
                 .catch((error) => console.log(error));
             setLoading(false);
