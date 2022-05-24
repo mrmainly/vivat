@@ -32,14 +32,14 @@ const Blog = () => {
     const [popularity, setPopularity] = useState([]);
     const [created, setCreated] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [topics, setTopics] = useState([{ topic: "" }]);
+    const [topics, setTopics] = useState([{ name: "" }]);
     const [topic, setTopic] = useState("");
     const [theme, setTheme] = useState([]);
     const [themeLoading, setThemeLoading] = useState(false);
 
     const navigate = useNavigate();
 
-    const getBlog = useCallback(async () => {
+    const getBlog = async () => {
         setLoading(true);
         await API.getBlog("popularity_all_time", "query")
             .then((res) => {
@@ -59,15 +59,15 @@ const Blog = () => {
             })
             .catch((error) => console.log(error));
         setLoading(false);
-    }, [""]);
+    };
 
-    const getTheme = useCallback(() => {
+    const getTheme = () => {
         API.getBlog(topic, "topic")
             .then((res) => {
                 setTheme(res.data.results);
             })
             .catch((error) => console.log(error));
-    }, [topic]);
+    };
 
     useEffect(() => {
         getBlog();
@@ -174,14 +174,14 @@ const Blog = () => {
                                 onClick={() =>
                                     navigate(ROUTES.BLOG_THEME, {
                                         state: {
-                                            name: item.name,
-                                            value: item.topic,
+                                            name: item.tags.name,
+                                            value: item.tags.name,
                                             type: "theme",
                                         },
                                     })
                                 }
                             >
-                                <MyText variant="h5">{item.topic}</MyText>
+                                <MyText variant="h5">{item.tags.name}</MyText>
                             </BlogMenuItem>
                         ))}
                         <FormControl
@@ -189,19 +189,19 @@ const Blog = () => {
                             size="small"
                         >
                             <InputLabel id="demo-simple-select-label">
-                                {topics[0].topic}
+                                Теги
                             </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                label={topics[0].topic}
-                                defaultValue={topics[0].topic}
+                                label={topics[0].name}
+                                defaultValue={topics[0].name}
                                 value={topic}
                                 onChange={(e) => setTopic(e.target.value)}
                             >
                                 {topics.map((item: any, index: number) => (
-                                    <MenuItem value={item.topic} key={index}>
-                                        {item.topic}
+                                    <MenuItem value={item.name} key={index}>
+                                        {item.name}
                                     </MenuItem>
                                 ))}
                             </Select>

@@ -141,7 +141,7 @@ interface BlogCardProps {
     views?: number | string;
     image?: string;
     date?: string;
-    topic?: string;
+    tags?: any;
     type?: string;
     id?: number;
 }

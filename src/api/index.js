@@ -88,6 +88,12 @@ class API {
         });
     }
 
+    resend_phone(data) {
+        return api("api/v1/users/code/1.5/resend/").post(null, {
+            phone: data,
+        });
+    }
+
     //orders || basket
     async getOrdersList() {
         let result = await api(`api/v1/carts/`).get();
@@ -146,7 +152,7 @@ class API {
                     ? query
                         ? `?query=${query}`
                         : ""
-                    : `?topic_query=${query}`
+                    : `?tags_query=${query}`
             }`
         ).get();
         return result;
@@ -158,7 +164,7 @@ class API {
     }
 
     async getTopic() {
-        let result = await api(`api/v1/blogs/topics/`).get();
+        let result = await api(`api/v1/blogs/tags/`).get();
         return result;
     }
 

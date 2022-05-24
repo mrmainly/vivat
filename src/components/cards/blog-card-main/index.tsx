@@ -46,7 +46,7 @@ const Main = styled(Box)(({ theme }) => ({
 
 const BlogCardMain: React.FC<BlogCardProps> = ({
     description,
-    topic,
+    tags,
     image,
     views,
     date,
@@ -54,13 +54,12 @@ const BlogCardMain: React.FC<BlogCardProps> = ({
     id,
 }) => {
     const navigate = useNavigate();
-
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
             <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
             <Box sx={{ width: "100%", height: "100%", pb: 2 }}>
                 <Main>
-                    <Tag>{topic}</Tag>
+                    <Tag>{tags?.name}</Tag>
                     <TextWrapper>
                         <div
                             style={{ fontSize: 14 }}

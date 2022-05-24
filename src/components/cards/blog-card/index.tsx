@@ -10,7 +10,7 @@ import ROUTES from "../../../routes";
 
 const BlogCard: React.FC<BlogCardProps> = ({
     description,
-    topic,
+    tags,
     image,
     views,
     date,
@@ -63,7 +63,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
             <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
             <Box sx={{ width: "100%" }}>
                 <Main>
-                    <Tag>{topic}</Tag>
+                    <Tag>{tags.name}</Tag>
                     <TextWrapper>
                         <div
                             style={{ fontSize: 17 }}

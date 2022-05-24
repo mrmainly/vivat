@@ -93,6 +93,7 @@ export default function ForgotPassword() {
     const [secondForm, setSecondForm] = useState(false);
     const [firstForm, setFirstForm] = useState(true);
     const [threeForm, setThreeForm] = useState(false);
+    const [phone, setPhone] = useState("");
 
     const [toggle, setToggle] = useState("Email");
     const state = useContext(StateContext);
@@ -109,6 +110,7 @@ export default function ForgotPassword() {
         });
     };
     const choiceAPI = (data: any) => {
+        setPhone(data.phone);
         API.sendPhoneMailForgotPassword(data, toggle)
             .then((res) => {
                 console.log("inside", res);
@@ -131,6 +133,17 @@ export default function ForgotPassword() {
                 console.log("res.inside", res);
                 setSecondForm(false);
                 setThreeForm(true);
+            })
+            .catch((err) => {
+                toast.error("Не правильный код");
+            });
+    };
+
+    const resend_code = () => {
+        API.resend_phone(phone)
+            .then((res) => {
+                toast.success("Код отправлен повторно");
+                console.log("refresh", res);
             })
             .catch((err) => {
                 toast.error("Не правильный код");
@@ -188,6 +201,7 @@ export default function ForgotPassword() {
                                     sx={{
                                         color: ThemeMain.palette.primary.main,
                                     }}
+                                    onClick={() => resend_code()}
                                 >
                                     Отправить код еще раз
                                 </MenuItem>

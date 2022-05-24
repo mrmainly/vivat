@@ -89,7 +89,7 @@ const BlogDetail = () => {
                     ) : (
                         "Нету автора"
                     )}
-                    <Tag>{data.topic}</Tag>
+                    <Tag>{data.tags.name}</Tag>
                     <Img
                         src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`}
                     />
