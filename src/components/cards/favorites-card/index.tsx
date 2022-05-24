@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { Box, IconButton } from "@mui/material";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import { BorderLine, MyText, MyButton } from "../..";
 import { DispatchContext } from "../../../store";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
+import ROUTES from "../../../routes";
 
 interface FavoritesCardProps {
     title: string;
@@ -31,9 +33,12 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     status,
     setStatus,
 }) => {
+    const navigate = useNavigate();
+
     const TransferFavorite = () => {
         API.transferFavorite(id)
             .then((res) => {
+                navigate(ROUTES.BASKET);
                 toast.success("Товар добавлен в корзину");
             })
             .catch(() => toast.error("Товар не найден"));

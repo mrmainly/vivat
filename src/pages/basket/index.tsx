@@ -20,21 +20,18 @@ const Basket = () => {
 
     const count_product = 8;
     const general_price = 8196;
-
-    const dispatch = useContext(DispatchContext);
-
     useEffect(() => {
         const getOrders = async () => {
-            setLoading(true);
             await API.getOrdersList()
                 .then((res) => {
                     console.log("data", res);
                     if (res.data.items) {
                         setData(res.data.items);
+                    } else {
+                        setData(res.data);
                     }
                 })
                 .catch((error) => console.log(error));
-            setLoading(false);
         };
         getOrders();
     }, [status]);
