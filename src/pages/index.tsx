@@ -29,6 +29,7 @@ import PharmacyDetailWork from "./pharmacy/pharmacy-work/detail";
 import ProductPage from "./product-page";
 import StatusProduct from "./status-product";
 import StatusProductDetail from "./status-product/detail";
+import MyOrdersDetail from "./profile/my-orders/detail";
 
 export {
     Home,
@@ -57,4 +58,5 @@ export {
     StockDetail,
     StatusProduct,
     StatusProductDetail,
+    MyOrdersDetail,
 };

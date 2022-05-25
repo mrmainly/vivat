@@ -34,6 +34,7 @@ import {
     StockDetail,
     StatusProduct,
     StatusProductDetail,
+    MyOrdersDetail,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -137,6 +138,10 @@ const App = () => {
                             <Route
                                 element={<StatusProductDetail />}
                                 path={`${ROUTES.STATUS_PRODUCT_DETAIL}/:id`}
+                            />
+                            <Route
+                                element={<MyOrdersDetail />}
+                                path={`${ROUTES.MY_ORDERS_DETAIL}/:id`}
                             />
                         </Route>
                     </Routes>

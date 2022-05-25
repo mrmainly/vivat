@@ -10,6 +10,7 @@ import {
     Table,
     Button,
     Box,
+    CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -44,42 +45,62 @@ const Arrow = styled(Box)(({ theme }) => ({
     },
 }));
 
-export default function BasicTable() {
+interface MyOrdersTableProps {
+    data?: any;
+    loading?: boolean;
+    navigate_to?: any;
+}
+
+const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
+    data,
+    loading,
+    navigate_to,
+}) => {
     const navigate = useNavigate();
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Номер и дата</TableCell>
-                        <TableCell align="right">Сумма</TableCell>
-                        <TableCell align="right">Адрес аптеки</TableCell>
-                        <TableCell align="right">Статус</TableCell>
-                        <TableCell align="right"></TableCell>
+                        <TableCell align="center">Номер</TableCell>
+                        <TableCell align="center">Дата</TableCell>
+                        <TableCell align="center">Сумма</TableCell>
+                        <TableCell align="center">Адрес аптеки</TableCell>
+                        <TableCell align="center">Статус</TableCell>
+                        <TableCell align="center">Действие</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {data.map((row: any, index: number) => (
                         <TableRow
-                            key={row.name}
+                            key={index}
                             sx={{
                                 "&:last-child td, &:last-child th": {
                                     border: 0,
                                 },
                             }}
                         >
-                            <TableCell component="th" scope="row">
-                                {row.name}
+                            <TableCell
+                                component="th"
+                                scope="row"
+                                align="center"
+                            >
+                                {row.num === null ? "Нету" : row.num}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">
+                            <TableCell align="center">{row.created}</TableCell>
+                            <TableCell align="center">
+                                {row.total_price === null
+                                    ? "Нету"
+                                    : row.total_price}
+                            </TableCell>
+                            <TableCell align="center">ыфыв</TableCell>
+                            <TableCell align="center">
+                                {row.orderStatus}
+                            </TableCell>
+                            <TableCell align="center">
                                 <Arrow
                                     onClick={() =>
-                                        navigate(
-                                            `${ROUTES.STATUS_PRODUCT_DETAIL}/${row.id}`
-                                        )
+                                        navigate(`${navigate_to}/${row.id}`)
                                     }
                                 >
                                     <ArrowForwardIosIcon />
@@ -91,4 +112,6 @@ export default function BasicTable() {
             </Table>
         </TableContainer>
     );
-}
+};
+
+export default MyOrdersTable;

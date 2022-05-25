@@ -100,6 +100,16 @@ class API {
         return result;
     }
 
+    async getOrdersMe() {
+        let result = await api(`api/v1/orders/me/`).get();
+        return result;
+    }
+
+    async getOrdersMeStatus() {
+        let result = await api(`api/v1/orders/me/status/`).get();
+        return result;
+    }
+
     deleteOrdersAll() {
         return api(`api/v1/carts/delete_all_items/`).delete(null);
     }

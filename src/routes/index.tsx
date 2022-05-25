@@ -29,6 +29,7 @@ enum ROUTES {
     STOCK_DETAIL = "/stock-detail",
     STATUS_PRODUCT = "/status-product",
     STATUS_PRODUCT_DETAIL = "/status-product-detail",
+    MY_ORDERS_DETAIL = "/my-orders-detail",
 }
 
 export default ROUTES;

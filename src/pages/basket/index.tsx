@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, MenuItem, CircularProgress } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +8,13 @@ import product_data from "../../local_data/product_data";
 import { BasketCard, MyText, MyButton } from "../../components";
 import { ProductCardsSlider } from "../../constructor";
 import API from "../../api";
-import { DispatchContext } from "../../store";
 import ROUTES from "../../routes";
 
 const Basket = () => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [totalCount, setTotalCount] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
     const [status, setStatus] = useState("");
 
     const navigate = useNavigate();
@@ -23,8 +24,10 @@ const Basket = () => {
     useEffect(() => {
         const getOrders = async () => {
             await API.getOrdersList()
-                .then((res) => {
+                .then((res: any) => {
                     console.log("data", res);
+                    setTotalCount(res.data.total_count);
+                    setTotalPrice(res.data.total_price);
                     if (res.data.items) {
                         setData(res.data.items);
                     } else {
@@ -32,6 +35,7 @@ const Basket = () => {
                     }
                 })
                 .catch((error) => console.log(error));
+            setLoading(false);
         };
         getOrders();
     }, [status]);
@@ -73,8 +77,7 @@ const Basket = () => {
                                 }}
                             >
                                 <MyText variant="body2" sx={{ color: "grey" }}>
-                                    {count_product} товаров на сумму{" "}
-                                    {general_price} ₽
+                                    {totalCount} товаров на сумму {totalPrice} ₽
                                 </MyText>
                                 <MenuItem
                                     sx={{ color: "#FE5860" }}

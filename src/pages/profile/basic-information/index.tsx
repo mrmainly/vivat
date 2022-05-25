@@ -45,11 +45,10 @@ const BasicInformation = () => {
     const [date, setDate] = useState("");
     const [patronymic, setPatronymic] = useState("");
     const [mail, setMail] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getAccount = async () => {
-            setLoading(true);
             await API.getAccountUser().then((res) => {
                 const data = res.data;
                 setPhone(data.phone);
