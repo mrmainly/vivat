@@ -18,10 +18,10 @@ const Root = styled(CardActionArea)(({ theme }) => ({
     height: 156,
     padding: 16,
     [theme.breakpoints.down("sm")]: {
-        height: 300,
+        height: 340,
         flexDirection: "column",
         alignItems: "center",
-        width: 250,
+        width: 280,
     },
 }));
 

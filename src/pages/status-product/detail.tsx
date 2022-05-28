@@ -27,6 +27,14 @@ const CardsBox = styled(Box)(({ theme }) => ({
     },
 }));
 
+const TextWrapper = styled(Box)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+    },
+}));
+
 const StatusProductDetail = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -98,28 +106,30 @@ const StatusProductDetail = () => {
                         ))}
                     </Grid>
                     <Info>
-                        <MyText variant="body1">
-                            Текущий статус:{" "}
-                            <span
-                                style={{
+                        <TextWrapper>
+                            <MyText variant="body1">Текущий статус:</MyText>
+                            <MyText
+                                variant="body1"
+                                sx={{
                                     color: ThemeMain.palette.primary.main,
-                                    marginLeft: 5,
+                                    marginLeft: 1,
                                 }}
                             >
                                 Рассматривается
-                            </span>
-                        </MyText>
-                        <MyText variant="body1">
-                            Сумма заказа{" "}
-                            <span
-                                style={{
-                                    marginLeft: 5,
+                            </MyText>
+                        </TextWrapper>
+                        <TextWrapper>
+                            <MyText variant="body1">Сумма заказа </MyText>
+                            <MyText
+                                variant="body1"
+                                sx={{
+                                    marginLeft: 1,
                                     fontSize: 20,
                                 }}
                             >
                                 1 696 ₽
-                            </span>
-                        </MyText>
+                            </MyText>
+                        </TextWrapper>
                     </Info>
                 </Main>
             )}
