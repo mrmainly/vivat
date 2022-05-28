@@ -12,7 +12,7 @@ import ROUTES from "../../routes";
 
 const Basket = () => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [totalCount, setTotalCount] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [status, setStatus] = useState("");
@@ -23,6 +23,7 @@ const Basket = () => {
     const general_price = 8196;
     useEffect(() => {
         const getOrders = async () => {
+            setLoading(true);
             await API.getOrdersList()
                 .then((res: any) => {
                     console.log("data", res);
