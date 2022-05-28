@@ -24,7 +24,7 @@ const Basket = () => {
     useEffect(() => {
         const getOrders = async () => {
             setLoading(true);
-            await API.getOrdersList()
+            await API.getCartsList()
                 .then((res: any) => {
                     console.log("data", res);
                     setTotalCount(res.data.total_count);

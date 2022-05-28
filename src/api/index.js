@@ -95,7 +95,7 @@ class API {
     }
 
     //orders || basket
-    async getOrdersList() {
+    async getCartsList() {
         let result = await api(`api/v1/carts/`).get();
         return result;
     }
