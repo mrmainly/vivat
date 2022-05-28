@@ -85,7 +85,7 @@ const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
                                 scope="row"
                                 align="center"
                             >
-                                {row.num === null ? "Нету" : row.num}
+                                {row.id === null ? "Нету" : row.id}
                             </TableCell>
                             <TableCell align="center">{row.created}</TableCell>
                             <TableCell align="center">

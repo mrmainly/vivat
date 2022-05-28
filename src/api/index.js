@@ -199,6 +199,11 @@ class API {
         let result = await api(`api/v1/orders/me/archieve/`).get();
         return result;
     }
+
+    async getMeStatusId(id) {
+        let result = await api(`api/v1/orders/${id}/`).get();
+        return result;
+    }
 }
 
 export default new API();

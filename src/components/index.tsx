@@ -33,6 +33,7 @@ import BlogCardTheme from "./cards/blog-card-theme";
 import Tag from "./tag";
 import StockCard from "./cards/stock-card";
 import Mobile from "./navbars/mobile";
+import StatusCard from "./cards/status-card";
 
 export {
     Header,
@@ -70,4 +71,5 @@ export {
     Tag,
     StockCard,
     Mobile,
+    StatusCard,
 };
