@@ -16,11 +16,10 @@ const Main = styled(Box)(({ theme }) => ({
 
 const MyOrders = () => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getOrderMe = async () => {
-            setLoading(true);
             await API.getOrdersMe()
                 .then((res) => {
                     setData(res.data);

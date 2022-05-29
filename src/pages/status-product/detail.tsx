@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import API from "../../api";
 import { StatusCard, MyText } from "../../components";
 import ThemeMain from "../../theme";
+import { LargeNumberLike } from "crypto";
 
 const Main = styled(Box)(({ theme }) => ({}));
 
@@ -35,8 +36,17 @@ const TextWrapper = styled(Box)(({ theme }) => ({
     },
 }));
 
+interface DataProps {
+    id: number;
+    total_price: string | null;
+    created: string | null;
+    orderStatus: string;
+}
+
 const StatusProductDetail = () => {
-    const [data, setData] = useState([]);
+    const [dataItems, setDataItems] = useState([]);
+    const [data, setData] = useState<DataProps>();
+
     const [loading, setLoading] = useState(true);
 
     const params = useParams();
@@ -46,6 +56,8 @@ const StatusProductDetail = () => {
             await API.getMeStatusId(params.id)
                 .then((res) => {
                     console.log(res);
+                    setData(res.data);
+                    setDataItems(res.data.items);
                 })
                 .catch((error) => console.log(error));
             setLoading(false);
@@ -80,14 +92,14 @@ const StatusProductDetail = () => {
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>
-            ) : (
+            ) : dataItems.length ? (
                 <Main>
                     <Box sx={{ display: "flex" }}>
-                        <MyText>№234</MyText>&nbsp;от&nbsp;
-                        <MyText>25.12.2018 16:19</MyText>
+                        <MyText>№{data?.id}</MyText>&nbsp;от&nbsp;
+                        <MyText>{data?.created}</MyText>
                     </Box>
                     <Grid container spacing={2}>
-                        {dataCard.map((item, index) => (
+                        {dataItems.map((item: any, index: number) => (
                             <Grid
                                 item
                                 lg={6}
@@ -101,7 +113,11 @@ const StatusProductDetail = () => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <StatusCard {...item} />
+                                <StatusCard
+                                    title={item.GoodsCode.name}
+                                    price={item.price}
+                                    producer={item.GoodsCode.producer}
+                                />
                             </Grid>
                         ))}
                     </Grid>
@@ -115,7 +131,7 @@ const StatusProductDetail = () => {
                                     marginLeft: 1,
                                 }}
                             >
-                                Рассматривается
+                                {data?.orderStatus}
                             </MyText>
                         </TextWrapper>
                         <TextWrapper>
@@ -127,11 +143,15 @@ const StatusProductDetail = () => {
                                     fontSize: 20,
                                 }}
                             >
-                                1 696 ₽
+                                {data?.total_price} ₽
                             </MyText>
                         </TextWrapper>
                     </Info>
                 </Main>
+            ) : (
+                <Box>
+                    <MyText variant="h6">У вас нету заказов</MyText>
+                </Box>
             )}
         </>
     );

@@ -17,10 +17,13 @@ import {
     CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { MyText, Form, Input, MyButton, BorderLine } from "../../components";
 import ThemeMain from "../../theme";
 import API from "../../api";
+import ROUTES from "../../routes";
 
 const InfoBlog = styled(Box)(({ theme }) => ({
     boxShadow: " 0px 5px 10px rgba(0, 0, 0, 0.1)",
@@ -55,6 +58,9 @@ const BasketForm = () => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [totalPrice, setTotalPrice] = useState("");
+    const [adresses, setAddresses] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getOrders = async () => {
@@ -81,6 +87,12 @@ const BasketForm = () => {
                     }
                 })
                 .catch((error) => console.log(error));
+            await API.getDeportaments()
+                .then((res: any) => {
+                    console.log("dep", res);
+                    setAddresses(res.data);
+                })
+                .catch((error) => console.log(error));
             setLoading(false);
         };
         getOrders();
@@ -90,13 +102,16 @@ const BasketForm = () => {
         API.sendOrder({
             payment_type: payment,
             delivery_type: delivery,
-            comment: Comment,
-            dep_id: 0,
+            comment: commend,
+            dep_id: adress,
         })
             .then((res) => {
-                console.log(res);
+                toast.success("Заявка оформлена");
             })
-            .catch((error) => console.log(error));
+            .then((res) => {
+                navigate(ROUTES.BASKET);
+            })
+            .catch((error) => toast.error("Заявка не оформлена"));
     };
 
     return (
@@ -120,12 +135,11 @@ const BasketForm = () => {
                             <MyText variant="h6" sx={{ mt: 1 }}>
                                 Контактные данные
                             </MyText>
-                            <Form
+                            <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
                                 }}
-                                onSubmit={compliteOrders}
                             >
                                 <InputProfile
                                     label="Телефон"
@@ -163,10 +177,21 @@ const BasketForm = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         label="Выберите адрес аптеки:"
+                                        value={adress}
+                                        onChange={(e) =>
+                                            setAdress(e.target.value)
+                                        }
                                     >
-                                        <MenuItem>Ten</MenuItem>
-                                        <MenuItem>Twenty</MenuItem>
-                                        <MenuItem>Thirty</MenuItem>
+                                        {adresses.map(
+                                            (item: any, index: number) => (
+                                                <MenuItem
+                                                    key={index}
+                                                    value={item.department.id}
+                                                >
+                                                    {item.department.address}
+                                                </MenuItem>
+                                            )
+                                        )}
                                     </Select>
                                 </FormControl>
                                 <TextareaAutosize
@@ -269,10 +294,13 @@ const BasketForm = () => {
                                         {totalPrice} ₽
                                     </MyText>
                                 </Box>
-                                <MyButton style={{ marginTop: 35 }}>
+                                <MyButton
+                                    style={{ marginTop: 35 }}
+                                    onClick={compliteOrders}
+                                >
                                     Подтвердить заказ
                                 </MyButton>
-                            </Form>
+                            </Box>
                         </Grid>
                         <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                             <InfoBlog>

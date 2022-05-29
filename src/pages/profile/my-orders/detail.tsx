@@ -10,6 +10,8 @@ import ThemeMain from "../../../theme";
 
 const Main = styled(Box)(({ theme }) => ({
     marginTop: 50,
+    width: "100%",
+    minHeight: 400,
     [theme.breakpoints.down("md")]: {
         marginLeft: 20,
     },
@@ -20,6 +22,7 @@ const Main = styled(Box)(({ theme }) => ({
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
+    width: "100%",
     [theme.breakpoints.down("sm")]: {
         flexDirection: "column",
     },
@@ -60,8 +63,16 @@ const TextWrapper = styled(Box)(({ theme }) => ({
     },
 }));
 
+interface DataProps {
+    id: number;
+    total_price: string | null;
+    created: string | null;
+    orderStatus: string;
+}
+
 const MyOrderDetail = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<DataProps>();
+    const [dataItems, setDataItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const params = useParams();
@@ -71,6 +82,8 @@ const MyOrderDetail = () => {
             await API.getMeStatusId(params.id)
                 .then((res) => {
                     console.log(res);
+                    setData(res.data);
+                    setDataItems(res.data.items);
                 })
                 .catch((error) => console.log(error));
             setLoading(false);
@@ -106,10 +119,12 @@ const MyOrderDetail = () => {
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>
-            ) : (
+            ) : dataItems.length ? (
                 <Main>
                     <TopBar>
-                        <MyText>№234 от 25.12.2018 16:19</MyText>
+                        <MyText>
+                            №{data?.id} от {data?.created}
+                        </MyText>
                         <MenuItem
                             sx={{ color: ThemeMain.palette.primary.main }}
                         >
@@ -117,7 +132,7 @@ const MyOrderDetail = () => {
                         </MenuItem>
                     </TopBar>
                     <Grid container>
-                        {dataCard.map((item, index) => (
+                        {dataItems.map((item: any, index: number) => (
                             <Grid
                                 item
                                 lg={12}
@@ -131,7 +146,11 @@ const MyOrderDetail = () => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <StatusCard {...item} />
+                                <StatusCard
+                                    title={item.GoodsCode.name}
+                                    price={item.price}
+                                    producer={item.GoodsCode.producer}
+                                />
                             </Grid>
                         ))}
                     </Grid>
@@ -145,7 +164,7 @@ const MyOrderDetail = () => {
                                     marginLeft: 1,
                                 }}
                             >
-                                Рассматривается
+                                {data?.orderStatus}
                             </MyText>
                         </TextWrapper>
                         <TextWrapper>
@@ -154,11 +173,15 @@ const MyOrderDetail = () => {
                                 variant="body1"
                                 sx={{ marginLeft: 1, fontSize: 20 }}
                             >
-                                1 696 ₽
+                                {data?.total_price} ₽
                             </MyText>
                         </TextWrapper>
                     </Info>
                 </Main>
+            ) : (
+                <Box sx={{ mt: 6 }}>
+                    <MyText variant="h6">У вас нету заказов</MyText>
+                </Box>
             )}
         </Root>
     );

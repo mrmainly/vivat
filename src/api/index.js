@@ -204,6 +204,12 @@ class API {
         let result = await api(`api/v1/orders/${id}/`).get();
         return result;
     }
+
+    //departaments
+    async getDeportaments() {
+        let result = await api(`api/v1/departments/connected/`).get();
+        return result;
+    }
 }
 
 export default new API();
