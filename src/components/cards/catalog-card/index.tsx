@@ -16,7 +16,7 @@ const Root = styled(Box)(({ theme }) => ({
     // justifyContent: 'center',
     padding: 10,
     background: "#FFFFFF",
-    width: 180,
+    width: "90%",
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
@@ -43,6 +43,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     specialPrice,
     specialText,
     id,
+    name,
 }) => {
     const navigate = useNavigate();
     return (
@@ -59,7 +60,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                     overflow: "hidden",
                 }}
             >
-                {description}...
+                {name}...
             </MyText>
             <MyText
                 variant="body1"

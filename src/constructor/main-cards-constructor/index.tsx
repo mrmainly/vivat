@@ -18,19 +18,22 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
     return (
         <Box {...props}>
             <MyText variant="h5">{title}</MyText>
-            <Root>
+
+            <Grid container spacing={2}>
                 {data.map((item: any, index: number) => (
-                    <CatalogCard
-                        key={index}
-                        id={item.id}
-                        specialPrice={item.specialPrice}
-                        specialText={item.specialText}
-                        img={item.img}
-                        description={item.description}
-                        price={item.price}
-                    />
+                    <Grid item lg={3} xl={3} md={4} sm={4} xs={12} key={index}>
+                        <CatalogCard
+                            id={item.id}
+                            specialPrice={item.specialPrice}
+                            specialText={item.specialText}
+                            img={item.img}
+                            description={item.description}
+                            price={item.price}
+                            name={item.name}
+                        />
+                    </Grid>
                 ))}
-            </Root>
+            </Grid>
         </Box>
     );
 };

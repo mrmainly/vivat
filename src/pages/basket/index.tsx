@@ -110,7 +110,7 @@ const Basket = () => {
                                     Итого:
                                 </MyText>
                                 <MyText variant="h6" sx={{ mr: 2 }}>
-                                    {general_price}₽
+                                    {totalPrice}₽
                                 </MyText>
                                 <MyButton
                                     onClick={() => navigate(ROUTES.BASKET_FORM)}

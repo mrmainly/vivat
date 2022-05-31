@@ -24,6 +24,7 @@ import {
     BorderLine,
     ProfileDrawer,
     FavoritesDrawer,
+    SubProductDrawer,
 } from "../..";
 import { DispatchContext } from "../../../store";
 import ROUTES from "../../../routes";
@@ -94,12 +95,18 @@ const Header = () => {
         drawerProfileOpen: false,
         drawerFavoritesOpen: false,
         statusProduct: false,
+        subProductDrawer: false,
     });
     // const [data, setData] = useState([]);
 
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
-    const { drawerOpen, drawerProfileOpen, drawerFavoritesOpen } = state;
+    const {
+        drawerOpen,
+        drawerProfileOpen,
+        drawerFavoritesOpen,
+        subProductDrawer,
+    } = state;
     const dispatch = useContext(DispatchContext);
 
     const handleDrawerClose = () =>
@@ -115,6 +122,11 @@ const Header = () => {
     const handleFavoritesDrawerClose = () =>
         setState((prevState) => ({ ...prevState, drawerFavoritesOpen: false }));
     const handleFavoritesDrawerOpen = () =>
+        setState((prevState) => ({ ...prevState, drawerFavoritesOpen: true }));
+
+    const handleSubProductDrawerClose = () =>
+        setState((prevState) => ({ ...prevState, drawerFavoritesOpen: false }));
+    const handleSubProductDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerFavoritesOpen: true }));
     // useEffect(() => {
     //     API.getFavorites()

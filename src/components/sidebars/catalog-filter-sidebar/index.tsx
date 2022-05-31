@@ -7,11 +7,14 @@ const Main = styled(Box)(({ theme }) => ({
     borderRadius: 12,
     minHeight: 800,
     width: "100%",
-    padding: 16,
 }));
 
 const CatalogFilterSideBar = () => {
-    return <Main></Main>;
+    return (
+        <Main>
+            <Box sx={{ padding: 1.6 }}></Box>
+        </Main>
+    );
 };
 
 export default CatalogFilterSideBar;

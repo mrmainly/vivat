@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Drawer, Box, IconButton } from "@mui/material";
+import { Drawer, Box, IconButton, MenuItem } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import { MyLink, BorderLine } from "../..";
 import drawer_links from "../../../local_data/drawer_links";
 import drawer_elements from "../../../local_data/drawer_elements";
+import API from "../../../api";
+import SubProductMenu from "../sub-product-drawer";
+import ROUTES from "../../../routes";
 
 interface MainDrawerProps {
     state: any;
@@ -12,10 +16,18 @@ interface MainDrawerProps {
 }
 
 const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
-    // const state = useContext(StateContext)
-    // const dispatch = useContext(DispatchContext)
+    const [data, setData] = useState([]);
 
-    // const handleDrawerClose = () => dispatch({ type: 'drawers', payload: { profile_drawer: false, main_drawer: false, favorites_drawer: false } })
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        API.getProductCatalog()
+            .then((res) => {
+                setData(res.data.results);
+            })
+            .catch((error) => console.log(error));
+    }, []);
+
     return (
         <Drawer
             {...{
@@ -40,14 +52,24 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                 </Box>
                 <Box>
                     <BorderLine sx={{ mb: 2, mt: 2 }} />
-                    {drawer_elements.map((item: any, index: number) => (
-                        <MyLink
-                            href={item.to}
+                    {data.map((item: any, index: number) => (
+                        <MenuItem
                             key={index}
-                            sx={{ color: "#20B12E" }}
+                            sx={{
+                                color: "#20B12E",
+                                textTransform: "uppercase",
+                                textOverflow: "ellipsis",
+                                overflow: "hidden",
+                                whiteSpace: "nowrap",
+                            }}
+                            onClick={() =>
+                                navigate(ROUTES.PRODUCT_PAGE, {
+                                    state: { id: item.id },
+                                })
+                            }
                         >
-                            {item.label}
-                        </MyLink>
+                            {item.name}
+                        </MenuItem>
                     ))}
                     <BorderLine sx={{ mb: 2, mt: 2 }} />
                 </Box>
@@ -60,6 +82,10 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                     <BorderLine sx={{ mt: 1 }} />
                 </Box>
             </Box>
+            {/* <SubProductMenu
+                state={stateOpen}
+                handleClose={setStateOpen(false)}
+            /> */}
         </Drawer>
     );
 };

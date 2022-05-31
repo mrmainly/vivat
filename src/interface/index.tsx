@@ -95,6 +95,7 @@ interface MainCardsConstructorProps {
     data: any;
     title?: string;
     sx?: SxProps;
+    loading?: any;
 }
 
 interface ProfileSideBarProps {
@@ -114,7 +115,7 @@ interface GoodsCardProps {
     specialText?: string;
     id: number | string;
     price?: number | string;
-
+    name?: string;
     // barcodes?: number;
     // code?: string;
     // mmmEn?: string;

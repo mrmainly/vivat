@@ -34,6 +34,7 @@ import Tag from "./tag";
 import StockCard from "./cards/stock-card";
 import Mobile from "./navbars/mobile";
 import StatusCard from "./cards/status-card";
+import SubProductDrawer from "./drawers/sub-product-drawer";
 
 export {
     Header,
@@ -72,4 +73,5 @@ export {
     StockCard,
     Mobile,
     StatusCard,
+    SubProductDrawer,
 };

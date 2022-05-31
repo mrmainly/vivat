@@ -71,43 +71,49 @@ const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row: any, index: number) => (
-                        <TableRow
-                            key={index}
-                            sx={{
-                                "&:last-child td, &:last-child th": {
-                                    border: 0,
-                                },
-                            }}
-                        >
-                            <TableCell
-                                component="th"
-                                scope="row"
-                                align="center"
+                    {data.length ? (
+                        data.map((row: any, index: number) => (
+                            <TableRow
+                                key={index}
+                                sx={{
+                                    "&:last-child td, &:last-child th": {
+                                        border: 0,
+                                    },
+                                }}
                             >
-                                {row.id === null ? "Нету" : row.id}
-                            </TableCell>
-                            <TableCell align="center">{row.created}</TableCell>
-                            <TableCell align="center">
-                                {row.total_price === null
-                                    ? "Нету"
-                                    : row.total_price}
-                            </TableCell>
-                            <TableCell align="center">ыфыв</TableCell>
-                            <TableCell align="center">
-                                {row.orderStatus}
-                            </TableCell>
-                            <TableCell align="center">
-                                <Arrow
-                                    onClick={() =>
-                                        navigate(`${navigate_to}/${row.id}`)
-                                    }
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    align="center"
                                 >
-                                    <ArrowForwardIosIcon />
-                                </Arrow>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                                    {row.id === null ? "Нету" : row.id}
+                                </TableCell>
+                                <TableCell align="center">
+                                    {row.created}
+                                </TableCell>
+                                <TableCell align="center">
+                                    {row.total_price === null
+                                        ? "Нету"
+                                        : row.total_price}
+                                </TableCell>
+                                <TableCell align="center">ыфыв</TableCell>
+                                <TableCell align="center">
+                                    {row.orderStatus}
+                                </TableCell>
+                                <TableCell align="center">
+                                    <Arrow
+                                        onClick={() =>
+                                            navigate(`${navigate_to}/${row.id}`)
+                                        }
+                                    >
+                                        <ArrowForwardIosIcon />
+                                    </Arrow>
+                                </TableCell>
+                            </TableRow>
+                        ))
+                    ) : (
+                        <Box sx={{ p: 2 }}>Нету данных</Box>
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>

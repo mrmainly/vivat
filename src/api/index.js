@@ -94,6 +94,26 @@ class API {
         });
     }
 
+    //products
+    async getProductsList(id, page) {
+        let result = await api(
+            `api/v1/goods/?group_id=${id}&page=${page}`
+        ).get();
+        return result;
+    }
+
+    async getProductCatalog() {
+        let result = await api(`api/v1/goods/catalogue/`).get();
+        return result;
+    }
+
+    async getProductSubCatalog(id) {
+        let result = await api(
+            `api/v1/goods/catalogue/subcatalogue/${id}`
+        ).get();
+        return result;
+    }
+
     //orders || basket
     async getCartsList() {
         let result = await api(`api/v1/carts/`).get();
