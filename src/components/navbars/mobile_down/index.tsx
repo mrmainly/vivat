@@ -42,7 +42,7 @@ const MobileDown = () => {
                         justifyContent: "space-between",
                     }}
                 >
-                    <IconButton>
+                    <IconButton onClick={() => navigate(ROUTES.HOME)}>
                         <img src="/img/darhboard.png" />
                     </IconButton>
                     <IconButton>
@@ -102,7 +102,12 @@ const MobileDown = () => {
                 state={profileDrawer}
                 handleClose={handleProfileDrawerClose}
             />
-            {favoriteDrawer ? (
+            {jwttoken ? (
+                <FavoritesDrawer
+                    state={favoriteDrawer}
+                    handleClose={handleFavoriteDrawerClose}
+                />
+            ) : favoriteDrawer ? (
                 <FavoritesDrawer
                     state={favoriteDrawer}
                     handleClose={handleFavoriteDrawerClose}

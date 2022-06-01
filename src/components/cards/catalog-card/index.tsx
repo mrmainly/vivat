@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
@@ -8,10 +8,13 @@ import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
 import ThemeMain from "../../../theme";
+import API from "../../../api";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
+    justifyContent: "start",
+    alignItems: "start",
     // alignItems: 'center',
     // justifyContent: 'center',
     padding: 10,
@@ -20,6 +23,11 @@ const Root = styled(Box)(({ theme }) => ({
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
+    cursor: "pointer",
+    "&:hover": {
+        boxShadow: "0px 0px 20px rgba(0,0,0,0.8)",
+    },
+    transition: "all 1s ease",
 }));
 
 const Img = styled("img")(({ theme }) => ({
@@ -34,6 +42,7 @@ const CombinedBox = styled(Box)(({ theme }) => ({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 5,
+    width: "100%",
 }));
 
 const CatalogCard: React.FC<GoodsCardProps> = ({

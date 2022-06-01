@@ -18,7 +18,35 @@ const Root = styled(Box)(({ theme }) => ({
     margin: "5px 0px",
     height: 136,
     padding: 16,
+    [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+        height: 300,
+    },
 }));
+
+const Img = styled("img")(({ theme }) => ({
+    height: "100%",
+    borderRadius: 9,
+    filter: "drop-shadow(2px 3px 8px rgba(0, 0, 0, 0.1))",
+    objectFit: "cover",
+    [theme.breakpoints.down("sm")]: {
+        height: 150,
+    },
+}));
+
+const InfoBox = styled(Box)(({ theme }) => ({
+    marginLeft: 25,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+        marginLeft: 0,
+        marginTop: 10,
+        height: "100%",
+    },
+}));
+
 interface BasketProps {
     price?: any;
     GoodsCode?: any;
@@ -54,53 +82,33 @@ const BasketCard: React.FC<BasketProps> = ({
     };
     return (
         <Root>
-            <Box sx={{ display: "flex", width: "100%" }}>
-                <img
-                    src="/img/prototypeimg.png"
-                    style={{
-                        height: "100%",
-                        borderRadius: 9,
-                        filter: "drop-shadow(2px 3px 8px rgba(0, 0, 0, 0.1))",
-                    }}
-                />
+            <Img src="/img/prototypeimg.png" />
+            <InfoBox>
                 <Box
                     sx={{
-                        ml: 2.5,
                         display: "flex",
-                        flexDirection: "column",
                         justifyContent: "space-between",
-                        width: "100%",
+                        alignItems: "center",
                     }}
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                        }}
-                    >
-                        <MyText variant="body1" sx={{ fontStyle: "normal" }}>
-                            {GoodsCode.name}
-                        </MyText>
-                        <IconButton onClick={deleteProduct}>
-                            <CloseIcon />
-                        </IconButton>
-                    </Box>
-                    <MyText variant="body2">
-                        Производитель:
-                        <span style={{ marginLeft: 15 }}>
-                            {GoodsCode.producer}
-                        </span>
+                    <MyText variant="body1" sx={{ fontStyle: "normal" }}>
+                        {GoodsCode.name}
                     </MyText>
-                    <MyText variant="body2">
-                        Код товара:<span style={{ marginLeft: 15 }}>322</span>
-                    </MyText>
-                    <MyText variant="body2" sx={{ color: "#55CD61" }}>
-                        В наличии
-                    </MyText>
+                    <IconButton onClick={deleteProduct}>
+                        <CloseIcon />
+                    </IconButton>
                 </Box>
-            </Box>
-            <Box></Box>
+                <MyText variant="body2">
+                    Производитель:
+                    <span style={{ marginLeft: 15 }}>{GoodsCode.producer}</span>
+                </MyText>
+                <MyText variant="body2">
+                    Код товара:<span style={{ marginLeft: 15 }}>322</span>
+                </MyText>
+                <MyText variant="body2" sx={{ color: "#55CD61" }}>
+                    В наличии
+                </MyText>
+            </InfoBox>
         </Root>
     );
 };

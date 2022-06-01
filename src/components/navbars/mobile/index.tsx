@@ -16,6 +16,23 @@ const MobileWrapper = styled(Container)(({ theme }) => ({
     },
 }));
 
+const ButtonCustom = styled(Button)(({ theme }) => ({
+    color: ThemeMain.palette.primary.main,
+    borderColor: ThemeMain.palette.primary.main,
+    width: "max-content",
+    mr: 1,
+    fontSize: 14,
+    [theme.breakpoints.down("sm")]: {
+        fontSize: 12,
+    },
+}));
+
+const IconWrapper = styled(Box)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "-10px",
+}));
+
 const Mobile = () => {
     const [state, setState] = useState({
         drawerOpen: false,
@@ -31,31 +48,24 @@ const Mobile = () => {
     return (
         <MobileWrapper>
             <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
-            <Box sx={{ display: "flex" }}>
+            <IconWrapper>
                 <IconButton
                     color="primary"
                     aria-label="upload picture"
                     component="span"
                     onClick={() => handleDrawerOpen()}
+                    size="small"
                 >
                     <MenuIcon sx={{ color: "#55CD61" }} fontSize="large" />
                 </IconButton>
-                <MenuItem>
-                    <img src="/img/Frame60.png" style={{ height: 48 }} />
-                </MenuItem>
-            </Box>
+
+                <img
+                    src="/img/Frame60.png"
+                    style={{ height: 48, objectFit: "cover", marginLeft: 5 }}
+                />
+            </IconWrapper>
             <Box sx={{ display: "flex" }}>
-                <Button
-                    sx={{
-                        color: ThemeMain.palette.primary.main,
-                        borderColor: ThemeMain.palette.primary.main,
-                        width: "max-content",
-                        mr: 1,
-                    }}
-                    variant="outlined"
-                >
-                    Статус заказа
-                </Button>
+                <ButtonCustom variant="outlined">Статус заказа</ButtonCustom>
             </Box>
         </MobileWrapper>
     );
