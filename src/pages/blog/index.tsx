@@ -19,13 +19,14 @@ import ThemeMain from "./components/ThemeMain";
 
 const BlogMenuItem = styled(MenuItem)(({ theme }) => ({
     width: "max-content",
-    marginBottom: 10,
 }));
 
 const BoxTheme = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 20,
+    marginBottom: 20,
 }));
 
 const Blog = () => {
@@ -169,7 +170,6 @@ const Blog = () => {
                     <BoxTheme>
                         {theme.slice(0, 1).map((item: any, index: number) => (
                             <BlogMenuItem
-                                sx={{ mt: 5 }}
                                 key={index}
                                 onClick={() =>
                                     navigate(ROUTES.BLOG_THEME, {

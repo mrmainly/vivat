@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { MyText, FavoritesCard } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
+import { StateContext } from "../../../store";
 
 interface MainDrawerProps {
     state?: any;
@@ -15,16 +16,22 @@ interface MainDrawerProps {
 const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState("");
+
+    const stateContext = useContext(StateContext);
+
     useEffect(() => {
         const getFavorites = async () => {
             API.getFavorites()
                 .then((res) => {
                     setData(res.data);
+                    console.log(res.data);
                 })
                 .catch((error) => console.log(error));
         };
         getFavorites();
-    }, [status]);
+    }, [stateContext.favorite_status.status, status]);
+
+    console.log(stateContext);
     return (
         <Drawer
             {...{

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { Box, IconButton, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
+import { DispatchContext, StateContext } from "../../../store";
 import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
@@ -58,15 +60,24 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     setState,
     producer,
     qty,
+    fav,
 }) => {
     const navigate = useNavigate();
+    const dispatch = useContext(DispatchContext);
+    const stateContext = useContext(StateContext);
 
     const addedFavorite = () => {
         API.addedFavorite(id)
             .then((res) => {
                 toast.success("Товар добавлен в избранное");
+                dispatch({
+                    type: "favorite_status",
+                    payload: {
+                        status: stateContext.favorite_status.status + 1,
+                    },
+                });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => toast.error("Товар не добавлен в избранное"));
     };
 
     const TransferFavorite = () => {
@@ -150,7 +161,11 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                     В корзину
                 </MyButton>
                 <IconButton size="small" sx={{ mr: 1 }} onClick={addedFavorite}>
-                    <img src="/img/Favorite_light.png" />
+                    {fav ? (
+                        <FavoriteIcon sx={{ color: "#55CD61" }} />
+                    ) : (
+                        <img src="/img/Favorite_light.png" />
+                    )}
                 </IconButton>
             </CombinedBox>
         </Root>

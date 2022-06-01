@@ -32,6 +32,7 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                             name={item.name}
                             producer={item.producer}
                             qty={item?.stocks.qty}
+                            fav={item.fav}
                         />
                     </Grid>
                 ))}

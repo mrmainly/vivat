@@ -14,6 +14,8 @@ export const stateReducer = (state: any, action: any) => {
             return { ...state, register_version: action.payload };
         case "status_product":
             return { ...state, status_product: action.payload };
+        case "favorite_status":
+            return { ...state, favorite_status: action.payload };
         default:
             throw new Error();
     }

@@ -120,6 +120,7 @@ interface GoodsCardProps {
     setState?: any;
     producer?: string;
     qty?: number;
+    fav?: any;
     // barcodes?: number;
     // code?: string;
     // mmmEn?: string;
