@@ -188,7 +188,7 @@ const BasketForm = () => {
                                                     key={index}
                                                     value={item.department.id}
                                                 >
-                                                    {item.department.address}
+                                                    {item.department.name}
                                                 </MenuItem>
                                             )
                                         )}

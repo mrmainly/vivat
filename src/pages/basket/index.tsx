@@ -54,25 +54,21 @@ const TotalBox = styled(Box)(({ theme }) => ({
 }));
 
 const Basket = () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [totalCount, setTotalCount] = useState(0);
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [data, setData] = useState<any>([]);
+    const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState("");
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const getOrders = async () => {
+            setLoading(true);
             await API.getCartsList()
                 .then((res: any) => {
-                    setTotalCount(res.data.total_count);
-                    setTotalPrice(res.data.total_price);
-                    if (res.data.items) {
-                        setData(res.data.items);
-                    } else {
-                        setData(res.data);
-                    }
+                    console.log(res);
+                    // setTotalCount(res.data.total_count);
+                    // setTotalPrice(res.data.total_price);
+                    setData(res.data);
                 })
                 .catch((error) => console.log(error));
             setLoading(false);
@@ -101,17 +97,19 @@ const Basket = () => {
                         mb: 5,
                     }}
                 >
-                    <CircularProgress />
+                    {/* <CircularProgress /> */}
+                    Loading...
                 </Box>
             ) : (
                 <>
-                    {data.length > 0 ? (
+                    {data.items ? (
                         <>
                             <ActionBox>
                                 <MyText variant="body2" sx={{ color: "grey" }}>
-                                    {totalCount} товаров на сумму {totalPrice} ₽
+                                    {data.total_count} товаров на сумму{" "}
+                                    {data.total_price} ₽
                                 </MyText>
-                                <DeleteMenuItem>
+                                <DeleteMenuItem onClick={deleteBasket}>
                                     <MyText variant="body1">
                                         Очистить корзину
                                     </MyText>
@@ -124,7 +122,7 @@ const Basket = () => {
                                     <CloseIcon sx={{ ml: 1 }} />
                                 </DeleteBox>
                             </ActionBox>
-                            {data.map((item: any, index: number) => (
+                            {data?.items.map((item: any, index: number) => (
                                 <BasketCard
                                     key={index}
                                     {...item}
@@ -146,7 +144,7 @@ const Basket = () => {
                                         Итого:
                                     </MyText>
                                     <MyText variant="h6" sx={{ mr: 2 }}>
-                                        {totalPrice}₽
+                                        {data.total_price}₽
                                     </MyText>
                                 </Box>
                                 <MyButton

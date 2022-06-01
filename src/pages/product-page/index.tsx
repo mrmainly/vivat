@@ -13,6 +13,7 @@ const WrapperBox = styled(Box)(({ theme }) => ({
 
 interface CustomizedState {
     id: number | string;
+    title?: string;
 }
 
 const ProductPage = () => {
@@ -24,11 +25,11 @@ const ProductPage = () => {
     const location = useLocation();
     const state = location.state as CustomizedState;
 
-    const { id } = state;
+    const { id, title } = state;
 
     useEffect(() => {
         const getProducts = async () => {
-            API.getProductsList(id, currentPage)
+            await API.getProductsList(id, currentPage)
                 .then((res) => {
                     console.log(res);
                     setData(res.data.results);
@@ -44,14 +45,14 @@ const ProductPage = () => {
     return (
         <Box sx={{ width: "100%" }}>
             <MyText variant="h5" sx={{ mb: 2 }}>
-                Каталог
+                {title}
             </MyText>
             <Grid container spacing={2}>
-                <Grid lg={3} xl={3} md={3} item>
+                <Grid lg={3} xl={3} md={3} sm={0} xs={0} item>
                     <CatalogFilterSideBar />
                 </Grid>
-                <Grid lg={9} xl={9} md={9} item>
-                    {data.length === 0 ? (
+                <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
+                    {loading ? (
                         <Box
                             sx={{
                                 display: "flex",
@@ -61,7 +62,7 @@ const ProductPage = () => {
                         >
                             <CircularProgress />
                         </Box>
-                    ) : (
+                    ) : data.length > 0 ? (
                         <>
                             <MainCardsConstructor data={data} />
                             <Pagination
@@ -72,6 +73,10 @@ const ProductPage = () => {
                                 }
                             />
                         </>
+                    ) : (
+                        <Box>
+                            <MyText variant="h6">Лекарств нету</MyText>
+                        </Box>
                     )}
                 </Grid>
             </Grid>

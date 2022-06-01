@@ -24,6 +24,7 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
         API.getProductCatalog()
             .then((res) => {
                 setData(res.data.results);
+                console.log(res);
             })
             .catch((error) => console.log(error));
     }, []);
@@ -64,7 +65,7 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                             }}
                             onClick={() =>
                                 navigate(ROUTES.PRODUCT_PAGE, {
-                                    state: { id: item.id },
+                                    state: { id: item.id, title: item.name },
                                 })
                             }
                         >

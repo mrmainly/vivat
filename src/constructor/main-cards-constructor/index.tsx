@@ -24,12 +24,14 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                     <Grid item lg={3} xl={3} md={4} sm={4} xs={12} key={index}>
                         <CatalogCard
                             id={item.id}
-                            specialPrice={item?.stocks?.priceBuy}
+                            price={item?.stocks?.priceBuy}
                             specialText={item.specialText}
                             img={item.img}
                             description={item.description}
-                            price={item?.stocks?.priceSale}
+                            specialPrice={item?.stocks?.priceSale}
                             name={item.name}
+                            producer={item.producer}
+                            qty={item?.stocks.qty}
                         />
                     </Grid>
                 ))}

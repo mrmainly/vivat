@@ -64,6 +64,7 @@ const MidleBar = styled(Box)(({ theme }) => ({
     alignItems: "center",
     width: "100%",
     height: 105,
+    marginBottom: "-6px",
 }));
 
 const MidleBarItem = styled(Box)(({ theme }) => ({

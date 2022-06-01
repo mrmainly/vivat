@@ -7,6 +7,9 @@ const Main = styled(Box)(({ theme }) => ({
     borderRadius: 12,
     minHeight: 800,
     width: "100%",
+    [theme.breakpoints.down("sm")]: {
+        display: "none",
+    },
 }));
 
 const CatalogFilterSideBar = () => {

@@ -103,8 +103,11 @@ const BasketCard: React.FC<BasketProps> = ({
                     <span style={{ marginLeft: 15 }}>{GoodsCode.producer}</span>
                 </MyText>
                 <MyText variant="body2">
-                    Код товара:<span style={{ marginLeft: 15 }}>322</span>
+                    Код товара:<span style={{ marginLeft: 15 }}>{id}</span>
                 </MyText>
+                {/* <MyText variant="body2">
+                    Цена:<span style={{ marginLeft: 15 }}>{price}</span>
+                </MyText> */}
                 <MyText variant="body2" sx={{ color: "#55CD61" }}>
                     В наличии
                 </MyText>

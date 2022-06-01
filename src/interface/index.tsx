@@ -116,6 +116,10 @@ interface GoodsCardProps {
     id: number | string;
     price?: number | string;
     name?: string;
+    state?: any;
+    setState?: any;
+    producer?: string;
+    qty?: number;
     // barcodes?: number;
     // code?: string;
     // mmmEn?: string;

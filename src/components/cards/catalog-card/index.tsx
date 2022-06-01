@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Box, IconButton, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
@@ -23,7 +24,6 @@ const Root = styled(Box)(({ theme }) => ({
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
-    cursor: "pointer",
     "&:hover": {
         boxShadow: "0px 0px 20px rgba(0,0,0,0.8)",
     },
@@ -35,6 +35,7 @@ const Img = styled("img")(({ theme }) => ({
     height: 170,
     objectFit: "cover",
     boxShadow: "1px 1px 11px -3px rgba(34, 60, 80, 0.2)",
+    cursor: "pointer",
 }));
 
 const CombinedBox = styled(Box)(({ theme }) => ({
@@ -53,11 +54,37 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     specialText,
     id,
     name,
+    state,
+    setState,
+    producer,
+    qty,
 }) => {
     const navigate = useNavigate();
+
+    const addedFavorite = () => {
+        API.addedFavorite(id)
+            .then((res) => {
+                toast.success("Товар добавлен в избранное");
+            })
+            .catch((error) => console.log(error));
+    };
+
+    const TransferFavorite = () => {
+        API.transferFavorite(id)
+            .then((res) => {
+                toast.success("Товар добавлен в корзину");
+            })
+            .catch(() => toast.error("Товар не найден"));
+    };
+
     return (
         <Root>
-            <Img src={img} />
+            <Img
+                src={img}
+                onClick={() => {
+                    navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`);
+                }}
+            />
             <MyText
                 variant="body1"
                 sx={{
@@ -71,18 +98,18 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
             >
                 {name}...
             </MyText>
-            <MyText
-                variant="body1"
-                sx={{ color: "#2F80ED", mt: 0.5, cursor: "pointer" }}
-            >
-                Производитель
+            <MyText variant="body2" sx={{ color: "#2F80ED", mt: 0.5 }}>
+                {producer}
             </MyText>
-            <MyText
-                variant="body1"
-                sx={{ color: "#55CD61", mt: 0.5, cursor: "pointer" }}
-            >
-                В наличии
-            </MyText>
+            {qty === 0 ? (
+                <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>
+                    Нет в наличии
+                </MyText>
+            ) : (
+                <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
+                    В наличии
+                </MyText>
+            )}
             <CombinedBox>
                 <Box sx={{ display: "flex" }}>
                     <MyText
@@ -94,7 +121,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                     >
                         {price}₽
                     </MyText>
-                    <MyText
+                    {/* <MyText
                         variant="body2"
                         sx={{
                             fontWeight: "bold",
@@ -105,7 +132,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                         }}
                     >
                         {specialPrice}₽
-                    </MyText>
+                    </MyText> */}
                 </Box>
                 <IconButton size="small" sx={{ mr: 1 }}>
                     <img src="/img/Frame1208.png" />
@@ -118,11 +145,11 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                 <MyButton
                     sx={{ width: 130 }}
                     size="medium"
-                    onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`)}
+                    onClick={TransferFavorite}
                 >
                     В корзину
                 </MyButton>
-                <IconButton size="small" sx={{ mr: 1 }}>
+                <IconButton size="small" sx={{ mr: 1 }} onClick={addedFavorite}>
                     <img src="/img/Favorite_light.png" />
                 </IconButton>
             </CombinedBox>

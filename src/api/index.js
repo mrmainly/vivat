@@ -114,6 +114,11 @@ class API {
         return result;
     }
 
+    async getProductId(id) {
+        let result = await api(`api/v1/goods/${id}/`).get();
+        return result;
+    }
+
     //orders || basket
     async getCartsList() {
         let result = await api(`api/v1/carts/`).get();
@@ -155,6 +160,10 @@ class API {
 
     transferFavorite(id, dispatch) {
         return api(`api/v1/favorites/transfer/${id}/`).post();
+    }
+
+    addedFavorite(id) {
+        return api(`api/v1/favorites/${id}/`).post(null);
     }
 
     //employments
@@ -227,7 +236,7 @@ class API {
 
     //departaments
     async getDeportaments() {
-        let result = await api(`api/v1/departments/connected/`).get();
+        let result = await api(`api/v1/departments/`).get();
         return result;
     }
 
