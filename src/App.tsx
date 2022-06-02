@@ -40,6 +40,7 @@ import ROUTES from "./routes";
 
 const App = () => {
     const [state, dispatch] = useReducer(stateReducer, defaultStore);
+
     return (
         <DispatchContext.Provider value={dispatch}>
             <StateContext.Provider value={state}>

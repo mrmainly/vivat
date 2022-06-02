@@ -43,15 +43,24 @@ const ProfileDrawer: React.FC<ModalAndDrawer> = ({ state, handleClose }) => {
                     </MyText>
                 </Box>
                 <BorderLine sx={{ mb: 2, mt: 2 }} />
-                <MyLink href={ROUTES.MYORDERS} sx={{ color: "#20B12E" }}>
+                <MenuItem
+                    onClick={() => {
+                        navigate(ROUTES.MYORDERS);
+                        handleClose();
+                    }}
+                    sx={{ color: "#20B12E" }}
+                >
                     МОИ ЗАКАЗЫ
-                </MyLink>
-                <MyLink
-                    href={ROUTES.BASICINFORMATION}
-                    sx={{ color: "#20B12E", mt: 1 }}
+                </MenuItem>
+                <MenuItem
+                    onClick={() => {
+                        navigate(ROUTES.BASICINFORMATION);
+                        handleClose();
+                    }}
+                    sx={{ color: "#20B12E" }}
                 >
                     МОИ ДАННЫЕ
-                </MyLink>
+                </MenuItem>
                 <MyLink href="" sx={{ color: "#20B12E", mt: 1 }}>
                     ПРОГРАММА ЛОЯЛЬНОСТИ
                 </MyLink>

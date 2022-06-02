@@ -56,8 +56,8 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     specialText,
     id,
     name,
-    state,
-    setState,
+    status,
+    setStatus,
     producer,
     qty,
     fav,
@@ -69,7 +69,6 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     const addedFavorite = () => {
         API.addedFavorite(id)
             .then((res) => {
-                toast.success("Товар добавлен в избранное");
                 dispatch({
                     type: "favorite_status",
                     payload: {
@@ -130,7 +129,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                             fontFamily: "Montserrat",
                         }}
                     >
-                        {price}₽
+                        {specialPrice}₽
                     </MyText>
                     {/* <MyText
                         variant="body2"

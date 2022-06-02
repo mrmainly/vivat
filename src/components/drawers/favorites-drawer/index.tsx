@@ -30,8 +30,6 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
         };
         getFavorites();
     }, [stateContext.favorite_status.status, status]);
-
-    console.log(stateContext);
     return (
         <Drawer
             {...{

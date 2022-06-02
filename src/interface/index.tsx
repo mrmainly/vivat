@@ -96,6 +96,8 @@ interface MainCardsConstructorProps {
     title?: string;
     sx?: SxProps;
     loading?: any;
+    status?: any;
+    setStatus?: any;
 }
 
 interface ProfileSideBarProps {
@@ -116,8 +118,8 @@ interface GoodsCardProps {
     id: number | string;
     price?: number | string;
     name?: string;
-    state?: any;
-    setState?: any;
+    status?: any;
+    setStatus?: any;
     producer?: string;
     qty?: number;
     fav?: any;

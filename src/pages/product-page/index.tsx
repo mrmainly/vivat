@@ -27,6 +27,13 @@ const ProductPage = () => {
 
     const { id, title } = state;
 
+    function backToTop() {
+        if (window.pageYOffset > 0) {
+            window.scrollBy(0, -80);
+            setTimeout(backToTop, 0);
+        }
+    }
+
     useEffect(() => {
         const getProducts = async () => {
             await API.getProductsList(id, currentPage)
@@ -68,9 +75,10 @@ const ProductPage = () => {
                             <Pagination
                                 count={countNumber}
                                 style={{ marginTop: 20 }}
-                                onChange={(event, value) =>
-                                    setCurrentPage(value)
-                                }
+                                onChange={(event, value) => {
+                                    setCurrentPage(value);
+                                    backToTop();
+                                }}
                             />
                         </>
                     ) : (
