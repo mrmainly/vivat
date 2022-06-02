@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { Drawer, Box, IconButton, MenuItem } from "@mui/material";
+import {
+    Drawer,
+    Box,
+    IconButton,
+    MenuItem,
+    List,
+    ListItem,
+    ListItemButton,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { MyLink, BorderLine } from "../..";
@@ -63,22 +71,30 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                                 overflow: "hidden",
                                 whiteSpace: "nowrap",
                             }}
-                            onClick={() =>
+                            onClick={() => {
                                 navigate(ROUTES.PRODUCT_PAGE, {
                                     state: { id: item.id, title: item.name },
-                                })
-                            }
+                                });
+                                handleClose();
+                            }}
                         >
                             {item.name}
                         </MenuItem>
                     ))}
+
                     <BorderLine sx={{ mb: 2, mt: 2 }} />
                 </Box>
                 <Box>
                     {drawer_links.map((item: any, index: number) => (
-                        <MyLink href={item.to} key={index}>
+                        <MenuItem
+                            onClick={() => {
+                                navigate(item.to);
+                                handleClose();
+                            }}
+                            key={index}
+                        >
                             {item.label}
-                        </MyLink>
+                        </MenuItem>
                     ))}
                     <BorderLine sx={{ mt: 1 }} />
                 </Box>
