@@ -46,7 +46,7 @@ const ProductPage = () => {
             setLoading(false);
         };
         getProducts();
-    }, [currentPage]);
+    }, [currentPage, id]);
 
     let countNumber = Math.ceil(count / 20);
     return (

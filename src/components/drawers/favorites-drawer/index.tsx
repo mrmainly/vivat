@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 
 import { Drawer, Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { MyText, FavoritesCard } from "../..";
 import ThemeMain from "../../../theme";
@@ -24,7 +25,6 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
             API.getFavorites()
                 .then((res) => {
                     setData(res.data);
-                    console.log(res.data);
                 })
                 .catch((error) => console.log(error));
         };
@@ -49,7 +49,10 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                     sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}
                 >
                     <IconButton onClick={() => handleClose()}>
-                        <img src="/img/Close_round_light.png" />
+                        <CloseIcon
+                            sx={{ color: ThemeMain.palette.primary.main }}
+                            fontSize="large"
+                        />
                     </IconButton>
                 </Box>
                 <Box sx={{ display: "flex", alignItems: "center" }}>

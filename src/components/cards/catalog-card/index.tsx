@@ -90,7 +90,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     return (
         <Root>
             <Img
-                src={img}
+                src={`data:image/jpeg;base64,${img}`}
                 onClick={() => {
                     navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`);
                 }}

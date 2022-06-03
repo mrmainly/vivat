@@ -29,14 +29,6 @@ const drawer_links = [
         label: "Контакты",
         to: ROUTES.CONTACTS,
     },
-    {
-        label: "Обратная свзяь",
-        to: "",
-    },
-    {
-        label: "Отправить рецепт",
-        to: "",
-    },
 ];
 
 export default drawer_links;

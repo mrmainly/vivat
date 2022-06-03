@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { Drawer, Box, MenuItem, IconButton } from "@mui/material";
 import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { MyLink, BorderLine, MyText } from "../..";
 import ROUTES from "../../../routes";
 import { ModalAndDrawer } from "../../../interface";
+import ThemeMain from "../../../theme";
 
 const ProfileDrawer: React.FC<ModalAndDrawer> = ({ state, handleClose }) => {
     const navigate = useNavigate();
@@ -31,7 +33,10 @@ const ProfileDrawer: React.FC<ModalAndDrawer> = ({ state, handleClose }) => {
                     sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}
                 >
                     <IconButton onClick={() => handleClose()}>
-                        <img src="/img/Close_round_light.png" />
+                        <CloseIcon
+                            sx={{ color: ThemeMain.palette.primary.main }}
+                            fontSize="large"
+                        />
                     </IconButton>
                 </Box>
                 <Box sx={{ display: "flex", alignItems: "center", ml: 1.5 }}>
@@ -61,9 +66,6 @@ const ProfileDrawer: React.FC<ModalAndDrawer> = ({ state, handleClose }) => {
                 >
                     МОИ ДАННЫЕ
                 </MenuItem>
-                <MyLink href="" sx={{ color: "#20B12E", mt: 1 }}>
-                    ПРОГРАММА ЛОЯЛЬНОСТИ
-                </MyLink>
                 <BorderLine sx={{ mb: 2, mt: 2 }} />
                 <MenuItem
                     onClick={() => {

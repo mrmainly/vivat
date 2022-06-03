@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Grid, Box } from "@mui/material";
 import { styled } from "@mui/system";
@@ -40,6 +40,8 @@ interface MainInfoProps {
 }
 
 const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
+    const [photo, setPhoto] = useState("");
+
     const array = [
         {
             label: "Вид товара:",
@@ -85,7 +87,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
             <Grid container spacing={1}>
                 <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                     <ItemImg>
-                        <Img src="/img/prototypeimg.png" />
+                        <img
+                            src={`data:image/jpeg;base64,${data.photo.fileData}`}
+                        />
                     </ItemImg>
                 </Grid>
                 <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>

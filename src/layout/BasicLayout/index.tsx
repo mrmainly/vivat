@@ -13,13 +13,11 @@ import {
     MobileDown,
     Mobile,
 } from "../../components";
-import { HomeSlider } from "../../constructor";
 import { StateContext } from "../../store";
 
 const BasicLayout = () => {
     const [mobileView, setMobileView] = useState(false);
 
-    const location = useLocation();
     const state = useContext(StateContext);
 
     useEffect(() => {
@@ -40,7 +38,6 @@ const BasicLayout = () => {
             <SignUpModal />
 
             {state.auth_modal.forgot && <ForgotPasswordModal />}
-            {location.pathname === "/" ? <HomeSlider /> : ""}
             <MyContainer
                 wrapper={true}
                 minHeight={600}

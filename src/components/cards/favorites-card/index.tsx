@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Box, IconButton } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { BorderLine, MyText, MyButton } from "../..";
 import { DispatchContext } from "../../../store";
@@ -121,7 +122,10 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
                     Добавить в корзину
                 </MyButton>
                 <IconButton size="small" onClick={deleteFavorite}>
-                    <img src="/img/Close_round_light.png" />
+                    <CloseIcon
+                        sx={{ color: ThemeMain.palette.primary.main }}
+                        fontSize="large"
+                    />
                 </IconButton>
             </Box>
         </Box>

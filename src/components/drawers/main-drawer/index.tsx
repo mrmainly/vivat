@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import {
-    Drawer,
-    Box,
-    IconButton,
-    MenuItem,
-    List,
-    ListItem,
-    ListItemButton,
-} from "@mui/material";
+import { Drawer, Box, IconButton, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 
-import { MyLink, BorderLine } from "../..";
+import { BorderLine } from "../..";
 import drawer_links from "../../../local_data/drawer_links";
-import drawer_elements from "../../../local_data/drawer_elements";
 import API from "../../../api";
-import SubProductMenu from "../sub-product-drawer";
 import ROUTES from "../../../routes";
+import ThemeMain from "../../../theme";
 
 interface MainDrawerProps {
     state: any;
@@ -32,7 +24,6 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
         API.getProductCatalog()
             .then((res) => {
                 setData(res.data.results);
-                console.log(res);
             })
             .catch((error) => console.log(error));
     }, []);
@@ -56,7 +47,10 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
             >
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <IconButton onClick={() => handleClose()}>
-                        <img src="/img/Close_round_light.png" />
+                        <CloseIcon
+                            sx={{ color: ThemeMain.palette.primary.main }}
+                            fontSize="large"
+                        />
                     </IconButton>
                 </Box>
                 <Box>
