@@ -14,17 +14,21 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 const ItemImg = styled(Box)(({ theme }) => ({
-    minHeight: 550,
+    height: 550,
     background: "white",
     padding: 20,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    overflow: "hidden",
 }));
 
 const Img = styled("img")(({ theme }) => ({
-    width: 500,
+    width: 300,
     objectFit: "cover",
+    [theme.breakpoints.down("sm")]: {
+        width: "100%",
+    },
 }));
 
 const PriceBlog = styled(Box)(({ theme }) => ({
@@ -87,8 +91,12 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
             <Grid container spacing={1}>
                 <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                     <ItemImg>
-                        <img
-                            src={`data:image/jpeg;base64,${data.photo.fileData}`}
+                        <Img
+                            src={
+                                data?.photo?.fileData
+                                    ? `data:image/jpeg;base64,${data.photo.fileData}`
+                                    : "/img/tabletka.jpg"
+                            }
                         />
                     </ItemImg>
                 </Grid>

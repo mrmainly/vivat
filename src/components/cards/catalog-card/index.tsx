@@ -33,11 +33,18 @@ const Root = styled(Box)(({ theme }) => ({
 }));
 
 const Img = styled("img")(({ theme }) => ({
+    background: "red",
+    width: "100%",
+}));
+
+const ImgItem = styled(Box)(({ theme }) => ({
     width: "100%",
     height: 170,
-    objectFit: "cover",
     boxShadow: "1px 1px 11px -3px rgba(34, 60, 80, 0.2)",
     cursor: "pointer",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
 }));
 
 const CombinedBox = styled(Box)(({ theme }) => ({
@@ -89,12 +96,16 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
 
     return (
         <Root>
-            <Img
-                src={`data:image/jpeg;base64,${img}`}
+            <ImgItem
+                sx={{
+                    backgroundImage: img
+                        ? `url(data:image/jpeg;base64,${img})`
+                        : "url(/img/tabletka.jpg)",
+                }}
                 onClick={() => {
                     navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`);
                 }}
-            />
+            ></ImgItem>
             <MyText
                 variant="body1"
                 sx={{
