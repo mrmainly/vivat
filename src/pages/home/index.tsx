@@ -43,33 +43,19 @@ const Home = () => {
             ) : (
                 <HomeSlider data={dataBanner} />
             )}
-            {loading ? (
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        mt: 5,
+            <Box sx={{ mt: 10 }}>
+                <MyText variant="h5" sx={{ mb: 1 }}>
+                    Лек. средства
+                </MyText>
+                <MainCardsConstructor data={data} loading={loading} />
+                <Pagination
+                    count={countNumber}
+                    style={{ marginTop: 20 }}
+                    onChange={(event, value) => {
+                        setCurrentPage(value);
                     }}
-                >
-                    <CircularProgress />
-                </Box>
-            ) : data.length > 0 ? (
-                <Box sx={{ mt: 10 }}>
-                    <MyText variant="h5" sx={{ mb: 1 }}>
-                        Лек. средства
-                    </MyText>
-                    <MainCardsConstructor data={data} />
-                    <Pagination
-                        count={countNumber}
-                        style={{ marginTop: 20 }}
-                        onChange={(event, value) => {
-                            setCurrentPage(value);
-                        }}
-                    />
-                </Box>
-            ) : (
-                ""
-            )}
+                />
+            </Box>
         </div>
     );
 };

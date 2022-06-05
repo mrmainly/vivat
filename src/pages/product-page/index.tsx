@@ -59,33 +59,17 @@ const ProductPage = () => {
                     <CatalogFilterSideBar />
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
-                    {loading ? (
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                mt: 5,
+                    <>
+                        <MainCardsConstructor data={data} loading={loading} />
+                        <Pagination
+                            count={countNumber}
+                            style={{ marginTop: 20 }}
+                            onChange={(event, value) => {
+                                setCurrentPage(value);
+                                backToTop();
                             }}
-                        >
-                            <CircularProgress />
-                        </Box>
-                    ) : data.length > 0 ? (
-                        <>
-                            <MainCardsConstructor data={data} />
-                            <Pagination
-                                count={countNumber}
-                                style={{ marginTop: 20 }}
-                                onChange={(event, value) => {
-                                    setCurrentPage(value);
-                                    backToTop();
-                                }}
-                            />
-                        </>
-                    ) : (
-                        <Box>
-                            <MyText variant="h6">Лекарств нету</MyText>
-                        </Box>
-                    )}
+                        />
+                    </>
                 </Grid>
             </Grid>
         </Box>

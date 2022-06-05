@@ -151,9 +151,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                     fontFamily: "Montserrat",
                                 }}
                             >
-                                {data.stocks.priceBuy} ₽
+                                {data.stocks.priceSale} ₽
                             </MyText>
-                            <MyText
+                            {/* <MyText
                                 variant="h6"
                                 sx={{
                                     fontWeight: "bold",
@@ -164,7 +164,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                 }}
                             >
                                 {data.stocks.priceSale} ₽
-                            </MyText>
+                            </MyText> */}
                         </PriceBlog>
                         <Box sx={{ display: "flex", color: "#FE5860", mt: 1 }}>
                             <LocalShippingIcon />
@@ -176,7 +176,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             <MyButton>Добавить в корзину</MyButton>
                         </Box>
                         <Box sx={{ mt: 2 }}>
-                            {array2.map((item, index) => (
+                            {/* {array2.map((item, index) => (
                                 <MyText
                                     variant="body1"
                                     key={index}
@@ -192,7 +192,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                         {item.value}
                                     </span>
                                 </MyText>
-                            ))}
+                            ))} */}
                         </Box>
                     </Item>
                 </Grid>
