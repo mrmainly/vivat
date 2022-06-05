@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { styled } from "@mui/system";
+import Skeleton from "react-loading-skeleton";
 
 import product_data from "../../local_data/product_data";
 import { BasketCard, MyText, MyButton } from "../../components";
@@ -65,7 +66,7 @@ const Basket = () => {
             setLoading(true);
             await API.getCartsList()
                 .then((res: any) => {
-                    console.log(res);
+                    console.log("basket", res);
                     // setTotalCount(res.data.total_count);
                     // setTotalPrice(res.data.total_price);
                     setData(res.data);
@@ -85,20 +86,48 @@ const Basket = () => {
             })
             .catch(() => toast.error("Что то пошло не так"));
     };
+
+    const skeletonData = 1;
+
     return (
         <>
             <MyText variant="h6">Корзина</MyText>
             {loading ? (
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        mt: 5,
-                        mb: 5,
-                    }}
-                >
-                    {/* <CircularProgress /> */}
-                    Loading...
+                <Box sx={{ mt: 5 }}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Skeleton style={{ width: 170 }} />
+                        <Skeleton style={{ width: 170 }} />
+                    </Box>
+                    {Array(skeletonData)
+                        .fill(0)
+                        .map((item, index) => (
+                            <Skeleton
+                                key={index}
+                                style={{
+                                    height: 170,
+                                    width: "100%",
+                                    marginTop: 20,
+                                }}
+                            />
+                        ))}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "end",
+                            mt: 3,
+                            alignItems: "center",
+                        }}
+                    >
+                        <Skeleton style={{ width: 140, height: 20 }} />
+                        <Skeleton
+                            style={{ width: 140, height: 30, marginLeft: 5 }}
+                        />
+                    </Box>
                 </Box>
             ) : (
                 <>

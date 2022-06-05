@@ -135,6 +135,13 @@ class API {
         return result;
     }
 
+    patchBasket(id, count) {
+        const result = api(`api/v1/carts/${id}/`).patch(null, {
+            count: count,
+        });
+        return result;
+    }
+
     async getOrdersMe() {
         let result = await api(`api/v1/orders/me/`).get();
         return result;
