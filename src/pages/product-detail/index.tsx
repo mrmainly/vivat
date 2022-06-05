@@ -28,7 +28,11 @@ const ProductDetail = () => {
                 .then((resId) => {
                     API.getProductAnal(resId).then((res) => {
                         console.log("anal", res);
-                        setAnalogData(res.data.results);
+                        if (res.data.results) {
+                            setAnalogData(res.data.results);
+                        } else {
+                            setAnalogData(res.data);
+                        }
                     });
                 })
                 .catch((error) => console.log(error));

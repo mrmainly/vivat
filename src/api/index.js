@@ -102,6 +102,11 @@ class API {
         return result;
     }
 
+    transferBasket(id) {
+        const result = api(`api/v1/carts/${id}/`).post(null);
+        return result;
+    }
+
     async getProductCatalog() {
         let result = await api(`api/v1/goods/catalogue/`).get();
         return result;

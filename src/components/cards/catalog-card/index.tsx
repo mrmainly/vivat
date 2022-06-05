@@ -22,10 +22,8 @@ const Root = styled(Box)(({ theme }) => ({
     // justifyContent: 'center',
     padding: 10,
     background: "#FFFFFF",
+    margin: "0 auto",
     width: "90%",
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 5,
     "&:hover": {
         boxShadow: "0px 0px 20px rgba(0,0,0,0.8)",
     },
@@ -87,7 +85,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     };
 
     const TransferFavorite = () => {
-        API.transferFavorite(id)
+        API.transferBasket(id)
             .then((res) => {
                 toast.success("Товар добавлен в корзину");
             })

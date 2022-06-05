@@ -9,6 +9,7 @@ import drawer_links from "../../../local_data/drawer_links";
 import API from "../../../api";
 import ROUTES from "../../../routes";
 import ThemeMain from "../../../theme";
+import MyText from "../../text";
 
 interface MainDrawerProps {
     state: any;
@@ -58,13 +59,6 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                     {data.map((item: any, index: number) => (
                         <MenuItem
                             key={index}
-                            sx={{
-                                color: "#20B12E",
-                                textTransform: "uppercase",
-                                textOverflow: "ellipsis",
-                                overflow: "hidden",
-                                whiteSpace: "nowrap",
-                            }}
                             onClick={() => {
                                 navigate(ROUTES.PRODUCT_PAGE, {
                                     state: { id: item.id, title: item.name },
@@ -72,7 +66,17 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                                 handleClose();
                             }}
                         >
-                            {item.name}
+                            <MyText
+                                sx={{
+                                    color: "#20B12E",
+                                    textTransform: "uppercase",
+                                    textOverflow: "ellipsis",
+                                    overflow: "hidden",
+                                    whiteSpace: "nowrap",
+                                }}
+                            >
+                                {item.name}
+                            </MyText>
                         </MenuItem>
                     ))}
 

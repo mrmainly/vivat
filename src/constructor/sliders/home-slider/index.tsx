@@ -12,6 +12,22 @@ interface HomeSliderProps {
     data?: any;
 }
 
+const HomeSliderBox = styled(Box)(({ theme }) => ({
+    height: 500,
+    borderRadius: 10,
+    width: "98%",
+    margin: "0 auto",
+    display: "flex",
+    alignItems: "end",
+    justifyContent: "center",
+    [theme.breakpoints.down("md")]: {
+        height: 300,
+    },
+    [theme.breakpoints.down("sm")]: {
+        height: 200,
+    },
+}));
+
 const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
     const navigate = useNavigate();
 
@@ -30,19 +46,12 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
             <Slider {...settings}>
                 {data.map((item: any, index: number) => (
                     <Box key={index}>
-                        <Box
+                        <HomeSliderBox
                             sx={{
                                 background: `url(http://xn----7sbbagaytx2c4ad.xn--p1ai${item.banner_image})`,
-                                height: 500,
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
-                                borderRadius: 10,
-                                width: "98%",
-                                margin: "0 auto",
-                                display: "flex",
-                                alignItems: "end",
-                                justifyContent: "center",
                             }}
                         >
                             <Button
@@ -61,7 +70,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                             >
                                 Купить
                             </Button>
-                        </Box>
+                        </HomeSliderBox>
                     </Box>
                 ))}
             </Slider>

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 import { Grid, Box } from "@mui/material";
 import { styled } from "@mui/system";
+import { toast } from "react-toastify";
 
 import { MyText, MyButton } from "../../../components";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ThemeMain from "../../../theme";
+import API from "../../../api";
 
 const Item = styled(Box)(({ theme }) => ({
     minHeight: 550,
@@ -47,7 +49,15 @@ interface MainInfoProps {
 }
 
 const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
-    const [photo, setPhoto] = useState("");
+    const transferBasket = () => {
+        API.transferBasket(data.id)
+            .then((res) => {
+                toast.success("Товар добавлен в корзину");
+            })
+            .catch((error) => {
+                toast.error("Товар не найден");
+            });
+    };
 
     const array = [
         {
@@ -75,20 +85,6 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
             value: data.country,
         },
     ];
-    const array2 = [
-        {
-            label: "Самовызов через 2 часа:",
-            value: "в 2 аптеках",
-        },
-        {
-            label: "Под заказ:",
-            value: "В 3 аптеках",
-        },
-        {
-            label: "Доставка:",
-            value: "от 149 руб.",
-        },
-    ];
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={1}>
@@ -113,7 +109,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                     mb: 0.5,
                                 }}
                             >
-                                Товара в наличии
+                                Товар в наличии
                             </MyText>
                         ) : (
                             <MyText
@@ -173,7 +169,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             </MyText>
                         </Box>
                         <Box sx={{ mt: 2 }}>
-                            <MyButton>Добавить в корзину</MyButton>
+                            <MyButton onClick={transferBasket}>
+                                Добавить в корзину
+                            </MyButton>
                         </Box>
                         <Box sx={{ mt: 2 }}>
                             {/* {array2.map((item, index) => (

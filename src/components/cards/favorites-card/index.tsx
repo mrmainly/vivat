@@ -11,7 +11,7 @@ import API from "../../../api";
 import ROUTES from "../../../routes";
 
 interface FavoritesCardProps {
-    title: string;
+    GoodsCode: any;
     stock: boolean;
     deliveryStatus: boolean;
     price: number;
@@ -24,7 +24,6 @@ interface FavoritesCardProps {
 }
 
 const FavoritesCard: React.FC<FavoritesCardProps> = ({
-    title,
     stock,
     deliveryStatus,
     price,
@@ -33,6 +32,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     discountVal,
     status,
     setStatus,
+    GoodsCode,
 }) => {
     const navigate = useNavigate();
 
@@ -59,8 +59,8 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     return (
         <Box sx={{ mt: 2 }}>
             <BorderLine sx={{ mb: 2 }} />
-            <MyText variant="body1" sx={{ mb: 1 }}>
-                {title}
+            <MyText variant="h6" sx={{ mb: 1 }}>
+                {GoodsCode.name}
             </MyText>
             <Box sx={{ mb: 1 }}>
                 {stock ? (

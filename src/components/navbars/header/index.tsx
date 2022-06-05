@@ -301,7 +301,7 @@ const Header = () => {
                                 sx={{ mr: 0.5 }}
                                 onClick={() => {
                                     jwttoken
-                                        ? handleProfileDrawerOpen()
+                                        ? navigate(ROUTES.BASICINFORMATION)
                                         : handleLoginOpen();
                                 }}
                             >

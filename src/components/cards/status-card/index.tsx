@@ -42,6 +42,7 @@ const InfoBox = styled(Box)(({ theme }) => ({
     flexDirection: "column",
     justifyContent: "space-between",
     width: "100%",
+    height: "100%",
     [theme.breakpoints.down("sm")]: {
         marginLeft: 0,
         marginTop: 20,
@@ -75,41 +76,34 @@ const StatusCard: React.FC<StatusCardProps> = ({
                 <Box
                     sx={{
                         display: "flex",
+                        flexDirection: "column",
                         justifyContent: "space-between",
-                        alignItems: "center",
+                        height: "100%",
                     }}
                 >
                     <MyText variant="body1" sx={{ fontStyle: "normal" }}>
                         {title}
                     </MyText>
+
+                    <MyText variant="body2" sx={{ color: "gray" }}>
+                        Производитель:
+                        <span style={{ marginLeft: 15, color: "#0D99FF" }}>
+                            {producer}
+                        </span>
+                    </MyText>
+                    <MyText variant="body2" sx={{ color: "gray" }}>
+                        Цена:
+                        <span style={{ marginLeft: 15, color: "black" }}>
+                            {price} ₽
+                        </span>
+                    </MyText>
+                    {/* <MyText variant="body2" sx={{ color: "gray" }}>
+                        Код товара:
+                        <span style={{ marginLeft: 15, color: "black" }}>
+                            {GoodsCode}
+                        </span>
+                    </MyText> */}
                 </Box>
-                <MyText variant="body2" sx={{ color: "gray" }}>
-                    Производитель:
-                    <span style={{ marginLeft: 15, color: "#0D99FF" }}>
-                        {producer}
-                    </span>
-                </MyText>
-                <MyText variant="body2" sx={{ color: "gray" }}>
-                    Цена:
-                    <span style={{ marginLeft: 15, color: "black" }}>
-                        {price}
-                    </span>
-                </MyText>
-                <MyText variant="body2" sx={{ color: "gray" }}>
-                    Код товара:
-                    <span style={{ marginLeft: 15, color: "black" }}>
-                        {GoodsCode}
-                    </span>
-                </MyText>
-                {stock ? (
-                    <MyText variant="body2" sx={{ color: "#55CD61" }}>
-                        В наличии
-                    </MyText>
-                ) : (
-                    <MyText variant="body2" sx={{ color: "red" }}>
-                        Нет в наличии
-                    </MyText>
-                )}
             </InfoBox>
         </Root>
     );

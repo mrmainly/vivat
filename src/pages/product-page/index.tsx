@@ -40,7 +40,12 @@ const ProductPage = () => {
             await API.getProductsList(id, currentPage)
                 .then((res) => {
                     console.log(res);
-                    setData(res.data.results);
+                    if (res.data.results) {
+                        setData(res.data.results);
+                    } else {
+                        setData(res.data);
+                    }
+
                     setCount(res.data.count);
                 })
                 .catch((error) => console.log(error));

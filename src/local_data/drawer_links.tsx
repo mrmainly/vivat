@@ -19,7 +19,7 @@ const drawer_links = [
     },
     {
         label: "Работа",
-        to: ROUTES.WORK,
+        to: ROUTES.VIVAT_INFO,
     },
     {
         label: "Новости",

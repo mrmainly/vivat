@@ -67,7 +67,7 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                         </Grid>
                     ))
                 ) : (
-                    <Box>
+                    <Box sx={{ mt: 1, ml: 3 }}>
                         <MyText variant="h6">
                             На данный момент нету лекарств
                         </MyText>

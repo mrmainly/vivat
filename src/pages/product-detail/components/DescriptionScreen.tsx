@@ -82,10 +82,8 @@ const DescriptionScreen: React.FC<DescrProps> = ({ analData }) => {
             >
                 <TabPanel value={value} index={0} dir={theme.direction}>
                     <Description />
-                    21``
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    {/* <Analogues data={analData} /> */}
                     <MainCardsConstructor data={analData} />
                 </TabPanel>
             </SwipeableViews>
