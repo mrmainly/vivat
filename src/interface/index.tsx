@@ -123,6 +123,7 @@ interface GoodsCardProps {
     producer?: string;
     qty?: number;
     fav?: any;
+    stocks?: any;
     // barcodes?: number;
     // code?: string;
     // mmmEn?: string;

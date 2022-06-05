@@ -45,7 +45,6 @@ const ProductPage = () => {
                     } else {
                         setData(res.data);
                     }
-
                     setCount(res.data.count);
                 })
                 .catch((error) => console.log(error));

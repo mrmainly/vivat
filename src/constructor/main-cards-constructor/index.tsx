@@ -54,14 +54,15 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                         >
                             <CatalogCard
                                 id={item.id}
-                                price={item?.stocks?.priceBuy}
+                                // price={item?.stocks?.priceBuy}
+                                stocks={item.stocks}
                                 specialText={item.specialText}
                                 img={item?.photo?.fileData}
                                 description={item.description}
-                                specialPrice={item?.stocks?.priceSale}
+                                // specialPrice={item?.stocks?.priceSale}
                                 name={item.name}
                                 producer={item.producer}
-                                qty={item?.stocks.qty}
+                                // qty={item?.stocks.qty}
                                 fav={item.fav}
                             />
                         </Grid>

@@ -76,7 +76,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
                     </MyText>
                 )}
             </Box>
-            <Box sx={{ mb: 1 }}>
+            {/* <Box sx={{ mb: 1 }}>
                 {deliveryStatus ? (
                     <MyText
                         variant="body2"
@@ -89,7 +89,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
                         Возможна доставка курьером
                     </MyText>
                 )}
-            </Box>
+            </Box> */}
             {discountVal ? (
                 <Box sx={{ display: "flex", mt: 1 }}>
                     <MyText variant="h6" sx={{ fontWeight: 600 }}>

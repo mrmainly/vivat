@@ -64,8 +64,8 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     status,
     setStatus,
     producer,
-    qty,
     fav,
+    stocks,
 }) => {
     const navigate = useNavigate();
     const dispatch = useContext(DispatchContext);
@@ -120,34 +120,50 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
             <MyText variant="body2" sx={{ color: "#2F80ED", mt: 0.5 }}>
                 {producer}
             </MyText>
-            {qty === 0 ? (
+            {stocks ? (
+                stocks.qty === 0 ? (
+                    <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>
+                        Нет в наличии
+                    </MyText>
+                ) : (
+                    <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
+                        В наличии
+                    </MyText>
+                )
+            ) : (
                 <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>
                     Нет в наличии
-                </MyText>
-            ) : (
-                <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
-                    В наличии
                 </MyText>
             )}
             <CombinedBox>
                 <Box sx={{ display: "flex" }}>
-                    <MyText
-                        variant="h6"
-                        sx={{
-                            fontWeight: "bold",
-                            fontFamily: "Montserrat",
-                        }}
-                    >
-                        {specialPrice}₽
-                    </MyText>
+                    {stocks ? (
+                        <MyText
+                            variant="h6"
+                            sx={{
+                                fontWeight: "bold",
+                                fontFamily: "Montserrat",
+                            }}
+                        >
+                            {stocks.priceSale}₽
+                        </MyText>
+                    ) : (
+                        <MyText
+                            sx={{
+                                fontWeight: "bold",
+                                fontFamily: "Montserrat",
+                                color: "#999999",
+                                textDecoration: "line-through",
+                                ml: 1,
+                            }}
+                        >
+                            Нету
+                        </MyText>
+                    )}
                     {/* <MyText
                         variant="body2"
                         sx={{
-                            fontWeight: "bold",
-                            fontFamily: "Montserrat",
-                            color: "#999999",
-                            textDecoration: "line-through",
-                            ml: 1,
+                           
                         }}
                     >
                         {specialPrice}₽
