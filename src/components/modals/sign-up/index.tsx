@@ -19,6 +19,7 @@ import { StateContext, DispatchContext } from "../../../store";
 import { Form, Input, MyButton, MyText } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
+import { SignModalProps } from "../../../interface";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -89,86 +90,63 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-export default function SignUp() {
+const SignUpModal: React.FC<SignModalProps> = ({
+    registerModal,
+    setRegisterClose,
+    setLoginOpen,
+}) => {
     const [passwordText, setPasswordText] = useState(false);
     const [v1, setV1] = useState(true);
     const [verifyVersion, setVerifyVersion] = useState(false);
     const [passwordV, setPasswordV] = useState(false);
+    const [dangerText, setDangerText] = useState(false);
+    const [code, setCode] = useState("");
 
-    const state = useContext(StateContext);
-    const dispatch = useContext(DispatchContext);
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });
     const onSubmit = (data: any) => {
         API.sendRegister({ ...data })
             .then((res) => {
-                dispatch({
-                    type: "verify_code",
-                    payload: { code: res.data.code },
-                });
-                dispatch({
-                    type: "register_version",
-                    payload: {
-                        v1: false,
-                        verify_version: true,
-                        password_version: false,
-                    },
-                });
+                setCode(res.data.code);
+                setV1(false);
+                setVerifyVersion(true);
             })
             .catch((error) => {
-                dispatch({ type: "register", payload: { danger_text: true } });
+                setDangerText(true);
             });
     };
     const onSubmitVerify = (data: any) => {
         API.sendVerifyCode({ ...data })
             .then((res) => {
-                dispatch({
-                    type: "register_version",
-                    payload: {
-                        v1: false,
-                        verify_version: false,
-                        password_version: true,
-                    },
-                });
+                setVerifyVersion(false);
+                setPasswordV(true);
             })
             .catch(() => {
                 toast.error("вы ввели не правильные данные");
             });
     };
     const onSubmitPassword = (data: any) => {
-        if (state.verify_code.code !== "") {
-            if (data.password == data.forgot_password) {
-                API.sendPassword({
-                    password: data.password,
-                    code: state.verify_code.code,
+        if (data.password == data.forgot_password) {
+            API.sendPassword({
+                password: data.password,
+                code: code,
+            })
+                .then((res) => {
+                    setPasswordV(false);
+                    setLoginOpen();
+                    setRegisterClose();
                 })
-                    .then((res) => {
-                        dispatch({
-                            type: "auth_modal",
-                            payload: {
-                                sign_up: false,
-                                sign_in: true,
-                                forgot: false,
-                            },
-                        });
-                    })
-                    .catch((error) => {
-                        toast.error("что то пошло не так");
-                    });
-                setPasswordText(false);
-            } else {
-                setPasswordText(true);
-            }
+                .catch((error) => {
+                    toast.error("что то пошло не так");
+                });
+            setPasswordText(false);
         } else {
-            alert("нету кода");
+            setPasswordText(true);
         }
     };
     const handleClose = () => {
-        dispatch({
-            type: "auth_modal",
-            payload: { sign_in: false, sign_up: false, forgot: false },
-        });
+        setRegisterClose();
     };
 
     return (
@@ -176,7 +154,7 @@ export default function SignUp() {
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
-                open={state.auth_modal.sign_up}
+                open={registerModal}
             >
                 <BootstrapDialogTitle
                     id="customized-dialog-title"
@@ -184,7 +162,7 @@ export default function SignUp() {
                 >
                     Регистрация
                 </BootstrapDialogTitle>
-                {state.register_version.v1 && (
+                {v1 && (
                     <ModalContent dividers>
                         <Box
                             sx={{
@@ -195,7 +173,7 @@ export default function SignUp() {
                                 paddingBottom: 2,
                             }}
                         >
-                            {state.register.danger_text ? (
+                            {dangerText ? (
                                 <p>
                                     Пользователь с таким телефоном уже
                                     зарегистрирован. Необходимо{" "}
@@ -205,16 +183,7 @@ export default function SignUp() {
                                                 .main,
                                             cursor: "pointer",
                                         }}
-                                        onClick={() => {
-                                            dispatch({
-                                                type: "auth_modal",
-                                                payload: {
-                                                    sign_up: false,
-                                                    sign_in: true,
-                                                    forgot: false,
-                                                },
-                                            });
-                                        }}
+                                        onClick={setLoginOpen}
                                     >
                                         авторизоваться.
                                     </span>
@@ -263,7 +232,7 @@ export default function SignUp() {
                         </Box>
                     </ModalContent>
                 )}
-                {state.register_version.verify_version && (
+                {verifyVersion && (
                     <ModalContent dividers>
                         <Box
                             sx={{
@@ -282,13 +251,13 @@ export default function SignUp() {
                                     required
                                 />
                                 <MyButton style={{ marginTop: 10 }} fullWidth>
-                                    Получить код
+                                    Ввести пароль
                                 </MyButton>
                             </Form>
                         </Box>
                     </ModalContent>
                 )}
-                {state.register_version.password_version && (
+                {passwordV && (
                     <ModalContent dividers>
                         <Box
                             sx={{
@@ -314,7 +283,7 @@ export default function SignUp() {
                                     required
                                 />
                                 <MyButton style={{ marginTop: 10 }} fullWidth>
-                                    Получить код
+                                    Завершить
                                 </MyButton>
                             </Form>
                         </Box>
@@ -323,4 +292,6 @@ export default function SignUp() {
             </BootstrapDialog>
         </div>
     );
-}
+};
+
+export default SignUpModal;

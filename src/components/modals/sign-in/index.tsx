@@ -20,6 +20,7 @@ import { Form, Input, MyButton, MyText, BorderLine } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 import ROUTES from "../../../routes";
+import { SignModalProps } from "../../../interface";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -100,7 +101,12 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-export default function SignIn() {
+const SignIn: React.FC<SignModalProps> = ({
+    login,
+    setLoginClose,
+    setRegisterOpen,
+    setForgotOpen,
+}) => {
     const state = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
 
@@ -110,10 +116,7 @@ export default function SignIn() {
         mode: "onBlur",
     });
     const handleClose = () => {
-        dispatch({
-            type: "auth_modal",
-            payload: { sign_in: false, sign_up: false, forgot: false },
-        });
+        setLoginClose();
     };
 
     const onSubmit = (data: any) => {
@@ -121,10 +124,7 @@ export default function SignIn() {
             .then((res) => {
                 toast.success("авторизация прошла успешно");
                 cookie.set("jwttoken", res.data.token);
-                dispatch({
-                    type: "auth_modal",
-                    payload: { sign_in: false, forgot: false, sign_up: false },
-                });
+                setLoginClose();
                 navigate(ROUTES.BASICINFORMATION);
             })
             .catch((error) => {
@@ -135,7 +135,7 @@ export default function SignIn() {
         <BootstrapDialog
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"
-            open={state.auth_modal.sign_in}
+            open={login}
         >
             <BootstrapDialogTitle
                 id="customized-dialog-title"
@@ -178,16 +178,10 @@ export default function SignIn() {
                                 display: "flex",
                                 justifyContent: "center",
                             }}
-                            onClick={() =>
-                                dispatch({
-                                    type: "auth_modal",
-                                    payload: {
-                                        sign_in: false,
-                                        sign_up: false,
-                                        forgot: true,
-                                    },
-                                })
-                            }
+                            onClick={() => {
+                                handleClose();
+                                setForgotOpen();
+                            }}
                         >
                             Забыли пароль?
                         </MenuItem>
@@ -198,16 +192,10 @@ export default function SignIn() {
                     <BorderLine sx={{ mt: 2, mb: 2, width: 100 }} />
                     <MyButton
                         fullWidth
-                        onClick={() =>
-                            dispatch({
-                                type: "auth_modal",
-                                payload: {
-                                    sign_in: false,
-                                    sign_up: true,
-                                    forgot: false,
-                                },
-                            })
-                        }
+                        onClick={() => {
+                            handleClose();
+                            setRegisterOpen();
+                        }}
                     >
                         Регистрация
                     </MyButton>
@@ -220,4 +208,6 @@ export default function SignIn() {
                 </DialogActions> */}
         </BootstrapDialog>
     );
-}
+};
+
+export default SignIn;

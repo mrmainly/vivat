@@ -24,11 +24,12 @@ import {
     BorderLine,
     ProfileDrawer,
     FavoritesDrawer,
-    SubProductDrawer,
+    SignInModal,
+    SignUpModal,
+    ForgotPasswordModal,
 } from "../..";
 import { DispatchContext } from "../../../store";
 import ROUTES from "../../../routes";
-import API from "../../../api";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -97,6 +98,9 @@ const Header = () => {
         drawerFavoritesOpen: false,
         statusProduct: false,
         subProductDrawer: false,
+        login: false,
+        register: false,
+        forgot: false,
     });
     // const [data, setData] = useState([]);
 
@@ -106,7 +110,9 @@ const Header = () => {
         drawerOpen,
         drawerProfileOpen,
         drawerFavoritesOpen,
-        subProductDrawer,
+        login,
+        register,
+        forgot,
     } = state;
     const dispatch = useContext(DispatchContext);
 
@@ -125,10 +131,21 @@ const Header = () => {
     const handleFavoritesDrawerOpen = () =>
         setState((prevState) => ({ ...prevState, drawerFavoritesOpen: true }));
 
-    const handleSubProductDrawerClose = () =>
-        setState((prevState) => ({ ...prevState, drawerFavoritesOpen: false }));
-    const handleSubProductDrawerOpen = () =>
-        setState((prevState) => ({ ...prevState, drawerFavoritesOpen: true }));
+    const handleLoginClose = () =>
+        setState((prevState) => ({ ...prevState, login: false }));
+    const handleLoginOpen = () =>
+        setState((prevState) => ({ ...prevState, login: true }));
+
+    const handleRegisterClose = () =>
+        setState((prevState) => ({ ...prevState, register: false }));
+    const handleRegisterOpen = () =>
+        setState((prevState) => ({ ...prevState, register: true }));
+
+    const handleForgotClose = () =>
+        setState((prevState) => ({ ...prevState, forgot: false }));
+    const handleForgotOpen = () =>
+        setState((prevState) => ({ ...prevState, forgot: true }));
+
     // useEffect(() => {
     //     API.getFavorites()
     //         .then((res) => {
@@ -271,14 +288,7 @@ const Header = () => {
                                 onClick={() => {
                                     jwttoken
                                         ? handleFavoritesDrawerOpen()
-                                        : dispatch({
-                                              type: "auth_modal",
-                                              payload: {
-                                                  sign_in: true,
-                                                  sign_up: false,
-                                                  forgot: false,
-                                              },
-                                          });
+                                        : handleLoginOpen();
                                 }}
                             >
                                 <FavoriteBorderIcon
@@ -292,14 +302,7 @@ const Header = () => {
                                 onClick={() => {
                                     jwttoken
                                         ? handleProfileDrawerOpen()
-                                        : dispatch({
-                                              type: "auth_modal",
-                                              payload: {
-                                                  sign_in: true,
-                                                  sign_up: false,
-                                                  forgot: false,
-                                              },
-                                          });
+                                        : handleLoginOpen();
                                 }}
                             >
                                 <AccountCircleIcon
@@ -311,14 +314,7 @@ const Header = () => {
                                 onClick={() => {
                                     jwttoken
                                         ? navigate(ROUTES.BASKET)
-                                        : dispatch({
-                                              type: "auth_modal",
-                                              payload: {
-                                                  sign_in: true,
-                                                  sign_up: false,
-                                                  forgot: false,
-                                              },
-                                          });
+                                        : handleLoginOpen();
                                 }}
                             >
                                 <img src="/img/Frame954.png" />
@@ -343,6 +339,27 @@ const Header = () => {
                 <Desktop />
             </AppBar>
             <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
+
+            <SignUpModal
+                registerModal={register}
+                setRegisterClose={handleRegisterClose}
+                setRegisterOpen={handleRegisterOpen}
+                setLoginOpen={handleLoginOpen}
+            />
+            <SignInModal
+                login={login}
+                setLoginClose={handleLoginClose}
+                setRegisterClose={handleRegisterClose}
+                setRegisterOpen={handleRegisterOpen}
+                setForgotOpen={handleForgotOpen}
+            />
+
+            <ForgotPasswordModal
+                forgot={forgot}
+                setForgotClose={handleForgotClose}
+                setLoginOpen={handleLoginOpen}
+            />
+
             <ProfileDrawer
                 state={drawerProfileOpen}
                 handleClose={handleProfileDrawerClose}

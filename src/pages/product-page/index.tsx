@@ -20,7 +20,7 @@ const ProductPage = () => {
     const [data, setData] = useState([]);
     const [count, setCount] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const location = useLocation();
     const state = location.state as CustomizedState;
@@ -36,6 +36,7 @@ const ProductPage = () => {
 
     useEffect(() => {
         const getProducts = async () => {
+            setLoading(true);
             await API.getProductsList(id, currentPage)
                 .then((res) => {
                     console.log(res);

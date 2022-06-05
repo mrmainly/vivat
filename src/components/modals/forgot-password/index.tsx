@@ -17,6 +17,7 @@ import { StateContext, DispatchContext } from "../../../store";
 import { Form, Input, MyButton, MyText, ToggleButton } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
+import { SignModalProps } from "../../../interface";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -89,7 +90,11 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-export default function ForgotPassword() {
+const ForgotPasswordModal: React.FC<SignModalProps> = ({
+    forgot,
+    setForgotClose,
+    setLoginOpen,
+}) => {
     const [secondForm, setSecondForm] = useState(false);
     const [firstForm, setFirstForm] = useState(true);
     const [threeForm, setThreeForm] = useState(false);
@@ -104,11 +109,9 @@ export default function ForgotPassword() {
     });
 
     const handleClose = () => {
-        dispatch({
-            type: "auth_modal",
-            payload: { sign_in: false, sign_up: false, forgot: false },
-        });
+        setForgotClose();
     };
+
     const choiceAPI = (data: any) => {
         setPhone(data.phone);
         API.sendPhoneMailForgotPassword(data, toggle)
@@ -154,14 +157,8 @@ export default function ForgotPassword() {
         if (data.password === data.forgot_password) {
             API.reset_password(data)
                 .then((res) => {
-                    dispatch({
-                        type: "auth_modal",
-                        payload: {
-                            sign_up: false,
-                            sign_in: true,
-                            forgot: false,
-                        },
-                    });
+                    handleClose();
+                    setLoginOpen();
                 })
                 .catch((err) => toast.error("что то пошло не так"));
         } else {
@@ -174,7 +171,7 @@ export default function ForgotPassword() {
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
-                open={state.auth_modal.forgot}
+                open={forgot}
             >
                 <BootstrapDialogTitle
                     id="customized-dialog-title"
@@ -305,4 +302,6 @@ export default function ForgotPassword() {
             </BootstrapDialog>
         </div>
     );
-}
+};
+
+export default ForgotPasswordModal;

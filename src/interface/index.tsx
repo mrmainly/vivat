@@ -168,6 +168,18 @@ interface MainDrawerProps {
     handleClose: any;
 }
 
+interface SignModalProps {
+    login?: any;
+    setLoginClose?: any;
+    setLoginOpen?: any;
+    registerModal?: any;
+    setRegisterClose?: any;
+    setRegisterOpen?: any;
+    forgot?: any;
+    setForgotOpen?: any;
+    setForgotClose?: any;
+}
+
 export type {
     MyTextProps,
     InputProps,
@@ -188,4 +200,5 @@ export type {
     BlogCardProps,
     StockCardProps,
     MainDrawerProps,
+    SignModalProps,
 };

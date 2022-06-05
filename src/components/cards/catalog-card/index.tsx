@@ -172,7 +172,10 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                 </MyButton>
                 <IconButton size="small" sx={{ mr: 1 }} onClick={addedFavorite}>
                     {fav ? (
-                        <FavoriteIcon sx={{ color: "#55CD61" }} />
+                        <FavoriteIcon
+                            sx={{ color: "#55CD61" }}
+                            fontSize="large"
+                        />
                     ) : (
                         <img src="/img/Favorite_light.png" />
                     )}

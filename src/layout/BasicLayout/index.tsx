@@ -7,9 +7,6 @@ import {
     Header,
     Footer,
     MyContainer,
-    SignInModal,
-    SignUpModal,
-    ForgotPasswordModal,
     MobileDown,
     Mobile,
 } from "../../components";
@@ -34,10 +31,6 @@ const BasicLayout = () => {
         <div style={{ overflow: "hidden" }}>
             <ToastContainer autoClose={1000} />
             {mobileView ? <Mobile /> : <Header />}
-            <SignInModal />
-            <SignUpModal />
-
-            {state.auth_modal.forgot && <ForgotPasswordModal />}
             <MyContainer
                 wrapper={true}
                 minHeight={600}

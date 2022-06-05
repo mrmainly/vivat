@@ -7,7 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 import { DispatchContext } from "../../../store";
 import MyContainer from "../../container";
-import { ProfileDrawer, FavoritesDrawer } from "../..";
+import {
+    ProfileDrawer,
+    FavoritesDrawer,
+    SignInModal,
+    SignUpModal,
+    ForgotPasswordModal,
+} from "../..";
 import ROUTES from "../../../routes";
 
 const MobileBox = styled(Box)(({ theme }) => ({
@@ -26,6 +32,28 @@ const MobileBox = styled(Box)(({ theme }) => ({
 const MobileDown = () => {
     const [profileDrawer, setProfileDrawer] = useState(false);
     const [favoriteDrawer, setFavotiteDrawer] = useState(false);
+    const [state, setState] = useState({
+        login: false,
+        register: false,
+        forgot: false,
+    });
+
+    const { login, register, forgot } = state;
+
+    const handleLoginClose = () =>
+        setState((prevState) => ({ ...prevState, login: false }));
+    const handleLoginOpen = () =>
+        setState((prevState) => ({ ...prevState, login: true }));
+
+    const handleRegisterClose = () =>
+        setState((prevState) => ({ ...prevState, register: false }));
+    const handleRegisterOpen = () =>
+        setState((prevState) => ({ ...prevState, register: true }));
+
+    const handleForgotClose = () =>
+        setState((prevState) => ({ ...prevState, forgot: false }));
+    const handleForgotOpen = () =>
+        setState((prevState) => ({ ...prevState, forgot: true }));
 
     const handleProfileDrawerClose = () => setProfileDrawer(false);
     const handleFavoriteDrawerClose = () => setFavotiteDrawer(false);
@@ -52,14 +80,7 @@ const MobileDown = () => {
                         onClick={() => {
                             jwttoken
                                 ? setFavotiteDrawer(true)
-                                : dispatch({
-                                      type: "auth_modal",
-                                      payload: {
-                                          sign_in: true,
-                                          sign_up: false,
-                                          forgot: false,
-                                      },
-                                  });
+                                : handleLoginOpen();
                         }}
                     >
                         <img src="/img/Favorite_light.png" />
@@ -68,14 +89,7 @@ const MobileDown = () => {
                         onClick={() => {
                             jwttoken
                                 ? setProfileDrawer(true)
-                                : dispatch({
-                                      type: "auth_modal",
-                                      payload: {
-                                          sign_in: true,
-                                          sign_up: false,
-                                          forgot: false,
-                                      },
-                                  });
+                                : handleLoginOpen();
                         }}
                     >
                         <img src="/img/User_cicrle_light.png" />
@@ -84,20 +98,34 @@ const MobileDown = () => {
                         onClick={() => {
                             jwttoken
                                 ? navigate(ROUTES.BASKET)
-                                : dispatch({
-                                      type: "auth_modal",
-                                      payload: {
-                                          sign_in: true,
-                                          sign_up: false,
-                                          forgot: false,
-                                      },
-                                  });
+                                : handleLoginOpen();
                         }}
                     >
                         <img src="/img/Bag_light.png" />
                     </IconButton>
                 </Box>
             </MyContainer>
+
+            <SignUpModal
+                registerModal={register}
+                setRegisterClose={handleRegisterClose}
+                setRegisterOpen={handleRegisterOpen}
+                setLoginOpen={handleLoginOpen}
+            />
+            <SignInModal
+                login={login}
+                setLoginClose={handleLoginClose}
+                setRegisterClose={handleRegisterClose}
+                setRegisterOpen={handleRegisterOpen}
+                setForgotOpen={handleForgotOpen}
+            />
+
+            <ForgotPasswordModal
+                forgot={forgot}
+                setForgotClose={handleForgotClose}
+                setLoginOpen={handleLoginOpen}
+            />
+
             <ProfileDrawer
                 state={profileDrawer}
                 handleClose={handleProfileDrawerClose}
