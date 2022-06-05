@@ -11,6 +11,7 @@ import { CircularProgress } from "@mui/material";
 
 const ProductDetail = () => {
     const [data, setData] = useState<any>();
+    const [analogData, setAnalogData] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const params = useParams();
@@ -22,6 +23,13 @@ const ProductDetail = () => {
                 .then((res) => {
                     setData(res.data);
                     console.log(res);
+                    return res.data.id;
+                })
+                .then((resId) => {
+                    API.getProductAnal(resId).then((res) => {
+                        console.log("anal", res);
+                        setAnalogData(res.data.results);
+                    });
                 })
                 .catch((error) => console.log(error));
             setLoading(false);
@@ -33,11 +41,11 @@ const ProductDetail = () => {
             {data ? (
                 <>
                     <MainInfo data={data} />
-                    <ProductCardsSlider
+                    {/* <ProductCardsSlider
                         title="Форма выпуска"
                         data={product_data}
-                    />
-                    <DescriptionScreen />
+                    /> */}
+                    <DescriptionScreen analData={analogData} />
                 </>
             ) : (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const Analogues = () => {
-    return (
-        <div>
-            Analogues
-        </div>
-    )
+interface AnaloguesProps {
+    data?: any;
 }
 
-export default Analogues
+const Analogues: React.FC<AnaloguesProps> = ({ data }) => {
+    return <div>Analogues</div>;
+};
+
+export default Analogues;

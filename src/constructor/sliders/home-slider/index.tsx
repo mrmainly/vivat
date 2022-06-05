@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 
-import { ProductCard, MyText } from "../../../components";
-import { ProductSliderProps } from "../../../interface";
 import API from "../../../api";
+import ROUTES from "../../../routes";
 
-const HomeSlider = () => {
-    const [data, setData] = useState([]);
+interface HomeSliderProps {
+    data?: any;
+}
 
-    useEffect(() => {
-        API.getPromotion()
-            .then((res) => {
-                console.log(res);
-                setData(res.data.results);
-            })
-            .catch((error) => console.log(error));
-    }, []);
+const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
+    const navigate = useNavigate();
 
     const settings = {
         dots: true,
@@ -29,21 +24,45 @@ const HomeSlider = () => {
         slidesToShow: 1,
     };
     // const data = ["Rectangle4014", "Rectangle4014"];
+    console.log(data);
     return (
         <Box>
             <Slider {...settings}>
                 {data.map((item: any, index: number) => (
-                    <Box
-                        key={index}
-                        sx={{
-                            background: `url(${item.banner_image})`,
-                            height: 450,
-                            backgroundRepeat: "no-repeat",
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                            borderRadius: 10,
-                        }}
-                    ></Box>
+                    <Box key={index}>
+                        <Box
+                            sx={{
+                                background: `url(http://xn----7sbbagaytx2c4ad.xn--p1ai${item.banner_image})`,
+                                height: 500,
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
+                                borderRadius: 10,
+                                width: "98%",
+                                margin: "0 auto",
+                                display: "flex",
+                                alignItems: "end",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    mb: 5,
+                                    background: "#e2211c",
+                                    fontSize: 20,
+                                }}
+                                size="large"
+                                onClick={() =>
+                                    navigate(
+                                        `${ROUTES.STOCK_DETAIL}/${item.id}`
+                                    )
+                                }
+                            >
+                                Купить
+                            </Button>
+                        </Box>
+                    </Box>
                 ))}
             </Slider>
         </Box>

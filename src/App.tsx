@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 

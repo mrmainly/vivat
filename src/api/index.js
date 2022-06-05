@@ -107,6 +107,11 @@ class API {
         return result;
     }
 
+    async getProductAnal(id) {
+        let result = await api(`api/v1/goods/analogue/${id}`).get();
+        return result;
+    }
+
     async getProductSubCatalog(id) {
         let result = await api(
             `api/v1/goods/catalogue/subcatalogue/${id}`
@@ -210,6 +215,11 @@ class API {
     //promotion
     async getPromotion() {
         let result = await api(`api/v1/promotion/`).get();
+        return result;
+    }
+
+    async getPromotionMain() {
+        let result = await api(`api/v1/promotion/main/`).get();
         return result;
     }
 

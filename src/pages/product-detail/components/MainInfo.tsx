@@ -21,6 +21,9 @@ const ItemImg = styled(Box)(({ theme }) => ({
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
 }));
 
 const Img = styled("img")(({ theme }) => ({
@@ -90,15 +93,13 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={1}>
                 <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-                    <ItemImg>
-                        <Img
-                            src={
-                                data?.photo?.fileData
-                                    ? `data:image/jpeg;base64,${data.photo.fileData}`
-                                    : "/img/tabletka.jpg"
-                            }
-                        />
-                    </ItemImg>
+                    <ItemImg
+                        sx={{
+                            backgroundImage: data?.photo?.fileData
+                                ? `url(data:image/jpeg;base64,${data.photo.fileData})`
+                                : "/img/tabletka.jpg",
+                        }}
+                    ></ItemImg>
                 </Grid>
                 <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                     <Item>
