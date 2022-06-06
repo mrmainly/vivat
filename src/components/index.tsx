@@ -36,7 +36,9 @@ import Mobile from "./navbars/mobile";
 import StatusCard from "./cards/status-card";
 import SubProductDrawer from "./drawers/sub-product-drawer";
 
-import SkeletonCatalogVersion from "./cards/catalog-card/SkeletonVersion";
+import SkeletonCatalogVersion from "./skeletons/catalog-card-skeleton";
+import SkeletonBasicInformation from "./skeletons/basic-informations-skeleton";
+import SkeletonProductDetail from "./skeletons/catalog-card-detail-skeleton";
 
 export {
     Header,
@@ -77,4 +79,6 @@ export {
     StatusCard,
     SubProductDrawer,
     SkeletonCatalogVersion,
+    SkeletonBasicInformation,
+    SkeletonProductDetail,
 };

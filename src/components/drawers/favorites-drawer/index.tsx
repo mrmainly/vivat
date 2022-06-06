@@ -17,17 +17,20 @@ interface MainDrawerProps {
 const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const stateContext = useContext(StateContext);
 
     useEffect(() => {
         const getFavorites = async () => {
-            API.getFavorites()
+            setLoading(true);
+            await API.getFavorites()
                 .then((res) => {
                     setData(res.data);
                     console.log(res);
                 })
                 .catch((error) => console.log(error));
+            setLoading(false);
         };
         getFavorites();
     }, [stateContext.favorite_status.status, status]);
@@ -44,6 +47,7 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                     width: 300,
                     padding: 30,
                     height: "100%",
+                    opacity: loading ? 0.5 : 1,
                 }}
             >
                 <Box

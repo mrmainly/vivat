@@ -92,104 +92,66 @@ const Basket = () => {
     return (
         <>
             <MyText variant="h6">Корзина</MyText>
-            {loading ? (
-                <Box sx={{ mt: 5 }}>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <Skeleton style={{ width: 170 }} />
-                        <Skeleton style={{ width: 170 }} />
-                    </Box>
-                    {Array(skeletonData)
-                        .fill(0)
-                        .map((item, index) => (
-                            <Skeleton
+
+            <>
+                {data.items ? (
+                    <Box sx={{ opacity: loading ? 0.5 : 1 }}>
+                        <ActionBox>
+                            <MyText variant="body2" sx={{ color: "grey" }}>
+                                {data.total_count} товаров на сумму{" "}
+                                {data.total_price} ₽
+                            </MyText>
+                            <DeleteMenuItem onClick={deleteBasket}>
+                                <MyText variant="body1">
+                                    Очистить корзину
+                                </MyText>
+                                <CloseIcon sx={{ ml: 1 }} />
+                            </DeleteMenuItem>
+                            <DeleteBox onClick={deleteBasket}>
+                                <MyText variant="body1">
+                                    Очистить корзину
+                                </MyText>
+                                <CloseIcon sx={{ ml: 1 }} />
+                            </DeleteBox>
+                        </ActionBox>
+                        {data?.items.map((item: any, index: number) => (
+                            <BasketCard
                                 key={index}
-                                style={{
-                                    height: 170,
-                                    width: "100%",
-                                    marginTop: 20,
-                                }}
+                                {...item}
+                                status={status}
+                                setStatus={setStatus}
                             />
                         ))}
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "end",
-                            mt: 3,
-                            alignItems: "center",
-                        }}
-                    >
-                        <Skeleton style={{ width: 140, height: 20 }} />
-                        <Skeleton
-                            style={{ width: 140, height: 30, marginLeft: 5 }}
-                        />
-                    </Box>
-                </Box>
-            ) : (
-                <>
-                    {data.items ? (
-                        <>
-                            <ActionBox>
-                                <MyText variant="body2" sx={{ color: "grey" }}>
-                                    {data.total_count} товаров на сумму{" "}
-                                    {data.total_price} ₽
+                        <TotalBox>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <MyText
+                                    variant="h6"
+                                    sx={{ color: "gray", mr: 1 }}
+                                >
+                                    Итого:
                                 </MyText>
-                                <DeleteMenuItem onClick={deleteBasket}>
-                                    <MyText variant="body1">
-                                        Очистить корзину
-                                    </MyText>
-                                    <CloseIcon sx={{ ml: 1 }} />
-                                </DeleteMenuItem>
-                                <DeleteBox onClick={deleteBasket}>
-                                    <MyText variant="body1">
-                                        Очистить корзину
-                                    </MyText>
-                                    <CloseIcon sx={{ ml: 1 }} />
-                                </DeleteBox>
-                            </ActionBox>
-                            {data?.items.map((item: any, index: number) => (
-                                <BasketCard
-                                    key={index}
-                                    {...item}
-                                    status={status}
-                                    setStatus={setStatus}
-                                />
-                            ))}
-                            <TotalBox>
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <MyText
-                                        variant="h6"
-                                        sx={{ color: "gray", mr: 1 }}
-                                    >
-                                        Итого:
-                                    </MyText>
-                                    <MyText variant="h6" sx={{ mr: 2 }}>
-                                        {data.total_price}₽
-                                    </MyText>
-                                </Box>
-                                <MyButton
-                                    onClick={() => navigate(ROUTES.BASKET_FORM)}
-                                >
-                                    <MyText variant="body2" sm={12}>
-                                        Оформить заказ
-                                    </MyText>
-                                </MyButton>
-                            </TotalBox>
-                        </>
-                    ) : (
-                        <MyText variant="h6">У вас нету заказов</MyText>
-                    )}
-                </>
-            )}
+                                <MyText variant="h6" sx={{ mr: 2 }}>
+                                    {data.total_price}₽
+                                </MyText>
+                            </Box>
+                            <MyButton
+                                onClick={() => navigate(ROUTES.BASKET_FORM)}
+                            >
+                                <MyText variant="body2" sm={12}>
+                                    Оформить заказ
+                                </MyText>
+                            </MyButton>
+                        </TotalBox>
+                    </Box>
+                ) : (
+                    <MyText variant="h6">У вас нету заказов</MyText>
+                )}
+            </>
         </>
     );
 };

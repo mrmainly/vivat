@@ -12,15 +12,12 @@ const Home = () => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [count, setCount] = useState(0);
+    const [sliderLoading, setLoadingSlider] = useState(false);
 
     useEffect(() => {
         const getPromotion = async () => {
             setLoading(true);
-            await API.getPromotionMain()
-                .then((res) => {
-                    setDataBanner(res.data);
-                })
-                .catch((error) => console.log(error));
+
             await API.getProductsList(1, currentPage)
                 .then((res) => {
                     setData(res.data.results);
@@ -32,11 +29,24 @@ const Home = () => {
         getPromotion();
     }, [currentPage]);
 
+    useEffect(() => {
+        const getBanner = async () => {
+            setLoadingSlider(true);
+            await API.getPromotionMain()
+                .then((res) => {
+                    setDataBanner(res.data);
+                })
+                .catch((error) => console.log(error));
+            setLoadingSlider(false);
+        };
+        getBanner();
+    }, []);
+
     let countNumber = Math.ceil(count / 20);
 
     return (
         <div>
-            {loading ? (
+            {sliderLoading ? (
                 <Skeleton style={{ height: 500, borderRadius: 50 }} />
             ) : (
                 <HomeSlider data={dataBanner} />
@@ -45,6 +55,13 @@ const Home = () => {
                 <MyText variant="h5" sx={{ mb: 1 }}>
                     Лек. средства
                 </MyText>
+                <Pagination
+                    count={countNumber}
+                    style={{ marginBottom: 20, marginTop: 20 }}
+                    onChange={(event, value) => {
+                        setCurrentPage(value);
+                    }}
+                />
                 <MainCardsConstructor data={data} loading={loading} />
                 <Pagination
                     count={countNumber}

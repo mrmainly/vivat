@@ -28,6 +28,8 @@ const Root = styled(Box)(({ theme }) => ({
         boxShadow: "0px 0px 20px rgba(0,0,0,0.8)",
     },
     transition: "all 1s ease",
+    height: 400,
+    overflow: "hidden",
 }));
 
 const Img = styled("img")(({ theme }) => ({
@@ -117,7 +119,15 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
             >
                 {name}...
             </MyText>
-            <MyText variant="body2" sx={{ color: "#2F80ED", mt: 0.5 }}>
+            <MyText
+                variant="body2"
+                sx={{
+                    color: "#2F80ED",
+                    mt: 0.5,
+                    height: 40,
+                    overflow: "hidden",
+                }}
+            >
                 {producer}
             </MyText>
             {stocks ? (

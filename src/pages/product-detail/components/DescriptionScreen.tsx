@@ -43,9 +43,10 @@ function a11yProps(index: number) {
 
 interface DescrProps {
     analData?: any;
+    loading?: any;
 }
 
-const DescriptionScreen: React.FC<DescrProps> = ({ analData }) => {
+const DescriptionScreen: React.FC<DescrProps> = ({ analData, loading }) => {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
 
@@ -84,7 +85,7 @@ const DescriptionScreen: React.FC<DescrProps> = ({ analData }) => {
                     <Description />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    <MainCardsConstructor data={analData} />
+                    <MainCardsConstructor data={analData} loading={loading} />
                 </TabPanel>
             </SwipeableViews>
         </Box>

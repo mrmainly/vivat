@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { BorderLine, MyText, MyButton } from "../..";
-import { DispatchContext } from "../../../store";
+import { DispatchContext, StateContext } from "../../../store";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 import ROUTES from "../../../routes";
@@ -35,6 +35,8 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     GoodsCode,
 }) => {
     const navigate = useNavigate();
+    const dispatch = useContext(DispatchContext);
+    const stateContext = useContext(StateContext);
 
     const TransferFavorite = () => {
         API.transferFavorite(id)
@@ -50,6 +52,12 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
             .then(() => {
                 toast.success("Товар удален");
                 setStatus(`delete ${status + 1}`);
+                dispatch({
+                    type: "favorite_status",
+                    payload: {
+                        status: stateContext.favorite_status.status + 1,
+                    },
+                });
             })
             .catch(() => {
                 toast.error("Товар не удален");

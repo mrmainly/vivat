@@ -16,6 +16,7 @@ import {
     MyButton,
     MyText,
     ProfileUpdateModal,
+    SkeletonBasicInformation,
 } from "../../../components";
 import API from "../../../api";
 import ThemeMain from "../../../theme";
@@ -93,7 +94,7 @@ const BasicInformation = () => {
                     <ProfileUpdateModal />
                     {loading ? (
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
-                            <CircularProgress sx={{ mb: 2 }} />
+                            <SkeletonBasicInformation />
                         </Box>
                     ) : (
                         <>
