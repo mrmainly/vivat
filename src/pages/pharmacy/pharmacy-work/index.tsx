@@ -20,8 +20,9 @@ import work_data from "../../../local_data/work_data";
 const Main = styled(Box)(({ theme }) => ({
     marginLeft: 30,
     width: "100%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
         flexDirection: "column",
+        marginLeft: 0,
     },
 }));
 

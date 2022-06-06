@@ -88,7 +88,7 @@ const MobileDown = () => {
                     <IconButton
                         onClick={() => {
                             jwttoken
-                                ? setProfileDrawer(true)
+                                ? navigate(ROUTES.BASICINFORMATION)
                                 : handleLoginOpen();
                         }}
                     >
@@ -126,10 +126,6 @@ const MobileDown = () => {
                 setLoginOpen={handleLoginOpen}
             />
 
-            <ProfileDrawer
-                state={profileDrawer}
-                handleClose={handleProfileDrawerClose}
-            />
             {jwttoken ? (
                 <FavoritesDrawer
                     state={favoriteDrawer}

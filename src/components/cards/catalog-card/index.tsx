@@ -169,9 +169,6 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                         {specialPrice}₽
                     </MyText> */}
                 </Box>
-                <IconButton size="small" sx={{ mr: 1 }}>
-                    <img src="/img/Frame1208.png" />
-                </IconButton>
             </CombinedBox>
             <MyText variant="body2" sx={{ color: "#EB5757" }}>
                 {specialText}

@@ -135,7 +135,7 @@ const BasketCard: React.FC<BasketProps> = ({
     };
     let totalItemPrice;
     if (count) {
-        totalItemPrice = price * count;
+        totalItemPrice = price / count;
     }
 
     return (
@@ -180,7 +180,7 @@ const BasketCard: React.FC<BasketProps> = ({
                     <CloseIcon />
                 </IconButtonDesctop>
                 <CountBox>
-                    <MyText sx={{ mr: 1 }}>{price}₽</MyText>
+                    <MyText sx={{ mr: 1 }}>{totalItemPrice}₽</MyText>
                     <Box sx={{ display: "flex" }}>
                         <Button
                             sx={{
@@ -220,7 +220,7 @@ const BasketCard: React.FC<BasketProps> = ({
                             <AddIcon />
                         </Button>
                     </Box>
-                    <MyText sx={{ ml: 1 }}>{totalItemPrice}₽</MyText>
+                    <MyText sx={{ ml: 1 }}>{price}₽</MyText>
                 </CountBox>
             </CountWrapper>
         </Root>

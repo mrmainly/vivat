@@ -12,6 +12,9 @@ const Root = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: "-15px",
+    [theme.breakpoints.down("md")]: {
+        marginBottom: 20,
+    },
 }));
 
 const CusLink = styled(Link)(({ theme }) => ({
