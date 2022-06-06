@@ -102,6 +102,11 @@ class API {
         return result;
     }
 
+    productsSearch(name) {
+        const result = api(`api/v1/goods/search/?name=${name}`).get();
+        return result;
+    }
+
     transferBasket(id) {
         const result = api(`api/v1/carts/${id}/`).post(null);
         return result;

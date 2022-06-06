@@ -190,8 +190,6 @@ const Basket = () => {
                     )}
                 </>
             )}
-            <ProductCardsSlider title="Может пригодиться" data={product_data} />
-            <ProductCardsSlider title="Рекомендуем" data={product_data} />
         </>
     );
 };

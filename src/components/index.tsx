@@ -36,6 +36,8 @@ import Mobile from "./navbars/mobile";
 import StatusCard from "./cards/status-card";
 import SubProductDrawer from "./drawers/sub-product-drawer";
 
+import SkeletonCatalogVersion from "./cards/catalog-card/SkeletonVersion";
+
 export {
     Header,
     MyText,
@@ -74,4 +76,5 @@ export {
     Mobile,
     StatusCard,
     SubProductDrawer,
+    SkeletonCatalogVersion,
 };

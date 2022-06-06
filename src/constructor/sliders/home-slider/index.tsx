@@ -40,7 +40,6 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
         slidesToShow: 1,
     };
     // const data = ["Rectangle4014", "Rectangle4014"];
-    console.log(data);
     return (
         <Box>
             <Slider {...settings}>

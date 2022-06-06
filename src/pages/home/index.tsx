@@ -18,13 +18,11 @@ const Home = () => {
             setLoading(true);
             await API.getPromotionMain()
                 .then((res) => {
-                    console.log(res);
                     setDataBanner(res.data);
                 })
                 .catch((error) => console.log(error));
             await API.getProductsList(1, currentPage)
                 .then((res) => {
-                    console.log(res);
                     setData(res.data.results);
                     setCount(res.data.count);
                 })

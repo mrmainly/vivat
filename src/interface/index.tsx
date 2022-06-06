@@ -40,6 +40,7 @@ interface FormProps {
     children: ReactNode[] | ReactNode;
     sx?: SxProps;
     onSubmit?: any;
+    style?: React.CSSProperties;
 }
 
 interface ButtonProps {

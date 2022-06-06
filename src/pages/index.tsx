@@ -31,6 +31,8 @@ import StatusProduct from "./status-product";
 import StatusProductDetail from "./status-product/detail";
 import MyOrdersDetail from "./profile/my-orders/detail";
 
+import SearchPage from "./search-page";
+
 export {
     Home,
     Basket,
@@ -59,4 +61,5 @@ export {
     StatusProduct,
     StatusProductDetail,
     MyOrdersDetail,
+    SearchPage,
 };

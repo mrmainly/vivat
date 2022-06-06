@@ -9,6 +9,7 @@ import {
     TextField,
     Grid,
     Button,
+    InputAdornment,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +17,9 @@ import { styled } from "@mui/system";
 import cookie from "js-cookie";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SearchIcon from "@mui/icons-material/Search";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 import ThemeMain from "../../../theme";
 import {
@@ -27,9 +31,11 @@ import {
     SignInModal,
     SignUpModal,
     ForgotPasswordModal,
+    Form,
 } from "../..";
 import { DispatchContext } from "../../../store";
 import ROUTES from "../../../routes";
+import API from "../../../api";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -99,10 +105,10 @@ const Header = () => {
         statusProduct: false,
         subProductDrawer: false,
         login: false,
-        register: false,
+        registerModal: false,
         forgot: false,
     });
-    // const [data, setData] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
 
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
@@ -111,10 +117,13 @@ const Header = () => {
         drawerProfileOpen,
         drawerFavoritesOpen,
         login,
-        register,
+        registerModal,
         forgot,
     } = state;
-    const dispatch = useContext(DispatchContext);
+
+    const { register, handleSubmit } = useForm({
+        mode: "onBlur",
+    });
 
     const handleDrawerClose = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: false }));
@@ -137,23 +146,26 @@ const Header = () => {
         setState((prevState) => ({ ...prevState, login: true }));
 
     const handleRegisterClose = () =>
-        setState((prevState) => ({ ...prevState, register: false }));
+        setState((prevState) => ({ ...prevState, registerModal: false }));
     const handleRegisterOpen = () =>
-        setState((prevState) => ({ ...prevState, register: true }));
+        setState((prevState) => ({ ...prevState, registerModal: true }));
 
     const handleForgotClose = () =>
         setState((prevState) => ({ ...prevState, forgot: false }));
     const handleForgotOpen = () =>
         setState((prevState) => ({ ...prevState, forgot: true }));
 
-    // useEffect(() => {
-    //     API.getFavorites()
-    //         .then((res) => {
-    //             console.log(res);
-    //             setData(res.data);
-    //         })
-    //         .catch((error) => console.log(error));
-    // }, []);
+    const onSubmit = (data: any) => {
+        API.productsSearch(data)
+            .then((res) => {
+                navigate(ROUTES.SEARCH_PAGE, {
+                    state: { data: res.data, title: data.name },
+                });
+            })
+            .catch((error) => {
+                toast.error("error");
+            });
+    };
 
     const Desktop = () => {
         return (
@@ -256,13 +268,44 @@ const Header = () => {
                                 />
                             </IconButton>
                         </BottomBarItem>
-                        <BottomBarItem sx={{ width: "100%" }}>
-                            <TextField
-                                variant="outlined"
-                                label="Поиск лекарства"
-                                size="small"
-                                fullWidth
-                            />
+                        <BottomBarItem
+                            sx={{
+                                width: "100%",
+
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Form
+                                onSubmit={handleSubmit(onSubmit)}
+                                style={{ marginTop: "-1px" }}
+                            >
+                                <TextField
+                                    variant="outlined"
+                                    label="Поиск лекарства"
+                                    size="small"
+                                    fullWidth
+                                    {...register("name")}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <Button
+                                                sx={{
+                                                    mr: "-15px",
+                                                    height: "100%",
+                                                }}
+                                                type="submit"
+                                            >
+                                                <SearchIcon
+                                                    sx={{
+                                                        color: ThemeMain.palette
+                                                            .primary.main,
+                                                    }}
+                                                />
+                                            </Button>
+                                        ),
+                                    }}
+                                />
+                            </Form>
                         </BottomBarItem>
                         <BottomBarItem sx={{ ml: 2 }}>
                             <Button
@@ -341,7 +384,7 @@ const Header = () => {
             <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
 
             <SignUpModal
-                registerModal={register}
+                registerModal={registerModal}
                 setRegisterClose={handleRegisterClose}
                 setRegisterOpen={handleRegisterOpen}
                 setLoginOpen={handleLoginOpen}

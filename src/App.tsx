@@ -36,6 +36,7 @@ import {
     StatusProduct,
     StatusProductDetail,
     MyOrdersDetail,
+    SearchPage,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -144,6 +145,10 @@ const App = () => {
                             <Route
                                 element={<MyOrdersDetail />}
                                 path={`${ROUTES.MY_ORDERS_DETAIL}/:id`}
+                            />
+                            <Route
+                                element={<SearchPage />}
+                                path={ROUTES.SEARCH_PAGE}
                             />
                         </Route>
                     </Routes>

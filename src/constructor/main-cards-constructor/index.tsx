@@ -4,7 +4,12 @@ import { styled } from "@mui/system";
 import Skeleton from "react-loading-skeleton";
 
 import { MainCardsConstructorProps } from "../../interface";
-import { MyText, ProductCard, CatalogCard } from "../../components";
+import {
+    MyText,
+    ProductCard,
+    CatalogCard,
+    SkeletonCatalogVersion,
+} from "../../components";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -36,9 +41,7 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                                 xs={12}
                                 key={index}
                             >
-                                <Skeleton
-                                    style={{ width: "100%", height: 480 }}
-                                />
+                                <SkeletonCatalogVersion />
                             </Grid>
                         ))
                 ) : data.length > 0 ? (
