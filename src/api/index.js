@@ -102,6 +102,11 @@ class API {
         return result;
     }
 
+    getAutoComplite(value) {
+        const result = api(`api/v1/goods/autocomplete/?name=${value}`).get();
+        return result;
+    }
+
     productsSearch(name) {
         const result = api(`api/v1/goods/search/?name=${name}`).get();
         return result;

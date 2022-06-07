@@ -9,8 +9,8 @@ import {
     TextField,
     Grid,
     Button,
-    CircularProgress,
     LinearProgress,
+    Autocomplete,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ import cookie from "js-cookie";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import ThemeMain from "../../../theme";
@@ -108,6 +108,7 @@ const Header = () => {
         login: false,
         registerModal: false,
         forgot: false,
+        AutoCompliteData: ["a"],
     });
     const [loading, setLoading] = useState(false);
 
@@ -120,9 +121,10 @@ const Header = () => {
         login,
         registerModal,
         forgot,
+        AutoCompliteData,
     } = state;
 
-    const { register, handleSubmit } = useForm({
+    const { register, handleSubmit, control } = useForm({
         mode: "onBlur",
     });
 
@@ -156,7 +158,11 @@ const Header = () => {
     const handleForgotOpen = () =>
         setState((prevState) => ({ ...prevState, forgot: true }));
 
+    const handleAutoCompliteData = (data: any) =>
+        setState((prevState) => ({ ...prevState, AutoCompliteData: data }));
+
     const onSubmit = async (data: any) => {
+        console.log(data);
         setLoading(true);
         await API.productsSearch(data.name)
             .then((res) => {
@@ -168,6 +174,18 @@ const Header = () => {
                 toast.error("error");
             });
         setLoading(false);
+    };
+
+    const handleAutoComplite = (e: any) => {
+        API.getAutoComplite(e)
+            .then((res) => {
+                const newData = res.data.map((item: any) => {
+                    return item.name;
+                });
+                console.log("newData", newData);
+                // handleAutoCompliteData(newData);
+            })
+            .catch((error) => console.log(error));
     };
 
     const Desktop = () => {
@@ -283,33 +301,58 @@ const Header = () => {
                         >
                             <Form
                                 onSubmit={handleSubmit(onSubmit)}
-                                style={{ marginTop: "-1px" }}
+                                style={{
+                                    marginTop: "-1px",
+                                }}
                             >
-                                <TextField
-                                    variant="outlined"
-                                    label="Поиск лекарства"
+                                {/* <Controller
+                                    name="name"
+                                    control={control}
+                                    render={({
+                                        field: { onChange, onBlur, value, ref },
+                                    }) => ( */}
+                                <Autocomplete
+                                    id="free-solo-demo"
+                                    freeSolo
                                     size="small"
-                                    fullWidth
-                                    {...register("name")}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <Button
-                                                sx={{
-                                                    mr: "-15px",
-                                                    height: "100%",
-                                                }}
-                                                type="submit"
-                                            >
-                                                <SearchIcon
-                                                    sx={{
-                                                        color: ThemeMain.palette
-                                                            .primary.main,
-                                                    }}
-                                                />
-                                            </Button>
-                                        ),
-                                    }}
+                                    options={AutoCompliteData}
+                                    renderInput={(params) => (
+                                        <TextField
+                                            variant="outlined"
+                                            label="Поиск лекарства"
+                                            {...params}
+                                            fullWidth
+                                            {...register("name")}
+                                            // onChange={(e) =>
+                                            //     handleAutoComplite(
+                                            //         e.target.value
+                                            //     )
+                                            // }
+                                            InputProps={{
+                                                endAdornment: (
+                                                    <Button
+                                                        sx={{
+                                                            mr: "-15px",
+                                                            height: 30,
+                                                        }}
+                                                        type="submit"
+                                                    >
+                                                        <SearchIcon
+                                                            sx={{
+                                                                color: ThemeMain
+                                                                    .palette
+                                                                    .primary
+                                                                    .main,
+                                                            }}
+                                                        />
+                                                    </Button>
+                                                ),
+                                            }}
+                                        />
+                                    )}
                                 />
+                                {/* )}
+                                /> */}
                             </Form>
                         </BottomBarItem>
                         <BottomBarItem sx={{ ml: 2 }}>
