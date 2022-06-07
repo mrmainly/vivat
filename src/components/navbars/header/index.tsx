@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 
 import {
     AppBar,
@@ -9,7 +9,8 @@ import {
     TextField,
     Grid,
     Button,
-    InputAdornment,
+    CircularProgress,
+    LinearProgress,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -108,7 +109,7 @@ const Header = () => {
         registerModal: false,
         forgot: false,
     });
-    const [searchValue, setSearchValue] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
@@ -155,8 +156,9 @@ const Header = () => {
     const handleForgotOpen = () =>
         setState((prevState) => ({ ...prevState, forgot: true }));
 
-    const onSubmit = (data: any) => {
-        API.productsSearch(data)
+    const onSubmit = async (data: any) => {
+        setLoading(true);
+        await API.productsSearch(data.name)
             .then((res) => {
                 navigate(ROUTES.SEARCH_PAGE, {
                     state: { data: res.data, title: data.name },
@@ -165,6 +167,7 @@ const Header = () => {
             .catch((error) => {
                 toast.error("error");
             });
+        setLoading(false);
     };
 
     const Desktop = () => {
@@ -273,7 +276,9 @@ const Header = () => {
                                 width: "100%",
 
                                 display: "flex",
-                                alignItems: "center",
+
+                                flexDirection: "column",
+                                justifyContent: "center",
                             }}
                         >
                             <Form
@@ -380,6 +385,7 @@ const Header = () => {
                 }}
             >
                 <Desktop />
+                {loading ? <LinearProgress /> : ""}
             </AppBar>
             <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
 

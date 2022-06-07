@@ -99,7 +99,7 @@ const Basket = () => {
                         <ActionBox>
                             <MyText variant="body2" sx={{ color: "grey" }}>
                                 {data.total_count} товаров на сумму{" "}
-                                {data.total_price} ₽
+                                {Math.trunc(data.total_price)} ₽
                             </MyText>
                             <DeleteMenuItem onClick={deleteBasket}>
                                 <MyText variant="body1">
@@ -136,7 +136,7 @@ const Basket = () => {
                                     Итого:
                                 </MyText>
                                 <MyText variant="h6" sx={{ mr: 2 }}>
-                                    {data.total_price}₽
+                                    {Math.trunc(data.total_price)}₽
                                 </MyText>
                             </Box>
                             <MyButton

@@ -266,12 +266,6 @@ class API {
         let result = await api(`api/v1/departments/`).get();
         return result;
     }
-
-    //base
-    async getEs(id) {
-        let result = await api(`api/v1/goods/ES/${id}/`).get();
-        return result;
-    }
 }
 
 export default new API();
