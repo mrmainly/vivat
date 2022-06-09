@@ -78,6 +78,21 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
             .catch((error) => toast.error("Товар не добавлен в избранное"));
     };
 
+    const deleteFavorite = () => {
+        API.deleteFavorite(data.fav?.fav_id)
+            .then(() => {
+                dispatch({
+                    type: "favorite_status",
+                    payload: {
+                        status: state.favorite_status.status + 1,
+                    },
+                });
+            })
+            .catch(() => {
+                toast.error("Товар не удален");
+            });
+    };
+
     const array = [
         {
             label: "Вид товара:",
@@ -193,8 +208,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             </MyButton>
                             <IconButton sx={{ ml: 5 }}>
                                 {" "}
-                                {data.fav ? (
+                                {data?.fav?.is_fav ? (
                                     <FavoriteIcon
+                                        onClick={deleteFavorite}
                                         sx={{ color: "#55CD61" }}
                                         fontSize="large"
                                     />
