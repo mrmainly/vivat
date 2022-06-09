@@ -12,13 +12,14 @@ import {
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
-import { BlogCard, MyText, BlogCardMain } from "../../components";
+import { BlogCard, MyText, BlogCardMain, SkeletonBlog } from "../../components";
 import ROUTES from "../../routes";
 import API from "../../api";
 import ThemeMain from "./components/ThemeMain";
 
 const BlogMenuItem = styled(MenuItem)(({ theme }) => ({
     width: "max-content",
+    marginBottom: 10,
 }));
 
 const BoxTheme = styled(Box)(({ theme }) => ({
@@ -45,6 +46,7 @@ const Blog = () => {
         await API.getBlog("popularity_all_time", "query")
             .then((res) => {
                 setPopularity(res.data.results);
+                console.log("популяр", res);
             })
             .catch((error) => console.log(error));
 
@@ -81,9 +83,7 @@ const Blog = () => {
     return (
         <>
             {loading ? (
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-                    <CircularProgress />
-                </Box>
+                <SkeletonBlog />
             ) : (
                 <Box>
                     <Grid
@@ -169,7 +169,7 @@ const Blog = () => {
                     </Grid>
                     <BoxTheme>
                         {theme.slice(0, 1).map((item: any, index: number) => (
-                            <BlogMenuItem
+                            <MenuItem
                                 key={index}
                                 onClick={() =>
                                     navigate(ROUTES.BLOG_THEME, {
@@ -182,7 +182,7 @@ const Blog = () => {
                                 }
                             >
                                 <MyText variant="h5">{item.tags.name}</MyText>
-                            </BlogMenuItem>
+                            </MenuItem>
                         ))}
                         <FormControl
                             sx={{ width: 150, bgcolor: "white", ml: 1 }}
@@ -220,7 +220,6 @@ const Blog = () => {
                     ) : (
                         <ThemeMain theme={theme} />
                     )}
-                    {/* Тема */}
                 </Box>
             )}
         </>

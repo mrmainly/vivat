@@ -59,7 +59,7 @@ const BlogCardMain: React.FC<BlogCardProps> = ({
             <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
             <Box sx={{ width: "100%", height: "100%", pb: 2 }}>
                 <Main>
-                    <Tag>{tags?.name}</Tag>
+                    <Tag>{tags ? tags.name : "Нету тега"}</Tag>
                     <TextWrapper>
                         <div
                             style={{ fontSize: 14 }}

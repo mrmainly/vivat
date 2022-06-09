@@ -154,6 +154,7 @@ interface BlogCardProps {
     tags?: any;
     type?: string;
     id?: number;
+    name?: string;
 }
 
 interface StockCardProps {

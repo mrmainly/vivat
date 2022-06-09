@@ -135,7 +135,7 @@ const BasketCard: React.FC<BasketProps> = ({
     };
     let totalItemPrice;
     if (count) {
-        totalItemPrice = price / count;
+        totalItemPrice = price * count;
     }
 
     return (

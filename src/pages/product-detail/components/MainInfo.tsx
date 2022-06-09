@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { MyText, MyButton } from "../../../components";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ThemeMain from "../../../theme";
+import { DispatchContext, StateContext } from "../../../store";
 import API from "../../../api";
 
 const Item = styled(Box)(({ theme }) => ({
@@ -49,6 +52,9 @@ interface MainInfoProps {
 }
 
 const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
+    const state = useContext(StateContext);
+    const dispatch = useContext(DispatchContext);
+
     const transferBasket = () => {
         API.transferBasket(data.id)
             .then((res) => {
@@ -57,6 +63,19 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
             .catch((error) => {
                 toast.error("Товар не найден");
             });
+    };
+
+    const addedFavorite = () => {
+        API.addedFavorite(data.id)
+            .then((res) => {
+                dispatch({
+                    type: "favorite_status",
+                    payload: {
+                        status: state.favorite_status.status + 1,
+                    },
+                });
+            })
+            .catch((error) => toast.error("Товар не добавлен в избранное"));
     };
 
     const array = [
@@ -172,6 +191,21 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             <MyButton onClick={transferBasket}>
                                 Добавить в корзину
                             </MyButton>
+                            <IconButton sx={{ ml: 5 }}>
+                                {" "}
+                                {data.fav ? (
+                                    <FavoriteIcon
+                                        sx={{ color: "#55CD61" }}
+                                        fontSize="large"
+                                    />
+                                ) : (
+                                    <FavoriteBorderIcon
+                                        onClick={addedFavorite}
+                                        sx={{ color: "#55CD61" }}
+                                        fontSize="large"
+                                    />
+                                )}
+                            </IconButton>
                         </Box>
                         <Box sx={{ mt: 2 }}>
                             {/* {array2.map((item, index) => (

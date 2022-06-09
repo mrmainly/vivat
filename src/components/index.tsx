@@ -39,6 +39,7 @@ import SubProductDrawer from "./drawers/sub-product-drawer";
 import SkeletonCatalogVersion from "./skeletons/catalog-card-skeleton";
 import SkeletonBasicInformation from "./skeletons/basic-informations-skeleton";
 import SkeletonProductDetail from "./skeletons/catalog-card-detail-skeleton";
+import SkeletonBlog from "./skeletons/blog-skeleton";
 
 export {
     Header,
@@ -81,4 +82,5 @@ export {
     SkeletonCatalogVersion,
     SkeletonBasicInformation,
     SkeletonProductDetail,
+    SkeletonBlog,
 };

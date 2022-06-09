@@ -94,6 +94,21 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
             .catch(() => toast.error("Товар не найден"));
     };
 
+    const deleteFavorite = () => {
+        API.deleteFavorite(fav?.fav_id)
+            .then(() => {
+                dispatch({
+                    type: "favorite_status",
+                    payload: {
+                        status: stateContext.favorite_status.status + 1,
+                    },
+                });
+            })
+            .catch(() => {
+                toast.error("Товар не удален");
+            });
+    };
+
     return (
         <Root>
             <ImgItem
@@ -191,16 +206,27 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                 >
                     В корзину
                 </MyButton>
-                <IconButton size="small" sx={{ mr: 1 }} onClick={addedFavorite}>
-                    {fav ? (
+                {/* onClick={deleteFavorite} */}
+                {fav?.is_fav ? (
+                    <IconButton
+                        size="small"
+                        sx={{ mr: 1 }}
+                        onClick={deleteFavorite}
+                    >
                         <FavoriteIcon
                             sx={{ color: "#55CD61" }}
                             fontSize="large"
                         />
-                    ) : (
+                    </IconButton>
+                ) : (
+                    <IconButton
+                        size="small"
+                        sx={{ mr: 1 }}
+                        onClick={addedFavorite}
+                    >
                         <img src="/img/Favorite_light.png" />
-                    )}
-                </IconButton>
+                    </IconButton>
+                )}
             </CombinedBox>
         </Root>
     );

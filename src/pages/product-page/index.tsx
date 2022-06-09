@@ -44,6 +44,7 @@ const ProductPage = () => {
                     console.log(res);
                     if (res.data.results) {
                         setData(res.data.results);
+                        console.log(res);
                     } else {
                         setData(res.data);
                     }

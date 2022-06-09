@@ -16,6 +16,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
     date,
     type,
     id,
+    name,
 }) => {
     const navigate = useNavigate();
 
@@ -48,6 +49,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
     const TextWrapper = styled(Box)(({ theme }) => ({
         overflow: "hidden",
+
         height: 40,
     }));
 
@@ -63,15 +65,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
             <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
             <Box sx={{ width: "100%" }}>
                 <Main>
-                    <Tag>{tags.name}</Tag>
-                    <TextWrapper>
-                        <div
-                            style={{ fontSize: 17 }}
-                            dangerouslySetInnerHTML={{
-                                __html: description,
-                            }}
-                        ></div>
-                    </TextWrapper>
+                    <Tag>{tags ? tags.name : "Нету тега"}</Tag>
+                    <TextWrapper>{name}</TextWrapper>
                     <Box
                         sx={{
                             display: "flex",
