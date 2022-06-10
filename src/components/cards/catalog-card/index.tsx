@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { Box, IconButton, CardActionArea } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import cookie from "js-cookie";
 
 import { DispatchContext, StateContext } from "../../../store";
 import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
-import ThemeMain from "../../../theme";
 import API from "../../../api";
 
 const Root = styled(Box)(({ theme }) => ({
@@ -72,6 +72,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     const navigate = useNavigate();
     const dispatch = useContext(DispatchContext);
     const stateContext = useContext(StateContext);
+    const jwttoken = cookie.get("jwttoken");
 
     const addedFavorite = () => {
         API.addedFavorite(id)
@@ -202,7 +203,16 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                 <MyButton
                     sx={{ width: 130 }}
                     size="medium"
-                    onClick={TransferFavorite}
+                    onClick={() => {
+                        jwttoken
+                            ? TransferFavorite()
+                            : dispatch({
+                                  type: "auth_modal",
+                                  payload: {
+                                      login: true,
+                                  },
+                              });
+                    }}
                 >
                     В корзину
                 </MyButton>
@@ -222,7 +232,16 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                     <IconButton
                         size="small"
                         sx={{ mr: 1 }}
-                        onClick={addedFavorite}
+                        onClick={() => {
+                            jwttoken
+                                ? addedFavorite()
+                                : dispatch({
+                                      type: "auth_modal",
+                                      payload: {
+                                          login: true,
+                                      },
+                                  });
+                        }}
                     >
                         <img src="/img/Favorite_light.png" />
                     </IconButton>

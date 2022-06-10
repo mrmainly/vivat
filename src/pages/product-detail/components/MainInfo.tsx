@@ -5,6 +5,7 @@ import { styled } from "@mui/system";
 import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import cookie from "js-cookie";
 
 import { MyText, MyButton } from "../../../components";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
@@ -54,6 +55,7 @@ interface MainInfoProps {
 const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
     const state = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
+    const jwttoken = cookie.get("jwttoken");
 
     const transferBasket = () => {
         API.transferBasket(data.id)
@@ -203,7 +205,18 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             </MyText>
                         </Box>
                         <Box sx={{ mt: 2 }}>
-                            <MyButton onClick={transferBasket}>
+                            <MyButton
+                                onClick={() => {
+                                    jwttoken
+                                        ? transferBasket()
+                                        : dispatch({
+                                              type: "auth_modal",
+                                              payload: {
+                                                  login: true,
+                                              },
+                                          });
+                                }}
+                            >
                                 Добавить в корзину
                             </MyButton>
                             <IconButton sx={{ ml: 5 }}>
@@ -216,7 +229,16 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                     />
                                 ) : (
                                     <FavoriteBorderIcon
-                                        onClick={addedFavorite}
+                                        onClick={() => {
+                                            jwttoken
+                                                ? addedFavorite()
+                                                : dispatch({
+                                                      type: "auth_modal",
+                                                      payload: {
+                                                          login: true,
+                                                      },
+                                                  });
+                                        }}
                                         sx={{ color: "#55CD61" }}
                                         fontSize="large"
                                     />

@@ -111,12 +111,22 @@ const SignIn: React.FC<SignModalProps> = ({
     const dispatch = useContext(DispatchContext);
 
     const navigate = useNavigate();
+    const jwttoken = cookie.get("jwttoken");
 
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });
     const handleClose = () => {
-        setLoginClose();
+        {
+            state.auth_modal.login
+                ? dispatch({
+                      type: "auth_modal",
+                      payload: {
+                          login: false,
+                      },
+                  })
+                : setLoginClose();
+        }
     };
 
     const onSubmit = (data: any) => {

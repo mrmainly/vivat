@@ -2,9 +2,7 @@ import React from "react";
 
 export const defaultStore = {
     auth_modal: {
-        sign_in: false,
-        sign_up: false,
-        forgot: false,
+        login: false,
     },
     drawers: {
         favorites_drawer: false,

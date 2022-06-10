@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import {
     AppBar,
@@ -35,7 +35,7 @@ import {
     ForgotPasswordModal,
     Form,
 } from "../..";
-import { DispatchContext } from "../../../store";
+import { StateContext } from "../../../store";
 import ROUTES from "../../../routes";
 import API from "../../../api";
 
@@ -116,6 +116,8 @@ const Header = () => {
     const [loading, setLoading] = useState(false);
 
     const jwttoken = cookie.get("jwttoken");
+    const stateContext = useContext(StateContext);
+
     const navigate = useNavigate();
     const {
         drawerOpen,
@@ -190,6 +192,15 @@ const Header = () => {
             })
             .catch((error) => console.log(error));
     };
+
+    useEffect(() => {
+        if (stateContext.auth_modal.login) {
+            handleLoginOpen();
+        } else {
+            handleLoginClose();
+        }
+        console.log(stateContext);
+    }, [stateContext.auth_modal.login]);
 
     return (
         <>
