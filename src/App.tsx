@@ -37,6 +37,7 @@ import {
     StatusProductDetail,
     MyOrdersDetail,
     SearchPage,
+    Address,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -149,6 +150,10 @@ const App = () => {
                             <Route
                                 element={<SearchPage />}
                                 path={ROUTES.SEARCH_PAGE}
+                            />
+                            <Route
+                                element={<Address />}
+                                path={ROUTES.ADDRESS}
                             />
                         </Route>
                     </Routes>

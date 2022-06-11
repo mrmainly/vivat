@@ -32,6 +32,7 @@ import StatusProductDetail from "./status-product/detail";
 import MyOrdersDetail from "./profile/my-orders/detail";
 
 import SearchPage from "./search-page";
+import Address from "./address";
 
 export {
     Home,
@@ -62,4 +63,5 @@ export {
     StatusProductDetail,
     MyOrdersDetail,
     SearchPage,
+    Address,
 };

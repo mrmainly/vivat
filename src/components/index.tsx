@@ -35,6 +35,7 @@ import StockCard from "./cards/stock-card";
 import Mobile from "./navbars/mobile";
 import StatusCard from "./cards/status-card";
 import SubProductDrawer from "./drawers/sub-product-drawer";
+import AddressSideBar from "./sidebars/address-sidebar";
 
 import SkeletonCatalogVersion from "./skeletons/catalog-card-skeleton";
 import SkeletonBasicInformation from "./skeletons/basic-informations-skeleton";
@@ -83,4 +84,5 @@ export {
     SkeletonBasicInformation,
     SkeletonProductDetail,
     SkeletonBlog,
+    AddressSideBar,
 };

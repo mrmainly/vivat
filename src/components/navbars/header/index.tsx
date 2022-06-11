@@ -193,15 +193,6 @@ const Header = () => {
             .catch((error) => console.log(error));
     };
 
-    useEffect(() => {
-        if (stateContext.auth_modal.login) {
-            handleLoginOpen();
-        } else {
-            handleLoginClose();
-        }
-        console.log(stateContext);
-    }, [stateContext.auth_modal.login]);
-
     return (
         <>
             <AppBar
@@ -217,7 +208,7 @@ const Header = () => {
                         <TopBar>
                             <TopBarItem>
                                 <MenuItem
-                                    onClick={() => navigate(ROUTES.VIVAT_INFO)}
+                                    onClick={() => navigate(ROUTES.ADDRESS)}
                                 >
                                     <MyText variant="body1">Наши аптеки</MyText>
                                 </MenuItem>

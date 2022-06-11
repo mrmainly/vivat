@@ -209,12 +209,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                 onClick={() => {
                                     jwttoken
                                         ? transferBasket()
-                                        : dispatch({
-                                              type: "auth_modal",
-                                              payload: {
-                                                  login: true,
-                                              },
-                                          });
+                                        : toast.error(
+                                              "данная операция доступно только при авторизации"
+                                          );
                                 }}
                             >
                                 Добавить в корзину
@@ -232,12 +229,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                         onClick={() => {
                                             jwttoken
                                                 ? addedFavorite()
-                                                : dispatch({
-                                                      type: "auth_modal",
-                                                      payload: {
-                                                          login: true,
-                                                      },
-                                                  });
+                                                : toast.error(
+                                                      "данная операция доступно только при авторизации"
+                                                  );
                                         }}
                                         sx={{ color: "#55CD61" }}
                                         fontSize="large"

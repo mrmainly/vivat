@@ -31,6 +31,7 @@ enum ROUTES {
     STATUS_PRODUCT_DETAIL = "/status-product-detail",
     MY_ORDERS_DETAIL = "/my-orders-detail",
     SEARCH_PAGE = "/search-page",
+    ADDRESS = "/address",
 }
 
 export default ROUTES;

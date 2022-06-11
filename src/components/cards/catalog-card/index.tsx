@@ -206,12 +206,9 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                     onClick={() => {
                         jwttoken
                             ? TransferFavorite()
-                            : dispatch({
-                                  type: "auth_modal",
-                                  payload: {
-                                      login: true,
-                                  },
-                              });
+                            : toast.error(
+                                  "данная операция доступно только при авторизации"
+                              );
                     }}
                 >
                     В корзину
@@ -235,12 +232,9 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                         onClick={() => {
                             jwttoken
                                 ? addedFavorite()
-                                : dispatch({
-                                      type: "auth_modal",
-                                      payload: {
-                                          login: true,
-                                      },
-                                  });
+                                : toast.error(
+                                      "данная операция доступно только при авторизации"
+                                  );
                         }}
                     >
                         <img src="/img/Favorite_light.png" />
