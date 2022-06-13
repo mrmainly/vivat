@@ -127,8 +127,8 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                 <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                     <ItemImg
                         sx={{
-                            backgroundImage: data?.photo?.fileData
-                                ? `url(data:image/jpeg;base64,${data.photo.fileData})`
+                            backgroundImage: data?.esphoto[0]?.fileData
+                                ? `url(data:image/jpeg;base64,${data.esphoto[0]?.fileData})`
                                 : "/img/tabletka.jpg",
                         }}
                     ></ItemImg>
