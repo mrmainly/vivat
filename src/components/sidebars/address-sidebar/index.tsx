@@ -25,7 +25,15 @@ const Title = styled(Box)(({ theme }) => ({
     padding: 15,
 }));
 
-const AddressSideBar = () => {
+interface AddressSideBarInterface {
+    data: any;
+    dispatchMapCenter?: any;
+}
+
+const AddressSideBar: React.FC<AddressSideBarInterface> = ({
+    data,
+    dispatchMapCenter,
+}) => {
     return (
         <Main>
             <Title>
@@ -36,20 +44,25 @@ const AddressSideBar = () => {
                     </span>
                 </MyText>
             </Title>
-            <CusMenuItem>
-                <MyText
-                    variant="h6"
-                    sx={{
-                        color: "#20B12E",
-
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                    }}
+            {data.map((item: any, index: number) => (
+                <CusMenuItem
+                    onClick={() => dispatchMapCenter(item.location)}
+                    key={index}
                 >
-                    Семейная стоматологическая клиника Виват
-                </MyText>
-            </CusMenuItem>
+                    <MyText
+                        variant="h6"
+                        sx={{
+                            color: "#20B12E",
+
+                            textOverflow: "ellipsis",
+                            overflow: "hidden",
+                            whiteSpace: "nowrap",
+                        }}
+                    >
+                        {item.address}
+                    </MyText>
+                </CusMenuItem>
+            ))}
         </Main>
     );
 };

@@ -271,6 +271,12 @@ class API {
         let result = await api(`api/v1/departments/`).get();
         return result;
     }
+
+    //Address
+    async getAddress() {
+        let result = await api(`api/v1/departments/organisations/1`).get();
+        return result;
+    }
 }
 
 export default new API();
