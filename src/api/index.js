@@ -95,9 +95,9 @@ class API {
     }
 
     //products
-    async getProductsList(id, page) {
+    async getProductsList(id, page, availability) {
         let result = await api(
-            `api/v1/goods/?group_id=${id}&page=${page}`
+            `api/v1/goods/?group_id=${id}&page=${page}&availability=${availability}`
         ).get();
         return result;
     }

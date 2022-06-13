@@ -23,6 +23,8 @@ const ProductPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
+    const [availability, setAvailability] = useState("");
+
     const location = useLocation();
     const state = location.state as CustomizedState;
     const stateContext = useContext(StateContext);
@@ -39,7 +41,7 @@ const ProductPage = () => {
     useEffect(() => {
         const getProducts = async () => {
             setLoading(true);
-            await API.getProductsList(id, currentPage)
+            await API.getProductsList(id, currentPage, availability)
                 .then((res) => {
                     console.log(res);
                     if (res.data.results) {
@@ -54,7 +56,8 @@ const ProductPage = () => {
             setLoading(false);
         };
         getProducts();
-    }, [currentPage, id, stateContext.favorite_status.status]);
+        console.log(availability);
+    }, [currentPage, id, stateContext.favorite_status.status, availability]);
 
     let countNumber = Math.ceil(count / 20);
     return (
@@ -64,7 +67,10 @@ const ProductPage = () => {
             </MyText>
             <Grid container spacing={2}>
                 <Grid lg={3} xl={3} md={3} sm={0} xs={0} item>
-                    <CatalogFilterSideBar />
+                    <CatalogFilterSideBar
+                        availability={availability}
+                        setAvailability={setAvailability}
+                    />
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
                     <>

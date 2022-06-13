@@ -14,13 +14,13 @@ import { DispatchContext, StateContext } from "../../../store";
 import API from "../../../api";
 
 const Item = styled(Box)(({ theme }) => ({
-    minHeight: 550,
+    minHeight: 520,
     background: "white",
     padding: 20,
 }));
 
 const ItemImg = styled(Box)(({ theme }) => ({
-    height: 550,
+    height: 520,
     background: "white",
     padding: 20,
     display: "flex",
@@ -97,28 +97,24 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
 
     const array = [
         {
-            label: "Вид товара:",
+            label: "Действующее вещество:",
             value: "Лекарственные средства",
         },
         {
-            label: "Форма выпуска:",
-            value: "Таблетки растворимые",
+            label: "Mnn:",
+            value: data.mnnRu,
         },
         {
             label: "Производитель:",
             value: data.producer,
         },
         {
-            label: "Дозировка:",
-            value: "500МЕ",
+            label: "Страна:",
+            value: data.country,
         },
         {
             label: "Фасовка:",
             value: "№60",
-        },
-        {
-            label: "Страна:",
-            value: data.country,
         },
     ];
     return (
@@ -135,14 +131,16 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                 </Grid>
                 <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                     <Item>
-                        <MyText variant="h5">{data?.name}</MyText>
+                        <MyText variant="h5" sx={{ mt: 3 }}>
+                            {data?.name}
+                        </MyText>
                         {data.stocks.qty > 0 ? (
                             <MyText
                                 variant="body1"
                                 sx={{
                                     color: ThemeMain.palette.primary.main,
-                                    mt: 0.5,
-                                    mb: 0.5,
+                                    mt: 2,
+                                    mb: 2,
                                 }}
                             >
                                 Товар в наличии
@@ -150,7 +148,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                         ) : (
                             <MyText
                                 variant="body1"
-                                sx={{ color: "#FE5860", mt: 0.5, mb: 0.5 }}
+                                sx={{ color: "#FE5860", mt: 2, mb: 2 }}
                             >
                                 Товара нет в наличии
                             </MyText>
@@ -159,7 +157,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             <MyText
                                 variant="body1"
                                 key={index}
-                                sx={{ mt: 0.8, color: "#9B9B9B" }}
+                                sx={{ mt: 1.5, color: "#9B9B9B" }}
                             >
                                 {item.label}
                                 <span
@@ -171,7 +169,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                         ))}
                         <MyText
                             variant="body1"
-                            sx={{ color: "#9B9B9B", mt: 1.5 }}
+                            sx={{ color: "#9B9B9B", mt: 2.5 }}
                         >
                             Цена:
                         </MyText>
@@ -216,28 +214,34 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             >
                                 Добавить в корзину
                             </MyButton>
-                            <IconButton sx={{ ml: 5 }}>
-                                {" "}
-                                {data?.fav?.is_fav ? (
+
+                            {data?.fav?.is_fav ? (
+                                <IconButton
+                                    sx={{ ml: 5 }}
+                                    onClick={deleteFavorite}
+                                >
                                     <FavoriteIcon
-                                        onClick={deleteFavorite}
                                         sx={{ color: "#55CD61" }}
                                         fontSize="large"
                                     />
-                                ) : (
+                                </IconButton>
+                            ) : (
+                                <IconButton
+                                    sx={{ ml: 5 }}
+                                    onClick={() => {
+                                        jwttoken
+                                            ? addedFavorite()
+                                            : toast.error(
+                                                  "данная операция доступно только при авторизации"
+                                              );
+                                    }}
+                                >
                                     <FavoriteBorderIcon
-                                        onClick={() => {
-                                            jwttoken
-                                                ? addedFavorite()
-                                                : toast.error(
-                                                      "данная операция доступно только при авторизации"
-                                                  );
-                                        }}
                                         sx={{ color: "#55CD61" }}
                                         fontSize="large"
                                     />
-                                )}
-                            </IconButton>
+                                </IconButton>
+                            )}
                         </Box>
                         <Box sx={{ mt: 2 }}>
                             {/* {array2.map((item, index) => (
