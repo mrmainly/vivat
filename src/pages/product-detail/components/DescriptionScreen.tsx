@@ -44,9 +44,14 @@ function a11yProps(index: number) {
 interface DescrProps {
     analData?: any;
     loading?: any;
+    instructions?: any;
 }
 
-const DescriptionScreen: React.FC<DescrProps> = ({ analData, loading }) => {
+const DescriptionScreen: React.FC<DescrProps> = ({
+    analData,
+    loading,
+    instructions,
+}) => {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
 
@@ -72,7 +77,7 @@ const DescriptionScreen: React.FC<DescrProps> = ({ analData, loading }) => {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab label="Описание" {...a11yProps(0)} />
+                    <Tab label="Инструкция" {...a11yProps(0)} />
                     <Tab label="Аналоги" {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
@@ -82,7 +87,7 @@ const DescriptionScreen: React.FC<DescrProps> = ({ analData, loading }) => {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                    <Description />
+                    <Description instructions={instructions} />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                     <MainCardsConstructor data={analData} loading={loading} />

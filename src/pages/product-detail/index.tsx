@@ -12,6 +12,7 @@ const ProductDetail = () => {
     const [data, setData] = useState<any>();
     const [analogData, setAnalogData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [instructions, setInstructions] = useState("");
 
     const params = useParams();
 
@@ -49,6 +50,7 @@ const ProductDetail = () => {
                         data={product_data}
                     /> */}
                     <DescriptionScreen
+                        instructions={data.esgood[0]}
                         analData={analogData}
                         loading={loading}
                     />

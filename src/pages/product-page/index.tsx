@@ -56,10 +56,10 @@ const ProductPage = () => {
             setLoading(false);
         };
         getProducts();
-        console.log(availability);
-    }, [currentPage, id, stateContext.favorite_status.status, availability]);
+    }, [currentPage, id, stateContext.favorite_status.status]);
 
     let countNumber = Math.ceil(count / 20);
+
     return (
         <Box sx={{ width: "100%" }}>
             <MyText variant="h5" sx={{ mb: 2 }}>

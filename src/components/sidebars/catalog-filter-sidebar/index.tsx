@@ -14,7 +14,6 @@ import { MyText, BorderLine, MyButton } from "../..";
 const Main = styled(Box)(({ theme }) => ({
     background: "white",
     borderRadius: 12,
-    minHeight: 800,
     width: "100%",
     [theme.breakpoints.down("sm")]: {
         display: "none",
@@ -125,7 +124,9 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                 </Drawer>
             ) : (
                 <Main>
-                    <Box sx={{ p: 2 }}>
+                    <Box
+                        sx={{ p: 2, display: "flex", flexDirection: "column" }}
+                    >
                         <MyText variant="h6">Фильтр</MyText>
                         <FormControlLabel
                             control={<Checkbox />}
@@ -168,7 +169,7 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                             type="number"
                         />
                     </Box>
-                    <Box sx={{ pl: 2, pr: 2 }}>
+                    <Box sx={{ pl: 2, pr: 2, pb: 3 }}>
                         <MyButton>Поиск</MyButton>
                     </Box>
                 </Main>
