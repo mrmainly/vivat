@@ -95,9 +95,13 @@ class API {
     }
 
     //products
-    async getProductsList(id, page, availability) {
+    async getProductsList(id, page, data) {
         let result = await api(
-            `api/v1/goods/?group_id=${id}&page=${page}&availability=${availability}`
+            `api/v1/goods/?group_id=${id}&page=${page}&notRecept=${
+                data?.notRecept ? data?.notRecept : ""
+            }&price_min=${data?.min_price}&price_max=${
+                data?.max_price
+            }&producer=${data?.producer ? data?.producer : ""}`
         ).get();
         return result;
     }

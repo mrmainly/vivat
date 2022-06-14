@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Box, Grid, Pagination, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useLocation } from "react-router-dom";
+import { Sling as Hamburger } from "hamburger-react";
 
 import { CatalogFilterSideBar, MyText } from "../../components";
 import { MainCardsConstructor } from "../../constructor";
@@ -10,6 +11,16 @@ import API from "../../api";
 
 const WrapperBox = styled(Box)(({ theme }) => ({
     display: "flex",
+}));
+
+const ButtonShow = styled(Box)(({ theme }) => ({
+    cursor: "pointer",
+    display: "none",
+    width: "max-content",
+    [theme.breakpoints.down("md")]: {
+        display: "flex",
+        flexDirection: "row",
+    },
 }));
 
 interface CustomizedState {
@@ -22,6 +33,7 @@ const ProductPage = () => {
     const [count, setCount] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const [availability, setAvailability] = useState("");
 
@@ -38,25 +50,31 @@ const ProductPage = () => {
         }
     }
 
-    useEffect(() => {
-        const getProducts = async () => {
-            setLoading(true);
-            await API.getProductsList(id, currentPage, availability)
-                .then((res) => {
+    const getProducts = async (data: any = []) => {
+        setLoading(true);
+        console.log("filter", data);
+        await API.getProductsList(id, currentPage, data)
+            .then((res) => {
+                console.log(res);
+                if (res.data.results) {
+                    setData(res.data.results);
                     console.log(res);
-                    if (res.data.results) {
-                        setData(res.data.results);
-                        console.log(res);
-                    } else {
-                        setData(res.data);
-                    }
-                    setCount(res.data.count);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
+                } else {
+                    setData(res.data);
+                }
+                setCount(res.data.count);
+            })
+            .catch((error) => console.log(error));
+        setLoading(false);
+    };
+
+    useEffect(() => {
         getProducts();
     }, [currentPage, id, stateContext.favorite_status.status]);
+
+    const onSubmit = (data: any) => {
+        getProducts(data);
+    };
 
     let countNumber = Math.ceil(count / 20);
 
@@ -68,20 +86,38 @@ const ProductPage = () => {
             <Grid container spacing={2}>
                 <Grid lg={3} xl={3} md={3} sm={0} xs={0} item>
                     <CatalogFilterSideBar
+                        open={drawerOpen}
+                        setOpen={setDrawerOpen}
                         availability={availability}
                         setAvailability={setAvailability}
+                        onSubmit={onSubmit}
                     />
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
                     <>
-                        <Pagination
-                            count={countNumber}
-                            style={{ marginBottom: 20 }}
-                            onChange={(event, value) => {
-                                setCurrentPage(value);
-                                backToTop();
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                marginBottom: 2,
                             }}
-                        />
+                        >
+                            <Pagination
+                                count={countNumber}
+                                onChange={(event, value) => {
+                                    setCurrentPage(value);
+                                    backToTop();
+                                }}
+                            />
+                            <ButtonShow
+                                onClick={() => {
+                                    setDrawerOpen(true);
+                                }}
+                            >
+                                <Hamburger toggled={drawerOpen} />
+                            </ButtonShow>
+                        </Box>
                         <MainCardsConstructor data={data} loading={loading} />
                         <Pagination
                             count={countNumber}

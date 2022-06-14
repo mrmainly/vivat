@@ -7,41 +7,36 @@ import {
     Drawer,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { Sling as Hamburger } from "hamburger-react";
+import { useForm, Controller } from "react-hook-form";
 
-import { MyText, BorderLine, MyButton } from "../..";
+import { MyText, BorderLine, MyButton, Form } from "../..";
 
-const Main = styled(Box)(({ theme }) => ({
+const Main = styled(Form)(({ theme }) => ({
     background: "white",
     borderRadius: 12,
     width: "100%",
-    [theme.breakpoints.down("sm")]: {
-        display: "none",
-    },
-}));
-
-const ButtonShow = styled(Box)(({ theme }) => ({
-    cursor: "pointer",
-    display: "none",
-    width: "max-content",
-    [theme.breakpoints.down("md")]: {
-        display: "flex",
-        flexDirection: "row",
-        float: "right",
-    },
 }));
 
 interface CatalogFilterSideBarProps {
     availability: any;
     setAvailability: any;
+    open: any;
+    setOpen: any;
+    onSubmit: any;
 }
 
 const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
     availability,
     setAvailability,
+    open,
+    setOpen,
+    onSubmit,
 }) => {
     const [drawerState, setDrawerState] = useState(true);
-    const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const { control, register, handleSubmit, getValues } = useForm({
+        mode: "onBlur",
+    });
 
     React.useEffect(() => {
         function handleResize() {
@@ -56,123 +51,73 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
         window.addEventListener("resize", handleResize);
     }, []);
 
+    const Body = () => {
+        return (
+            <Main onSubmit={handleSubmit(onSubmit)}>
+                <Box sx={{ p: 2 }}>
+                    <MyText variant="h6">Фильтр</MyText>
+                    <FormControlLabel
+                        control={<Checkbox />}
+                        label="Наличие товара"
+                    />
+                    <FormControlLabel
+                        control={<Checkbox />}
+                        label="Без рецепта"
+                        {...register("notRecept")}
+                    />
+                    <FormControlLabel control={<Checkbox />} label="ЖНВЛП" />
+                </Box>
+                <BorderLine sx={{ mt: "-5px" }} />
+                <Box sx={{ padding: 2 }}>
+                    <MyText variant="h6">Цена, ₽</MyText>
+                    <Box>
+                        <TextField
+                            label="Начало цены"
+                            size="small"
+                            sx={{ mt: 2, width: "100%" }}
+                            type="number"
+                            {...register("min_price")}
+                        />
+                        <TextField
+                            label="Конец цены"
+                            size="small"
+                            sx={{ mt: 2, width: "100%" }}
+                            type="number"
+                            {...register("max_price")}
+                        />
+                    </Box>
+                </Box>
+                <BorderLine />
+                <Box sx={{ p: 2 }}>
+                    <MyText variant="h6">Бренды</MyText>
+                    <TextField
+                        label="Название бренда"
+                        size="small"
+                        sx={{ mt: 2, width: "100%" }}
+                        {...register("producer")}
+                    />
+                </Box>
+                <Box sx={{ pl: 2, pr: 2, pb: 2.5 }}>
+                    <MyButton>Поиск</MyButton>
+                </Box>
+            </Main>
+        );
+    };
+
     return (
         <>
-            <ButtonShow
-                onClick={() => {
-                    setDrawerOpen(true);
-                }}
-            >
-                <Hamburger toggled={drawerOpen} />
-            </ButtonShow>
             {drawerState ? (
                 <Drawer
                     {...{
                         anchor: "left",
-                        open: drawerOpen,
-                        onClose: () => setDrawerOpen(false),
+                        open: open,
+                        onClose: () => setOpen(false),
                     }}
                 >
-                    <Main>
-                        <Box sx={{ p: 2 }}>
-                            <MyText variant="h6">Фильтр</MyText>
-                            <FormControlLabel
-                                control={<Checkbox />}
-                                label="Наличие товара"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox />}
-                                label="Без рецепта"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox />}
-                                label="ЖНВЛП"
-                            />
-                        </Box>
-                        <BorderLine sx={{ mt: "-5px" }} />
-                        <Box sx={{ padding: 2 }}>
-                            <MyText variant="h6">Цена, ₽</MyText>
-                            <Box>
-                                <TextField
-                                    label="Начало цены"
-                                    size="small"
-                                    sx={{ mt: 2, width: "100%" }}
-                                    type="number"
-                                />
-                                <TextField
-                                    label="Конец цены"
-                                    size="small"
-                                    sx={{ mt: 2, width: "100%" }}
-                                    type="number"
-                                />
-                            </Box>
-                        </Box>
-                        <BorderLine />
-                        <Box sx={{ p: 2 }}>
-                            <MyText variant="h6">Бренды</MyText>
-                            <TextField
-                                label="Название бренда"
-                                size="small"
-                                sx={{ mt: 2, width: "100%" }}
-                                type="number"
-                            />
-                        </Box>
-                        <Box sx={{ pl: 2, pr: 2 }}>
-                            <MyButton>Поиск</MyButton>
-                        </Box>
-                    </Main>
+                    <Body />
                 </Drawer>
             ) : (
-                <Main>
-                    <Box
-                        sx={{ p: 2, display: "flex", flexDirection: "column" }}
-                    >
-                        <MyText variant="h6">Фильтр</MyText>
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Наличие товара"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Без рецепта"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="ЖНВЛП"
-                        />
-                    </Box>
-                    <BorderLine sx={{ mt: "-5px" }} />
-                    <Box sx={{ padding: 2 }}>
-                        <MyText variant="h6">Цена, ₽</MyText>
-                        <Box>
-                            <TextField
-                                label="Начало цены"
-                                size="small"
-                                sx={{ mt: 2, width: "100%" }}
-                                type="number"
-                            />
-                            <TextField
-                                label="Конец цены"
-                                size="small"
-                                sx={{ mt: 2, width: "100%" }}
-                                type="number"
-                            />
-                        </Box>
-                    </Box>
-                    <BorderLine />
-                    <Box sx={{ p: 2 }}>
-                        <MyText variant="h6">Бренды</MyText>
-                        <TextField
-                            label="Название бренда"
-                            size="small"
-                            sx={{ mt: 2, width: "100%" }}
-                            type="number"
-                        />
-                    </Box>
-                    <Box sx={{ pl: 2, pr: 2, pb: 3 }}>
-                        <MyButton>Поиск</MyButton>
-                    </Box>
-                </Main>
+                <Body />
             )}
         </>
     );
