@@ -11,32 +11,29 @@ import { useForm, Controller } from "react-hook-form";
 
 import { MyText, BorderLine, MyButton, Form } from "../..";
 
-const Main = styled(Form)(({ theme }) => ({
+const Main = styled(Box)(({ theme }) => ({
     background: "white",
     borderRadius: 12,
     width: "100%",
 }));
 
 interface CatalogFilterSideBarProps {
-    availability: any;
-    setAvailability: any;
     open: any;
     setOpen: any;
-    onSubmit: any;
+    formState: any;
+    formDispatch: any;
 }
 
 const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
-    availability,
-    setAvailability,
+    formState,
+    formDispatch,
     open,
     setOpen,
-    onSubmit,
 }) => {
     const [drawerState, setDrawerState] = useState(true);
-
-    const { control, register, handleSubmit, getValues } = useForm({
-        mode: "onBlur",
-    });
+    const [minPrice, setMinPrice] = useState("");
+    const [maxPrice, setMaxPrice] = useState("");
+    const [producer, setProducer] = useState("");
 
     React.useEffect(() => {
         function handleResize() {
@@ -51,57 +48,19 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
         window.addEventListener("resize", handleResize);
     }, []);
 
-    const Body = () => {
-        return (
-            <Main onSubmit={handleSubmit(onSubmit)}>
-                <Box sx={{ p: 2 }}>
-                    <MyText variant="h6">Фильтр</MyText>
-                    <FormControlLabel
-                        control={<Checkbox />}
-                        label="Наличие товара"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox />}
-                        label="Без рецепта"
-                        {...register("notRecept")}
-                    />
-                    <FormControlLabel control={<Checkbox />} label="ЖНВЛП" />
-                </Box>
-                <BorderLine sx={{ mt: "-5px" }} />
-                <Box sx={{ padding: 2 }}>
-                    <MyText variant="h6">Цена, ₽</MyText>
-                    <Box>
-                        <TextField
-                            label="Начало цены"
-                            size="small"
-                            sx={{ mt: 2, width: "100%" }}
-                            type="number"
-                            {...register("min_price")}
-                        />
-                        <TextField
-                            label="Конец цены"
-                            size="small"
-                            sx={{ mt: 2, width: "100%" }}
-                            type="number"
-                            {...register("max_price")}
-                        />
-                    </Box>
-                </Box>
-                <BorderLine />
-                <Box sx={{ p: 2 }}>
-                    <MyText variant="h6">Бренды</MyText>
-                    <TextField
-                        label="Название бренда"
-                        size="small"
-                        sx={{ mt: 2, width: "100%" }}
-                        {...register("producer")}
-                    />
-                </Box>
-                <Box sx={{ pl: 2, pr: 2, pb: 2.5 }}>
-                    <MyButton>Поиск</MyButton>
-                </Box>
-            </Main>
-        );
+    const handleCheckbox = (e: any) => {
+        formDispatch({
+            type: "checkbox",
+            field: e.target.name,
+            payload: e.target.checked,
+        });
+    };
+
+    const handleInput = (value: any, name: string) => {
+        formDispatch({
+            type: "input",
+            payload: { value: value, name: name },
+        });
     };
 
     return (
@@ -114,10 +73,166 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                         onClose: () => setOpen(false),
                     }}
                 >
-                    <Body />
+                    <Main>
+                        <Box sx={{ p: 2 }}>
+                            <MyText variant="h6">Фильтр</MyText>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={formState.ordering_qty}
+                                        name="ordering_qty"
+                                        onChange={(e) => handleCheckbox(e)}
+                                    />
+                                }
+                                label="Наличие товара"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={formState.notRecept}
+                                        name="notRecept"
+                                        onChange={(e) => handleCheckbox(e)}
+                                    />
+                                }
+                                label="Без рецепта"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={formState.jnvls}
+                                        name="jnvls"
+                                        onChange={(e) => handleCheckbox(e)}
+                                    />
+                                }
+                                label="ЖНВЛП"
+                            />
+                        </Box>
+                        <BorderLine sx={{ mt: "-5px" }} />
+                        <Box sx={{ padding: 2 }}>
+                            <MyText variant="h6">Цена, ₽</MyText>
+                            <Box>
+                                <TextField
+                                    label="Начало цены"
+                                    size="small"
+                                    sx={{ mt: 2, width: "100%" }}
+                                    type="number"
+                                    value={minPrice}
+                                    onChange={(e) =>
+                                        setMinPrice(e.target.value)
+                                    }
+                                    onBlur={() => {
+                                        handleInput(minPrice, "min_price");
+                                    }}
+                                />
+                                <TextField
+                                    label="Конец цены"
+                                    size="small"
+                                    sx={{ mt: 2, width: "100%" }}
+                                    type="number"
+                                    value={maxPrice}
+                                    onChange={(e) =>
+                                        setMaxPrice(e.target.value)
+                                    }
+                                    onBlur={() => {
+                                        handleInput(maxPrice, "max_price");
+                                    }}
+                                />
+                            </Box>
+                        </Box>
+                        <BorderLine />
+                        <Box sx={{ p: 2 }}>
+                            <MyText variant="h6">Бренды</MyText>
+                            <TextField
+                                label="Название бренда"
+                                size="small"
+                                sx={{ mt: 2, width: "100%", pb: 1 }}
+                                value={producer}
+                                onChange={(e) => setProducer(e.target.value)}
+                                onBlur={() => {
+                                    handleInput(producer, "producer");
+                                }}
+                            />
+                        </Box>
+                    </Main>
                 </Drawer>
             ) : (
-                <Body />
+                <Main>
+                    <Box sx={{ p: 2 }}>
+                        <MyText variant="h6">Фильтр</MyText>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={formState.ordering_qty}
+                                    name="ordering_qty"
+                                    onChange={(e) => handleCheckbox(e)}
+                                />
+                            }
+                            label="Наличие товара"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={formState.notRecept}
+                                    name="notRecept"
+                                    onChange={(e) => handleCheckbox(e)}
+                                />
+                            }
+                            label="Без рецепта"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={formState.jnvls}
+                                    name="jnvls"
+                                    onChange={(e) => handleCheckbox(e)}
+                                />
+                            }
+                            label="ЖНВЛП"
+                        />
+                    </Box>
+                    <BorderLine sx={{ mt: "-5px" }} />
+                    <Box sx={{ padding: 2 }}>
+                        <MyText variant="h6">Цена, ₽</MyText>
+                        <Box>
+                            <TextField
+                                label="Начало цены"
+                                size="small"
+                                sx={{ mt: 2, width: "100%" }}
+                                type="number"
+                                value={minPrice}
+                                onChange={(e) => setMinPrice(e.target.value)}
+                                onBlur={() => {
+                                    handleInput(minPrice, "min_price");
+                                }}
+                            />
+                            <TextField
+                                label="Конец цены"
+                                size="small"
+                                sx={{ mt: 2, width: "100%" }}
+                                type="number"
+                                value={maxPrice}
+                                onChange={(e) => setMaxPrice(e.target.value)}
+                                onBlur={() => {
+                                    handleInput(maxPrice, "max_price");
+                                }}
+                            />
+                        </Box>
+                    </Box>
+                    <BorderLine />
+                    <Box sx={{ p: 2 }}>
+                        <MyText variant="h6">Бренды</MyText>
+                        <TextField
+                            label="Название бренда"
+                            size="small"
+                            sx={{ mt: 2, width: "100%", pb: 1 }}
+                            value={producer}
+                            onChange={(e) => setProducer(e.target.value)}
+                            onBlur={() => {
+                                handleInput(producer, "producer");
+                            }}
+                        />
+                    </Box>
+                </Main>
             )}
         </>
     );

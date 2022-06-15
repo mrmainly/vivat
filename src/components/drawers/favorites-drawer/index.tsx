@@ -27,7 +27,6 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
             await API.getFavorites()
                 .then((res) => {
                     setData(res.data);
-                    console.log("favor", res);
                 })
                 .catch((error) => console.log(error));
             setLoading(false);

@@ -1,5 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Box, Grid, Pagination, CircularProgress } from "@mui/material";
+import React, {
+    useEffect,
+    useState,
+    useContext,
+    useReducer,
+    useLayoutEffect,
+} from "react";
+import { Box, Grid, Pagination } from "@mui/material";
 import { styled } from "@mui/system";
 import { useLocation } from "react-router-dom";
 import { Sling as Hamburger } from "hamburger-react";
@@ -28,6 +34,32 @@ interface CustomizedState {
     title?: string;
 }
 
+const initialFormState = {
+    notRecept: false,
+    jnvls: false,
+    ordering_qty: false,
+    min_price: "",
+    max_price: "",
+    producer: "",
+};
+
+const formReducer = (state: any, action: any) => {
+    switch (action.type) {
+        case "input":
+            return {
+                ...state,
+                [action.payload.name]: action.payload.value,
+            };
+        case "checkbox":
+            return {
+                ...state,
+                [action.field]: action.payload,
+            };
+        default:
+            throw new Error(`Unknown action type: ${action.type}`);
+    }
+};
+
 const ProductPage = () => {
     const [data, setData] = useState([]);
     const [count, setCount] = useState<number>(0);
@@ -35,7 +67,7 @@ const ProductPage = () => {
     const [loading, setLoading] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const [availability, setAvailability] = useState("");
+    const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
     const location = useLocation();
     const state = location.state as CustomizedState;
@@ -50,29 +82,25 @@ const ProductPage = () => {
         }
     }
 
-    const getProducts = async (data: any = []) => {
-        console.log("filter", data);
-        const filter = async () => {
-            setLoading(true);
-            await API.getProductsList(id, currentPage, data)
-                .then((res) => {
-                    console.log(res);
-                    if (res.data.results) {
-                        setData(res.data.results);
-                    } else {
-                        setData(res.data);
-                    }
-                    setCount(res.data.count);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        filter();
+    const getProducts = async () => {
+        setLoading(true);
+        await API.getProductsList(id, currentPage, formState)
+            .then((res) => {
+                console.log(res);
+                if (res.data.results) {
+                    setData(res.data.results);
+                } else {
+                    setData(res.data);
+                }
+                setCount(res.data.count);
+            })
+            .catch((error) => console.log(error));
+        setLoading(false);
     };
 
     useEffect(() => {
         getProducts();
-    }, [currentPage, id, stateContext.favorite_status.status]);
+    }, [currentPage, id, stateContext.favorite_status.status, formState]);
 
     let countNumber = Math.ceil(count / 20);
 
@@ -86,9 +114,8 @@ const ProductPage = () => {
                     <CatalogFilterSideBar
                         open={drawerOpen}
                         setOpen={setDrawerOpen}
-                        availability={availability}
-                        setAvailability={setAvailability}
-                        onSubmit={getProducts}
+                        formState={formState}
+                        formDispatch={formDispatch}
                     />
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
