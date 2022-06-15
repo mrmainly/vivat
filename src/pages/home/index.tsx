@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
-import { Box, CircularProgress, Pagination } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
 
 import { HomeSlider, MainCardsConstructor } from "../../constructor";
 import API from "../../api";
@@ -51,6 +51,7 @@ const Home = () => {
             ) : (
                 <HomeSlider data={dataBanner} />
             )}
+
             <Box sx={{ mt: 10 }}>
                 <MyText variant="h5" sx={{ mb: 1 }}>
                     Лек. средства

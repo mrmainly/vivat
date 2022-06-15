@@ -93,6 +93,7 @@ interface BasketProps {
     status?: any;
     setStatus?: any;
     count?: number;
+    price_one_goods?: number;
 }
 
 const BasketCard: React.FC<BasketProps> = ({
@@ -106,6 +107,7 @@ const BasketCard: React.FC<BasketProps> = ({
     status,
     setStatus,
     count,
+    price_one_goods,
 }) => {
     const patchCountBasket = async (type: string) => {
         if (count) {
@@ -133,10 +135,6 @@ const BasketCard: React.FC<BasketProps> = ({
                 toast.error("Товар не удален");
             });
     };
-    let totalItemPrice;
-    if (count) {
-        totalItemPrice = price * count;
-    }
 
     return (
         <Root>
@@ -180,7 +178,7 @@ const BasketCard: React.FC<BasketProps> = ({
                     <CloseIcon />
                 </IconButtonDesctop>
                 <CountBox>
-                    <MyText sx={{ mr: 1 }}>{totalItemPrice}₽</MyText>
+                    <MyText sx={{ mr: 1 }}>{price_one_goods}₽</MyText>
                     <Box sx={{ display: "flex" }}>
                         <Button
                             sx={{

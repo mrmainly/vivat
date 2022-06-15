@@ -51,30 +51,28 @@ const ProductPage = () => {
     }
 
     const getProducts = async (data: any = []) => {
-        setLoading(true);
         console.log("filter", data);
-        await API.getProductsList(id, currentPage, data)
-            .then((res) => {
-                console.log(res);
-                if (res.data.results) {
-                    setData(res.data.results);
+        const filter = async () => {
+            setLoading(true);
+            await API.getProductsList(id, currentPage, data)
+                .then((res) => {
                     console.log(res);
-                } else {
-                    setData(res.data);
-                }
-                setCount(res.data.count);
-            })
-            .catch((error) => console.log(error));
-        setLoading(false);
+                    if (res.data.results) {
+                        setData(res.data.results);
+                    } else {
+                        setData(res.data);
+                    }
+                    setCount(res.data.count);
+                })
+                .catch((error) => console.log(error));
+            setLoading(false);
+        };
+        filter();
     };
 
     useEffect(() => {
         getProducts();
     }, [currentPage, id, stateContext.favorite_status.status]);
-
-    const onSubmit = (data: any) => {
-        getProducts(data);
-    };
 
     let countNumber = Math.ceil(count / 20);
 
@@ -90,7 +88,7 @@ const ProductPage = () => {
                         setOpen={setDrawerOpen}
                         availability={availability}
                         setAvailability={setAvailability}
-                        onSubmit={onSubmit}
+                        onSubmit={getProducts}
                     />
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>

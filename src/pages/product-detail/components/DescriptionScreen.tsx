@@ -77,7 +77,7 @@ const DescriptionScreen: React.FC<DescrProps> = ({
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab label="Инструкция" {...a11yProps(0)} />
+                    <Tab label="Описание" {...a11yProps(0)} />
                     <Tab label="Аналоги" {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
