@@ -5,7 +5,15 @@ import React, {
     useReducer,
     useLayoutEffect,
 } from "react";
-import { Box, Grid, Pagination } from "@mui/material";
+import {
+    Box,
+    Grid,
+    Pagination,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
+} from "@mui/material";
 import { styled } from "@mui/system";
 import { useLocation } from "react-router-dom";
 import { Sling as Hamburger } from "hamburger-react";
@@ -14,9 +22,32 @@ import { CatalogFilterSideBar, MyText } from "../../components";
 import { MainCardsConstructor } from "../../constructor";
 import { StateContext } from "../../store";
 import API from "../../api";
+import ThemeMain from "../../theme";
 
 const WrapperBox = styled(Box)(({ theme }) => ({
     display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+    [theme.breakpoints.down("md")]: {
+        flexDirection: "column",
+        alignItems: "start",
+    },
+}));
+
+const SelectDesktop = styled(FormControl)(({ theme }) => ({
+    width: 250,
+    background: "white",
+}));
+
+const BoxInside = styled(Box)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("md")]: {
+        marginTop: 20,
+        width: "100%",
+    },
 }));
 
 const ButtonShow = styled(Box)(({ theme }) => ({
@@ -25,7 +56,6 @@ const ButtonShow = styled(Box)(({ theme }) => ({
     width: "max-content",
     [theme.breakpoints.down("md")]: {
         display: "flex",
-        flexDirection: "row",
     },
 }));
 
@@ -66,6 +96,7 @@ const ProductPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [sort, setSort] = useState("");
 
     const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
@@ -84,7 +115,7 @@ const ProductPage = () => {
 
     const getProducts = async () => {
         setLoading(true);
-        await API.getProductsList(id, currentPage, formState)
+        await API.getProductsList(id, currentPage, formState, sort)
             .then((res) => {
                 console.log(res);
                 if (res.data.results) {
@@ -100,7 +131,7 @@ const ProductPage = () => {
 
     useEffect(() => {
         getProducts();
-    }, [currentPage, id, stateContext.favorite_status.status, formState]);
+    }, [currentPage, id, stateContext.favorite_status.status, formState, sort]);
 
     let countNumber = Math.ceil(count / 20);
 
@@ -120,14 +151,7 @@ const ProductPage = () => {
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
                     <>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                marginBottom: 2,
-                            }}
-                        >
+                        <WrapperBox>
                             <Pagination
                                 count={countNumber}
                                 onChange={(event, value) => {
@@ -135,14 +159,43 @@ const ProductPage = () => {
                                     backToTop();
                                 }}
                             />
-                            <ButtonShow
-                                onClick={() => {
-                                    setDrawerOpen(true);
-                                }}
-                            >
-                                <Hamburger toggled={drawerOpen} />
-                            </ButtonShow>
-                        </Box>
+                            <BoxInside>
+                                <SelectDesktop size="small">
+                                    <InputLabel id="demo-simple-select-label">
+                                        Сортировка
+                                    </InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        label="Сортировка"
+                                        value={sort}
+                                        onChange={(e) =>
+                                            setSort(e.target.value)
+                                        }
+                                    >
+                                        <MenuItem value="priceSale">
+                                            по возрастанию цены
+                                        </MenuItem>
+                                        <MenuItem value="-priceSale">
+                                            по убыванию цены
+                                        </MenuItem>
+                                        <MenuItem value="name">
+                                            по алфавиту
+                                        </MenuItem>
+                                    </Select>
+                                </SelectDesktop>
+                                <ButtonShow
+                                    onClick={() => {
+                                        setDrawerOpen(true);
+                                    }}
+                                >
+                                    <Hamburger
+                                        toggled={drawerOpen}
+                                        color="#55CD61"
+                                    />
+                                </ButtonShow>
+                            </BoxInside>
+                        </WrapperBox>
                         <MainCardsConstructor data={data} loading={loading} />
                         <Pagination
                             count={countNumber}

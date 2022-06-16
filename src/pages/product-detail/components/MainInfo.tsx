@@ -14,13 +14,13 @@ import { DispatchContext, StateContext } from "../../../store";
 import API from "../../../api";
 
 const Item = styled(Box)(({ theme }) => ({
-    minHeight: 520,
+    minHeight: 500,
     background: "white",
     padding: 20,
 }));
 
 const ItemImg = styled(Box)(({ theme }) => ({
-    height: 520,
+    height: 500,
     background: "white",
     padding: 20,
     display: "flex",
@@ -111,10 +111,6 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
         {
             label: "Страна:",
             value: data.country,
-        },
-        {
-            label: "Фасовка:",
-            value: "№60",
         },
     ];
     return (

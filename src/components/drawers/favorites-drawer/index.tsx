@@ -72,7 +72,7 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                     <span>{data.length}</span> товара
                 </MyText>
                 {data.length !== 0
-                    ? data.map((item, index) => (
+                    ? data.map((item: any, index: number) => (
                           <FavoritesCard
                               {...item}
                               key={index}

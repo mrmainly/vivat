@@ -5,16 +5,22 @@ import {
     FormControlLabel,
     TextField,
     Drawer,
+    IconButton,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useForm, Controller } from "react-hook-form";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { MyText, BorderLine, MyButton, Form } from "../..";
+import ThemeMain from "../../../theme";
 
 const Main = styled(Box)(({ theme }) => ({
     background: "white",
     borderRadius: 12,
     width: "100%",
+    [theme.breakpoints.down("md")]: {
+        width: 300,
+    },
 }));
 
 interface CatalogFilterSideBarProps {
@@ -74,8 +80,31 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                     }}
                 >
                     <Main>
-                        <Box sx={{ p: 2 }}>
-                            <MyText variant="h6">Фильтр</MyText>
+                        <Box
+                            sx={{
+                                p: 2,
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <MyText variant="h6">Фильтр</MyText>
+                                <IconButton onClick={() => setOpen(false)}>
+                                    <CloseIcon
+                                        sx={{
+                                            color: ThemeMain.palette.primary
+                                                .main,
+                                        }}
+                                        fontSize="large"
+                                    />
+                                </IconButton>
+                            </Box>
                             <FormControlLabel
                                 control={
                                     <Checkbox

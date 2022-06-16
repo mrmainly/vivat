@@ -95,7 +95,7 @@ class API {
     }
 
     //products
-    async getProductsList(id, page, formState) {
+    async getProductsList(id, page, formState, sort) {
         let result = await api(
             `api/v1/goods/?group_id=${id}&page=${page}
             ${
@@ -107,7 +107,11 @@ class API {
                           formState.ordering_qty ? formState.ordering_qty : ""
                       }&price_min=${formState.min_price}&price_max=${
                           formState.max_price
-                      }&producer=${formState.producer}`
+                      }&producer=${formState.producer}${
+                          sort === "name" && "-name"
+                              ? `&ordering_name=${sort ? sort : ""}`
+                              : `&ordering_price=${sort ? sort : ""}`
+                      }`
                     : ""
             }`
         ).get();

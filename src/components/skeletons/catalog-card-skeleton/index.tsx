@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import Skeleton from "react-loading-skeleton";
 
 const SkeletonCard = styled(Box)(({ theme }) => ({
-    width: "90%",
+    width: "92%",
     height: 400,
     background: "white",
     padding: 10,

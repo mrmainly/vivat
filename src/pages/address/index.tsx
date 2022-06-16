@@ -62,10 +62,10 @@ const Address = () => {
                             dispatchMapCenter={dispatchMapCenter}
                         />
                     </Grid> */}
-                    <Grid item lg={12} xl={12}>
+                    <Grid item lg={12} xl={12} md={12} xs={12} sm={12}>
                         <YMaps>
                             <Map
-                                width={"100%"}
+                                width="100%"
                                 height={800}
                                 defaultState={{
                                     center: mapCenter,
@@ -111,10 +111,11 @@ const Address = () => {
                                               properties={{
                                                   balloonContentHeader:
                                                       item.address,
-                                                  // balloonContentBody: `
-                                                  //     <img width="300" src="${item.image}" />
-                                                  //     <p>${item.text}</p>
-                                                  // `,
+                                                  balloonContentBody: `
+                                                
+                                                      <p>${item.work_time}</p>
+                                                      <p>Номер телефона: ${item.unit_phone}</p>
+                                                  `,
                                                   // iconContent: mapIcon
                                               }}
                                           />

@@ -30,6 +30,9 @@ const Root = styled(Box)(({ theme }) => ({
     transition: "all 1s ease",
     height: 400,
     overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+        width: "92%",
+    },
 }));
 
 const Img = styled("img")(({ theme }) => ({

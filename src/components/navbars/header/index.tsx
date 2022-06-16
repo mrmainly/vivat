@@ -336,17 +336,10 @@ const Header = () => {
                                                 onChange={(e) =>
                                                     handleAutoComplite(e)
                                                 }
+                                                onBlur={onSubmit}
                                             />
                                         )}
                                     />
-                                    <Button onClick={onSubmit}>
-                                        <SearchIcon
-                                            sx={{
-                                                color: ThemeMain.palette.primary
-                                                    .main,
-                                            }}
-                                        />
-                                    </Button>
                                 </ButtonGroup>
                             </BottomBarItem>
                             <BottomBarItem sx={{ ml: 2 }}>
