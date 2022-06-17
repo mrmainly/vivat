@@ -1,10 +1,4 @@
-import React, {
-    useEffect,
-    useState,
-    useContext,
-    useReducer,
-    useLayoutEffect,
-} from "react";
+import React, { useEffect, useState, useContext, useReducer } from "react";
 import {
     Box,
     Grid,
@@ -113,23 +107,22 @@ const ProductPage = () => {
         }
     }
 
-    const getProducts = async () => {
-        setLoading(true);
-        await API.getProductsList(id, currentPage, formState, sort)
-            .then((res) => {
-                console.log(res);
-                if (res.data.results) {
-                    setData(res.data.results);
-                } else {
-                    setData(res.data);
-                }
-                setCount(res.data.count);
-            })
-            .catch((error) => console.log(error));
-        setLoading(false);
-    };
-
     useEffect(() => {
+        const getProducts = async () => {
+            setLoading(true);
+            await API.getProductsList(id, currentPage, formState, sort)
+                .then((res) => {
+                    console.log(res);
+                    if (res.data.results) {
+                        setData(res.data.results);
+                    } else {
+                        setData(res.data);
+                    }
+                    setCount(res.data.count);
+                })
+                .catch((error) => console.log(error));
+            setLoading(false);
+        };
         getProducts();
     }, [currentPage, id, stateContext.favorite_status.status, formState, sort]);
 

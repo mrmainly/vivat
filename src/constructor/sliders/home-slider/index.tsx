@@ -20,6 +20,7 @@ const HomeSliderBox = styled(Box)(({ theme }) => ({
     display: "flex",
     alignItems: "end",
     justifyContent: "center",
+
     [theme.breakpoints.down("md")]: {
         height: 300,
     },

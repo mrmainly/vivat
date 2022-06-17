@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Box } from "@mui/material";
 import Slider from "react-slick";
+import { styled } from "@mui/system";
 
 import { MyText } from "../../../components";
 import { HomeSecondSliderProps } from "../../../interface/index";
@@ -19,22 +20,40 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
         variableWidth: false,
         swipeToSlide: true,
     };
+
+    const sliders = [
+        {
+            img: "/img/Rectangle4041.png",
+        },
+        {
+            img: "/img/Rectangle4041.png",
+        },
+        {
+            img: "/img/Rectangle4041.png",
+        },
+        {
+            img: "/img/Rectangle4041.png",
+        },
+    ];
+
     return (
         <Box sx={{ mb: 5 }}>
-            <MyText variant="h5" sx={{ mb: 3 }}>{title}</MyText>
+            <MyText variant="h5" sx={{ mb: 3 }}>
+                {title}
+            </MyText>
             <Slider {...settings}>
-                <div>
-                    <img src='/img/Rectangle4041.png' style={{borderRadius: "10px"}}/>
-                </div>
-                <div>
-                    <img src="/img/Rectangle4042.png" style={{borderRadius: "10px"}}/>
-                </div>
-                <div>
-                    <img src='/img/Rectangle4041.png' style={{borderRadius: "10px"}}/>
-                </div>
-                <div>
-                    <img src="/img/Rectangle4042.png" style={{borderRadius: "10px"}}/>
-                </div>
+                {sliders.map((item, index) => (
+                    <Box key={index}>
+                        <img
+                            src={item.img}
+                            style={{
+                                borderRadius: "10px",
+                                margin: "0 auto",
+                                width: "95%",
+                            }}
+                        />
+                    </Box>
+                ))}
             </Slider>
         </Box>
     );
