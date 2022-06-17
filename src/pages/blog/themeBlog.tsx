@@ -51,7 +51,7 @@ const ThemeBlog = () => {
                     </Box>
                 ) : (
                     <Grid item xs={12}>
-                        {data.map((item, index) => (
+                        {data.map((item: any, index: number) => (
                             <BlogCardTheme {...item} key={index} />
                         ))}
                     </Grid>

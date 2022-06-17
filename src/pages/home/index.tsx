@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Box, Pagination } from "@mui/material";
 
-import { HomeSlider, MainCardsConstructor } from "../../constructor";
+import { HomeSlider, HomeSecondSlider, MainCardsConstructor } from "../../constructor";
 import API from "../../api";
 import { MyText } from "../../components";
 
@@ -13,6 +13,7 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [count, setCount] = useState(0);
     const [sliderLoading, setLoadingSlider] = useState(false);
+    const [homeSecondSliderCount, setHomeSecondSliderCount] = useState(4);
 
     useEffect(() => {
         const getPromotion = async () => {
@@ -51,8 +52,8 @@ const Home = () => {
             ) : (
                 <HomeSlider data={dataBanner} />
             )}
-
             <Box sx={{ mt: 10 }}>
+                <HomeSecondSlider title="Наши преимущества"/>
                 <MyText variant="h5" sx={{ mb: 1 }}>
                     Лек. средства
                 </MyText>

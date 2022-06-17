@@ -109,7 +109,7 @@ const Blog = () => {
                                 {popularity.length > 0
                                     ? popularity
                                           .slice(0, 3)
-                                          .map((item, index) => (
+                                          .map((item: any, index: number) => (
                                               <Grid
                                                   item
                                                   key={index}
@@ -129,7 +129,7 @@ const Blog = () => {
                             {created.length > 0
                                 ? created
                                       .slice(0, 1)
-                                      .map((item, index) => (
+                                      .map((item: any, index: number) => (
                                           <BlogCardMain key={index} {...item} />
                                       ))
                                 : ""}
@@ -150,7 +150,7 @@ const Blog = () => {
                             </BlogMenuItem>
                             <Grid container spacing={2}>
                                 {created.length > 0
-                                    ? created.slice(1, 3).map((item, index) => (
+                                    ? created.slice(1, 3).map((item: any, index: number) => (
                                           <Grid
                                               item
                                               key={index}

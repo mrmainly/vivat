@@ -183,6 +183,10 @@ interface SignModalProps {
     setForgotClose?: any;
 }
 
+interface HomeSecondSliderProps {
+    title: string;
+}
+
 export type {
     MyTextProps,
     InputProps,
@@ -204,4 +208,5 @@ export type {
     StockCardProps,
     MainDrawerProps,
     SignModalProps,
+    HomeSecondSliderProps,
 };

@@ -67,7 +67,7 @@ const Stock = () => {
             ) : (
                 <>
                     <Grid container spacing={2} sx={{ mt: 2 }}>
-                        {data.map((item, index) => (
+                        {data.map((item: any, index: number) => (
                             <Grid
                                 item
                                 lg={3}
