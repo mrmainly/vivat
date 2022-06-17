@@ -173,7 +173,10 @@ const ProductPage = () => {
                                             по убыванию цены
                                         </MenuItem>
                                         <MenuItem value="name">
-                                            по алфавиту
+                                            по алфавиту а-я
+                                        </MenuItem>
+                                        <MenuItem value="-name">
+                                            по алфавиту я-а
                                         </MenuItem>
                                     </Select>
                                 </SelectDesktop>

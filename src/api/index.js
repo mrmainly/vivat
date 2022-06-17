@@ -108,7 +108,7 @@ class API {
                       }&price_min=${formState.min_price}&price_max=${
                           formState.max_price
                       }&producer=${formState.producer}${
-                          sort === "name" && "-name"
+                          sort == "name" || sort == "-name"
                               ? `&ordering_name=${sort ? sort : ""}`
                               : `&ordering_price=${sort ? sort : ""}`
                       }`

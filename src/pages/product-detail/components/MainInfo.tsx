@@ -1,26 +1,27 @@
 import React, { useContext } from "react";
 
-import { Grid, Box, IconButton } from "@mui/material";
+import { Grid, Box, IconButton, MenuItem } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import cookie from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 import { MyText, MyButton } from "../../../components";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ThemeMain from "../../../theme";
 import { DispatchContext, StateContext } from "../../../store";
 import API from "../../../api";
+import ROUTES from "../../../routes";
 
 const Item = styled(Box)(({ theme }) => ({
-    minHeight: 500,
     background: "white",
     padding: 20,
+    minHeight: 520,
 }));
 
 const ItemImg = styled(Box)(({ theme }) => ({
-    height: 500,
     background: "white",
     padding: 20,
     display: "flex",
@@ -30,6 +31,7 @@ const ItemImg = styled(Box)(({ theme }) => ({
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    minHeight: 520,
 }));
 
 const Img = styled("img")(({ theme }) => ({
@@ -48,6 +50,16 @@ const PriceBlog = styled(Box)(({ theme }) => ({
     marginTop: 5,
 }));
 
+const Span = styled("span")(({ theme }) => ({
+    marginLeft: 15,
+    color: "black",
+    cursor: "pointer",
+    "&:hover": {
+        textDecoration: "underline",
+    },
+    transition: "all 1s ease",
+}));
+
 interface MainInfoProps {
     data?: any;
 }
@@ -56,6 +68,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
     const state = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
     const jwttoken = cookie.get("jwttoken");
+    const navigate = useNavigate();
 
     const transferBasket = () => {
         API.transferBasket(data.id)
@@ -96,10 +109,6 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
     };
 
     const array = [
-        {
-            label: "Действующее вещество:",
-            value: "Лекарственные средства",
-        },
         {
             label: "Mnn:",
             value: data.mnnRu,
@@ -149,6 +158,29 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                 Товара нет в наличии
                             </MyText>
                         )}
+                        <MyText
+                            variant="body1"
+                            sx={{ mt: 1.5, color: "#9B9B9B" }}
+                        >
+                            Группы товаров:
+                            {data.goodsGroupCodes.map(
+                                (item: any, index: number) => (
+                                    <Span
+                                        key={index}
+                                        onClick={() =>
+                                            navigate(ROUTES.PRODUCT_PAGE, {
+                                                state: {
+                                                    id: item.id,
+                                                    title: item.name,
+                                                },
+                                            })
+                                        }
+                                    >
+                                        {item.name}
+                                    </Span>
+                                )
+                            )}
+                        </MyText>
                         {array.map((item, index) => (
                             <MyText
                                 variant="body1"
