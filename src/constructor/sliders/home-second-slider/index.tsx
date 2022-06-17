@@ -19,6 +19,14 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
         slidesToShow: 2,
         variableWidth: false,
         swipeToSlide: true,
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }
+        ]
     };
 
     const sliders = [
