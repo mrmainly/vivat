@@ -150,19 +150,21 @@ const Blog = () => {
                             </BlogMenuItem>
                             <Grid container spacing={2}>
                                 {created.length > 0
-                                    ? created.slice(1, 3).map((item: any, index: number) => (
-                                          <Grid
-                                              item
-                                              key={index}
-                                              lg={12}
-                                              xl={12}
-                                              md={12}
-                                              sm={12}
-                                              xs={12}
-                                          >
-                                              <BlogCard {...item} />
-                                          </Grid>
-                                      ))
+                                    ? created
+                                          .slice(1, 3)
+                                          .map((item: any, index: number) => (
+                                              <Grid
+                                                  item
+                                                  key={index}
+                                                  lg={12}
+                                                  xl={12}
+                                                  md={12}
+                                                  sm={12}
+                                                  xs={12}
+                                              >
+                                                  <BlogCard {...item} />
+                                              </Grid>
+                                          ))
                                     : ""}
                             </Grid>
                         </Grid>
@@ -194,7 +196,7 @@ const Blog = () => {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                label={topics[0].name}
+                                label="Теги"
                                 defaultValue={topics[0].name}
                                 value={topic}
                                 onChange={(e) => setTopic(e.target.value)}

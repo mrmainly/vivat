@@ -233,6 +233,11 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                                 onBlur={() => {
                                     handleInput(minPrice, "min_price");
                                 }}
+                                onKeyDown={(e) =>
+                                    e.key === "Enter"
+                                        ? handleInput(minPrice, "min_price")
+                                        : ""
+                                }
                             />
                             <TextField
                                 label="Конец цены"
@@ -244,6 +249,11 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                                 onBlur={() => {
                                     handleInput(maxPrice, "max_price");
                                 }}
+                                onKeyDown={(e) =>
+                                    e.key === "Enter"
+                                        ? handleInput(maxPrice, "max_price")
+                                        : ""
+                                }
                             />
                         </Box>
                     </Box>
@@ -259,6 +269,11 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                             onBlur={() => {
                                 handleInput(producer, "producer");
                             }}
+                            onKeyDown={(e) =>
+                                e.key === "Enter"
+                                    ? handleInput(producer, "producer")
+                                    : ""
+                            }
                         />
                     </Box>
                 </Main>

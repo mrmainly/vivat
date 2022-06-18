@@ -12,6 +12,7 @@ import {
     LinearProgress,
     Autocomplete,
     ButtonGroup,
+    Drawer,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -337,6 +338,11 @@ const Header = () => {
                                                     handleAutoComplite(e)
                                                 }
                                                 onBlur={onSubmit}
+                                                onKeyDown={(e) =>
+                                                    e.key === "Enter"
+                                                        ? onSubmit()
+                                                        : ""
+                                                }
                                             />
                                         )}
                                     />

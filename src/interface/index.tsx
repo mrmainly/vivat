@@ -158,7 +158,7 @@ interface BlogCardProps {
 }
 
 interface StockCardProps {
-    image: string | null;
+    image: string;
     description: any;
     date_start?: string;
     date_end?: string;

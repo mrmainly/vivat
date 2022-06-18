@@ -47,9 +47,7 @@ const StockDetail = () => {
                 <>
                     <Grid container spacing={4}>
                         <Grid item lg={4} xl={4} md={5} sm={12} xs={12}>
-                            <Img
-                                src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`}
-                            />
+                            <Img src={data.image} />
                         </Grid>
                         <Grid item lg={8} xl={8} md={7} sm={12} xs={12}>
                             <Box
