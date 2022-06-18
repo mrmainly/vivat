@@ -24,9 +24,9 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 1,
-                }
-            }
-        ]
+                },
+            },
+        ],
     };
 
     const sliders = [
@@ -55,6 +55,8 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
                         <img
                             src={item.img}
                             style={{
+                                height: 250,
+                                objectFit: "cover",
                                 borderRadius: "10px",
                                 margin: "0 auto",
                                 width: "95%",

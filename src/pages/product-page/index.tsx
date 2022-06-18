@@ -146,10 +146,10 @@ const ProductPage = () => {
                     <>
                         <WrapperBox>
                             <Pagination
+                                page={currentPage}
                                 count={countNumber}
                                 onChange={(event, value) => {
                                     setCurrentPage(value);
-                                    backToTop();
                                 }}
                             />
                             <BoxInside>
@@ -195,6 +195,7 @@ const ProductPage = () => {
                         <MainCardsConstructor data={data} loading={loading} />
                         <Pagination
                             count={countNumber}
+                            page={currentPage}
                             style={{ marginTop: 20 }}
                             onChange={(event, value) => {
                                 setCurrentPage(value);

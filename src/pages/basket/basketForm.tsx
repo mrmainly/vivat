@@ -204,7 +204,7 @@ const BasketForm = () => {
                                 />
                                 <FormControl sx={{ mt: 2 }}>
                                     <FormLabel component="legend">
-                                        Способ оплаты:
+                                        Способ оплаты: <span>в разработке</span>
                                     </FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
@@ -221,7 +221,7 @@ const BasketForm = () => {
                                             value="CASH"
                                         />
                                         <FormControlLabel
-                                            control={<Radio />}
+                                            control={<Radio checked={false} />}
                                             label="Оплата картой онлайн"
                                             value="CARDS"
                                         />
@@ -229,7 +229,8 @@ const BasketForm = () => {
                                 </FormControl>
                                 <FormControl sx={{ mt: 2 }}>
                                     <FormLabel component="legend">
-                                        Способ доставки:
+                                        Способ доставки:{" "}
+                                        <span>в разработке</span>
                                     </FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
@@ -242,11 +243,11 @@ const BasketForm = () => {
                                     >
                                         <FormControlLabel
                                             control={<Radio />}
-                                            label="Самовызов"
+                                            label={`Самовызов`}
                                             value="PICKUP"
                                         />
                                         <FormControlLabel
-                                            control={<Radio />}
+                                            control={<Radio checked={false} />}
                                             label="Доставка курьером"
                                             value="DELIVERY"
                                         />

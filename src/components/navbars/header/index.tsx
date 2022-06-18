@@ -221,7 +221,7 @@ const Header = () => {
                                 </MenuItem>
                                 <MenuItem>
                                     <MyText variant="body1">
-                                        8 (914) 225-25-25
+                                        8 (914) 280-13-13
                                     </MyText>
                                 </MenuItem>
                                 <MenuItem
@@ -354,7 +354,9 @@ const Header = () => {
                                     }}
                                     variant="outlined"
                                     onClick={() => {
-                                        navigate(ROUTES.STATUS_PRODUCT);
+                                        jwttoken
+                                            ? navigate(ROUTES.STATUS_PRODUCT)
+                                            : handleLoginOpen();
                                     }}
                                 >
                                     Статус заказа
