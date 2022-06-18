@@ -64,6 +64,7 @@ const Home = () => {
                 </MyText>
                 <Pagination
                     count={countNumber}
+                    page={currentPage}
                     style={{ marginBottom: 20, marginTop: 20 }}
                     onChange={(event, value) => {
                         setCurrentPage(value);
@@ -72,6 +73,7 @@ const Home = () => {
                 <MainCardsConstructor data={data} loading={loading} />
                 <Pagination
                     count={countNumber}
+                    page={currentPage}
                     style={{ marginTop: 20 }}
                     onChange={(event, value) => {
                         setCurrentPage(value);
