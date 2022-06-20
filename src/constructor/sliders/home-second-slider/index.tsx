@@ -45,11 +45,12 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
             </MyText>
             <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
                 {sliders.map((item, index) => (
-                    <Box key={index} sx={{ mb: 5 }}>
+                    <Box key={index} sx={{ mb: 3, 
+                        maxWidth: 520, }}>
                         <img
                             src={item.img}
                             style={{
-                                height: 220,
+                                width: '100%',
                                 objectFit: "cover",
                                 borderRadius: "10px",
                             }}
