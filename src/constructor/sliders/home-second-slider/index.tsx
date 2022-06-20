@@ -8,63 +8,55 @@ import { MyText } from "../../../components";
 import { HomeSecondSliderProps } from "../../../interface/index";
 
 const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
-    const settings = {
-        arrows: false,
-        dots: true,
-        infinite: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        speed: 500,
-        slidesToScroll: 1,
-        slidesToShow: 2,
-        variableWidth: false,
-        swipeToSlide: true,
-        responsive: [
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                },
-            },
-        ],
-    };
+    // const settings = {
+    //     arrows: false,
+    //     dots: true,
+    //     infinite: true,
+    //     autoplay: true,
+    //     autoplaySpeed: 5000,
+    //     speed: 500,
+    //     slidesToScroll: 1,
+    //     slidesToShow: 2,
+    //     variableWidth: false,
+    //     swipeToSlide: true,
+    //     responsive: [
+    //         {
+    //             breakpoint: 600,
+    //             settings: {
+    //                 slidesToShow: 1,
+    //             },
+    //         },
+    //     ],
+    // };
 
     const sliders = [
         {
             img: "/img/Rectangle4041.png",
         },
         {
-            img: "/img/Rectangle4041.png",
-        },
-        {
-            img: "/img/Rectangle4041.png",
-        },
-        {
-            img: "/img/Rectangle4041.png",
+            img: "/img/Rectangle4042.png",
         },
     ];
 
     return (
-        <Box sx={{ mb: 5 }}>
+        <Box>
             <MyText variant="h5" sx={{ mb: 3 }}>
                 {title}
             </MyText>
-            <Slider {...settings}>
+            <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
                 {sliders.map((item, index) => (
-                    <Box key={index}>
+                    <Box key={index} sx={{ mb: 5 }}>
                         <img
                             src={item.img}
                             style={{
-                                height: 250,
+                                height: 220,
                                 objectFit: "cover",
                                 borderRadius: "10px",
-                                margin: "0 auto",
-                                width: "95%",
                             }}
                         />
                     </Box>
                 ))}
-            </Slider>
+            </Box>
         </Box>
     );
 };
