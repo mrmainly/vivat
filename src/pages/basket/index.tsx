@@ -93,65 +93,59 @@ const Basket = () => {
         <>
             <MyText variant="h6">Корзина</MyText>
 
-            <>
-                {data.items ? (
-                    <Box sx={{ opacity: loading ? 0.5 : 1 }}>
-                        <ActionBox>
-                            <MyText variant="body2" sx={{ color: "grey" }}>
-                                {data.total_count} товаров на сумму{" "}
-                                {Math.trunc(data.total_price)} ₽
+            {loading ? (
+                <Box sx={{ mt: 10, display: "flex", justifyContent: "center" }}>
+                    {" "}
+                    <CircularProgress />
+                </Box>
+            ) : data.items ? (
+                <Box sx={{ opacity: loading ? 0.5 : 1 }}>
+                    <ActionBox>
+                        <MyText variant="body2" sx={{ color: "grey" }}>
+                            {data.total_count} товаров на сумму{" "}
+                            {Math.trunc(data.total_price)} ₽
+                        </MyText>
+                        <DeleteMenuItem onClick={deleteBasket}>
+                            <MyText variant="body1">Очистить корзину</MyText>
+                            <CloseIcon sx={{ ml: 1 }} />
+                        </DeleteMenuItem>
+                        <DeleteBox onClick={deleteBasket}>
+                            <MyText variant="body1">Очистить корзину</MyText>
+                            <CloseIcon sx={{ ml: 1 }} />
+                        </DeleteBox>
+                    </ActionBox>
+                    {data?.items.map((item: any, index: number) => (
+                        <BasketCard
+                            key={index}
+                            {...item}
+                            status={status}
+                            setStatus={setStatus}
+                        />
+                    ))}
+                    <TotalBox>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                        >
+                            <MyText variant="h6" sx={{ color: "gray", mr: 1 }}>
+                                Итого:
                             </MyText>
-                            <DeleteMenuItem onClick={deleteBasket}>
-                                <MyText variant="body1">
-                                    Очистить корзину
-                                </MyText>
-                                <CloseIcon sx={{ ml: 1 }} />
-                            </DeleteMenuItem>
-                            <DeleteBox onClick={deleteBasket}>
-                                <MyText variant="body1">
-                                    Очистить корзину
-                                </MyText>
-                                <CloseIcon sx={{ ml: 1 }} />
-                            </DeleteBox>
-                        </ActionBox>
-                        {data?.items.map((item: any, index: number) => (
-                            <BasketCard
-                                key={index}
-                                {...item}
-                                status={status}
-                                setStatus={setStatus}
-                            />
-                        ))}
-                        <TotalBox>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <MyText
-                                    variant="h6"
-                                    sx={{ color: "gray", mr: 1 }}
-                                >
-                                    Итого:
-                                </MyText>
-                                <MyText variant="h6" sx={{ mr: 2 }}>
-                                    {Math.trunc(data.total_price)}₽
-                                </MyText>
-                            </Box>
-                            <MyButton
-                                onClick={() => navigate(ROUTES.BASKET_FORM)}
-                            >
-                                <MyText variant="body2" sm={12}>
-                                    Оформить заказ
-                                </MyText>
-                            </MyButton>
-                        </TotalBox>
-                    </Box>
-                ) : (
-                    <MyText variant="h6">У вас нету заказов</MyText>
-                )}
-            </>
+                            <MyText variant="h6" sx={{ mr: 2 }}>
+                                {Math.trunc(data.total_price)}₽
+                            </MyText>
+                        </Box>
+                        <MyButton onClick={() => navigate(ROUTES.BASKET_FORM)}>
+                            <MyText variant="body2" sm={12}>
+                                Оформить заказ
+                            </MyText>
+                        </MyButton>
+                    </TotalBox>
+                </Box>
+            ) : (
+                <MyText variant="h6">У вас нету заказов</MyText>
+            )}
         </>
     );
 };

@@ -27,7 +27,7 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
     return (
         <Box {...props}>
             <MyText variant="h5">{title}</MyText>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{ mt: 1 }}>
                 {loading ? (
                     Array(skeletonData)
                         .fill(0)

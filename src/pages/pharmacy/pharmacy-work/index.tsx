@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { WorkCard } from "../../../components";
+import { MyText, WorkCard } from "../../../components";
 import Wrapper from "../components/wrapper";
 import API from "../../../api";
 
@@ -99,25 +99,29 @@ const PharmacyWork = () => {
                     </Box>
                 ) : (
                     <Grid container spacing={2} sx={{ mt: 2 }}>
-                        {works.length > 0
-                            ? works.map((item: any, index: number) => (
-                                  <Grid
-                                      item
-                                      key={index}
-                                      lg={6}
-                                      xl={6}
-                                      md={6}
-                                      sm={12}
-                                      xs={12}
-                                  >
-                                      <WorkCard
-                                          id={item.id}
-                                          title={item.name}
-                                          city={item.city}
-                                      />
-                                  </Grid>
-                              ))
-                            : "Нету вакансий"}
+                        {works.length > 0 ? (
+                            works.map((item: any, index: number) => (
+                                <Grid
+                                    item
+                                    key={index}
+                                    lg={6}
+                                    xl={6}
+                                    md={6}
+                                    sm={12}
+                                    xs={12}
+                                >
+                                    <WorkCard
+                                        id={item.id}
+                                        title={item.name}
+                                        city={item.city}
+                                    />
+                                </Grid>
+                            ))
+                        ) : (
+                            <MyText sx={{ ml: 4.2, mt: 2 }}>
+                                Нету вакансий
+                            </MyText>
+                        )}
                     </Grid>
                 )}
             </Main>
