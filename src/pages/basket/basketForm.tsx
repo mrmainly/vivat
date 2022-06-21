@@ -255,7 +255,7 @@ const BasketForm = () => {
                                 <MyText variant="body1" sx={{ mt: 2 }}>
                                     Подтвердите ваш заказ
                                 </MyText>
-                                <Box
+                                {/* <Box
                                     sx={{
                                         display: "flex",
                                         justifyContent: "space-between",
@@ -268,8 +268,8 @@ const BasketForm = () => {
                                     <MyText variant="body2">
                                         {totalPrice} ₽
                                     </MyText>
-                                </Box>
-                                <Box
+                                </Box> */}
+                                {/* <Box
                                     sx={{
                                         display: "flex",
                                         justifyContent: "space-between",
@@ -280,7 +280,7 @@ const BasketForm = () => {
                                         Бонусы за заказ:
                                     </MyText>
                                     <MyText variant="body2">160 ₽</MyText>
-                                </Box>
+                                </Box> */}
                                 <Box
                                     sx={{
                                         display: "flex",
@@ -295,7 +295,7 @@ const BasketForm = () => {
                                     </MyText>
                                 </Box>
                                 <MyButton
-                                    style={{ marginTop: 35 }}
+                                    style={{ marginTop: 20 }}
                                     onClick={compliteOrders}
                                 >
                                     Подтвердить заказ
