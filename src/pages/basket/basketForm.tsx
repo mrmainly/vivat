@@ -53,8 +53,8 @@ const BasketForm = () => {
     const [mail, setMail] = useState("");
     const [adress, setAdress] = useState("");
     const [commend, setCommend] = useState("");
-    const [payment, setPayment] = useState("");
-    const [delivery, setDelivery] = useState("");
+    const [payment, setPayment] = useState("CASH");
+    const [delivery, setDelivery] = useState("PICKUP");
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [totalPrice, setTotalPrice] = useState("");
@@ -204,7 +204,7 @@ const BasketForm = () => {
                                 />
                                 <FormControl sx={{ mt: 2 }}>
                                     <FormLabel component="legend">
-                                        Способ оплаты: <span>в разработке</span>
+                                        Способ оплаты
                                     </FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
@@ -216,7 +216,7 @@ const BasketForm = () => {
                                         }
                                     >
                                         <FormControlLabel
-                                            control={<Radio />}
+                                            control={<Radio checked={true} />}
                                             label="Наличными при получении"
                                             value="CASH"
                                         />
@@ -229,8 +229,7 @@ const BasketForm = () => {
                                 </FormControl>
                                 <FormControl sx={{ mt: 2 }}>
                                     <FormLabel component="legend">
-                                        Способ доставки:{" "}
-                                        <span>в разработке</span>
+                                        Способ доставки
                                     </FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
@@ -242,7 +241,7 @@ const BasketForm = () => {
                                         }
                                     >
                                         <FormControlLabel
-                                            control={<Radio />}
+                                            control={<Radio checked={true} />}
                                             label={`Самовызов`}
                                             value="PICKUP"
                                         />
@@ -328,6 +327,7 @@ const BasketForm = () => {
                                             <MyText variant="body2">
                                                 {index + 1}.
                                                 {item.GoodsCode.name}
+                                                &nbsp; x{item.count}
                                             </MyText>
                                             <MyText
                                                 variant="body2"

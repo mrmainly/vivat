@@ -39,7 +39,7 @@ const ProductDetail = () => {
             setLoading(false);
         };
         getProductId();
-    }, []);
+    }, [params.id]);
     return (
         <>
             {data ? (
