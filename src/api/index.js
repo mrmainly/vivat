@@ -4,8 +4,8 @@ import cookie from "js-cookie";
 
 import ROUTES from "../routes";
 
-const testURL = "http://127.0.0.1:8000/";
-const publicURL = "http://xn----7sbbagaytx2c4ad.xn--p1ai/";
+const testURL = "https://127.0.0.1:8000/";
+const publicURL = "https://xn----7sbbagaytx2c4ad.xn--p1ai/";
 
 const api = (url) => {
     const token = cookie.get("jwttoken");
@@ -98,21 +98,16 @@ class API {
     async getProductsList(id, page, formState, sort) {
         let result = await api(
             `api/v1/goods/?group_id=${id}&page=${page}
-            ${
-                formState
-                    ? `
-            &notRecept=${
-                formState.notRecept ? formState.notRecept : ""
-            }&jnvls=${formState.jnvls ? formState.jnvls : ""}&ordering_qty=${
-                          formState.ordering_qty ? formState.ordering_qty : ""
-                      }&price_min=${formState.min_price}&price_max=${
-                          formState.max_price
-                      }&producer=${formState.producer}${
-                          sort == "name" || sort == "-name"
-                              ? `&ordering_name=${sort ? sort : ""}`
-                              : `&ordering_price=${sort ? sort : ""}`
-                      }`
-                    : ""
+            ${formState
+                ? `
+            &notRecept=${formState.notRecept ? formState.notRecept : ""
+                }&jnvls=${formState.jnvls ? formState.jnvls : ""}&ordering_qty=${formState.ordering_qty ? formState.ordering_qty : ""
+                }&price_min=${formState.min_price}&price_max=${formState.max_price
+                }&producer=${formState.producer}${sort == "name" || sort == "-name"
+                    ? `&ordering_name=${sort ? sort : ""}`
+                    : `&ordering_price=${sort ? sort : ""}`
+                }`
+                : ""
             }`
         ).get();
         return result;
@@ -229,12 +224,11 @@ class API {
     //blog
     async getBlog(query, type) {
         let result = await api(
-            `api/v1/blogs/${
-                type == "query"
-                    ? query
-                        ? `?query=${query}`
-                        : ""
-                    : `?tags_query=${query}`
+            `api/v1/blogs/${type == "query"
+                ? query
+                    ? `?query=${query}`
+                    : ""
+                : `?tags_query=${query}`
             }`
         ).get();
         return result;

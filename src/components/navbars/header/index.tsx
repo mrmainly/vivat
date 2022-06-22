@@ -13,6 +13,9 @@ import {
     Autocomplete,
     ButtonGroup,
     Drawer,
+    FormControl,
+    InputLabel,
+    Select
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -20,10 +23,12 @@ import { styled } from "@mui/system";
 import cookie from "js-cookie";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import SearchIcon from "@mui/icons-material/Search";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
+import { LanguageContext } from "../../../store";
+import { LOCALES } from "../../../i18n/locales";
 import ThemeMain from "../../../theme";
 import {
     MyText,
@@ -134,6 +139,12 @@ const Header = () => {
         mode: "onBlur",
     });
 
+    const languages = [
+        { name: 'Русский', code: LOCALES.RUSSIAN },
+        { name: 'Саха тыла', code: LOCALES.SAKHA },
+    ]
+    const { currentLocale, changeLocale } = useContext(LanguageContext)
+
     const handleDrawerClose = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: false }));
     const handleDrawerOpen = () =>
@@ -215,11 +226,29 @@ const Header = () => {
                                 </MenuItem>
                             </TopBarItem>
                             <TopBarItem>
-                                <MenuItem>
-                                    <MyText variant="body1">
-                                        Русский язык
-                                    </MyText>
-                                </MenuItem>
+                                <FormControl
+                                    sx={{ width: 150, bgcolor: "white", mr: 1 }}
+                                    size="small"
+                                >
+                                    <InputLabel >
+                                        <FormattedMessage id='langue_select' />
+                                    </InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        label={<FormattedMessage id='langue_select' />}
+                                        value={currentLocale}
+                                        onChange={(e) => {
+                                            changeLocale(e.target.value)
+                                        }}
+                                    >
+                                        {languages.map(({ name, code }) => (
+                                            <MenuItem key={name} value={code}>
+                                                {name}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
                                 <MenuItem>
                                     <MyText variant="body1">
                                         8 (914) 280-13-13

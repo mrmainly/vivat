@@ -33,3 +33,4 @@ export const defaultStore = {
 
 export const StateContext = React.createContext({} as any);
 export const DispatchContext = React.createContext({} as any);
+export const LanguageContext = React.createContext({} as any);
