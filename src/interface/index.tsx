@@ -102,7 +102,7 @@ interface MainCardsConstructorProps {
 }
 
 interface ProfileSideBarProps {
-    title?: string;
+    title?: any;
 }
 
 interface ToggleButtonProps {

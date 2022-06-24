@@ -1,32 +1,34 @@
 import ROUTES from "../routes";
 
+import { FormattedMessage } from "react-intl";
+
 const drawer_links = [
     {
-        label: "Доставка",
+        label: <FormattedMessage id='delivery'/>,
         to: ROUTES.DELIVERY,
     },
     {
-        label: "Оплата и бронирование",
+        label: <FormattedMessage id='payment_booking'/>,
         to: ROUTES.BOOKING,
     },
     {
-        label: "Акции",
+        label: <FormattedMessage id='stock'/>,
         to: ROUTES.STOCK,
     },
     {
-        label: "О компании",
+        label: <FormattedMessage id='about_company'/>,
         to: ROUTES.TEAM,
     },
     {
-        label: "Работа",
+        label: <FormattedMessage id='job'/>,
         to: ROUTES.VIVAT_INFO,
     },
     {
-        label: "Новости",
+        label: <FormattedMessage id='news'/>,
         to: ROUTES.BLOG,
     },
     {
-        label: "Контакты",
+        label: <FormattedMessage id='contacts'/>,
         to: ROUTES.CONTACTS,
     },
 ];

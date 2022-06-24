@@ -9,6 +9,8 @@ import { BorderLine, MyText } from '../..'
 import { ProfileSideBarProps } from '../../../interface'
 import ROUTES from '../../../routes'
 
+import { FormattedMessage } from "react-intl";
+
 const Menu = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -25,15 +27,15 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
     const navigate = useNavigate()
     const links = [
         {
-            label: 'Основная информация',
+            label: <FormattedMessage id='basic_information'/>,
             to: ROUTES.BASICINFORMATION,
         },
         {
-            label: 'Мои заказы',
+            label: <FormattedMessage id='my_orders'/>,
             to: ROUTES.MYORDERS,
         },
         {
-            label: 'Программа лояльности',
+            label: <FormattedMessage id='loyalty_program'/>,
             to: ROUTES.MYORDERS,
         },
     ]
@@ -50,7 +52,7 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
                     cookie.remove('jwttoken')
                     navigate('/')
                 }}>
-                    Выйти
+                    <FormattedMessage id='quit'/>
                 </MenuItem>
             </Menu>
         </Box>

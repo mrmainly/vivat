@@ -8,6 +8,8 @@ import API from "../../../api";
 import { StatusCard, MyText, ProfileSideBar } from "../../../components";
 import ThemeMain from "../../../theme";
 
+import { FormattedMessage } from "react-intl";
+
 const Main = styled(Box)(({ theme }) => ({
     marginTop: 50,
     width: "100%",
@@ -114,7 +116,7 @@ const MyOrderDetail = () => {
 
     return (
         <Root>
-            <ProfileSideBar title="Основная информация" />
+            <ProfileSideBar title={<FormattedMessage id='basic_information'/>} />
             {loading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
@@ -128,7 +130,7 @@ const MyOrderDetail = () => {
                         <MenuItem
                             sx={{ color: ThemeMain.palette.primary.main }}
                         >
-                            Вернуться в архив
+                            <FormattedMessage id='back_to_archive'/>
                         </MenuItem>
                     </TopBar>
                     <Grid container>
@@ -156,7 +158,7 @@ const MyOrderDetail = () => {
                     </Grid>
                     <Info>
                         <TextWrapper>
-                            <MyText variant="body1">Текущий статус: </MyText>
+                            <MyText variant="body1"><FormattedMessage id='current_status'/> </MyText>
                             <MyText
                                 variant="body1"
                                 sx={{
@@ -168,7 +170,7 @@ const MyOrderDetail = () => {
                             </MyText>
                         </TextWrapper>
                         <TextWrapper>
-                            <MyText variant="body1">Сумма заказа</MyText>
+                            <MyText variant="body1"><FormattedMessage id='order_price'/></MyText>
                             <MyText
                                 variant="body1"
                                 sx={{ marginLeft: 1, fontSize: 20 }}

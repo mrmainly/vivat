@@ -7,6 +7,8 @@ import { ProfileSideBar, MyOrdersTable } from "../../../components";
 import API from "../../../api";
 import ROUTES from "../../../routes";
 
+import { FormattedMessage } from "react-intl";
+
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
     [theme.breakpoints.down("md")]: {
@@ -31,7 +33,7 @@ const MyOrders = () => {
     }, []);
     return (
         <Main>
-            <ProfileSideBar title="Мои заказы" />
+            <ProfileSideBar title={<FormattedMessage id='my_orders'/>} />
 
             <Box sx={{ mt: 6.3, width: "100%" }}>
                 {loading ? (

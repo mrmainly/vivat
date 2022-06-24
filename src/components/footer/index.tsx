@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { MyContainer, MyText, BorderLine } from "..";
 import ROUTES from "../../routes";
 
+import { FormattedMessage } from "react-intl";
+
 const GridItem = styled(Grid)(({ theme }) => ({
     marginTop: 10,
     marginBottom: 10,
@@ -28,97 +30,72 @@ const FooterBox = styled(Box)(({ theme }) => ({
 const Footer = () => {
     const Array = [
         {
-            title: "ПОМОЩЬ",
+            title: <FormattedMessage id='help'/>,
             columns: [
                 {
-                    label: "Как сделать заказ",
+                    label: <FormattedMessage id='how_place_order'/>,
                     href: ROUTES.ORDER,
                 },
                 {
-                    label: "Оплата и бронирование",
+                    label: <FormattedMessage id='payment_booking'/>,
                     href: ROUTES.BOOKING,
                 },
                 {
-                    label: "Доставка",
+                    label: <FormattedMessage id='delivery'/>,
                     href: ROUTES.DELIVERY,
                 },
                 {
-                    label: "Это интересно",
+                    label: <FormattedMessage id='interesting'/>,
                     href: "/",
                 },
                 {
-                    label: "Политика конфиденциальности",
+                    label: <FormattedMessage id='privacy_policy'/>,
                     href: "/",
                 },
                 {
-                    label: "Разрешительная документация",
+                    label: <FormattedMessage id='permit_documentation'/>,
                     href: ROUTES.WORK,
                 },
                 {
-                    label: "Условия дистанционной продажи",
+                    label: <FormattedMessage id='conditions_distance_selling'/>,
                     href: "/",
                 },
                 {
-                    label: "Обратная связь",
+                    label: <FormattedMessage id='feedback'/>,
                     href: "/",
                 },
             ],
         },
         {
-            title: "О НАС",
+            title: <FormattedMessage id='about_us'/>,
             columns: [
                 {
-                    label: "О компании",
+                    label: <FormattedMessage id='about_company'/>,
                     href: ROUTES.TEAM,
                 },
                 {
-                    label: "Контакты",
+                    label: <FormattedMessage id='contacts'/>,
                     href: ROUTES.CONTACTS,
                 },
                 {
-                    label: "Оставить отзыв",
-                    href: "/",
-                },
-                {
-                    label: "Контакты",
-                    href: ROUTES.CONTACTS,
-                },
-            ],
-        },
-        {
-            title: "ПРОГРАММА ЛОЯЛЬНОСТИ",
-            columns: [
-                {
-                    label: "О компании",
-                    href: "/",
-                },
-                {
-                    label: "Адреса аптек",
+                    label: <FormattedMessage id='leave_feedback'/>,
                     href: "/",
                 },
             ],
         },
         {
-            title: "Покупателям",
+            title: <FormattedMessage id='job_uppercase'/>,
             columns: [
                 {
-                    label: "Как оформить заказ",
+                    label: <FormattedMessage id='benefits_working_in_vivat'/>,
                     href: "/",
                 },
                 {
-                    label: "Программа лояльности",
+                    label: <FormattedMessage id='working_in_pharmacy'/>,
                     href: "/",
                 },
                 {
-                    label: "Бонусная программа",
-                    href: "/",
-                },
-                {
-                    label: "Личный кабинет",
-                    href: "/",
-                },
-                {
-                    label: "Политика конфиденциальности",
+                    label: <FormattedMessage id='contacts'/>,
                     href: "/",
                 },
             ],

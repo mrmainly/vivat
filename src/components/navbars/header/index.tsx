@@ -222,7 +222,9 @@ const Header = () => {
                                 <MenuItem
                                     onClick={() => navigate(ROUTES.ADDRESS)}
                                 >
-                                    <MyText variant="body1">Наши аптеки</MyText>
+                                    <MyText variant="body1">
+                                        <FormattedMessage id='pharmacy'/>
+                                    </MyText>
                                 </MenuItem>
                             </TopBarItem>
                             <TopBarItem>
@@ -258,7 +260,7 @@ const Header = () => {
                                     onClick={() => navigate(ROUTES.ORDER)}
                                 >
                                     <MyText variant="body1">
-                                        Как сделать заказ
+                                        <FormattedMessage id='how_place_order' />
                                     </MyText>
                                 </MenuItem>
                             </TopBarItem>
@@ -359,7 +361,7 @@ const Header = () => {
                                         renderInput={(params) => (
                                             <TextField
                                                 variant="outlined"
-                                                label="Поиск лекарства"
+                                                label={<FormattedMessage id='search_medicine'/>}
                                                 {...params}
                                                 fullWidth
                                                 value={searchValue}
@@ -394,7 +396,7 @@ const Header = () => {
                                             : handleLoginOpen();
                                     }}
                                 >
-                                    Статус заказа
+                                    <FormattedMessage id='status_order'/>
                                 </Button>
 
                                 <IconButton

@@ -21,6 +21,8 @@ import {
 import API from "../../../api";
 import ThemeMain from "../../../theme";
 
+import { FormattedMessage } from "react-intl";
+
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
     [theme.breakpoints.down("md")]: {
@@ -88,7 +90,7 @@ const BasicInformation = () => {
 
     return (
         <Main>
-            <ProfileSideBar title="Основная информация" />
+            <ProfileSideBar title={<FormattedMessage id='basic_information'/>} />
             <Box sx={{ mt: 6.3, width: "100%" }}>
                 <ProfileForm>
                     <ProfileUpdateModal />
@@ -99,41 +101,41 @@ const BasicInformation = () => {
                     ) : (
                         <>
                             <InputProfile
-                                label="Фамилия"
+                                label={<FormattedMessage id='surname'/>}
                                 fullWidth
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                             />
                             <InputProfile
-                                label="Имя"
+                                label={<FormattedMessage id='name'/>}
                                 margin="normal"
                                 fullWidth
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
                             <InputProfile
-                                label="Отчество"
+                                label={<FormattedMessage id='patronymic'/>}
                                 margin="normal"
                                 fullWidth
                                 value={patronymic}
                                 onChange={(e) => setPatronymic(e.target.value)}
                             />
                             <InputProfile
-                                label="Номер телефона"
+                                label={<FormattedMessage id='phone_number'/>}
                                 margin="normal"
                                 fullWidth
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                             />
                             <InputProfile
-                                label="Электронная почта"
+                                label={<FormattedMessage id='mail'/>}
                                 margin="normal"
                                 fullWidth
                                 value={mail}
                                 onChange={(e) => setMail(e.target.value)}
                             />
                             <InputProfile
-                                label="Дата рождения"
+                                label={<FormattedMessage id='birth_date'/>}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
