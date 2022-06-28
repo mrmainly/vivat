@@ -41,6 +41,8 @@ import {
     MyOrdersDetail,
     SearchPage,
     Address,
+    SuccessPayment,
+    ErrorPayment
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -164,6 +166,14 @@ const App = () => {
                                     <Route
                                         element={<Address />}
                                         path={ROUTES.ADDRESS}
+                                    />
+                                    <Route
+                                        element={<SuccessPayment />}
+                                        path={ROUTES.SUCCESS_PAYMENT}
+                                    />
+                                    <Route
+                                        element={<ErrorPayment />}
+                                        path={ROUTES.ERROR_PAYMENT}
                                     />
                                 </Route>
                             </Routes>

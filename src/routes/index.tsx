@@ -32,6 +32,8 @@ enum ROUTES {
     MY_ORDERS_DETAIL = "/my-orders-detail",
     SEARCH_PAGE = "/search-page",
     ADDRESS = "/address",
+    SUCCESS_PAYMENT = '/success-payment',
+    ERROR_PAYMENT = '/error-payment'
 }
 
 export default ROUTES;

@@ -34,6 +34,9 @@ import MyOrdersDetail from "./profile/my-orders/detail";
 import SearchPage from "./search-page";
 import Address from "./address";
 
+import SuccessPayment from './payment/success'
+import ErrorPayment from "./payment/error";
+
 export {
     Home,
     Basket,
@@ -64,4 +67,6 @@ export {
     MyOrdersDetail,
     SearchPage,
     Address,
+    SuccessPayment,
+    ErrorPayment
 };
