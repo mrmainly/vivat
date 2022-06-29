@@ -4,9 +4,26 @@ import { Box, IconButton, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import { MyText } from "../..";
 import API from "../../../api";
+import ROUTES from "../../../routes";
+
+const ImgBox = styled(Box)(({ theme }) => ({
+    height: "100%",
+    borderRadius: 9,
+    filter: "drop-shadow(2px 3px 8px rgba(0, 0, 0, 0.1))",
+    width: 300,
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    cursor: "pointer",
+    [theme.breakpoints.down("sm")]: {
+        height: 250,
+        width: "100%",
+    },
+}));
 
 const Root = styled(CardActionArea)(({ theme }) => ({
     display: "flex",
@@ -67,11 +84,21 @@ const StatusCard: React.FC<StatusCardProps> = ({
     title,
     img,
     producer,
-    stock,
 }) => {
+    const navigate = useNavigate();
+    console.log("GoodsCode", GoodsCode);
     return (
-        <Root>
-            <Img src="/img/prototypeimg.png" />
+        <Root onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`)}>
+            <ImgBox
+                sx={{
+                    backgroundImage: img
+                        ? `url(data:image/jpeg;base64,${img})`
+                        : "url(/img/vivat_background.png)",
+                }}
+                onClick={() =>
+                    navigate(`${ROUTES.PRODUCT_DETAIL}/${GoodsCode?.id}`)
+                }
+            ></ImgBox>
             <InfoBox>
                 <Box
                     sx={{

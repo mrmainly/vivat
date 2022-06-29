@@ -52,79 +52,79 @@ const Footer = () => {
                     href: "",
                 },
                 {
-                    label: <FormattedMessage id='office_address'/>,
+                    label: <FormattedMessage id="office_address" />,
                     href: "",
                 },
             ],
         },
         {
-            title: <FormattedMessage id='about_company'/>,
+            title: <FormattedMessage id="about_company" />,
             columns: [
                 {
-                    label: <FormattedMessage id='about_us'/>,
+                    label: <FormattedMessage id="about_us" />,
                     href: ROUTES.TEAM,
                 },
                 {
-                    label: <FormattedMessage id='privacy_policy'/>,
+                    label: <FormattedMessage id="privacy_policy" />,
                     href: "/",
                 },
                 {
-                    label: <FormattedMessage id='contacts'/>,
+                    label: <FormattedMessage id="contacts" />,
                     href: ROUTES.CONTACTS,
                 },
                 {
-                    label: <FormattedMessage id='pharmacy'/>,
+                    label: <FormattedMessage id="pharmacy" />,
                     href: ROUTES.ADDRESS,
                 },
             ],
         },
         {
-            title: <FormattedMessage id='help'/>,
+            title: <FormattedMessage id="help" />,
             columns: [
                 {
-                    label: <FormattedMessage id='news'/>,
+                    label: <FormattedMessage id="news" />,
                     href: ROUTES.BLOG,
                 },
                 {
-                    label: <FormattedMessage id='medication_booking'/>,
+                    label: <FormattedMessage id="medication_booking" />,
                     href: ROUTES.BOOKING,
                 },
                 {
-                    label: <FormattedMessage id='payment_receipt_order'/>,
+                    label: <FormattedMessage id="payment_receipt_order" />,
                     href: "/",
                 },
             ],
         },
         {
-            title: <FormattedMessage id='career'/>,
+            title: <FormattedMessage id="career" />,
             columns: [
                 {
-                    label: <FormattedMessage id='benefits_working'/>,
+                    label: <FormattedMessage id="benefits_working" />,
                     href: ROUTES.VIVAT_INFO,
                 },
                 {
-                    label: <FormattedMessage id='vacancy'/>,
+                    label: <FormattedMessage id="vacancy" />,
                     href: "/",
                 },
                 {
-                    label: <FormattedMessage id='human_resource_department'/>,
+                    label: <FormattedMessage id="human_resource_department" />,
                     href: "/",
                 },
             ],
         },
         {
-            title: <FormattedMessage id='cooperation'/>,
+            title: <FormattedMessage id="cooperation" />,
             columns: [
                 {
-                    label: <FormattedMessage id='manufacturers'/>,
+                    label: <FormattedMessage id="manufacturers" />,
                     href: "/",
                 },
                 {
-                    label: <FormattedMessage id='advertising_in_website'/>,
+                    label: <FormattedMessage id="advertising_in_website" />,
                     href: "/",
                 },
                 {
-                    label: <FormattedMessage id='technical_support'/>,
+                    label: <FormattedMessage id="technical_support" />,
                     href: "/",
                 },
             ],
@@ -160,7 +160,9 @@ const Footer = () => {
                                 style={{
                                     color: "#343434",
                                 }}
-                            >{item.title}</MyText>
+                            >
+                                {item.title}
+                            </MyText>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -168,35 +170,34 @@ const Footer = () => {
                                 }}
                             >
                                 {item.columns.map((item, index) => (
-                                    <>
-                                    {
-                                    item.href ?
-                                        <Link
-                                            to={item.href}
-                                            key={index}
-                                            style={{
-                                                marginTop: 10,
-                                                textDecoration: "none",
-                                                color: "#828282",
-                                                width: "max-width",
-                                            }}
-                                        >
-                                            {item.label}
-                                        </Link>
-                                    :
-                                        <MyText
-                                            key={index}
-                                            style={{
-                                                marginTop: 10,
-                                                textDecoration: "none",
-                                                color: "#686868",
-                                                width: "max-width",
-                                            }}
-                                        >
-                                            {item.label}
-                                        </MyText>
-}
-                                        </>
+                                    <Box key={index}>
+                                        {item.href ? (
+                                            <Link
+                                                to={item.href}
+                                                key={index}
+                                                style={{
+                                                    marginTop: 10,
+                                                    textDecoration: "none",
+                                                    color: "#828282",
+                                                    width: "max-width",
+                                                }}
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        ) : (
+                                            <MyText
+                                                key={index}
+                                                style={{
+                                                    marginTop: 10,
+                                                    textDecoration: "none",
+                                                    color: "#686868",
+                                                    width: "max-width",
+                                                }}
+                                            >
+                                                {item.label}
+                                            </MyText>
+                                        )}
+                                    </Box>
                                 ))}
                             </Box>
                         </GridItem>

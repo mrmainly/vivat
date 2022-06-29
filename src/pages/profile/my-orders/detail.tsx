@@ -116,7 +116,9 @@ const MyOrderDetail = () => {
 
     return (
         <Root>
-            <ProfileSideBar title={<FormattedMessage id='basic_information'/>} />
+            <ProfileSideBar
+                title={<FormattedMessage id="basic_information" />}
+            />
             {loading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
@@ -130,7 +132,7 @@ const MyOrderDetail = () => {
                         <MenuItem
                             sx={{ color: ThemeMain.palette.primary.main }}
                         >
-                            <FormattedMessage id='back_to_archive'/>
+                            <FormattedMessage id="back_to_archive" />
                         </MenuItem>
                     </TopBar>
                     <Grid container>
@@ -152,13 +154,17 @@ const MyOrderDetail = () => {
                                     title={item.GoodsCode.name}
                                     price={item.price}
                                     producer={item.GoodsCode.producer}
+                                    img={item.GoodsCode?.esphoto[0]?.fileData}
+                                    id={item.GoodsCode?.id}
                                 />
                             </Grid>
                         ))}
                     </Grid>
                     <Info>
                         <TextWrapper>
-                            <MyText variant="body1"><FormattedMessage id='current_status'/> </MyText>
+                            <MyText variant="body1">
+                                <FormattedMessage id="current_status" />{" "}
+                            </MyText>
                             <MyText
                                 variant="body1"
                                 sx={{
@@ -170,7 +176,9 @@ const MyOrderDetail = () => {
                             </MyText>
                         </TextWrapper>
                         <TextWrapper>
-                            <MyText variant="body1"><FormattedMessage id='order_price'/></MyText>
+                            <MyText variant="body1">
+                                <FormattedMessage id="order_price" />
+                            </MyText>
                             <MyText
                                 variant="body1"
                                 sx={{ marginLeft: 1, fontSize: 20 }}

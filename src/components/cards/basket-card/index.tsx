@@ -6,9 +6,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useNavigate } from "react-router-dom";
 
 import { MyText } from "../..";
 import API from "../../../api";
+import ROUTES from "../../../routes";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -33,6 +35,7 @@ const ImgBox = styled(Box)(({ theme }) => ({
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
         height: 250,
         width: "100%",
@@ -125,6 +128,8 @@ const BasketCard: React.FC<BasketProps> = ({
         }
     };
 
+    const navigate = useNavigate();
+
     const deleteProduct = () => {
         API.deleteProductItem(id)
             .then((res) => {
@@ -140,8 +145,13 @@ const BasketCard: React.FC<BasketProps> = ({
         <Root>
             <ImgBox
                 sx={{
-                    backgroundImage: "url(/img/prototypeimg.png)",
+                    backgroundImage: GoodsCode?.esphoto[0]?.fileData
+                        ? `url(data:image/jpeg;base64,${GoodsCode?.esphoto[0].fileData})`
+                        : "url(/img/vivat_background.png)",
                 }}
+                onClick={() =>
+                    navigate(`${ROUTES.PRODUCT_DETAIL}/${GoodsCode?.id}`)
+                }
             ></ImgBox>
             <InfoBox>
                 <Box

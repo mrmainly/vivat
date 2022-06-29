@@ -55,7 +55,7 @@ const StatusProductDetail = () => {
         const statusProductId = async () => {
             await API.getMeStatusId(params.id)
                 .then((res) => {
-                    console.log(res);
+                    console.log("res", res);
                     setData(res.data);
                     setDataItems(res.data.items);
                 })
@@ -117,6 +117,8 @@ const StatusProductDetail = () => {
                                     title={item.GoodsCode.name}
                                     price={item.price}
                                     producer={item.GoodsCode.producer}
+                                    img={item.GoodsCode?.esphoto[0]?.fileData}
+                                    id={item.GoodsCode?.id}
                                 />
                             </Grid>
                         ))}
