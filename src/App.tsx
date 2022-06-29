@@ -3,6 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
+import "./panton/stylesheet.css"
+
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 
