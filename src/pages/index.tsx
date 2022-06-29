@@ -11,6 +11,7 @@ import Booking from "./info-screens/booking";
 import Stock from "./stock";
 import StockDetail from "./stock/detail";
 import Order from "./info-screens/order";
+import PrivacyPolicy from "./info-screens/privacy-policy";
 
 import BasicInformation from "./profile/basic-information";
 import ChangePassword from "./profile/change-password";
@@ -56,6 +57,7 @@ export {
     BlogTheme,
     Blog,
     BlogDetail,
+    PrivacyPolicy,
     VivatInfo,
     PharmacyWork,
     PharmacyContacts,
@@ -68,5 +70,5 @@ export {
     SearchPage,
     Address,
     SuccessPayment,
-    ErrorPayment
+    ErrorPayment,
 };

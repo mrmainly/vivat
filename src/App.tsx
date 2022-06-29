@@ -42,7 +42,8 @@ import {
     SearchPage,
     Address,
     SuccessPayment,
-    ErrorPayment
+    ErrorPayment,
+    PrivacyPolicy
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -101,6 +102,7 @@ const App = () => {
                                         element={<Delivery />}
                                         path={ROUTES.DELIVERY}
                                     />
+                                    <Route element={<PrivacyPolicy />} path={ROUTES.PRIVACY_POLICY} />
                                     <Route element={<Work />} path={ROUTES.WORK} />
                                     <Route
                                         element={<Contacts />}

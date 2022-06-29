@@ -33,7 +33,8 @@ enum ROUTES {
     SEARCH_PAGE = "/search-page",
     ADDRESS = "/address",
     SUCCESS_PAYMENT = '/success-payment',
-    ERROR_PAYMENT = '/error-payment'
+    ERROR_PAYMENT = '/error-payment',
+    PRIVACY_POLICY = '/privacy-policy',
 }
 
 export default ROUTES;
