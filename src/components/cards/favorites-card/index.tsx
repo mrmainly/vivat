@@ -41,6 +41,12 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     const TransferFavorite = () => {
         API.transferFavorite(id)
             .then((res) => {
+                dispatch({
+                    type: "basket",
+                    payload: {
+                        status: stateContext.basket.status + 1,
+                    },
+                });
                 navigate(ROUTES.BASKET);
                 toast.success("Товар добавлен в корзину");
             })

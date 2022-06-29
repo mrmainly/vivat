@@ -29,6 +29,9 @@ export const defaultStore = {
     favorite_status: {
         status: 0,
     },
+    basket: {
+        status: 0,
+    },
 };
 
 export const StateContext = React.createContext({} as any);
