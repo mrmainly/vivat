@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Box, MenuItem, CircularProgress } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { styled } from "@mui/system";
-import Skeleton from "react-loading-skeleton";
 
-import product_data from "../../local_data/product_data";
 import { BasketCard, MyText, MyButton } from "../../components";
-import { ProductCardsSlider } from "../../constructor";
 import API from "../../api";
 import ROUTES from "../../routes";
+import { StateContext } from "../../store";
 
 const ActionBox = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -60,6 +58,7 @@ const Basket = () => {
     const [status, setStatus] = useState("");
 
     const navigate = useNavigate();
+    const basketStatus = useContext(StateContext);
 
     useEffect(() => {
         const getOrders = async () => {
@@ -76,7 +75,7 @@ const Basket = () => {
         };
 
         getOrders();
-    }, [status]);
+    }, [status, basketStatus.basket.status]);
 
     const deleteBasket = () => {
         API.deleteOrdersAll()
