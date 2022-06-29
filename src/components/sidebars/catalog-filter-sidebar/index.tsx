@@ -186,7 +186,9 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                 </Drawer>
             ) : (
                 <Main>
-                    <Box sx={{ p: 2 }}>
+                    <Box
+                        sx={{ p: 2, display: "flex", flexDirection: "column" }}
+                    >
                         <MyText variant="h6">Фильтр</MyText>
                         <FormControlLabel
                             control={
