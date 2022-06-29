@@ -128,6 +128,29 @@ const ProductPage = () => {
 
     let countNumber = Math.ceil(count / 20);
 
+    const sortName = [
+        {
+            label: "по возрастанию цены",
+            value: "priceSale",
+        },
+        {
+            label: "по убыванию цены",
+            value: "-priceSale",
+        },
+        {
+            label: "по алфавиту а-я",
+            value: "name",
+        },
+        {
+            label: "по алфавиту я-а",
+            value: "-name",
+        },
+        {
+            label: "по популярности",
+            value: "good_views",
+        },
+    ];
+
     return (
         <Box sx={{ width: "100%" }}>
             <MyText variant="h5" sx={{ mb: 2 }}>
@@ -166,18 +189,14 @@ const ProductPage = () => {
                                             setSort(e.target.value)
                                         }
                                     >
-                                        <MenuItem value="priceSale">
-                                            по возрастанию цены
-                                        </MenuItem>
-                                        <MenuItem value="-priceSale">
-                                            по убыванию цены
-                                        </MenuItem>
-                                        <MenuItem value="name">
-                                            по алфавиту а-я
-                                        </MenuItem>
-                                        <MenuItem value="-name">
-                                            по алфавиту я-а
-                                        </MenuItem>
+                                        {sortName.map((item, index) => (
+                                            <MenuItem
+                                                value={item.value}
+                                                key={index}
+                                            >
+                                                {item.label}
+                                            </MenuItem>
+                                        ))}
                                     </Select>
                                 </SelectDesktop>
                                 <ButtonShow

@@ -111,6 +111,10 @@ class API {
                           sort == "name" || sort == "-name"
                               ? `&ordering_name=${sort ? sort : ""}`
                               : `&ordering_price=${sort ? sort : ""}`
+
+                          // sort == "priceSale" || sort == "-priceSale" ?
+
+                          // : ''
                       }`
                     : ""
             }`

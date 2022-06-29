@@ -59,10 +59,12 @@ const BasketForm = () => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [totalPrice, setTotalPrice] = useState("");
-    const [costTotalPrice, setCostTotalPrice] = useState("");
+    const [costTotalPrice, setCostTotalPrice] = useState(0);
     const [adresses, setAddresses] = useState([]);
     const [myAddress, setMyAddress] = useState("");
-    // const [searchValue, setSearchValue] = useState([])
+    const [floor, setFloor] = useState("");
+    const [apartment, setApartament] = useState("");
+    const [entrance, setEntrance] = useState("");
     const [AutoCompliteData, setAutoCopliteData] = useState([]);
 
     const navigate = useNavigate();
@@ -113,8 +115,12 @@ const BasketForm = () => {
                 "https://xn----7sbbagaytx2c4ad.xn--p1ai/success-payment",
             FailURL: "https://xn----7sbbagaytx2c4ad.xn--p1ai/error-payment",
             address: myAddress,
+            floor: floor,
+            entrance: entrance,
+            apartment: apartment,
         })
             .then((res) => {
+                toast.success("Заявка оформлена");
                 res.data === "Success"
                     ? navigate(ROUTES.SUCCESS_PAYMENT)
                     : (window.location.href = res.data);
@@ -142,11 +148,25 @@ const BasketForm = () => {
         setMyAddress(values);
         API.getGogoCost(values)
             .then((res) => {
-                console.log("cost", res);
                 setCostTotalPrice(res.data.organisation_cost);
-                console.log("cost_price", costTotalPrice);
             })
             .catch((error) => console.log(error));
+    };
+
+    const handleDelivery = (e: any) => {
+        setDelivery(e.target.value);
+        if (e.target.value === "DELIVERY") {
+            setPayment("CARD");
+        } else {
+            setPayment("CASH");
+        }
+    };
+
+    const handlePayment = (e: any) => {
+        // setPayment(e.target.value);
+        if (delivery === "DELIVERY") {
+            setPayment(e.target.value);
+        }
     };
 
     return (
@@ -223,6 +243,31 @@ const BasketForm = () => {
                                         />
                                     )}
                                 />
+                                <InputProfile
+                                    label="Этаж"
+                                    fullWidth
+                                    margin="normal"
+                                    value={floor}
+                                    onChange={(e) => setFloor(e.target.value)}
+                                />
+                                <InputProfile
+                                    label="Квартира"
+                                    fullWidth
+                                    margin="normal"
+                                    value={apartment}
+                                    onChange={(e) =>
+                                        setApartament(e.target.value)
+                                    }
+                                />
+                                <InputProfile
+                                    label="Подьезд"
+                                    fullWidth
+                                    margin="normal"
+                                    value={entrance}
+                                    onChange={(e) =>
+                                        setEntrance(e.target.value)
+                                    }
+                                />
 
                                 <FormControl
                                     fullWidth
@@ -270,17 +315,23 @@ const BasketForm = () => {
                                         defaultValue="female"
                                         name="radio-buttons-group"
                                         value={payment}
-                                        onChange={(e) =>
-                                            setPayment(e.target.value)
-                                        }
+                                        onChange={(e) => handlePayment(e)}
                                     >
                                         <FormControlLabel
-                                            control={<Radio />}
+                                            control={
+                                                <Radio
+                                                    checked={payment === "CASH"}
+                                                />
+                                            }
                                             label="Наличными при получении"
                                             value="CASH"
                                         />
                                         <FormControlLabel
-                                            control={<Radio />}
+                                            control={
+                                                <Radio
+                                                    checked={payment === "CARD"}
+                                                />
+                                            }
                                             label="Оплата картой онлайн"
                                             value="CARD"
                                         />
@@ -295,12 +346,7 @@ const BasketForm = () => {
                                         defaultValue="female"
                                         name="radio-buttons-group"
                                         value={delivery}
-                                        onChange={(e) => {
-                                            setDelivery(e.target.value);
-                                            if (e.target.value === "DELIVERY") {
-                                                setPayment("CARD");
-                                            }
-                                        }}
+                                        onChange={(e) => handleDelivery(e)}
                                     >
                                         <FormControlLabel
                                             control={<Radio />}
@@ -331,20 +377,24 @@ const BasketForm = () => {
                                         {totalPrice} ₽
                                     </MyText>
                                 </Box> */}
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        mt: 1,
-                                    }}
-                                >
-                                    <MyText variant="body2">
-                                        Оплата доставки:
-                                    </MyText>
-                                    <MyText variant="body2">
-                                        {costTotalPrice} ₽
-                                    </MyText>
-                                </Box>
+                                {delivery === "DELIVERY" ? (
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            mt: 1,
+                                        }}
+                                    >
+                                        <MyText variant="body2">
+                                            Оплата доставки:
+                                        </MyText>
+                                        <MyText variant="body2">
+                                            {costTotalPrice} ₽
+                                        </MyText>
+                                    </Box>
+                                ) : (
+                                    ""
+                                )}
                                 <Box
                                     sx={{
                                         display: "flex",
@@ -355,7 +405,10 @@ const BasketForm = () => {
                                 >
                                     <MyText variant="body1">Итого</MyText>
                                     <MyText variant="body2">
-                                        {totalPrice + costTotalPrice}₽
+                                        {delivery === "DELIVERY"
+                                            ? totalPrice + costTotalPrice
+                                            : totalPrice}
+                                        ₽
                                     </MyText>
                                 </Box>
                                 <MyButton
@@ -425,7 +478,10 @@ const BasketForm = () => {
                                                     .main,
                                             }}
                                         >
-                                            {totalPrice + costTotalPrice}₽
+                                            {delivery === "DELIVERY"
+                                                ? totalPrice + costTotalPrice
+                                                : totalPrice}
+                                            ₽
                                         </MyText>
                                     </Box>
                                     <BorderLine />
