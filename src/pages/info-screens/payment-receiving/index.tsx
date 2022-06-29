@@ -8,6 +8,14 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/system";
 import { isTemplateExpression } from "typescript";
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 const Main = styled(Box)(({ theme }) => ({
   padding: 20,
   background: "white",
@@ -15,6 +23,14 @@ const Main = styled(Box)(({ theme }) => ({
   borderRadius: 12,
   marginTop: 20,
 }));
+
+function createData(
+  first: string,
+  second: string,
+  third: string
+) {
+  return { first, second, third };
+}
 
 const PaymentReceiving = () => {
   const array = [
@@ -36,7 +52,12 @@ const PaymentReceiving = () => {
             "парфюмерно-косметические товары.",
         ]
     }
-  ]  
+  ];
+  const rows = [
+    createData("доставка в пределах 4 км", "200 руб	", "50 руб."),
+    createData("в отдаленные районы", "рассчитывается индивидуально", "рассчитывается индивидуально"),
+  ];
+
   return (
     <div>
       <InfoBlog title="Оплата и получение заказа">
@@ -62,7 +83,7 @@ const PaymentReceiving = () => {
         <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
           Оплата и получение при доставке курьером
         </MyText>
-        <Grid container sx={{ width: "70%", mt: 1.2, minHeight: 126 }}>
+        {/* <Grid container sx={{ width: "70%", mt: 1.2, minHeight: 126 }}>
             <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3", pl: 1.8, display: "flex", alignItems: "center" }}>
                 <MyText>
                     Удаленность
@@ -103,7 +124,35 @@ const PaymentReceiving = () => {
                     рассчитывается индивидуально.
                 </MyText>
             </Grid>
-        </Grid>
+        </Grid> */}
+        <TableContainer component={Paper} sx={{ mt: 1.2 }}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Удаленность</TableCell>
+                <TableCell align="left">Стоимость</TableCell>
+                <TableCell align="left">Каждый дополнительный км</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.first}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.first}
+                  </TableCell>
+                  <TableCell align="left">{row.second}</TableCell>
+                  <TableCell align="left">{row.third}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <MyText variant="body2" sx={{ mt: 1.2, ml: 1.8 }}>
+          при заказе от 1500 р в центре города действует бесплатная доставка.
+        </MyText>
         <MyText variant="body2" sx={{ mt: 3.2 }}>
           Оплата заказа производится онлайн на сайте в полном объеме (выбираете при оформлении заказа. В счет заказа выставляется цена на курьерскую доставку). При получении заказа проверяйте на месте содержимое заказа.
         </MyText>
