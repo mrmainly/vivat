@@ -30,72 +30,101 @@ const FooterBox = styled(Box)(({ theme }) => ({
 const Footer = () => {
     const Array = [
         {
-            title: <FormattedMessage id='help'/>,
             columns: [
                 {
-                    label: <FormattedMessage id='how_place_order'/>,
-                    href: ROUTES.ORDER,
+                    label: "VIVAT",
+                    href: "",
                 },
                 {
-                    label: <FormattedMessage id='payment_booking'/>,
-                    href: ROUTES.BOOKING,
+                    label: "8 (914) 272-50-13",
+                    href: "",
                 },
                 {
-                    label: <FormattedMessage id='delivery'/>,
-                    href: ROUTES.DELIVERY,
+                    label: "finvest2011@mail.ru",
+                    href: "",
                 },
                 {
-                    label: <FormattedMessage id='interesting'/>,
-                    href: "/",
+                    label: "ИНН 7707083893",
+                    href: "",
+                },
+                {
+                    label: "ОГРН 1027700132195",
+                    href: "",
+                },
+                {
+                    label: <FormattedMessage id='office_address'/>,
+                    href: "",
+                },
+            ],
+        },
+        {
+            title: <FormattedMessage id='about_company'/>,
+            columns: [
+                {
+                    label: <FormattedMessage id='about_us'/>,
+                    href: ROUTES.TEAM,
                 },
                 {
                     label: <FormattedMessage id='privacy_policy'/>,
                     href: "/",
                 },
                 {
-                    label: <FormattedMessage id='permit_documentation'/>,
-                    href: ROUTES.WORK,
-                },
-                {
-                    label: <FormattedMessage id='conditions_distance_selling'/>,
-                    href: "/",
-                },
-                {
-                    label: <FormattedMessage id='feedback'/>,
-                    href: "/",
-                },
-            ],
-        },
-        {
-            title: <FormattedMessage id='about_us'/>,
-            columns: [
-                {
-                    label: <FormattedMessage id='about_company'/>,
-                    href: ROUTES.TEAM,
-                },
-                {
                     label: <FormattedMessage id='contacts'/>,
                     href: ROUTES.CONTACTS,
                 },
                 {
-                    label: <FormattedMessage id='leave_feedback'/>,
+                    label: <FormattedMessage id='pharmacy'/>,
+                    href: ROUTES.ADDRESS,
+                },
+            ],
+        },
+        {
+            title: <FormattedMessage id='help'/>,
+            columns: [
+                {
+                    label: <FormattedMessage id='news'/>,
+                    href: ROUTES.BLOG,
+                },
+                {
+                    label: <FormattedMessage id='medication_booking'/>,
+                    href: ROUTES.BOOKING,
+                },
+                {
+                    label: <FormattedMessage id='payment_receipt_order'/>,
                     href: "/",
                 },
             ],
         },
         {
-            title: <FormattedMessage id='job_uppercase'/>,
+            title: <FormattedMessage id='career'/>,
             columns: [
                 {
-                    label: <FormattedMessage id='benefits_working_in_vivat'/>,
+                    label: <FormattedMessage id='benefits_working'/>,
+                    href: ROUTES.VIVAT_INFO,
+                },
+                {
+                    label: <FormattedMessage id='vacancy'/>,
                     href: "/",
                 },
                 {
-                    label: <FormattedMessage id='working_in_pharmacy'/>,
+                    label: <FormattedMessage id='human_resource_department'/>,
+                    href: "/",
+                },
+            ],
+        },
+        {
+            title: <FormattedMessage id='cooperation'/>,
+            columns: [
+                {
+                    label: <FormattedMessage id='manufacturers'/>,
                     href: "/",
                 },
                 {
-                    label: <FormattedMessage id='contacts'/>,
+                    label: <FormattedMessage id='advertising_in_website'/>,
+                    href: "/",
+                },
+                {
+                    label: <FormattedMessage id='technical_support'/>,
                     href: "/",
                 },
             ],
@@ -120,13 +149,18 @@ const Footer = () => {
                         <GridItem
                             item
                             key={index}
-                            lg={3}
-                            xl={3}
+                            lg={2.4}
+                            xl={2.4}
                             md={3}
                             sm={6}
                             xs={12}
                         >
-                            <MyText variant="h6">{item.title}</MyText>
+                            <MyText
+                                variant="h6"
+                                style={{
+                                    color: "#343434",
+                                }}
+                            >{item.title}</MyText>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -134,27 +168,41 @@ const Footer = () => {
                                 }}
                             >
                                 {item.columns.map((item, index) => (
-                                    <Link
-                                        to={item.href}
-                                        key={index}
-                                        style={{
-                                            marginTop: 10,
-                                            textDecoration: "none",
-                                            color: "#55CD61",
-                                            width: "max-width",
-                                        }}
-                                    >
-                                        {item.label}
-                                    </Link>
+                                    <>
+                                    {
+                                    item.href ?
+                                        <Link
+                                            to={item.href}
+                                            key={index}
+                                            style={{
+                                                marginTop: 10,
+                                                textDecoration: "none",
+                                                color: "#828282",
+                                                width: "max-width",
+                                            }}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    :
+                                        <MyText
+                                            key={index}
+                                            style={{
+                                                marginTop: 10,
+                                                textDecoration: "none",
+                                                color: "#686868",
+                                                width: "max-width",
+                                            }}
+                                        >
+                                            {item.label}
+                                        </MyText>
+}
+                                        </>
                                 ))}
                             </Box>
                         </GridItem>
                     ))}
                 </Grid>
                 <BorderLine />
-                <MyText sx={{ mt: 2 }}>
-                    © 2021 Да здравствует здоровье «Vivat»
-                </MyText>
             </MyContainer>
         </FooterBox>
     );

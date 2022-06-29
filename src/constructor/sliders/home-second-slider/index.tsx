@@ -31,10 +31,10 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
 
     const sliders = [
         {
-            img: "/img/Rectangle4041.png",
+            img: "/img/Frame_1264.png",
         },
         {
-            img: "/img/Rectangle4042.png",
+            img: "/img/Frame_1265.png",
         },
     ];
 
