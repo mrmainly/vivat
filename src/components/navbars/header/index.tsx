@@ -15,7 +15,7 @@ import {
     Drawer,
     FormControl,
     InputLabel,
-    Select
+    Select,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -140,10 +140,10 @@ const Header = () => {
     });
 
     const languages = [
-        { name: 'Русский', code: LOCALES.RUSSIAN },
-        { name: 'Саха тыла', code: LOCALES.SAKHA },
-    ]
-    const { currentLocale, changeLocale } = useContext(LanguageContext)
+        { name: "Русский", code: LOCALES.RUSSIAN },
+        { name: "Саха тыла", code: LOCALES.SAKHA },
+    ];
+    const { currentLocale, changeLocale } = useContext(LanguageContext);
 
     const handleDrawerClose = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: false }));
@@ -223,7 +223,7 @@ const Header = () => {
                                     onClick={() => navigate(ROUTES.ADDRESS)}
                                 >
                                     <MyText variant="body1">
-                                        <FormattedMessage id='pharmacy'/>
+                                        <FormattedMessage id="pharmacy" />
                                     </MyText>
                                 </MenuItem>
                             </TopBarItem>
@@ -232,16 +232,18 @@ const Header = () => {
                                     sx={{ width: 150, bgcolor: "white", mr: 1 }}
                                     size="small"
                                 >
-                                    <InputLabel >
-                                        <FormattedMessage id='langue_select' />
+                                    <InputLabel>
+                                        <FormattedMessage id="langue_select" />
                                     </InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        label={<FormattedMessage id='langue_select' />}
+                                        label={
+                                            <FormattedMessage id="langue_select" />
+                                        }
                                         value={currentLocale}
                                         onChange={(e) => {
-                                            changeLocale(e.target.value)
+                                            changeLocale(e.target.value);
                                         }}
                                     >
                                         {languages.map(({ name, code }) => (
@@ -260,7 +262,7 @@ const Header = () => {
                                     onClick={() => navigate(ROUTES.ORDER)}
                                 >
                                     <MyText variant="body1">
-                                        <FormattedMessage id='how_place_order' />
+                                        <FormattedMessage id="how_place_order" />
                                     </MyText>
                                 </MenuItem>
                             </TopBarItem>
@@ -361,7 +363,9 @@ const Header = () => {
                                         renderInput={(params) => (
                                             <TextField
                                                 variant="outlined"
-                                                label={<FormattedMessage id='search_medicine'/>}
+                                                label={
+                                                    <FormattedMessage id="search_medicine" />
+                                                }
                                                 {...params}
                                                 fullWidth
                                                 value={searchValue}
@@ -396,7 +400,7 @@ const Header = () => {
                                             : handleLoginOpen();
                                     }}
                                 >
-                                    <FormattedMessage id='status_order'/>
+                                    <FormattedMessage id="status_order" />
                                 </Button>
 
                                 <IconButton

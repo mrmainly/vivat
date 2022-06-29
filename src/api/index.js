@@ -98,16 +98,21 @@ class API {
     async getProductsList(id, page, formState, sort) {
         let result = await api(
             `api/v1/goods/?group_id=${id}&page=${page}
-            ${formState
-                ? `
-            &notRecept=${formState.notRecept ? formState.notRecept : ""
-                }&jnvls=${formState.jnvls ? formState.jnvls : ""}&ordering_qty=${formState.ordering_qty ? formState.ordering_qty : ""
-                }&price_min=${formState.min_price}&price_max=${formState.max_price
-                }&producer=${formState.producer}${sort == "name" || sort == "-name"
-                    ? `&ordering_name=${sort ? sort : ""}`
-                    : `&ordering_price=${sort ? sort : ""}`
-                }`
-                : ""
+            ${
+                formState
+                    ? `
+            &notRecept=${
+                formState.notRecept ? formState.notRecept : ""
+            }&jnvls=${formState.jnvls ? formState.jnvls : ""}&ordering_qty=${
+                          formState.ordering_qty ? formState.ordering_qty : ""
+                      }&price_min=${formState.min_price}&price_max=${
+                          formState.max_price
+                      }&producer=${formState.producer}${
+                          sort == "name" || sort == "-name"
+                              ? `&ordering_name=${sort ? sort : ""}`
+                              : `&ordering_price=${sort ? sort : ""}`
+                      }`
+                    : ""
             }`
         ).get();
         return result;
@@ -153,6 +158,20 @@ class API {
     //orders || basket
     async getCartsList() {
         let result = await api(`api/v1/carts/`).get();
+        return result;
+    }
+
+    getAddressAutoComplete(address) {
+        let result = api(
+            `api/v1/payments/gogo/autocomplete?address=${address}`
+        ).get();
+        return result;
+    }
+
+    getGogoCost(address) {
+        let result = api(
+            `api/v1/payments/gogo/get_cost?address=${address}`
+        ).get();
         return result;
     }
 
@@ -224,11 +243,12 @@ class API {
     //blog
     async getBlog(query, type) {
         let result = await api(
-            `api/v1/blogs/${type == "query"
-                ? query
-                    ? `?query=${query}`
-                    : ""
-                : `?tags_query=${query}`
+            `api/v1/blogs/${
+                type == "query"
+                    ? query
+                        ? `?query=${query}`
+                        : ""
+                    : `?tags_query=${query}`
             }`
         ).get();
         return result;

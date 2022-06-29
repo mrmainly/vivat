@@ -15,6 +15,7 @@ import {
     Radio,
     RadioGroup,
     CircularProgress,
+    Autocomplete,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
@@ -53,12 +54,15 @@ const BasketForm = () => {
     const [mail, setMail] = useState("");
     const [adress, setAdress] = useState("");
     const [commend, setCommend] = useState("");
-    const [payment, setPayment] = useState("CASH");
-    const [delivery, setDelivery] = useState("PICKUP");
+    const [payment, setPayment] = useState("");
+    const [delivery, setDelivery] = useState("");
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [totalPrice, setTotalPrice] = useState("");
     const [adresses, setAddresses] = useState([]);
+    const [myAddress, setMyAddress] = useState("");
+    // const [searchValue, setSearchValue] = useState([])
+    const [AutoCompliteData, setAutoCopliteData] = useState([]);
 
     const navigate = useNavigate();
 
@@ -104,14 +108,42 @@ const BasketForm = () => {
             delivery_type: delivery,
             comment: commend,
             dep_id: adress,
+            SuccessURL:
+                "https://xn----7sbbagaytx2c4ad.xn--p1ai/success-payment",
+            FailURL: "https://xn----7sbbagaytx2c4ad.xn--p1ai/error-payment",
+            address: myAddress,
         })
             .then((res) => {
-                toast.success("Заявка оформлена");
-            })
-            .then((res) => {
-                navigate(ROUTES.BASKET);
+                res.data === "Success"
+                    ? navigate(ROUTES.SUCCESS_PAYMENT)
+                    : (window.location.href = res.data);
             })
             .catch((error) => toast.error("Заявка не оформлена"));
+    };
+
+    const handleAutoComplite = (e: any) => {
+        setMyAddress(e.target.value);
+        API.getAddressAutoComplete(e.target.value)
+            .then((res) => {
+                console.log(res);
+                const newData = res.data?.result?.items
+                    .filter((item: any) => item.address_name)
+                    .map((item: any) => {
+                        return item.address_name;
+                    });
+                console.log("newData", newData);
+                setAutoCopliteData(newData);
+            })
+            .catch((error) => console.log(error));
+    };
+
+    const getCost = (event: any, values: any) => {
+        API.getGogoCost(values)
+            .then((res) => {
+                console.log("cost", res);
+                setTotalPrice(totalPrice + res.data.organisation_cost);
+            })
+            .catch((error) => console.log(error));
     };
 
     return (
@@ -165,6 +197,30 @@ const BasketForm = () => {
                                     value={mail}
                                     margin="normal"
                                 />
+                                <Autocomplete
+                                    id="free-solo-demo"
+                                    freeSolo
+                                    fullWidth
+                                    sx={{
+                                        opacity:
+                                            delivery === "DELIVERY" ? 1 : 0.5,
+                                    }}
+                                    disabled={delivery != "DELIVERY"}
+                                    options={AutoCompliteData}
+                                    onChange={getCost}
+                                    renderInput={(params) => (
+                                        <InputProfile
+                                            label="Адрес"
+                                            margin="normal"
+                                            {...params}
+                                            value={myAddress}
+                                            onChange={(e) =>
+                                                handleAutoComplite(e)
+                                            }
+                                        />
+                                    )}
+                                />
+
                                 <FormControl
                                     fullWidth
                                     margin="normal"
@@ -216,14 +272,14 @@ const BasketForm = () => {
                                         }
                                     >
                                         <FormControlLabel
-                                            control={<Radio checked={true} />}
+                                            control={<Radio />}
                                             label="Наличными при получении"
                                             value="CASH"
                                         />
                                         <FormControlLabel
-                                            control={<Radio checked={false} />}
+                                            control={<Radio />}
                                             label="Оплата картой онлайн"
-                                            value="CARDS"
+                                            value="CARD"
                                         />
                                     </RadioGroup>
                                 </FormControl>
@@ -236,17 +292,20 @@ const BasketForm = () => {
                                         defaultValue="female"
                                         name="radio-buttons-group"
                                         value={delivery}
-                                        onChange={(e) =>
-                                            setDelivery(e.target.value)
-                                        }
+                                        onChange={(e) => {
+                                            setDelivery(e.target.value);
+                                            if (e.target.value === "DELIVERY") {
+                                                setPayment("CARD");
+                                            }
+                                        }}
                                     >
                                         <FormControlLabel
-                                            control={<Radio checked={true} />}
+                                            control={<Radio />}
                                             label={`Самовызов`}
                                             value="PICKUP"
                                         />
                                         <FormControlLabel
-                                            control={<Radio checked={false} />}
+                                            control={<Radio />}
                                             label="Доставка курьером"
                                             value="DELIVERY"
                                         />
