@@ -47,12 +47,12 @@ const PaymentReceiving = () => {
             Оплата и получение при самовывозе.
         </MyText>
         <ol>
-            <li>
+            <li style={{fontSize: 14}}>
                 <MyText variant="body2" sx={{ mt: 1.2 }}>
                     Оплачиваете и получаете заказ прямо в аптеке. Проверяете на месте комплектность, стоимость, целостность, сроки годности, размер (для изделий мед. назначения) каждой позиции заказа. В случае несоответствия вы вправе отказаться от заказа.
                 </MyText>
             </li>
-            <li>
+            <li style={{fontSize: 14}}>
                 <MyText variant="body2" sx={{ mt: 1.2 }}>
                     Оплачиваете на сайте и получаете заказ в аптеке. На месте называете номер вашего заказа, далее проверяете на месте комплектность, стоимость, целостность, сроки годности, размер (для изделий мед. назначения) каждой позиции заказа. В случае несоответствия вы вправе отказаться от заказа.
                 </MyText>
@@ -62,32 +62,46 @@ const PaymentReceiving = () => {
         <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
           Оплата и получение при доставке курьером
         </MyText>
-        <Grid container spacing={2} sx={{ width: "70%", mt: 1.2 }}>
-            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3" }}>
+        <Grid container sx={{ width: "70%", mt: 1.2, minHeight: 126 }}>
+            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3", pl: 1.8, display: "flex", alignItems: "center" }}>
                 <MyText>
                     Удаленность
                 </MyText>
             </Grid>
-            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3" }}>
-                xs=4
+            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3", pl: 1.8, display: "flex", alignItems: "center" }}>
+                <MyText>
+                    Стоимость
+                </MyText>
             </Grid>
-            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3" }}>
-                xs=4
+            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3", pl: 1.8, display: "flex", alignItems: "center" }}>
+                <MyText>
+                    Каждый дополнительный км
+                </MyText>
             </Grid>
-            <Grid item xs={4}>
-                xs=8
+            <Grid item xs={4} sx={{ pl: 1.8, display: "flex", alignItems: "center"}}>
+                <MyText>
+                    доставка в пределах 4 км
+                </MyText>
             </Grid>
-            <Grid item xs={4}>
-                xs=8
+            <Grid item xs={4} sx={{ pl: 1.8, display: "flex", alignItems: "center"}}>
+                <MyText>
+                    200 руб	
+                </MyText>
             </Grid>
-            <Grid item xs={4}>
-                xs=8
+            <Grid item xs={4} sx={{ pl: 1.8, display: "flex", alignItems: "center"}}>
+                <MyText>
+                    50 руб.
+                </MyText>
             </Grid>
-            <Grid item xs={4} sx={{ backgroundColor: "#EDF1F4" }}>
-                xs=8
+            <Grid item xs={4} sx={{ backgroundColor: "#EDF1F4", pl: 1.8, display: "flex", alignItems: "center" }}>
+                <MyText>
+                    в отдаленные районы
+                </MyText>
             </Grid>
-            <Grid item xs={8} sx={{ backgroundColor: "#EDF1F4" }}>
-                xs=8
+            <Grid item xs={8} sx={{ backgroundColor: "#EDF1F4", pl: 1.8, display: "flex", alignItems: "center" }}>
+                <MyText>
+                    рассчитывается индивидуально.
+                </MyText>
             </Grid>
         </Grid>
         <MyText variant="body2" sx={{ mt: 3.2 }}>
