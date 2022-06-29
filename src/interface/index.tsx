@@ -11,6 +11,7 @@ interface MyTextProps {
     xs?: number;
     variant?: any;
     style?: any;
+    onClick?: () => void;
 }
 
 interface ModalAndDrawer {

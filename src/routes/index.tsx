@@ -36,6 +36,7 @@ enum ROUTES {
     ERROR_PAYMENT = '/error-payment',
     PRIVACY_POLICY = '/privacy-policy',
     PAYMENT_RECEIVING = '/payment-receiving',
+    MANUFACTURERS = '/manufacturers',
 }
 
 export default ROUTES;
