@@ -62,7 +62,7 @@ const Footer = () => {
             columns: [
                 {
                     label: <FormattedMessage id="about_us" />,
-                    href: ROUTES.TEAM,
+                    href: ROUTES.ABOUT_US,
                 },
                 {
                     label: <FormattedMessage id="privacy_policy" />,

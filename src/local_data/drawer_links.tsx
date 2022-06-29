@@ -17,7 +17,7 @@ const drawer_links = [
     },
     {
         label: <FormattedMessage id='about_company'/>,
-        to: ROUTES.TEAM,
+        to: ROUTES.ABOUT_US,
     },
     {
         label: <FormattedMessage id='job'/>,

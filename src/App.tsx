@@ -22,7 +22,7 @@ import {
     ChangePassword,
     ProductDetail,
     Order,
-    Team,
+    AboutUs,
     Delivery,
     Work,
     Contacts,
@@ -101,7 +101,7 @@ const App = () => {
                                     />
 
                                     {/* Info-pages */}
-                                    <Route element={<Team />} path={ROUTES.TEAM} />
+                                    <Route element={<AboutUs />} path={ROUTES.ABOUT_US} />
                                     <Route
                                         element={<Delivery />}
                                         path={ROUTES.DELIVERY}

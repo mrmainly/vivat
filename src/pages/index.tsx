@@ -3,7 +3,7 @@ import Basket from "./basket";
 import BasketForm from "./basket/basketForm";
 import IssueOrdering from "./issue-ordering";
 
-import Team from "./info-screens/team";
+import AboutUs from "./info-screens/about-us";
 import Delivery from "./info-screens/delivery";
 import Work from "./info-screens/work";
 import Contacts from "./info-screens/contacts";
@@ -48,7 +48,7 @@ export {
     ChangePassword,
     MyOrders,
     ProductDetail,
-    Team,
+    AboutUs,
     Delivery,
     Work,
     Contacts,

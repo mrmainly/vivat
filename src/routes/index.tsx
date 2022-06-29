@@ -5,7 +5,7 @@ enum ROUTES {
     MYORDERS = "/profile-my-orders",
     BASICINFORMATION = "/profile-basic-information",
     CHANGEPASSWORD = "/profile-change-password",
-    TEAM = "/team",
+    ABOUT_US = "/about-us",
     DELIVERY = "/delivery",
     WORK = "/work",
     CONTACTS = "/contacts",
