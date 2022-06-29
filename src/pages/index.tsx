@@ -13,6 +13,7 @@ import StockDetail from "./stock/detail";
 import Order from "./info-screens/order";
 import PrivacyPolicy from "./info-screens/privacy-policy";
 import PaymentReceiving from "./info-screens/payment-receiving";
+import Manufacturers from "./info-screens/manufacturers";
 
 import BasicInformation from "./profile/basic-information";
 import ChangePassword from "./profile/change-password";
@@ -73,4 +74,5 @@ export {
     SuccessPayment,
     ErrorPayment,
     PaymentReceiving,
+    Manufacturers,
 };

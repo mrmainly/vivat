@@ -5,7 +5,7 @@ import { MyText } from "../../../components";
 
 import { Box } from "@mui/material";
 
-const PrivacyPolicy = () => {
+const Manufacturers = () => {
     const data = [
         {
             title: "1. Общие положения",
@@ -286,7 +286,7 @@ const PrivacyPolicy = () => {
 
     return (
         <div>
-            <InfoBlog title="Политика обработки персональных данных">
+            <InfoBlog title="Производителям">
                 {data.map((item, index) => (
                     <Box key={index}>
                         <MyText variant="h6" sx={{ mt: 3.2, fontWeight: 600 }}>{item.title}</MyText>
@@ -309,18 +309,9 @@ const PrivacyPolicy = () => {
                         ))}
                     </Box>
                 ))}
-                <MyText
-                    variant="body2"
-                    onClick={() => 
-                        window.location.href = 'https://docs.google.com/document/d/1aQqpTYsuiH490vCqcjLFtpboay_MrkOOqxwec7r5aAk/edit'
-                    }
-                    sx={{ display: "inline-block", mt: 1.2, color: "#0D99FF", cursor: "pointer" }}
-                >
-                    ФОРМА ЗАЯВЛЕНИЯ ОБ ОТЗЫВЕ ПЕРСОНАЛЬНЫХ ДАННЫХ
-                </MyText>
             </InfoBlog>
         </div>
     );
 };
 
-export default PrivacyPolicy;
+export default Manufacturers;
