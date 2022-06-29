@@ -3,7 +3,7 @@ import InfoBlog from "../components/InfoBlog";
 import { MyText } from "../../../components";
 import ThemeMain from "../../../theme";
 
-import { Box, MenuItem } from "@mui/material";
+import { Box, MenuItem, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/system";
 import { isTemplateExpression } from "typescript";
@@ -59,15 +59,42 @@ const PaymentReceiving = () => {
             </li>
         </ol>
 
-        <MyText variant="body1" sx={{ mt: 3.2 }}>
+        <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
           Оплата и получение при доставке курьером
         </MyText>
-
+        <Grid container spacing={2} sx={{ width: "70%", mt: 1.2 }}>
+            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3" }}>
+                <MyText>
+                    Удаленность
+                </MyText>
+            </Grid>
+            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3" }}>
+                xs=4
+            </Grid>
+            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3" }}>
+                xs=4
+            </Grid>
+            <Grid item xs={4}>
+                xs=8
+            </Grid>
+            <Grid item xs={4}>
+                xs=8
+            </Grid>
+            <Grid item xs={4}>
+                xs=8
+            </Grid>
+            <Grid item xs={4} sx={{ backgroundColor: "#EDF1F4" }}>
+                xs=8
+            </Grid>
+            <Grid item xs={8} sx={{ backgroundColor: "#EDF1F4" }}>
+                xs=8
+            </Grid>
+        </Grid>
         <MyText variant="body2" sx={{ mt: 3.2 }}>
           Оплата заказа производится онлайн на сайте в полном объеме (выбираете при оформлении заказа. В счет заказа выставляется цена на курьерскую доставку). При получении заказа проверяйте на месте содержимое заказа.
         </MyText>
 
-        <MyText variant="body1" sx={{ mt: 3.2 }}>
+        <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
           Обмен/Возврат
         </MyText>
         {array.map((item, index) => (
@@ -81,6 +108,7 @@ const PaymentReceiving = () => {
                   style={{
                     fontSize: 14,
                     marginTop: 12,
+                    marginLeft: 6,
                   }}
                   key={index}
                 >
