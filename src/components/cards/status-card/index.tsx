@@ -86,7 +86,6 @@ const StatusCard: React.FC<StatusCardProps> = ({
     producer,
 }) => {
     const navigate = useNavigate();
-    console.log("GoodsCode", GoodsCode);
     return (
         <Root onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`)}>
             <ImgBox

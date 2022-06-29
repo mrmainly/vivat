@@ -110,11 +110,18 @@ class API {
                       }&producer=${formState.producer}${
                           sort == "name" || sort == "-name"
                               ? `&ordering_name=${sort ? sort : ""}`
-                              : `&ordering_price=${sort ? sort : ""}`
+                              : ""
 
                           // sort == "priceSale" || sort == "-priceSale" ?
-
                           // : ''
+                      }${
+                          sort == "priceSale" || sort == "-priceSale"
+                              ? `&ordering_price=${sort ? sort : ""}`
+                              : ""
+                      }${
+                          sort == "good_views" || sort == "-good_views"
+                              ? `&good_views=${sort ? sort : ""}`
+                              : ""
                       }`
                     : ""
             }`

@@ -15,7 +15,6 @@ const MyText: React.FC<MyTextProps> = ({
     ...props
 }) => {
     const Text = styled(Typography)(({ theme }) => ({
-        fontFamily: "Roboto",
         [theme.breakpoints.down("lg")]: {
             fontSize: lg ? lg : "",
         },

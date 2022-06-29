@@ -41,6 +41,7 @@ interface DataProps {
     total_price: string | null;
     created: string | null;
     orderStatus: string;
+    delivery_type: string;
 }
 
 const StatusProductDetail = () => {
@@ -94,9 +95,24 @@ const StatusProductDetail = () => {
                 </Box>
             ) : dataItems.length ? (
                 <Main>
-                    <Box sx={{ display: "flex" }}>
-                        <MyText>№{data?.id}</MyText>&nbsp;от&nbsp;
-                        <MyText>{data?.created}</MyText>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Box sx={{ display: "flex" }}>
+                            <MyText>№{data?.id}</MyText>&nbsp;от&nbsp;
+                            <MyText>{data?.created}</MyText>
+                        </Box>
+                        <Box sx={{ display: "flex" }}>
+                            <MyText>Тип доставки:</MyText>&nbsp;
+                            <MyText
+                                sx={{ color: ThemeMain.palette.primary.main }}
+                            >
+                                {data?.delivery_type}
+                            </MyText>
+                        </Box>
                     </Box>
                     <Grid container spacing={2}>
                         {dataItems.map((item: any, index: number) => (
