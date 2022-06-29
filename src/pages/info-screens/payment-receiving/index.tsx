@@ -24,6 +24,14 @@ const Main = styled(Box)(({ theme }) => ({
   marginTop: 20,
 }));
 
+const CustomTableContainer = styled(TableContainer)(({ theme }) => ({
+  marginTop: 12,
+  width: "70%",
+  [theme.breakpoints.down("sm")]: {
+      width: "100%",
+  },
+}));
+
 function createData(
   first: string,
   second: string,
@@ -125,20 +133,20 @@ const PaymentReceiving = () => {
                 </MyText>
             </Grid>
         </Grid> */}
-        <TableContainer component={Paper} sx={{ mt: 1.2 }}>
+        <CustomTableContainer>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Удаленность</TableCell>
-                <TableCell align="left">Стоимость</TableCell>
-                <TableCell align="left">Каждый дополнительный км</TableCell>
+                <TableCell sx={{ backgroundColor: "#E4FFE3" }}>Удаленность</TableCell>
+                <TableCell sx={{ backgroundColor: "#E4FFE3" }} align="left">Стоимость</TableCell>
+                <TableCell sx={{ backgroundColor: "#E4FFE3" }} align="left">Каждый дополнительный км</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <TableRow
                   key={row.first}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0, backgroundColor: "#EDF1F4" }}}
                 >
                   <TableCell component="th" scope="row">
                     {row.first}
@@ -149,7 +157,7 @@ const PaymentReceiving = () => {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </CustomTableContainer>
         <MyText variant="body2" sx={{ mt: 1.2, ml: 1.8 }}>
           при заказе от 1500 р в центре города действует бесплатная доставка.
         </MyText>
