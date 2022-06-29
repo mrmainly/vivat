@@ -59,6 +59,7 @@ const BasketForm = () => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [totalPrice, setTotalPrice] = useState("");
+    const [costTotalPrice, setCostTotalPrice] = useState("");
     const [adresses, setAddresses] = useState([]);
     const [myAddress, setMyAddress] = useState("");
     // const [searchValue, setSearchValue] = useState([])
@@ -138,10 +139,12 @@ const BasketForm = () => {
     };
 
     const getCost = (event: any, values: any) => {
+        setMyAddress(values);
         API.getGogoCost(values)
             .then((res) => {
                 console.log("cost", res);
-                setTotalPrice(totalPrice + res.data.organisation_cost);
+                setCostTotalPrice(res.data.organisation_cost);
+                console.log("cost_price", costTotalPrice);
             })
             .catch((error) => console.log(error));
     };
@@ -328,7 +331,7 @@ const BasketForm = () => {
                                         {totalPrice} ₽
                                     </MyText>
                                 </Box> */}
-                                {/* <Box
+                                <Box
                                     sx={{
                                         display: "flex",
                                         justifyContent: "space-between",
@@ -336,10 +339,12 @@ const BasketForm = () => {
                                     }}
                                 >
                                     <MyText variant="body2">
-                                        Бонусы за заказ:
+                                        Оплата доставки:
                                     </MyText>
-                                    <MyText variant="body2">160 ₽</MyText>
-                                </Box> */}
+                                    <MyText variant="body2">
+                                        {costTotalPrice} ₽
+                                    </MyText>
+                                </Box>
                                 <Box
                                     sx={{
                                         display: "flex",
@@ -350,7 +355,7 @@ const BasketForm = () => {
                                 >
                                     <MyText variant="body1">Итого</MyText>
                                     <MyText variant="body2">
-                                        {totalPrice} ₽
+                                        {totalPrice + costTotalPrice}₽
                                     </MyText>
                                 </Box>
                                 <MyButton
@@ -420,7 +425,7 @@ const BasketForm = () => {
                                                     .main,
                                             }}
                                         >
-                                            {totalPrice} ₽
+                                            {totalPrice + costTotalPrice}₽
                                         </MyText>
                                     </Box>
                                     <BorderLine />

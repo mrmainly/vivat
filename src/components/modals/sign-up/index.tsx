@@ -131,6 +131,11 @@ const SignUpModal: React.FC<SignModalProps> = ({
             API.sendPassword({
                 password: data.password,
                 code: code,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                patronymic: data.patronymic,
+                email: data.email,
+                birth_date: data.birth_date,
             })
                 .then((res) => {
                     setPasswordV(false);
@@ -271,6 +276,35 @@ const SignUpModal: React.FC<SignModalProps> = ({
                             {passwordText ? <p>Пароль не подошел</p> : ""}
                             <Form onSubmit={handleSubmit(onSubmitPassword)}>
                                 <Input
+                                    label="Имя"
+                                    {...register("first_name")}
+                                    required
+                                />
+                                <Input
+                                    label="Фамилия"
+                                    {...register("last_name")}
+                                    required
+                                />
+                                <Input
+                                    label="Отчество"
+                                    {...register("patronymic")}
+                                    required
+                                />
+                                <Input
+                                    label="E-mail"
+                                    {...register("email")}
+                                    required
+                                />
+                                <Input
+                                    label="Дата рождения"
+                                    {...register("birth_date")}
+                                    type={"date"}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    required
+                                />
+                                <Input
                                     label="Пароль"
                                     {...register("password")}
                                     type="password"
@@ -282,6 +316,7 @@ const SignUpModal: React.FC<SignModalProps> = ({
                                     type="password"
                                     required
                                 />
+
                                 <MyButton style={{ marginTop: 10 }} fullWidth>
                                     Завершить
                                 </MyButton>
