@@ -48,7 +48,7 @@ const Address = () => {
     return (
         <>
             <MyText variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
-                Наши атеки
+                Наши аптеки
             </MyText>
             {loading ? (
                 <Box sx={{ mt: 5, display: "flex", justifyContent: "center" }}>
