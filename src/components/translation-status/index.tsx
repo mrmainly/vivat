@@ -18,3 +18,27 @@ export const translationStatus = (name: any) => {
             throw new Error();
     }
 };
+
+export const translationDelivery = (name: any) => {
+    switch (name) {
+        case "DELIVARY":
+            return "Самовызов";
+        case "PICKUP":
+            return "Доставка курьером";
+
+        default:
+            throw new Error();
+    }
+};
+
+export const translationPayment = (name: any) => {
+    switch (name) {
+        case "CARD":
+            return "картой онляйн при получении";
+        case "CASH":
+            return "Наличными при получении";
+
+        default:
+            throw new Error();
+    }
+};

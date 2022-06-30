@@ -104,10 +104,20 @@ const Vacancy = () => {
             <InfoBlog title="Наши вакансии">
                 {data.map((item, index) => (
                     <Box key={index}>
-                        <MyText variant="h6" sx={{ mb: 0.8, fontWeight: 600 }}>{item.post}</MyText>
+                        <MyText variant="h6" sx={{ mb: 0.8, fontWeight: 600 }}>
+                            {item.post}
+                        </MyText>
                         {item.texts.map((textItem, index) => (
-                            <Grid container sx={{ display: "flex", mt: 0.8, "&:last-child" : {border: "none"} }}>
-                                <Grid item
+                            <Grid
+                                container
+                                sx={{
+                                    display: "flex",
+                                    mt: 0.8,
+                                    "&:last-child": { border: "none" },
+                                }}
+                            >
+                                <Grid
+                                    item
                                     xl={4}
                                     lg={4}
                                     md={4}
@@ -116,10 +126,11 @@ const Vacancy = () => {
                                     key={index}
                                 >
                                     <MyText variant="body2">
-                                       {textItem.label} 
+                                        {textItem.label}
                                     </MyText>
                                 </Grid>
-                                <Grid item
+                                <Grid
+                                    item
                                     xl={8}
                                     lg={8}
                                     md={8}
@@ -128,16 +139,24 @@ const Vacancy = () => {
                                     key={index}
                                 >
                                     <MyText variant="body2">
-                                       {textItem.value} 
+                                        {textItem.value}
                                     </MyText>
                                 </Grid>
                             </Grid>
                         ))}
                         <MyText variant="body1" sx={{ mt: 1.6 }}>
-                            {item.sentResume} <span style={{ color: theme.palette.primary.main }}>finvest2011@mail.ru</span>
+                            {item.sentResume}{" "}
+                            <span style={{ color: theme.palette.primary.main }}>
+                                finvest2011@mail.ru
+                            </span>
                         </MyText>
-                        <Box sx={{ border: "1px solid #CDCDCD", mt: 2.8, mb: 2.8}}>
-                        </Box>
+                        <Box
+                            sx={{
+                                border: "1px solid #CDCDCD",
+                                mt: 2.8,
+                                mb: 2.8,
+                            }}
+                        ></Box>
                     </Box>
                 ))}
             </InfoBlog>

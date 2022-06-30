@@ -42,7 +42,11 @@ import SkeletonBasicInformation from "./skeletons/basic-informations-skeleton";
 import SkeletonProductDetail from "./skeletons/catalog-card-detail-skeleton";
 import SkeletonBlog from "./skeletons/blog-skeleton";
 import SecondSliderCardSkeleton from "./skeletons/second-slider-card-skeleton";
-import { translationStatus } from "./translation-status";
+import {
+    translationStatus,
+    translationDelivery,
+    translationPayment,
+} from "./translation-status";
 
 export {
     Header,
@@ -89,4 +93,6 @@ export {
     AddressSideBar,
     SecondSliderCardSkeleton,
     translationStatus,
+    translationDelivery,
+    translationPayment,
 };

@@ -5,7 +5,12 @@ import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 
 import API from "../../api";
-import { StatusCard, MyText, translationStatus } from "../../components";
+import {
+    StatusCard,
+    MyText,
+    translationStatus,
+    translationDelivery,
+} from "../../components";
 import ThemeMain from "../../theme";
 import { LargeNumberLike } from "crypto";
 
@@ -110,7 +115,7 @@ const StatusProductDetail = () => {
                             <MyText
                                 sx={{ color: ThemeMain.palette.primary.main }}
                             >
-                                {data?.delivery_type}
+                                {translationDelivery(data?.delivery_type)}
                             </MyText>
                         </Box>
                     </Box>
