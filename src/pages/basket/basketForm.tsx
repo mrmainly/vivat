@@ -52,7 +52,9 @@ const BasketForm = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [mail, setMail] = useState("");
-    const [adress, setAdress] = useState("");
+    const [adress, setAdress] = useState(
+        "47CC211D-EECA-4D38-87A1-E255059DD16F"
+    );
     const [commend, setCommend] = useState("");
     const [payment, setPayment] = useState("");
     const [delivery, setDelivery] = useState("");
@@ -85,7 +87,6 @@ const BasketForm = () => {
                 });
             await API.getCartsList()
                 .then((res: any) => {
-                    console.log("data", res);
                     setTotalPrice(res.data.total_price);
                     if (res.data.items) {
                         setData(res.data.items);
@@ -96,7 +97,6 @@ const BasketForm = () => {
                 .catch((error) => console.log(error));
             await API.getDeportaments()
                 .then((res: any) => {
-                    console.log("dep", res);
                     setAddresses(res.data);
                 })
                 .catch((error) => console.log(error));
@@ -132,14 +132,15 @@ const BasketForm = () => {
         setMyAddress(e.target.value);
         API.getAddressAutoComplete(e.target.value)
             .then((res) => {
-                console.log(res);
-                const newData = res.data?.result?.items
-                    .filter((item: any) => item.address_name)
-                    .map((item: any) => {
-                        return item.address_name;
-                    });
-                console.log("newData", newData);
-                setAutoCopliteData(newData);
+                const newData = res?.data?.result?.items.map((item: any) => {
+                    return item.full_name;
+                });
+
+                if (newData === undefined) {
+                    setAutoCopliteData([]);
+                } else {
+                    setAutoCopliteData(newData);
+                }
             })
             .catch((error) => console.log(error));
     };
@@ -164,7 +165,7 @@ const BasketForm = () => {
 
     const handlePayment = (e: any) => {
         // setPayment(e.target.value);
-        if (delivery === "DELIVERY") {
+        if (delivery === "PICKUP") {
             setPayment(e.target.value);
         }
     };
@@ -230,7 +231,9 @@ const BasketForm = () => {
                                     }}
                                     disabled={delivery != "DELIVERY"}
                                     options={AutoCompliteData}
-                                    onChange={getCost}
+                                    onInputChange={(event, newInputValue) =>
+                                        setMyAddress(newInputValue)
+                                    }
                                     renderInput={(params) => (
                                         <InputProfile
                                             label="Адрес"
