@@ -57,7 +57,7 @@ const Benefits = () => {
                     <img
                         src={item.img}
                     />
-                    <MyText variant="h6" sx={{ maxWidth: 260, textAlign: "center" }}>
+                    <MyText variant="h6" sx={{ mt: 2, maxWidth: 260, textAlign: "center" }}>
                         {item.title}
                     </MyText>
                 </Grid>
