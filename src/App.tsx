@@ -49,6 +49,9 @@ import {
     PaymentReceiving,
     Manufacturers,
     StaffDepartment,
+    Licenses,
+    Advertising,
+    TechnicalSupport,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -111,6 +114,9 @@ const App = () => {
                                     <Route element={<PaymentReceiving />} path={ROUTES.PAYMENT_RECEIVING} />
                                     <Route element={<Manufacturers />} path={ROUTES.MANUFACTURERS} />
                                     <Route element={<StaffDepartment />} path={ROUTES.STAFF_DEPARTMENT} />
+                                    <Route element={<Licenses />} path={ROUTES.LICENSES} />
+                                    <Route element={<Advertising />} path={ROUTES.ADVERTISING} />
+                                    <Route element={<TechnicalSupport />} path={ROUTES.TECHNICAL_SUPPORT} />
                                     <Route element={<Work />} path={ROUTES.WORK} />
                                     <Route
                                         element={<Contacts />}

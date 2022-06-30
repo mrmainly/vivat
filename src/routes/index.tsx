@@ -38,6 +38,9 @@ enum ROUTES {
     PAYMENT_RECEIVING = '/payment-receiving',
     MANUFACTURERS = '/manufacturers',
     STAFF_DEPARTMENT = '/staff-department',
+    LICENSES = '/licenses',
+    ADVERTISING = '/advertising',
+    TECHNICAL_SUPPORT = '/technical-support'
 }
 
 export default ROUTES;
