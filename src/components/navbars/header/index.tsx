@@ -213,6 +213,8 @@ const Header = () => {
                     bgcolor: "white",
                     color: "#222222",
                     boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.25);",
+                    pt: 0.5,
+                    // pb: 0.5,
                 }}
             >
                 <DesktopWrapper>

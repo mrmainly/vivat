@@ -52,6 +52,8 @@ import {
     Licenses,
     Advertising,
     TechnicalSupport,
+    Benefits,
+    Vacancy,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -117,6 +119,8 @@ const App = () => {
                                     <Route element={<Licenses />} path={ROUTES.LICENSES} />
                                     <Route element={<Advertising />} path={ROUTES.ADVERTISING} />
                                     <Route element={<TechnicalSupport />} path={ROUTES.TECHNICAL_SUPPORT} />
+                                    <Route element={<Benefits />} path={ROUTES.BENEFITS} />
+                                    <Route element={<Vacancy />} path={ROUTES.VACANCY} />
                                     <Route element={<Work />} path={ROUTES.WORK} />
                                     <Route
                                         element={<Contacts />}
