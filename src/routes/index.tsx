@@ -41,7 +41,8 @@ enum ROUTES {
     LICENSES = '/licenses',
     ADVERTISING = '/advertising',
     TECHNICAL_SUPPORT = '/technical-support',
-    BENEFITS = '/benefits'
+    BENEFITS = '/benefits',
+    VACANCY = '/vacancy',
 }
 
 export default ROUTES;

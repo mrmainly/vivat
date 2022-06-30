@@ -66,7 +66,7 @@ const Footer = () => {
                 },
                 {
                     label: <FormattedMessage id="privacy_policy" />,
-                    href: "/",
+                    href: ROUTES.PRIVACY_POLICY,
                 },
                 {
                     label: <FormattedMessage id="contacts" />,
@@ -91,7 +91,7 @@ const Footer = () => {
                 },
                 {
                     label: <FormattedMessage id="payment_receipt_order" />,
-                    href: "/",
+                    href: ROUTES.PAYMENT_RECEIVING,
                 },
             ],
         },
@@ -100,7 +100,7 @@ const Footer = () => {
             columns: [
                 {
                     label: <FormattedMessage id="benefits_working" />,
-                    href: ROUTES.VIVAT_INFO,
+                    href: ROUTES.BENEFITS,
                 },
                 {
                     label: <FormattedMessage id="vacancy" />,
@@ -108,7 +108,7 @@ const Footer = () => {
                 },
                 {
                     label: <FormattedMessage id="human_resource_department" />,
-                    href: "/",
+                    href: ROUTES.STAFF_DEPARTMENT,
                 },
             ],
         },
@@ -117,15 +117,15 @@ const Footer = () => {
             columns: [
                 {
                     label: <FormattedMessage id="manufacturers" />,
-                    href: "/",
+                    href: ROUTES.MANUFACTURERS,
                 },
                 {
                     label: <FormattedMessage id="advertising_in_website" />,
-                    href: "/",
+                    href: ROUTES.ADVERTISING,
                 },
                 {
                     label: <FormattedMessage id="technical_support" />,
-                    href: "/",
+                    href: ROUTES.TECHNICAL_SUPPORT,
                 },
             ],
         },
@@ -159,6 +159,7 @@ const Footer = () => {
                                 variant="h6"
                                 style={{
                                     color: "#343434",
+                                    fontWeight: 700,
                                 }}
                             >
                                 {item.title}
@@ -170,13 +171,13 @@ const Footer = () => {
                                 }}
                             >
                                 {item.columns.map((item, index) => (
-                                    <Box key={index}>
+                                    <Box key={index} sx={{ mt: 0.5 }}>
                                         {item.href ? (
                                             <Link
                                                 to={item.href}
                                                 key={index}
                                                 style={{
-                                                    marginTop: 10,
+                                                    lineHeight: "200%",
                                                     textDecoration: "none",
                                                     color: "#828282",
                                                     width: "max-width",
@@ -188,7 +189,7 @@ const Footer = () => {
                                             <MyText
                                                 key={index}
                                                 style={{
-                                                    marginTop: 10,
+                                                    lineHeight: "160%",
                                                     textDecoration: "none",
                                                     color: "#686868",
                                                     width: "max-width",

@@ -18,7 +18,8 @@ import StaffDepartment from "./info-screens/staff-department";
 import Licenses from "./info-screens/licenses";
 import Advertising from "./info-screens/advertising";
 import TechnicalSupport from "./info-screens/technical-support"
-import Benefits from "./info-screens/benefits"
+import Benefits from "./info-screens/benefits";
+import Vacancy from "./info-screens/vacancy";
 
 import BasicInformation from "./profile/basic-information";
 import ChangePassword from "./profile/change-password";
@@ -85,4 +86,5 @@ export {
     Advertising,
     TechnicalSupport,
     Benefits,
+    Vacancy,
 };
