@@ -4,6 +4,7 @@ import { styled } from "@mui/system";
 
 import { MyText } from "../../../components";
 import ThemeMain from "../../../theme";
+import InfoBlog from "../components/InfoBlog";
 
 const Main = styled(Box)(({ theme }) => ({
   width: 450,
@@ -55,8 +56,8 @@ const Contacts = () => {
     },
   ];
   return (
-    <Main>
-      <MyText variant="h5">Контакты</MyText>
+    <InfoBlog title="Контакты">
+      {/* <MyText variant="h5">Контакты</MyText>
       <Box sx={{ mt: 1.6 }}>
         <MyText variant="h6">Время работы</MyText>
       </Box>
@@ -87,8 +88,27 @@ const Contacts = () => {
             </Box>
           ))}
         </Box>
-      ))}
-    </Main>
+      ))} */}
+      <Box>
+        <MyText variant="body1" sx={{ fontWeight: 600 }}>
+          Связаться с нами:
+        </MyText>
+        <MyText variant="body2" sx={{ mt: 0.8 }}>
+          По вопросам связанным с оформлением, исполнение заказа вы можете обратиться:
+        </MyText>
+        <MyText variant="body2" sx={{ mt: 0.8 }}>
+          <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}>+7 (914) 280-13-13 </span> в Якутске;
+        </MyText>
+        <MyText variant="body2" sx={{ mt: 0.8 }}>
+          График работы клиентского сервиса: 
+          <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}> с 8:00 до 24:00</span>
+        </MyText>
+        <MyText variant="body2" sx={{ mt: 0.8, whiteSpace: "pre-wrap" }}>
+          Круглосуточный прием обращений принимается по адресу: 
+          <span style={{ color: ThemeMain.palette.primary.main }}> finvest2011@mail.ru</span> 
+        </MyText>
+      </Box>
+    </InfoBlog>
   );
 };
 
