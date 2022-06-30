@@ -104,7 +104,7 @@ const Footer = () => {
                 },
                 {
                     label: <FormattedMessage id="vacancy" />,
-                    href: "/",
+                    href: ROUTES.VACANCY,
                 },
                 {
                     label: <FormattedMessage id="human_resource_department" />,
