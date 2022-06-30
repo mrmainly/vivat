@@ -17,6 +17,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 
 import ROUTES from "../../../routes";
+import { translationStatus } from "../..";
 
 function createData(
     name: string,
@@ -96,9 +97,11 @@ const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
                                         ? "Нету"
                                         : row.total_price}
                                 </TableCell>
-                                <TableCell align="center">ыфыв</TableCell>
                                 <TableCell align="center">
-                                    {row.orderStatus}
+                                    Лермонтова 38
+                                </TableCell>
+                                <TableCell align="center">
+                                    {translationStatus(row.orderStatus)}
                                 </TableCell>
                                 <TableCell align="center">
                                     <Arrow
