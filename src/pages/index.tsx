@@ -14,6 +14,7 @@ import Order from "./info-screens/order";
 import PrivacyPolicy from "./info-screens/privacy-policy";
 import PaymentReceiving from "./info-screens/payment-receiving";
 import Manufacturers from "./info-screens/manufacturers";
+import StaffDepartment from "./info-screens/staff-department";
 
 import BasicInformation from "./profile/basic-information";
 import ChangePassword from "./profile/change-password";
@@ -75,4 +76,5 @@ export {
     ErrorPayment,
     PaymentReceiving,
     Manufacturers,
+    StaffDepartment,
 };

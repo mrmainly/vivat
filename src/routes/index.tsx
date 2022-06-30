@@ -37,6 +37,7 @@ enum ROUTES {
     PRIVACY_POLICY = '/privacy-policy',
     PAYMENT_RECEIVING = '/payment-receiving',
     MANUFACTURERS = '/manufacturers',
+    STAFF_DEPARTMENT = '/staff-department',
 }
 
 export default ROUTES;

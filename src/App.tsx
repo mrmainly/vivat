@@ -47,7 +47,8 @@ import {
     ErrorPayment,
     PrivacyPolicy,
     PaymentReceiving,
-    Manufacturers
+    Manufacturers,
+    StaffDepartment,
 } from "./pages";
 import ROUTES from "./routes";
 
@@ -109,6 +110,7 @@ const App = () => {
                                     <Route element={<PrivacyPolicy />} path={ROUTES.PRIVACY_POLICY} />
                                     <Route element={<PaymentReceiving />} path={ROUTES.PAYMENT_RECEIVING} />
                                     <Route element={<Manufacturers />} path={ROUTES.MANUFACTURERS} />
+                                    <Route element={<StaffDepartment />} path={ROUTES.STAFF_DEPARTMENT} />
                                     <Route element={<Work />} path={ROUTES.WORK} />
                                     <Route
                                         element={<Contacts />}
