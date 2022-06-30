@@ -103,9 +103,9 @@ const Contacts = () => {
           График работы клиентского сервиса: 
           <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}> с 8:00 до 24:00</span>
         </MyText>
-        <MyText variant="body2" sx={{ mt: 0.8, whiteSpace: "pre-wrap" }}>
+        <MyText variant="body2" sx={{ mt: 0.8 }}>
           Круглосуточный прием обращений принимается по адресу: 
-          <span style={{ color: ThemeMain.palette.primary.main }}> finvest2011@mail.ru</span> 
+          <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}> finvest2011@mail.ru</span> 
         </MyText>
       </Box>
     </InfoBlog>
