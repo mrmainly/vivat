@@ -105,7 +105,7 @@ const Contacts = () => {
         </MyText>
         <MyText variant="body2" sx={{ mt: 0.8 }}>
           Круглосуточный прием обращений принимается по адресу: 
-          <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}> finvest2011@mail.ru</span> 
+          <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}> farmvivat@mail.ru</span> 
         </MyText>
       </Box>
     </InfoBlog>

@@ -30,7 +30,7 @@ const TechnicalSupport = () => {
                             Электронная почта:
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
-                            finvest2011@mail.ru
+                            farmvivat@mail.ru
                         </MyText>
                     </Box>
                 </Box>
@@ -55,7 +55,7 @@ const TechnicalSupport = () => {
                             Электронная почта:
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
-                            finvest2011@mail.ru
+                            farmvivat@mail.ru
                         </MyText>
                     </Box>
                 </Box>

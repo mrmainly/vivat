@@ -151,7 +151,7 @@ const Vacancy = () => {
                         <MyText variant="body1" sx={{ mt: 1.6 }}>
                             {item.sentResume}{" "}
                             <span style={{ color: theme.palette.primary.main }}>
-                                finvest2011@mail.ru
+                                farmvivat@mail.ru
                             </span>
                         </MyText>
                         <>

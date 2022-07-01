@@ -36,11 +36,11 @@ const Footer = () => {
                     href: "",
                 },
                 {
-                    label: "8 (914) 272-50-13",
+                    label: "8 (914) 280-13-13",
                     href: "",
                 },
                 {
-                    label: "finvest2011@mail.ru",
+                    label: "farmvivat@mail.ru",
                     href: "",
                 },
                 {
