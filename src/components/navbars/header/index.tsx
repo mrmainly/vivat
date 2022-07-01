@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
 import {
     AppBar,
@@ -16,6 +16,7 @@ import {
     FormControl,
     InputLabel,
     Select,
+    Badge,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -27,8 +28,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 
-import { LanguageContext } from "../../../store";
-import { LOCALES } from "../../../i18n/locales";
 import ThemeMain from "../../../theme";
 import {
     MyText,
@@ -44,6 +43,9 @@ import {
 import { StateContext } from "../../../store";
 import ROUTES from "../../../routes";
 import API from "../../../api";
+import Top from "./components/Top";
+import Middle from "./components/Middle";
+import Bottom from "./components/Bottom";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -73,20 +75,6 @@ const TopBarItem = styled(Box)(({ theme }) => ({
     alignItems: "center",
 }));
 
-const MidleBar = styled(Box)(({ theme }) => ({
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    height: 105,
-    marginBottom: "-6px",
-}));
-
-const MidleBarItem = styled(Box)(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-}));
-
 const BottomBar = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-between",
@@ -103,11 +91,15 @@ const GridMidle = styled(Grid)(({ theme }) => ({
     display: "flex",
 }));
 
-const MidleBarItemSelect = styled(Grid)(({ theme }) => ({}));
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+        // background: ThemeMain.palette.primary.main,
+        color: ThemeMain.palette.primary.main,
+    },
+}));
 
 const Header = () => {
-    const [searchValue, setSearchValue] = useState("");
-
+    const [loading, setLoading] = useState(false);
     const [state, setState] = useState({
         drawerOpen: false,
         drawerProfileOpen: false,
@@ -117,9 +109,7 @@ const Header = () => {
         login: false,
         registerModal: false,
         forgot: false,
-        AutoCompliteData: [],
     });
-    const [loading, setLoading] = useState(false);
 
     const jwttoken = cookie.get("jwttoken");
     const stateContext = useContext(StateContext);
@@ -132,18 +122,11 @@ const Header = () => {
         login,
         registerModal,
         forgot,
-        AutoCompliteData,
     } = state;
 
     const { register, handleSubmit, control } = useForm({
         mode: "onBlur",
     });
-
-    const languages = [
-        { name: "Русский", code: LOCALES.RUSSIAN },
-        { name: "Саха тыла", code: LOCALES.SAKHA },
-    ];
-    const { currentLocale, changeLocale } = useContext(LanguageContext);
 
     const handleDrawerClose = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: false }));
@@ -178,33 +161,6 @@ const Header = () => {
     const handleAutoCompliteData = (data: any) =>
         setState((prevState) => ({ ...prevState, AutoCompliteData: data }));
 
-    const onSubmit = async () => {
-        setLoading(true);
-        await API.productsSearch(searchValue)
-            .then((res) => {
-                navigate(ROUTES.SEARCH_PAGE, {
-                    state: { data: res.data, title: searchValue },
-                });
-            })
-            .catch((error) => {
-                toast.error("error");
-            });
-        setLoading(false);
-    };
-
-    const handleAutoComplite = (e: any) => {
-        setSearchValue(e.target.value);
-        API.getAutoComplite(e.target.value)
-            .then((res) => {
-                const newData = res.data.map((item: any) => {
-                    return item.name;
-                });
-                console.log("newData", newData);
-                handleAutoCompliteData(newData);
-            })
-            .catch((error) => console.log(error));
-    };
-
     return (
         <>
             <AppBar
@@ -219,231 +175,18 @@ const Header = () => {
             >
                 <DesktopWrapper>
                     <Main aria-label="mailbox folders">
-                        <TopBar>
-                            <TopBarItem>
-                                <MenuItem
-                                    onClick={() => navigate(ROUTES.ADDRESS)}
-                                >
-                                    <MyText variant="body1">
-                                        <FormattedMessage id="pharmacy" />
-                                    </MyText>
-                                </MenuItem>
-                            </TopBarItem>
-                            <TopBarItem>
-                                <FormControl
-                                    sx={{ width: 150, bgcolor: "white", mr: 1 }}
-                                    size="small"
-                                >
-                                    <InputLabel>
-                                        <FormattedMessage id="langue_select" />
-                                    </InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        label={
-                                            <FormattedMessage id="langue_select" />
-                                        }
-                                        value={currentLocale}
-                                        onChange={(e) => {
-                                            changeLocale(e.target.value);
-                                        }}
-                                    >
-                                        {languages.map(({ name, code }) => (
-                                            <MenuItem key={name} value={code}>
-                                                {name}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                                <MenuItem>
-                                    <MyText variant="body1">
-                                        8 (914) 280-13-13
-                                    </MyText>
-                                </MenuItem>
-                                <MenuItem
-                                    onClick={() => navigate(ROUTES.ORDER)}
-                                >
-                                    <MyText variant="body1">
-                                        <FormattedMessage id="how_place_order" />
-                                    </MyText>
-                                </MenuItem>
-                            </TopBarItem>
-                        </TopBar>
+                        <Top />
                         <BorderLine />
-                        <MidleBar>
-                            <MidleBarItem>
-                                <MenuItem onClick={() => navigate(ROUTES.HOME)}>
-                                    <img
-                                        src="/img/Frame60.png"
-                                        style={{ height: 90 }}
-                                    />
-                                </MenuItem>
-                            </MidleBarItem>
-                            <MidleBarItem sx={{ width: "100%", ml: 2, mr: 2 }}>
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <img src="/img/Frame3.png" />
-                                    <Box>
-                                        <MyText>Якутск</MyText>
-                                        <MyText
-                                            variant="body2"
-                                            sx={{ color: "#999999" }}
-                                        >
-                                            Город
-                                        </MyText>
-                                    </Box>
-                                </Box>
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        ml: 3,
-                                    }}
-                                >
-                                    <img src="/img/Frame212.png" />
-                                    <Box>
-                                        <MyText>Лермонтова 38</MyText>
-                                        <MyText
-                                            variant="body2"
-                                            sx={{ color: "#999999" }}
-                                        >
-                                            Адрес аптеки
-                                        </MyText>
-                                    </Box>
-                                </Box>
-                            </MidleBarItem>
-                            <MidleBarItem>
-                                <img
-                                    src="/img/_x0020_1.png"
-                                    style={{ height: 103, width: 92 }}
-                                />
-                                <img
-                                    src="/img/Frame949.png"
-                                    style={{ height: 90 }}
-                                />
-                            </MidleBarItem>
-                        </MidleBar>
+                        <Middle />
                         <BorderLine />
-                        <BottomBar>
-                            <BottomBarItem sx={{ mr: 2 }}>
-                                <IconButton
-                                    color="primary"
-                                    aria-label="upload picture"
-                                    component="span"
-                                    onClick={() => handleDrawerOpen()}
-                                >
-                                    <MenuIcon
-                                        sx={{ color: "#55CD61" }}
-                                        fontSize="large"
-                                    />
-                                </IconButton>
-                            </BottomBarItem>
-                            <BottomBarItem
-                                sx={{
-                                    width: "100%",
-
-                                    display: "flex",
-
-                                    flexDirection: "column",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <ButtonGroup sx={{ width: "100%" }}>
-                                    <Autocomplete
-                                        sx={{ width: "100%" }}
-                                        id="free-solo-demo"
-                                        freeSolo
-                                        size="small"
-                                        options={AutoCompliteData}
-                                        onInputChange={(event, newInputValue) =>
-                                            setSearchValue(newInputValue)
-                                        }
-                                        renderInput={(params) => (
-                                            <TextField
-                                                variant="outlined"
-                                                label={
-                                                    <FormattedMessage id="search_medicine" />
-                                                }
-                                                {...params}
-                                                fullWidth
-                                                value={searchValue}
-                                                onChange={(e) =>
-                                                    handleAutoComplite(e)
-                                                }
-                                                onBlur={onSubmit}
-                                                onKeyDown={(e) =>
-                                                    e.key === "Enter"
-                                                        ? onSubmit()
-                                                        : ""
-                                                }
-                                            />
-                                        )}
-                                    />
-                                </ButtonGroup>
-                            </BottomBarItem>
-                            <BottomBarItem sx={{ ml: 2 }}>
-                                <Button
-                                    sx={{
-                                        color: ThemeMain.palette.primary.main,
-                                        borderColor:
-                                            ThemeMain.palette.primary.main,
-                                        width: "max-content",
-                                        mr: 1,
-                                        borderRadius: 8,
-                                    }}
-                                    variant="outlined"
-                                    onClick={() => {
-                                        jwttoken
-                                            ? navigate(ROUTES.STATUS_PRODUCT)
-                                            : handleLoginOpen();
-                                    }}
-                                >
-                                    <FormattedMessage id="status_order" />
-                                </Button>
-
-                                <IconButton
-                                    size="small"
-                                    sx={{ mr: 1 }}
-                                    onClick={() => {
-                                        jwttoken
-                                            ? handleFavoritesDrawerOpen()
-                                            : handleLoginOpen();
-                                    }}
-                                >
-                                    <FavoriteBorderIcon
-                                        sx={{ color: "#55CD61" }}
-                                        fontSize="large"
-                                    />
-                                </IconButton>
-                                <IconButton
-                                    size="small"
-                                    sx={{ mr: 0.5 }}
-                                    onClick={() => {
-                                        jwttoken
-                                            ? navigate(ROUTES.BASICINFORMATION)
-                                            : handleLoginOpen();
-                                    }}
-                                >
-                                    <AccountCircleIcon
-                                        sx={{ color: "#55CD61" }}
-                                        fontSize="large"
-                                    />
-                                </IconButton>
-                                <MenuItem
-                                    onClick={() => {
-                                        jwttoken
-                                            ? navigate(ROUTES.BASKET)
-                                            : handleLoginOpen();
-                                    }}
-                                >
-                                    <img src="/img/Frame954.png" />
-                                </MenuItem>
-                            </BottomBarItem>
-                        </BottomBar>
+                        <Bottom
+                            handleDrawerOpen={handleDrawerOpen}
+                            handleFavoritesDrawerOpen={
+                                handleFavoritesDrawerOpen
+                            }
+                            handleLoginOpen={handleLoginOpen}
+                            setLoading={setLoading}
+                        />
                     </Main>
                 </DesktopWrapper>
                 {loading ? <LinearProgress /> : ""}

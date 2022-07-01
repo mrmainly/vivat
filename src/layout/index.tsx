@@ -16,7 +16,7 @@ const Layout = () => {
         };
         setResponsiveness();
         window.addEventListener("resize", () => setResponsiveness());
-    }, []);
+    }, [window.innerWidth]);
 
     return (
         <div style={{ overflow: "hidden" }}>

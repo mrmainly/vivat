@@ -113,12 +113,10 @@ const MobileDown = () => {
                 const newData = res.data.map((item: any) => {
                     return item.name;
                 });
-                console.log("newData", newData);
                 handleAutoCompliteData(newData);
             })
             .catch((error) => console.log(error));
     };
-    console.log(searchStatus);
     return (
         <MobileBox>
             {loading ? <LinearProgress /> : ""}

@@ -112,7 +112,6 @@ const ProductPage = () => {
             setLoading(true);
             await API.getProductsList(id, currentPage, formState, sort)
                 .then((res) => {
-                    console.log(res);
                     if (res.data.results) {
                         setData(res.data.results);
                     } else {

@@ -115,7 +115,11 @@ const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
                             </TableRow>
                         ))
                     ) : (
-                        <Box sx={{ p: 2 }}>Нету данных</Box>
+                        <TableRow>
+                            <TableCell scope="row" align="center">
+                                Нету данных
+                            </TableCell>
+                        </TableRow>
                     )}
                 </TableBody>
             </Table>
