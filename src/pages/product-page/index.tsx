@@ -65,6 +65,7 @@ const initialFormState = {
     min_price: "",
     max_price: "",
     producer: "",
+    return_default_filter: false,
 };
 
 const formReducer = (state: any, action: any) => {
@@ -106,22 +107,27 @@ const ProductPage = () => {
             setTimeout(backToTop, 0);
         }
     }
+    const getProducts = async (reverse?: any) => {
+        setLoading(true);
+        await API.getProductsList(
+            id,
+            currentPage,
+            reverse ? "" : formState,
+            sort
+        )
+            .then((res) => {
+                if (res.data.results) {
+                    setData(res.data.results);
+                } else {
+                    setData(res.data);
+                }
+                setCount(res.data.count);
+            })
+            .catch((error) => console.log(error));
+        setLoading(false);
+    };
 
     useEffect(() => {
-        const getProducts = async () => {
-            setLoading(true);
-            await API.getProductsList(id, currentPage, formState, sort)
-                .then((res) => {
-                    if (res.data.results) {
-                        setData(res.data.results);
-                    } else {
-                        setData(res.data);
-                    }
-                    setCount(res.data.count);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
         getProducts();
     }, [currentPage, id, stateContext.favorite_status.status, formState, sort]);
 
@@ -162,6 +168,7 @@ const ProductPage = () => {
                         setOpen={setDrawerOpen}
                         formState={formState}
                         formDispatch={formDispatch}
+                        getProducts={getProducts}
                     />
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>

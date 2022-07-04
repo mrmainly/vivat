@@ -14,20 +14,15 @@ export const translationStatus = (name: any) => {
             return "Завершен";
         case "REJECTED":
             return "‘Отклонен’";
-        default:
-            throw new Error();
     }
 };
 
 export const translationDelivery = (name: any) => {
     switch (name) {
         case "DELIVARY":
-            return "Самовызов";
-        case "PICKUP":
             return "Доставка курьером";
-
-        default:
-            throw new Error();
+        case "PICKUP":
+            return "Самовызов ";
     }
 };
 
@@ -37,8 +32,5 @@ export const translationPayment = (name: any) => {
             return "картой онляйн при получении";
         case "CASH":
             return "Наличными при получении";
-
-        default:
-            throw new Error();
     }
 };

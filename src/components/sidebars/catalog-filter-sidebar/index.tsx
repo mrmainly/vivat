@@ -13,6 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { MyText, BorderLine, MyButton, Form } from "../..";
 import ThemeMain from "../../../theme";
+import Body from "./components/Body";
 
 const Main = styled(Box)(({ theme }) => ({
     background: "white",
@@ -28,6 +29,7 @@ interface CatalogFilterSideBarProps {
     setOpen: any;
     formState: any;
     formDispatch: any;
+    getProducts: any;
 }
 
 const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
@@ -35,11 +37,9 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
     formDispatch,
     open,
     setOpen,
+    getProducts,
 }) => {
     const [drawerState, setDrawerState] = useState(true);
-    const [minPrice, setMinPrice] = useState("");
-    const [maxPrice, setMaxPrice] = useState("");
-    const [producer, setProducer] = useState("");
 
     React.useEffect(() => {
         function handleResize() {
@@ -54,21 +54,6 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
         window.addEventListener("resize", handleResize);
     }, []);
 
-    const handleCheckbox = (e: any) => {
-        formDispatch({
-            type: "checkbox",
-            field: e.target.name,
-            payload: e.target.checked,
-        });
-    };
-
-    const handleInput = (value: any, name: string) => {
-        formDispatch({
-            type: "input",
-            payload: { value: value, name: name },
-        });
-    };
-
     return (
         <>
             {drawerState ? (
@@ -79,206 +64,22 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                         onClose: () => setOpen(false),
                     }}
                 >
-                    <Main>
-                        <Box
-                            sx={{
-                                p: 2,
-                                display: "flex",
-                                flexDirection: "column",
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <MyText variant="h6">Фильтр</MyText>
-                                <IconButton onClick={() => setOpen(false)}>
-                                    <CloseIcon
-                                        sx={{
-                                            color: ThemeMain.palette.primary
-                                                .main,
-                                        }}
-                                        fontSize="large"
-                                    />
-                                </IconButton>
-                            </Box>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={formState.ordering_qty}
-                                        name="ordering_qty"
-                                        onChange={(e) => handleCheckbox(e)}
-                                    />
-                                }
-                                label="Наличие товара"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={formState.notRecept}
-                                        name="notRecept"
-                                        onChange={(e) => handleCheckbox(e)}
-                                    />
-                                }
-                                label="Без рецепта"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={formState.jnvls}
-                                        name="jnvls"
-                                        onChange={(e) => handleCheckbox(e)}
-                                    />
-                                }
-                                label="ЖНВЛП"
-                            />
-                        </Box>
-                        <BorderLine sx={{ mt: "-5px" }} />
-                        <Box sx={{ padding: 2 }}>
-                            <MyText variant="h6">Цена, ₽</MyText>
-                            <Box>
-                                <TextField
-                                    label="Начало цены"
-                                    size="small"
-                                    sx={{ mt: 2, width: "100%" }}
-                                    type="number"
-                                    value={minPrice}
-                                    onChange={(e) =>
-                                        setMinPrice(e.target.value)
-                                    }
-                                    onBlur={() => {
-                                        handleInput(minPrice, "min_price");
-                                    }}
-                                />
-                                <TextField
-                                    label="Конец цены"
-                                    size="small"
-                                    sx={{ mt: 2, width: "100%" }}
-                                    type="number"
-                                    value={maxPrice}
-                                    onChange={(e) =>
-                                        setMaxPrice(e.target.value)
-                                    }
-                                    onBlur={() => {
-                                        handleInput(maxPrice, "max_price");
-                                    }}
-                                />
-                            </Box>
-                        </Box>
-                        <BorderLine />
-                        <Box sx={{ p: 2 }}>
-                            <MyText variant="h6">Бренды</MyText>
-                            <TextField
-                                label="Название бренда"
-                                size="small"
-                                sx={{ mt: 2, width: "100%", pb: 1 }}
-                                value={producer}
-                                onChange={(e) => setProducer(e.target.value)}
-                                onBlur={() => {
-                                    handleInput(producer, "producer");
-                                }}
-                            />
-                        </Box>
-                    </Main>
+                    <Body
+                        formState={formState}
+                        formDispatch={formDispatch}
+                        open={open}
+                        setOpen={setOpen}
+                        getProducts={getProducts}
+                    />
                 </Drawer>
             ) : (
-                <Main>
-                    <Box
-                        sx={{ p: 2, display: "flex", flexDirection: "column" }}
-                    >
-                        <MyText variant="h6">Фильтр</MyText>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={formState.ordering_qty}
-                                    name="ordering_qty"
-                                    onChange={(e) => handleCheckbox(e)}
-                                />
-                            }
-                            label="Наличие товара"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={formState.notRecept}
-                                    name="notRecept"
-                                    onChange={(e) => handleCheckbox(e)}
-                                />
-                            }
-                            label="Без рецепта"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={formState.jnvls}
-                                    name="jnvls"
-                                    onChange={(e) => handleCheckbox(e)}
-                                />
-                            }
-                            label="ЖНВЛП"
-                        />
-                    </Box>
-                    <BorderLine sx={{ mt: "-5px" }} />
-                    <Box sx={{ padding: 2 }}>
-                        <MyText variant="h6">Цена, ₽</MyText>
-                        <Box>
-                            <TextField
-                                label="Начало цены"
-                                size="small"
-                                sx={{ mt: 2, width: "100%" }}
-                                type="number"
-                                value={minPrice}
-                                onChange={(e) => setMinPrice(e.target.value)}
-                                onBlur={() => {
-                                    handleInput(minPrice, "min_price");
-                                }}
-                                onKeyDown={(e) =>
-                                    e.key === "Enter"
-                                        ? handleInput(minPrice, "min_price")
-                                        : ""
-                                }
-                            />
-                            <TextField
-                                label="Конец цены"
-                                size="small"
-                                sx={{ mt: 2, width: "100%" }}
-                                type="number"
-                                value={maxPrice}
-                                onChange={(e) => setMaxPrice(e.target.value)}
-                                onBlur={() => {
-                                    handleInput(maxPrice, "max_price");
-                                }}
-                                onKeyDown={(e) =>
-                                    e.key === "Enter"
-                                        ? handleInput(maxPrice, "max_price")
-                                        : ""
-                                }
-                            />
-                        </Box>
-                    </Box>
-                    <BorderLine />
-                    <Box sx={{ p: 2 }}>
-                        <MyText variant="h6">Бренды</MyText>
-                        <TextField
-                            label="Название бренда"
-                            size="small"
-                            sx={{ mt: 2, width: "100%", pb: 1 }}
-                            value={producer}
-                            onChange={(e) => setProducer(e.target.value)}
-                            onBlur={() => {
-                                handleInput(producer, "producer");
-                            }}
-                            onKeyDown={(e) =>
-                                e.key === "Enter"
-                                    ? handleInput(producer, "producer")
-                                    : ""
-                            }
-                        />
-                    </Box>
-                </Main>
+                <Body
+                    formState={formState}
+                    formDispatch={formDispatch}
+                    open={open}
+                    setOpen={setOpen}
+                    getProducts={getProducts}
+                />
             )}
         </>
     );

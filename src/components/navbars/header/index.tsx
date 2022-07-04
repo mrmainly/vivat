@@ -1,34 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
-import {
-    AppBar,
-    MenuItem,
-    Box,
-    IconButton,
-    Container,
-    TextField,
-    Grid,
-    Button,
-    LinearProgress,
-    Autocomplete,
-    ButtonGroup,
-    Drawer,
-    FormControl,
-    InputLabel,
-    Select,
-    Badge,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { AppBar, Box, Container, LinearProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import cookie from "js-cookie";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { FormattedMessage } from "react-intl";
 
-import ThemeMain from "../../../theme";
 import {
     MyText,
     MyDrawer,
@@ -38,14 +13,11 @@ import {
     SignInModal,
     SignUpModal,
     ForgotPasswordModal,
-    Form,
 } from "../..";
-import { StateContext } from "../../../store";
-import ROUTES from "../../../routes";
-import API from "../../../api";
 import Top from "./components/Top";
 import Middle from "./components/Middle";
 import Bottom from "./components/Bottom";
+import API from "../../../api";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -58,43 +30,6 @@ const Main = styled(Box)(({ theme }) => ({
 const DesktopWrapper = styled(Container)(({ theme }) => ({
     [theme.breakpoints.down("md")]: {
         display: "none",
-    },
-}));
-
-const TopBar = styled(Box)(({ theme }) => ({
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    marginTop: 5,
-}));
-
-const TopBarItem = styled(Box)(({ theme }) => ({
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-}));
-
-const BottomBar = styled(Box)(({ theme }) => ({
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    padding: 5,
-}));
-
-const BottomBarItem = styled(Box)(({ theme }) => ({
-    display: "flex",
-}));
-
-const GridMidle = styled(Grid)(({ theme }) => ({
-    display: "flex",
-}));
-
-const StyledBadge = styled(Badge)(({ theme }) => ({
-    "& .MuiBadge-badge": {
-        // background: ThemeMain.palette.primary.main,
-        color: ThemeMain.palette.primary.main,
     },
 }));
 
@@ -112,9 +47,7 @@ const Header = () => {
     });
 
     const jwttoken = cookie.get("jwttoken");
-    const stateContext = useContext(StateContext);
 
-    const navigate = useNavigate();
     const {
         drawerOpen,
         drawerProfileOpen,
@@ -123,10 +56,6 @@ const Header = () => {
         registerModal,
         forgot,
     } = state;
-
-    const { register, handleSubmit, control } = useForm({
-        mode: "onBlur",
-    });
 
     const handleDrawerClose = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: false }));
@@ -158,8 +87,15 @@ const Header = () => {
     const handleForgotOpen = () =>
         setState((prevState) => ({ ...prevState, forgot: true }));
 
-    const handleAutoCompliteData = (data: any) =>
-        setState((prevState) => ({ ...prevState, AutoCompliteData: data }));
+    useEffect(() => {
+        API.getCartsList()
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     return (
         <>
