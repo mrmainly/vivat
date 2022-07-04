@@ -30,7 +30,6 @@ interface CatalogFilterSideBarProps {
     setOpen: any;
     formState: any;
     formDispatch: any;
-    getProducts: any;
 }
 
 const Body: React.FC<CatalogFilterSideBarProps> = ({
@@ -38,7 +37,6 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
     formDispatch,
     open,
     setOpen,
-    getProducts,
 }) => {
     const [minPrice, setMinPrice] = useState("");
     const [maxPrice, setMaxPrice] = useState("");

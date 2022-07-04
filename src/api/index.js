@@ -169,6 +169,11 @@ class API {
         return result;
     }
 
+    async getProducerList(id) {
+        let result = await api(`api/v1/goods/producer_list/1`).get();
+        return result;
+    }
+
     getAddressAutoComplete(address) {
         let result = api(
             `api/v1/payments/gogo/autocomplete?address=${address}`

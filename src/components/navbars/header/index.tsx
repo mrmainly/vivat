@@ -87,15 +87,15 @@ const Header = () => {
     const handleForgotOpen = () =>
         setState((prevState) => ({ ...prevState, forgot: true }));
 
-    useEffect(() => {
-        API.getCartsList()
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     API.getCartsList()
+    //         .then((res) => {
+    //             console.log(res);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // }, []);
 
     return (
         <>

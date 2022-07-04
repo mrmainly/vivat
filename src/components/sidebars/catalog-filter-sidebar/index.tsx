@@ -29,7 +29,6 @@ interface CatalogFilterSideBarProps {
     setOpen: any;
     formState: any;
     formDispatch: any;
-    getProducts: any;
 }
 
 const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
@@ -37,7 +36,6 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
     formDispatch,
     open,
     setOpen,
-    getProducts,
 }) => {
     const [drawerState, setDrawerState] = useState(true);
 
@@ -69,7 +67,6 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                         formDispatch={formDispatch}
                         open={open}
                         setOpen={setOpen}
-                        getProducts={getProducts}
                     />
                 </Drawer>
             ) : (
@@ -78,7 +75,6 @@ const CatalogFilterSideBar: React.FC<CatalogFilterSideBarProps> = ({
                     formDispatch={formDispatch}
                     open={open}
                     setOpen={setOpen}
-                    getProducts={getProducts}
                 />
             )}
         </>
