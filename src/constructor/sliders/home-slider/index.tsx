@@ -51,7 +51,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                                 background: `url(http://xn----7sbbagaytx2c4ad.xn--p1ai${item.banner_image})`,
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover",
-                                backgroundPosition: "center",
+                                backgroundPosition: "left",
                             }}
                         >
                             <Button
@@ -68,7 +68,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                                     )
                                 }
                             >
-                                Купить
+                                Посмотреть
                             </Button>
                         </HomeSliderBox>
                     </Box>
