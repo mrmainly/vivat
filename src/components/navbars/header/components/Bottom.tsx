@@ -107,7 +107,7 @@ const Bottom: React.FC<BottomProps> = ({
                     console.log(error);
                 });
         }
-    }, [basketStatus.basket.status]);
+    }, [basketStatus.basket.status, jwttoken]);
 
     return (
         <BottomBar>

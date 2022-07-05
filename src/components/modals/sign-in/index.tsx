@@ -136,6 +136,12 @@ const SignIn: React.FC<SignModalProps> = ({
                 cookie.set("jwttoken", res.data.token);
                 setLoginClose();
                 navigate(ROUTES.BASICINFORMATION);
+                dispatch({
+                    type: "basket",
+                    payload: {
+                        status: state.basket.status + 1,
+                    },
+                });
             })
             .catch((error) => {
                 toast.error("такого пользователя не существует");
