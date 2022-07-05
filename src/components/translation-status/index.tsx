@@ -22,7 +22,7 @@ export const translationDelivery = (name: any) => {
         case "DELIVARY":
             return "Доставка курьером";
         case "PICKUP":
-            return "Самовызов ";
+            return "Самовывоз ";
     }
 };
 
