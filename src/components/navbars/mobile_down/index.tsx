@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import {
     Box,
@@ -6,6 +6,7 @@ import {
     TextField,
     Button,
     LinearProgress,
+    Badge,
     Autocomplete,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -15,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-import ThemeMain from "../../../theme";
 import MyContainer from "../../container";
 import {
     FavoritesDrawer,
@@ -26,6 +26,7 @@ import {
 } from "../..";
 import ROUTES from "../../../routes";
 import API from "../../../api";
+import { DispatchContext, StateContext } from "../../../store";
 
 const MobileBox = styled(Box)(({ theme }) => ({
     display: "none",
@@ -39,6 +40,14 @@ const MobileBox = styled(Box)(({ theme }) => ({
         width: "100%",
         zIndex: 1,
     },
+}));
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+        background: "red",
+        color: "white",
+    },
+    marginRight: 10,
 }));
 
 const SearchBox = styled(Autocomplete)(({ theme }) => ({
@@ -56,6 +65,7 @@ const MobileDown = () => {
     const [searchStatus, setSearchStatus] = useState(false);
     const [loading, setLoading] = useState(false);
     const [searchValue, setSearchValue] = useState("");
+    const [basketCount, setBasketCount] = useState(0);
 
     const [state, setState] = useState({
         login: false,
@@ -88,6 +98,8 @@ const MobileDown = () => {
 
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
+    const dispatch = useContext(DispatchContext);
+    const basketStatus = useContext(StateContext);
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });
@@ -117,6 +129,19 @@ const MobileDown = () => {
             })
             .catch((error) => console.log(error));
     };
+
+    useEffect(() => {
+        if (jwttoken) {
+            API.getCartsList()
+                .then((res) => {
+                    setBasketCount(res.data.total_qnt);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [basketStatus.basket.status, jwttoken]);
+
     return (
         <MobileBox>
             {loading ? <LinearProgress /> : ""}
@@ -151,6 +176,7 @@ const MobileDown = () => {
                     >
                         <img src="/img/User_cicrle_light.png" />
                     </IconButton>
+
                     <IconButton
                         onClick={() => {
                             jwttoken
@@ -158,7 +184,9 @@ const MobileDown = () => {
                                 : handleLoginOpen();
                         }}
                     >
-                        <img src="/img/Bag_light.png" />
+                        <StyledBadge badgeContent={jwttoken ? basketCount : 0}>
+                            <img src="/img/Bag_light.png" />
+                        </StyledBadge>
                     </IconButton>
                 </Box>
             </MyContainer>
