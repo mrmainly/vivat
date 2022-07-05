@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { styled } from "@mui/system";
 import {
     Box,
@@ -18,11 +18,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import MenuIcon from "@mui/icons-material/Menu";
 import { toast } from "react-toastify";
+import { StateContext } from "../../../../store";
 
 import { MyText } from "../../..";
 import ROUTES from "../../../../routes";
-import { LOCALES } from "../../../../i18n/locales";
-import { LanguageContext } from "../../../../store";
 import ThemeMain from "../../../../theme";
 import API from "../../../../api";
 
@@ -44,9 +43,10 @@ const GridMidle = styled(Grid)(({ theme }) => ({
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
-        // background: ThemeMain.palette.primary.main,
-        color: ThemeMain.palette.primary.main,
+        background: "red",
+        color: "white",
     },
+    marginRight: 10,
 }));
 
 interface BottomProps {
@@ -63,11 +63,13 @@ const Bottom: React.FC<BottomProps> = ({
     setLoading,
 }) => {
     const [searchValue, setSearchValue] = useState("");
+    const [basketCount, setBasketCount] = useState(0);
 
     const [AutoCompliteData, setAutoCompliteData] = useState([]);
 
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
+    const basketStatus = useContext(StateContext);
 
     const onSubmit = async () => {
         setLoading(true);
@@ -94,6 +96,18 @@ const Bottom: React.FC<BottomProps> = ({
             })
             .catch((error) => console.log(error));
     };
+
+    useEffect(() => {
+        if (jwttoken) {
+            API.getCartsList()
+                .then((res) => {
+                    setBasketCount(res.data.total_qnt);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [basketStatus.basket.status]);
 
     return (
         <BottomBar>
@@ -199,18 +213,18 @@ const Bottom: React.FC<BottomProps> = ({
                         jwttoken ? navigate(ROUTES.BASKET) : handleLoginOpen();
                     }}
                 >
-                    <img src="/img/Bag_light.png" />
-
-                    <StyledBadge badgeContent={4}>
-                        <MyText
-                            variant="h6"
-                            sx={{
-                                color: ThemeMain.palette.primary.main,
-                            }}
-                        >
-                            Корзина
-                        </MyText>
+                    {" "}
+                    <StyledBadge badgeContent={jwttoken ? basketCount : 0}>
+                        <img src="/img/Bag_light.png" />
                     </StyledBadge>
+                    <MyText
+                        variant="h6"
+                        sx={{
+                            color: ThemeMain.palette.primary.main,
+                        }}
+                    >
+                        Корзина
+                    </MyText>
                 </MenuItem>
             </BottomBarItem>
         </BottomBar>

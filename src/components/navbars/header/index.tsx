@@ -33,7 +33,11 @@ const DesktopWrapper = styled(Container)(({ theme }) => ({
     },
 }));
 
-const Header = () => {
+interface HeaderProps {
+    basketCount?: number;
+}
+
+const Header: React.FC<HeaderProps> = () => {
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState({
         drawerOpen: false,
@@ -56,7 +60,6 @@ const Header = () => {
         registerModal,
         forgot,
     } = state;
-
     const handleDrawerClose = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: false }));
     const handleDrawerOpen = () =>

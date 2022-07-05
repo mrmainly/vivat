@@ -8,7 +8,7 @@ import { styled } from "@mui/system";
 import { BasketCard, MyText, MyButton } from "../../components";
 import API from "../../api";
 import ROUTES from "../../routes";
-import { StateContext } from "../../store";
+import { StateContext, DispatchContext } from "../../store";
 
 const ActionBox = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -59,6 +59,7 @@ const Basket = () => {
 
     const navigate = useNavigate();
     const basketStatus = useContext(StateContext);
+    const dispatch = useContext(DispatchContext);
 
     useEffect(() => {
         const getOrders = async () => {
@@ -66,8 +67,6 @@ const Basket = () => {
             await API.getCartsList()
                 .then((res: any) => {
                     console.log("basket", res);
-                    // setTotalCount(res.data.total_count);
-                    // setTotalPrice(res.data.total_price);
                     setData(res.data);
                 })
                 .catch((error) => console.log(error));
@@ -82,6 +81,12 @@ const Basket = () => {
             .then((res) => {
                 setStatus(`delete_all ${status + 1}`);
                 toast.success("Корзина удалена");
+                dispatch({
+                    type: "basket",
+                    payload: {
+                        status: basketStatus.basket.status + 1,
+                    },
+                });
             })
             .catch(() => toast.error("Что то пошло не так"));
     };

@@ -170,7 +170,7 @@ class API {
     }
 
     async getProducerList(id) {
-        let result = await api(`api/v1/goods/producer_list/1`).get();
+        let result = await api(`api/v1/goods/producer_list/${id}`).get();
         return result;
     }
 

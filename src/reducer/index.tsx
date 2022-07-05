@@ -18,6 +18,10 @@ export const stateReducer = (state: any, action: any) => {
             return { ...state, favorite_status: action.payload };
         case "basket":
             return { ...state, basket: action.payload };
+        case "basket_qnt":
+            return { ...state, basket_qnt: action.payload };
+        case "fav_qnt":
+            return { ...state, fav_qnt: action.payload };
         default:
             throw new Error();
     }

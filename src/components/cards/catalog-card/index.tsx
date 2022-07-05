@@ -94,6 +94,12 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
         API.transferBasket(id)
             .then((res) => {
                 toast.success("Товар добавлен в корзину");
+                dispatch({
+                    type: "basket",
+                    payload: {
+                        status: stateContext.basket.status + 1,
+                    },
+                });
             })
             .catch(() => toast.error("Товар не найден"));
     };

@@ -139,7 +139,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                         <MyText variant="h5" sx={{ mt: 3 }}>
                             {data?.name}
                         </MyText>
-                        {data.stocks.qty > 0 ? (
+                        {data?.stocks?.qty > 0 ? (
                             <MyText
                                 variant="body1"
                                 sx={{
@@ -209,7 +209,10 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                     fontFamily: "Montserrat",
                                 }}
                             >
-                                {data.stocks.priceSale} ₽
+                                {data?.stocks?.priceSale
+                                    ? data?.stocks?.priceSale
+                                    : "Нету цены"}{" "}
+                                ₽
                             </MyText>
                             {/* <MyText
                                 variant="h6"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Box, IconButton, Button, TextField, ButtonGroup } from "@mui/material";
 import { styled } from "@mui/system";
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { MyText } from "../..";
 import API from "../../../api";
 import ROUTES from "../../../routes";
+import { DispatchContext, StateContext } from "../../../store";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -119,6 +120,12 @@ const BasketCard: React.FC<BasketProps> = ({
             API.patchBasket(id, newCount)
                 .then((res) => {
                     setStatus(`delete_item_ ${status + 1}`);
+                    dispatch({
+                        type: "basket",
+                        payload: {
+                            status: basketStatus.basket.status + 1,
+                        },
+                    });
                 })
                 .catch((error) => {
                     toast.error(
@@ -129,12 +136,20 @@ const BasketCard: React.FC<BasketProps> = ({
     };
 
     const navigate = useNavigate();
+    const dispatch = useContext(DispatchContext);
+    const basketStatus = useContext(StateContext);
 
     const deleteProduct = () => {
         API.deleteProductItem(id)
             .then((res) => {
                 toast.success("Товар удален");
                 setStatus(`delete_item_ ${status + 1}`);
+                dispatch({
+                    type: "basket",
+                    payload: {
+                        status: basketStatus.basket.status + 1,
+                    },
+                });
             })
             .catch((err) => {
                 toast.error("Товар не удален");

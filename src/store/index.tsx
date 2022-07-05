@@ -32,6 +32,12 @@ export const defaultStore = {
     basket: {
         status: 0,
     },
+    basket_qnt: {
+        count: 0,
+    },
+    fav_qnt: {
+        count: 0,
+    },
 };
 
 export const StateContext = React.createContext({} as any);

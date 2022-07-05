@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
     Grid,
     FormControl,
@@ -25,6 +25,7 @@ import { MyText, Form, Input, MyButton, BorderLine } from "../../components";
 import ThemeMain from "../../theme";
 import API from "../../api";
 import ROUTES from "../../routes";
+import { DispatchContext, StateContext } from "../../store";
 
 const InfoBlog = styled(Box)(({ theme }) => ({
     boxShadow: " 0px 5px 10px rgba(0, 0, 0, 0.1)",
@@ -70,6 +71,8 @@ const BasketForm = () => {
     const [AutoCompliteData, setAutoCopliteData] = useState([]);
 
     const navigate = useNavigate();
+    const dispatch = useContext(DispatchContext);
+    const basketState = useContext(StateContext);
 
     useEffect(() => {
         const getOrders = async () => {
@@ -121,6 +124,12 @@ const BasketForm = () => {
         })
             .then((res) => {
                 toast.success("Заявка оформлена");
+                dispatch({
+                    type: "basket",
+                    payload: {
+                        status: basketState.basket.status + 1,
+                    },
+                });
                 res.data === "Success"
                     ? navigate(ROUTES.SUCCESS_PAYMENT)
                     : (window.location.href = res.data);
