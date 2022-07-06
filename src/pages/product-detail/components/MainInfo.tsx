@@ -227,12 +227,34 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                 {data.stocks.priceSale} ₽
                             </MyText> */}
                         </PriceBlog>
-                        <Box sx={{ display: "flex", color: "#FE5860", mt: 1 }}>
-                            <LocalShippingIcon />
-                            <MyText variant="body1" sx={{ ml: 2 }}>
-                                Нет доставки
-                            </MyText>
-                        </Box>
+                        {data?.esgood[0]?.notRecept ? (
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    mt: 1,
+                                    color: ThemeMain.palette.primary.main,
+                                }}
+                            >
+                                <LocalShippingIcon />
+                                <MyText variant="body1" sx={{ ml: 2 }}>
+                                    Доставка доступна
+                                </MyText>
+                            </Box>
+                        ) : (
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    mt: 1,
+                                    color: "#FE5860",
+                                }}
+                            >
+                                <LocalShippingIcon />
+
+                                <MyText variant="body1" sx={{ ml: 2 }}>
+                                    Нет доставки
+                                </MyText>
+                            </Box>
+                        )}
                         <Box sx={{ mt: 2 }}>
                             <MyButton
                                 onClick={() => {

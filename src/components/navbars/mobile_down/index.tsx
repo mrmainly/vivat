@@ -15,6 +15,7 @@ import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 import MyContainer from "../../container";
 import {
@@ -104,13 +105,14 @@ const MobileDown = () => {
         mode: "onBlur",
     });
 
-    const onSubmit = async () => {
+    const onSubmit = async (event: any, values: any) => {
         setLoading(true);
-        await API.productsSearch(searchValue)
+        await API.productsSearch(values)
             .then((res) => {
                 navigate(ROUTES.SEARCH_PAGE, {
-                    state: { data: res.data, title: searchValue },
+                    state: { data: res.data, title: values },
                 });
+                setSearchStatus(false);
             })
             .catch((error) => {
                 toast.error("error");
@@ -199,25 +201,23 @@ const MobileDown = () => {
                     }}
                 >
                     <SearchBox
-                        id="free-solo-demo"
+                        id="free-solo-2-demo"
                         freeSolo
                         size="small"
                         options={AutoCompliteData}
                         onInputChange={(event, newInputValue) =>
-                            setSearchValue(newInputValue)
+                            handleAutoComplite(event)
                         }
+                        onChange={onSubmit}
                         renderInput={(params) => (
                             <TextField
                                 variant="outlined"
-                                label="Поиск лекарства"
-                                {...params}
-                                fullWidth
-                                value={searchValue}
-                                onChange={(e) => handleAutoComplite(e)}
-                                onBlur={onSubmit}
-                                onKeyDown={(e) =>
-                                    e.key === "Enter" ? onSubmit() : ""
+                                label={
+                                    <FormattedMessage id="search_medicine" />
                                 }
+                                {...params}
+                                value={searchValue}
+                                // onBlur={onSubmit}
                             />
                         )}
                     />
