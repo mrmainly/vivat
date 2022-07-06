@@ -4,17 +4,12 @@ import {
     Checkbox,
     FormControlLabel,
     TextField,
-    Drawer,
-    IconButton,
-    Radio,
-    FormControl,
-    RadioGroup,
-    FormLabel,
+    Slider,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
-import { MyText, BorderLine, MyButton, Form } from "../../..";
+import { MyText, BorderLine } from "../../..";
 
 const Main = styled(Box)(({ theme }) => ({
     background: "white",
@@ -23,6 +18,11 @@ const Main = styled(Box)(({ theme }) => ({
     [theme.breakpoints.down("md")]: {
         width: 300,
     },
+}));
+
+const InputNumber = styled(TextField)(({ theme }) => ({
+    marginTop: 2,
+    width: "100%",
 }));
 
 interface CatalogFilterSideBarProps {
@@ -38,9 +38,10 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
     open,
     setOpen,
 }) => {
-    const [minPrice, setMinPrice] = useState("");
-    const [maxPrice, setMaxPrice] = useState("");
+    const [minPrice, setMinPrice] = useState(formState.min_price);
+    const [maxPrice, setMaxPrice] = useState(formState.max_price);
     const [producer, setProducer] = useState("");
+    const [value, setValue] = useState([23, 37]);
 
     const navigate = useNavigate();
 
@@ -59,6 +60,12 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
             type: "input",
             payload: { value: value, name: name },
         });
+    };
+    const handleChange = (event: Event, newValue: any | number[]) => {
+        // setMinPrice(newValue[0]);
+        // setMaxPrice(newValue[1]);
+        // console.log(minPrice);
+        // console.log(newValue[1] as number[]);
     };
     return (
         <Main>
@@ -108,38 +115,58 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
             <BorderLine sx={{ mt: "-5px" }} />
             <Box sx={{ padding: 2 }}>
                 <MyText variant="body1">Цена, ₽</MyText>
-                <Box>
-                    <TextField
-                        label="Начало цены"
-                        size="small"
-                        sx={{ mt: 2, width: "100%" }}
-                        type="number"
-                        value={minPrice}
-                        onChange={(e) => setMinPrice(e.target.value)}
-                        onBlur={() => {
-                            handleInput(minPrice, "min_price");
-                        }}
-                        onKeyDown={(e) =>
-                            e.key === "Enter"
-                                ? handleInput(minPrice, "min_price")
-                                : ""
-                        }
-                    />
-                    <TextField
-                        label="Конец цены"
-                        size="small"
-                        sx={{ mt: 2, width: "100%" }}
-                        type="number"
-                        value={maxPrice}
-                        onChange={(e) => setMaxPrice(e.target.value)}
-                        onBlur={() => {
-                            handleInput(maxPrice, "max_price");
-                        }}
-                        onKeyDown={(e) =>
-                            e.key === "Enter"
-                                ? handleInput(maxPrice, "max_price")
-                                : ""
-                        }
+                <Box sx={{ mt: 1 }}>
+                    <Box sx={{ display: "flex" }}>
+                        <InputNumber
+                            size="small"
+                            type="number"
+                            variant="outlined"
+                            label="Мин"
+                            value={minPrice}
+                            onChange={(e) => setMinPrice(e.target.value)}
+                            inputProps={{
+                                min: 0,
+                                style: { textAlign: "center" },
+                            }}
+                            onBlur={() => {
+                                handleInput(minPrice, "min_price");
+                            }}
+                            sx={{ mr: 0.5 }}
+                            onKeyDown={(e) =>
+                                e.key === "Enter"
+                                    ? handleInput(minPrice, "min_price")
+                                    : ""
+                            }
+                        />
+                        <InputNumber
+                            size="small"
+                            type="number"
+                            label="Макс"
+                            variant="outlined"
+                            value={maxPrice}
+                            onChange={(e) => setMaxPrice(e.target.value)}
+                            inputProps={{
+                                min: 0,
+                                style: { textAlign: "center" },
+                            }}
+                            sx={{ ml: 0.5 }}
+                            onBlur={() => {
+                                handleInput(maxPrice, "max_price");
+                            }}
+                            onKeyDown={(e) =>
+                                e.key === "Enter"
+                                    ? handleInput(maxPrice, "max_price")
+                                    : ""
+                            }
+                        />
+                    </Box>
+                    <Slider
+                        sx={{ mt: 2, marginBottom: "-15px" }}
+                        defaultValue={[minPrice, maxPrice]}
+                        valueLabelDisplay="auto"
+                        onChange={handleChange}
+                        max={maxPrice}
+                        // getAriaValueText={valuetext}
                     />
                 </Box>
             </Box>

@@ -62,8 +62,8 @@ const initialFormState = {
     notRecept: false,
     jnvls: false,
     ordering_qty: false,
-    min_price: "",
-    max_price: "",
+    min_price: 3.8,
+    max_price: 4864,
     producer: "",
 };
 
