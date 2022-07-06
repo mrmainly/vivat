@@ -176,7 +176,6 @@ const MobileDown = () => {
                     >
                         <img src="/img/User_cicrle_light.png" />
                     </IconButton>
-
                     <IconButton
                         onClick={() => {
                             jwttoken

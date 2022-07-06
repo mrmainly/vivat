@@ -231,8 +231,8 @@ const BasketForm = () => {
                                     margin="normal"
                                 />
                                 <Autocomplete
-                                    id="free-solo-demo"
                                     freeSolo
+                                    id="free-solo-2-demo"
                                     fullWidth
                                     sx={{
                                         opacity:
@@ -241,17 +241,15 @@ const BasketForm = () => {
                                     disabled={delivery != "DELIVERY"}
                                     options={AutoCompliteData}
                                     onInputChange={(event, newInputValue) =>
-                                        setMyAddress(newInputValue)
+                                        handleAutoComplite(event)
                                     }
+                                    onChange={getCost}
                                     renderInput={(params) => (
                                         <InputProfile
                                             label="Адрес"
                                             margin="normal"
                                             {...params}
                                             value={myAddress}
-                                            onChange={(e) =>
-                                                handleAutoComplite(e)
-                                            }
                                         />
                                     )}
                                 />

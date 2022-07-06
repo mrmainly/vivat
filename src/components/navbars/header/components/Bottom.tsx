@@ -71,12 +71,12 @@ const Bottom: React.FC<BottomProps> = ({
     const jwttoken = cookie.get("jwttoken");
     const basketStatus = useContext(StateContext);
 
-    const onSubmit = async () => {
+    const onSubmit = async (event: any, values: any) => {
         setLoading(true);
-        await API.productsSearch(searchValue)
+        await API.productsSearch(values)
             .then((res) => {
                 navigate(ROUTES.SEARCH_PAGE, {
-                    state: { data: res.data, title: searchValue },
+                    state: { data: res.data, title: values },
                 });
             })
             .catch((error) => {
@@ -102,6 +102,7 @@ const Bottom: React.FC<BottomProps> = ({
             API.getCartsList()
                 .then((res) => {
                     setBasketCount(res.data.total_qnt);
+                    console.log("effect");
                 })
                 .catch((error) => {
                     console.log(error);
@@ -134,13 +135,14 @@ const Bottom: React.FC<BottomProps> = ({
                 <ButtonGroup sx={{ width: "100%" }}>
                     <Autocomplete
                         sx={{ width: "100%" }}
-                        id="free-solo-demo"
+                        id="free-solo-2-demo"
                         freeSolo
                         size="small"
                         options={AutoCompliteData}
                         onInputChange={(event, newInputValue) =>
-                            setSearchValue(newInputValue)
+                            handleAutoComplite(event)
                         }
+                        onChange={onSubmit}
                         renderInput={(params) => (
                             <TextField
                                 variant="outlined"
@@ -150,11 +152,7 @@ const Bottom: React.FC<BottomProps> = ({
                                 {...params}
                                 fullWidth
                                 value={searchValue}
-                                onChange={(e) => handleAutoComplite(e)}
-                                onBlur={onSubmit}
-                                onKeyDown={(e) =>
-                                    e.key === "Enter" ? onSubmit() : ""
-                                }
+                                // onBlur={onSubmit}
                             />
                         )}
                     />
