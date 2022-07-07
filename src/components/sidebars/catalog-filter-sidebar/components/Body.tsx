@@ -41,9 +41,9 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
     const [minPrice, setMinPrice] = useState(formState.min_price);
     const [maxPrice, setMaxPrice] = useState(formState.max_price);
     const [producer, setProducer] = useState("");
-    const [value, setValue] = useState([23, 37]);
 
     const navigate = useNavigate();
+    const minDistance = 10;
 
     const handleCheckbox = (e: any, type: string) => {
         formDispatch({
@@ -51,8 +51,6 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
             field: e.target.name,
             payload: type === "radio" ? e.target.value : e.target.checked,
         });
-        // console.log("tar4get", e.target.name);
-        // console.log("tar4get value", e.target.value);
     };
 
     const handleInput = (value: any, name: string) => {
@@ -61,11 +59,21 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
             payload: { value: value, name: name },
         });
     };
-    const handleChange = (event: Event, newValue: any | number[]) => {
-        // setMinPrice(newValue[0]);
-        // setMaxPrice(newValue[1]);
-        // console.log(minPrice);
-        // console.log(newValue[1] as number[]);
+    const handleChange = (event: Event, newValue: any | number[], activeThumb: any) => {
+        if (!Array.isArray(newValue)) {
+            return;
+          }
+
+        if(activeThumb === 0) {
+            // setMinPrice(newValue[0]);
+            setMinPrice(Math.min(newValue[0], maxPrice - minDistance));
+        } else {
+            setMaxPrice(Math.max(newValue[1], minPrice + minDistance));
+        }
+    };
+    const handleChange1 = (activeThumb: any) => {
+        handleInput(minPrice, "min_price");
+        handleInput(maxPrice, "max_price")
     };
     return (
         <Main>
@@ -123,7 +131,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             variant="outlined"
                             label="Мин"
                             value={minPrice}
-                            onChange={(e) => setMinPrice(e.target.value)}
+                            onChange={(e) => setMinPrice(Math.min(Number(e.target.value), maxPrice - minDistance))}
                             inputProps={{
                                 min: 0,
                                 style: { textAlign: "center" },
@@ -144,7 +152,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             label="Макс"
                             variant="outlined"
                             value={maxPrice}
-                            onChange={(e) => setMaxPrice(e.target.value)}
+                            onChange={(e) => setMaxPrice(Math.max(Number(e.target.value), minPrice + minDistance))}
                             inputProps={{
                                 min: 0,
                                 style: { textAlign: "center" },
@@ -162,10 +170,13 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                     </Box>
                     <Slider
                         sx={{ mt: 2, marginBottom: "-15px" }}
-                        defaultValue={[minPrice, maxPrice]}
+                        defaultValue={[3.8, 4864]}
+                        value={[minPrice, maxPrice]}
                         valueLabelDisplay="auto"
                         onChange={handleChange}
-                        max={maxPrice}
+                        max={15000}
+                        onChangeCommitted={handleChange1}
+                
                         // getAriaValueText={valuetext}
                     />
                 </Box>
@@ -188,15 +199,6 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             : ""
                     }
                 />
-                {/* <MyButton
-                    style={{ marginTop: 10 }}
-                    variant="contained"
-                    onClick={() => {
-                        getProducts("reverse");
-                    }}
-                >
-                    Сбросить фильтры
-                </MyButton> */}
             </Box>
         </Main>
     );

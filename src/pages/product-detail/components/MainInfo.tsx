@@ -8,6 +8,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
+
 import { MyText, MyButton } from "../../../components";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ThemeMain from "../../../theme";
@@ -74,6 +75,12 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
         API.transferBasket(data.id)
             .then((res) => {
                 toast.success("Товар добавлен в корзину");
+                dispatch({
+                    type: "basket",
+                    payload: {
+                        status: state.basket.status + 1,
+                    },
+                });
             })
             .catch((error) => {
                 toast.error("Товар не найден");

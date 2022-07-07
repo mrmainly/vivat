@@ -143,6 +143,7 @@ const Bottom: React.FC<BottomProps> = ({
                             handleAutoComplite(event)
                         }
                         onChange={onSubmit}
+                        
                         renderInput={(params) => (
                             <TextField
                                 variant="outlined"
@@ -152,7 +153,7 @@ const Bottom: React.FC<BottomProps> = ({
                                 {...params}
                                 fullWidth
                                 value={searchValue}
-                                // onBlur={onSubmit}
+                               
                             />
                         )}
                     />
