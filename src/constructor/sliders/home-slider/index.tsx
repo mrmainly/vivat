@@ -12,6 +12,18 @@ interface HomeSliderProps {
     data?: any;
 }
 
+const BottomCustom = styled(Button)(({ theme }) => ({
+    marginBottom: "50px",
+    background: "#e2211c",
+    fontSize: 20,
+
+    [theme.breakpoints.down("sm")]: {
+        fontSize: 10,
+        padding: "4px 11px",
+        marginBottom: "10px",
+    },
+}));
+
 const HomeSliderBox = styled(Box)(({ theme }) => ({
     height: 500,
     borderRadius: 10,
@@ -54,13 +66,8 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                                 backgroundPosition: "left",
                             }}
                         >
-                            <Button
+                            <BottomCustom
                                 variant="contained"
-                                sx={{
-                                    mb: 5,
-                                    background: "#e2211c",
-                                    fontSize: 20,
-                                }}
                                 size="large"
                                 onClick={() =>
                                     navigate(
@@ -69,7 +76,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                                 }
                             >
                                 Посмотреть
-                            </Button>
+                            </BottomCustom>
                         </HomeSliderBox>
                     </Box>
                 ))}
