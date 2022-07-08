@@ -16,11 +16,12 @@ import { useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from "@mui/icons-material/Menu";
 import { toast } from "react-toastify";
 import { StateContext } from "../../../../store";
 
-import { MyText } from "../../..";
+import { MyText, MyButton } from "../../..";
 import ROUTES from "../../../../routes";
 import ThemeMain from "../../../../theme";
 import API from "../../../../api";
@@ -37,16 +38,29 @@ const BottomBarItem = styled(Box)(({ theme }) => ({
     display: "flex",
 }));
 
-const GridMidle = styled(Grid)(({ theme }) => ({
-    display: "flex",
-}));
-
 const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
         background: "red",
         color: "white",
     },
     marginRight: 10,
+}));
+
+const CustomTextField = styled(TextField)(({ theme }) => ({
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderTopRightRadius: 0,
+            borderEndEndRadius: 0
+        },
+    },
+}));
+
+const CustomButton = styled(Button)(({ theme }) => ({
+    backgroundColor: ThemeMain.palette.primary.main, color: 'white', borderTopLeftRadius: 0, borderEndStartRadius: 0,
+    '&:hover': {
+        color: ThemeMain.palette.primary.main,
+        borderColor: ThemeMain.palette.primary.main
+    },
 }));
 
 interface BottomProps {
@@ -71,12 +85,12 @@ const Bottom: React.FC<BottomProps> = ({
     const jwttoken = cookie.get("jwttoken");
     const basketStatus = useContext(StateContext);
 
-    const onSubmit = async (event: any, values: any) => {
+    const onSubmit = async () => {
         setLoading(true);
-        await API.productsSearch(values)
+        await API.productsSearch(searchValue)
             .then((res) => {
                 navigate(ROUTES.SEARCH_PAGE, {
-                    state: { data: res.data, title: values },
+                    state: { data: res.data, title: searchValue },
                 });
             })
             .catch((error) => {
@@ -85,9 +99,9 @@ const Bottom: React.FC<BottomProps> = ({
         setLoading(false);
     };
 
-    const handleAutoComplite = (e: any) => {
-        setSearchValue(e.target.value);
-        API.getAutoComplite(e.target.value)
+    const handleAutoComplite = (newValue: any) => {
+        setSearchValue(newValue);
+        API.getAutoComplite(newValue)
             .then((res) => {
                 const newData = res.data.map((item: any) => {
                     return item.name;
@@ -132,7 +146,7 @@ const Bottom: React.FC<BottomProps> = ({
                     justifyContent: "center",
                 }}
             >
-                <ButtonGroup sx={{ width: "100%" }}>
+                <ButtonGroup >
                     <Autocomplete
                         sx={{ width: "100%" }}
                         id="free-solo-2-demo"
@@ -140,11 +154,10 @@ const Bottom: React.FC<BottomProps> = ({
                         size="small"
                         options={AutoCompliteData}
                         onInputChange={(event, newInputValue) =>
-                            handleAutoComplite(event)
+                            handleAutoComplite(newInputValue)
                         }
-                        onChange={onSubmit}
                         renderInput={(params) => (
-                            <TextField
+                            <CustomTextField
                                 variant="outlined"
                                 label={
                                     <FormattedMessage id="search_medicine" />
@@ -152,10 +165,11 @@ const Bottom: React.FC<BottomProps> = ({
                                 {...params}
                                 fullWidth
                                 value={searchValue}
-
+                            // onChange={(e) => setSearchValue(e.target.value)}
                             />
                         )}
                     />
+                    <CustomButton size="small" onClick={onSubmit}><SearchIcon /></CustomButton>
                 </ButtonGroup>
             </BottomBarItem>
             <BottomBarItem sx={{ ml: 2 }}>
