@@ -64,7 +64,6 @@ const App = () => {
     const changeLocale = (localeCode: string) => {
         setCurrentLocale(localeCode)
     }
-
     return (
         <IntlProvider messages={messages[currentLocale]} defaultLocale={currentLocale} locale={LOCALES.RUSSIAN}>
             <LanguageContext.Provider value={{ currentLocale, changeLocale }}>

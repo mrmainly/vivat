@@ -62,9 +62,9 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
     const handleChange = (event: Event, newValue: any | number[], activeThumb: any) => {
         if (!Array.isArray(newValue)) {
             return;
-          }
+        }
 
-        if(activeThumb === 0) {
+        if (activeThumb === 0) {
             // setMinPrice(newValue[0]);
             setMinPrice(Math.min(newValue[0], maxPrice - minDistance));
         } else {
@@ -176,8 +176,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                         onChange={handleChange}
                         max={15000}
                         onChangeCommitted={handleChange1}
-                
-                        // getAriaValueText={valuetext}
+                    // getAriaValueText={valuetext}
                     />
                 </Box>
             </Box>

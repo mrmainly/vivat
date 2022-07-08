@@ -5,13 +5,13 @@ import cookie from "js-cookie";
 import ROUTES from "../routes";
 
 const testURL = "https://127.0.0.1:8000/";
-const publicURL = "https://xn----7sbbagaytx2c4ad.xn--p1ai/";
+const publicURL = "";
 
 const api = (url) => {
     const token = cookie.get("jwttoken");
     if (token) {
         const instance = axios.create({
-            baseURL: publicURL + url,
+            baseURL: process.env.REACT_APP_API + url,
             headers: {
                 Authorization: "Token " + token,
                 "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const api = (url) => {
         return instance;
     } else {
         const instance = axios.create({
-            baseURL: publicURL + url,
+            baseURL: process.env.REACT_APP_API + url,
             headers: {
                 "Content-Type": "application/json",
             },
@@ -98,29 +98,22 @@ class API {
     async getProductsList(id, page, formState, sort) {
         let result = await api(
             `api/v1/goods/?group_id=${id}&page=${page}
-            ${
-                formState
-                    ? `
-            &notRecept=${
-                formState.notRecept ? formState.notRecept : ""
-            }&jnvls=${formState.jnvls ? formState.jnvls : ""}&ordering_qty=${
-                          formState.ordering_qty ? formState.ordering_qty : ""
-                      }&price_min=${formState.min_price}&price_max=${
-                          formState.max_price
-                      }&producer=${formState.producer}${
-                          sort == "name" || sort == "-name"
-                              ? `&ordering_name=${sort ? sort : ""}`
-                              : ""
-                      }${
-                          sort == "priceSale" || sort == "-priceSale"
-                              ? `&ordering_price=${sort ? sort : ""}`
-                              : ""
-                      }${
-                          sort == "good_views" || sort == "-good_views"
-                              ? `&good_views=${sort ? sort : ""}`
-                              : ""
-                      }`
+            ${formState
+                ? `
+            &notRecept=${formState.notRecept ? formState.notRecept : ""
+                }&jnvls=${formState.jnvls ? formState.jnvls : ""}&ordering_qty=${formState.ordering_qty ? formState.ordering_qty : ""
+                }&price_min=${formState.min_price}&price_max=${formState.max_price
+                }&producer=${formState.producer}${sort == "name" || sort == "-name"
+                    ? `&ordering_name=${sort ? sort : ""}`
                     : ""
+                }${sort == "priceSale" || sort == "-priceSale"
+                    ? `&ordering_price=${sort ? sort : ""}`
+                    : ""
+                }${sort == "good_views" || sort == "-good_views"
+                    ? `&good_views=${sort ? sort : ""}`
+                    : ""
+                }`
+                : ""
             }`
         ).get();
         return result;
@@ -256,12 +249,11 @@ class API {
     //blog
     async getBlog(query, type) {
         let result = await api(
-            `api/v1/blogs/${
-                type == "query"
-                    ? query
-                        ? `?query=${query}`
-                        : ""
-                    : `?tags_query=${query}`
+            `api/v1/blogs/${type == "query"
+                ? query
+                    ? `?query=${query}`
+                    : ""
+                : `?tags_query=${query}`
             }`
         ).get();
         return result;
