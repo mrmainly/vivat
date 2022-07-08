@@ -5,13 +5,13 @@ import cookie from "js-cookie";
 import ROUTES from "../routes";
 
 const testURL = "https://127.0.0.1:8000/";
-const publicURL = "";
+const publicURL = "https://xn----7sbbagaytx2c4ad.xn--p1ai/";
 
 const api = (url) => {
     const token = cookie.get("jwttoken");
     if (token) {
         const instance = axios.create({
-            baseURL: process.env.REACT_APP_API + url,
+            baseURL: publicURL + url,
             headers: {
                 Authorization: "Token " + token,
                 "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const api = (url) => {
         return instance;
     } else {
         const instance = axios.create({
-            baseURL: process.env.REACT_APP_API + url,
+            baseURL: publicURL + url,
             headers: {
                 "Content-Type": "application/json",
             },
