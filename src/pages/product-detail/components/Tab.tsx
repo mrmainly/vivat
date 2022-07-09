@@ -7,8 +7,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-import Description from "../../../pages/product-detail/components/Descriptions";
-import Analogues from "../../../pages/product-detail/components/Analogues";
+import Description from "./Descriptions";
+import Analogues from "./Analogues";
 import { MainCardsConstructor } from "../../../constructor";
 
 interface TabPanelProps {
@@ -47,7 +47,7 @@ interface DescrProps {
     instructions?: any;
 }
 
-const DescriptionScreen: React.FC<DescrProps> = ({
+const ProductDetailTab: React.FC<DescrProps> = ({
     analData,
     loading,
     instructions,
@@ -97,4 +97,4 @@ const DescriptionScreen: React.FC<DescrProps> = ({
     );
 };
 
-export default DescriptionScreen;
+export default ProductDetailTab;

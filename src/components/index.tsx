@@ -47,6 +47,7 @@ import {
     translationDelivery,
     translationPayment,
 } from "./translation-status";
+import BasketFormSideBars from "./sidebars/basket-form-sidebars";
 
 export {
     Header,
@@ -95,4 +96,5 @@ export {
     translationStatus,
     translationDelivery,
     translationPayment,
+    BasketFormSideBars,
 };

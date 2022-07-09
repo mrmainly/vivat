@@ -8,8 +8,6 @@ import {
     TextareaAutosize,
     FormLabel,
     FormControlLabel,
-    Checkbox,
-    FormGroup,
     Box,
     TextField,
     Radio,
@@ -21,28 +19,10 @@ import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { MyText, Form, Input, MyButton, BorderLine } from "../../components";
-import ThemeMain from "../../theme";
+import { MyText, MyButton, BasketFormSideBars } from "../../components";
 import API from "../../api";
 import ROUTES from "../../routes";
 import { DispatchContext, StateContext } from "../../store";
-
-const InfoBlog = styled(Box)(({ theme }) => ({
-    boxShadow: " 0px 5px 10px rgba(0, 0, 0, 0.1)",
-    borderRadius: 12,
-    width: "80%",
-    minHeight: 391,
-    background: "white",
-    padding: 24,
-    margin: "0 auto",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    [theme.breakpoints.down("md")]: {
-        width: "90%",
-        padding: 10,
-    },
-}));
 
 const InputProfile = styled(TextField)(({ theme }) => ({
     background: "white",
@@ -430,73 +410,12 @@ const BasketForm = () => {
                             </Box>
                         </Grid>
                         <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-                            <InfoBlog>
-                                <Box>
-                                    <MyText
-                                        variant="h6"
-                                        sx={{
-                                            color: ThemeMain.palette.primary
-                                                .main,
-                                            mb: 2,
-                                        }}
-                                    >
-                                        Ваш заказ:
-                                    </MyText>
-                                    {data.map((item: any, index: number) => (
-                                        <Box
-                                            key={index}
-                                            sx={{
-                                                display: "flex",
-                                                justifyContent: "space-between",
-                                                mt: 1,
-                                            }}
-                                        >
-                                            <MyText variant="body2">
-                                                {index + 1}.
-                                                {item.GoodsCode.name}
-                                                &nbsp; x{item.count}
-                                            </MyText>
-                                            <MyText
-                                                variant="body2"
-                                                sx={{ fontWeight: 600 }}
-                                            >
-                                                {item.price} ₽
-                                            </MyText>
-                                        </Box>
-                                    ))}
-                                </Box>
-                                <Box>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                        }}
-                                    >
-                                        <MyText
-                                            variant="body1"
-                                            sx={{
-                                                color: ThemeMain.palette.primary
-                                                    .main,
-                                            }}
-                                        >
-                                            Сумма к оплате:
-                                        </MyText>
-                                        <MyText
-                                            variant="body1"
-                                            sx={{
-                                                color: ThemeMain.palette.primary
-                                                    .main,
-                                            }}
-                                        >
-                                            {delivery === "DELIVERY"
-                                                ? totalPrice + costTotalPrice
-                                                : totalPrice}
-                                            ₽
-                                        </MyText>
-                                    </Box>
-                                    <BorderLine />
-                                </Box>
-                            </InfoBlog>
+                            <BasketFormSideBars
+                                data={data}
+                                totalPrice={totalPrice}
+                                costTotalPrice={costTotalPrice}
+                                delivery={delivery}
+                            />
                         </Grid>
                     </Grid>
                 </>

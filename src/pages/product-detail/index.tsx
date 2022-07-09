@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
 import MainInfo from "./components/MainInfo";
-import DescriptionScreen from "./components/DescriptionScreen";
+import DescriptionScreen from "./components/Tab";
 import API from "../../api";
 import { CircularProgress } from "@mui/material";
 import { SkeletonProductDetail } from "../../components";

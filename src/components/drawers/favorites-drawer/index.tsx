@@ -3,11 +3,21 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 import { Drawer, Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
+import { styled } from "@mui/system";
 
 import { MyText, FavoritesCard } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 import { StateContext } from "../../../store";
+
+const Main = styled(Box)(({ theme }) => ({
+    width: 300,
+    padding: 30,
+    height: "100%",
+    [theme.breakpoints.down("sm")]: {
+        width: 260,
+    },
+}));
 
 interface MainDrawerProps {
     state?: any;
@@ -41,11 +51,8 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                 onClose: handleClose,
             }}
         >
-            <Box
+            <Main
                 style={{
-                    width: 300,
-                    padding: 30,
-                    height: "100%",
                     opacity: loading ? 0.5 : 1,
                 }}
             >
@@ -81,7 +88,7 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                           />
                       ))
                     : "Нет избранных товаров"}
-            </Box>
+            </Main>
         </Drawer>
     );
 };

@@ -8,7 +8,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-
 import { MyText, MyButton } from "../../../components";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ThemeMain from "../../../theme";
@@ -33,6 +32,9 @@ const ItemImg = styled(Box)(({ theme }) => ({
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     minHeight: 520,
+    [theme.breakpoints.down("sm")]: {
+        minHeight: 200,
+    },
 }));
 
 const Img = styled("img")(({ theme }) => ({

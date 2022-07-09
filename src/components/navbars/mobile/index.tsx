@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { styled } from "@mui/system";
 import { Container, IconButton, Box, MenuItem, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { toast } from "react-toastify";
+import cookie from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 import ThemeMain from "../../../theme";
 import { MyDrawer } from "../..";
+import ROUTES from "../../../routes";
 
 const MobileWrapper = styled(Container)(({ theme }) => ({
     display: "none",
@@ -39,6 +43,8 @@ const Mobile = () => {
     });
 
     const { drawerOpen } = state;
+    const jwttoken = cookie.get("jwttoken");
+    const navigate = useNavigate();
 
     const handleDrawerClose = () =>
         setState((prevState) => ({ ...prevState, drawerOpen: false }));
@@ -65,7 +71,18 @@ const Mobile = () => {
                 />
             </IconWrapper>
             <Box sx={{ display: "flex" }}>
-                <ButtonCustom variant="outlined">Статус заказа</ButtonCustom>
+                <ButtonCustom
+                    variant="outlined"
+                    onClick={() => {
+                        jwttoken
+                            ? navigate(ROUTES.STATUS_PRODUCT)
+                            : toast.error(
+                                  "данная операция доступно только при авторизации"
+                              );
+                    }}
+                >
+                    Статус заказа
+                </ButtonCustom>
             </Box>
         </MobileWrapper>
     );
