@@ -52,9 +52,8 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
         slidesToScroll: 1,
         slidesToShow: 1,
     };
-    // const data = ["Rectangle4014", "Rectangle4014"];
     return (
-        <Box>
+        <Box style={{ marginBottom: data.lenght >= 0 ? 50 : 0 }}>
             <Slider {...settings}>
                 {data.map((item: any, index: number) => (
                     <Box key={index}>

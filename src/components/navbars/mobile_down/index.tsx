@@ -15,7 +15,6 @@ import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { FormattedMessage } from "react-intl";
 
 import MyContainer from "../../container";
 import {
@@ -65,7 +64,7 @@ const MobileDown = () => {
     const [favoriteDrawer, setFavotiteDrawer] = useState(false);
     const [searchStatus, setSearchStatus] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [searchValue, setSearchValue] = useState("");
+
     const [basketCount, setBasketCount] = useState(0);
 
     const [state, setState] = useState({
@@ -105,33 +104,6 @@ const MobileDown = () => {
         mode: "onBlur",
     });
 
-    const onSubmit = async (event: any, values: any) => {
-        setLoading(true);
-        await API.productsSearch(values)
-            .then((res) => {
-                navigate(ROUTES.SEARCH_PAGE, {
-                    state: { data: res.data, title: values },
-                });
-                setSearchStatus(false);
-            })
-            .catch((error) => {
-                toast.error("error");
-            });
-        setLoading(false);
-    };
-
-    const handleAutoComplite = (e: any) => {
-        setSearchValue(e.target.value);
-        API.getAutoComplite(e.target.value)
-            .then((res) => {
-                const newData = res.data.map((item: any) => {
-                    return item.name;
-                });
-                handleAutoCompliteData(newData);
-            })
-            .catch((error) => console.log(error));
-    };
-
     useEffect(() => {
         if (jwttoken) {
             API.getCartsList()
@@ -157,7 +129,9 @@ const MobileDown = () => {
                     <IconButton onClick={() => navigate(ROUTES.HOME)}>
                         <img src="/img/darhboard.png" />
                     </IconButton>
-                    <IconButton onClick={() => setSearchStatus(!searchStatus)}>
+                    <IconButton
+                        onClick={() => navigate(ROUTES.SEARCH_PAGE_MOBILE)}
+                    >
                         <img src="/img/Component17.png" />
                     </IconButton>
                     <IconButton
@@ -191,38 +165,6 @@ const MobileDown = () => {
                     </IconButton>
                 </Box>
             </MyContainer>
-            {searchStatus && (
-                <Box
-                    style={{
-                        marginTop: "-1px",
-                        position: "relative",
-                        display: "flex",
-                        justifyContent: "center",
-                    }}
-                >
-                    <SearchBox
-                        id="free-solo-2-demo"
-                        freeSolo
-                        size="small"
-                        options={AutoCompliteData}
-                        onInputChange={(event, newInputValue) =>
-                            handleAutoComplite(event)
-                        }
-                        onChange={onSubmit}
-                        renderInput={(params) => (
-                            <TextField
-                                variant="outlined"
-                                label={
-                                    <FormattedMessage id="search_medicine" />
-                                }
-                                {...params}
-                                value={searchValue}
-                                // onBlur={onSubmit}
-                            />
-                        )}
-                    />
-                </Box>
-            )}
 
             <SignUpModal
                 registerModal={registerModal}

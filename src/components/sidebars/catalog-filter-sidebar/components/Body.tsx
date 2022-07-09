@@ -59,7 +59,11 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
             payload: { value: value, name: name },
         });
     };
-    const handleChange = (event: Event, newValue: any | number[], activeThumb: any) => {
+    const handleChange = (
+        event: Event,
+        newValue: any | number[],
+        activeThumb: any
+    ) => {
         if (!Array.isArray(newValue)) {
             return;
         }
@@ -73,7 +77,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
     };
     const handleChange1 = (activeThumb: any) => {
         handleInput(minPrice, "min_price");
-        handleInput(maxPrice, "max_price")
+        handleInput(maxPrice, "max_price");
     };
     return (
         <Main>
@@ -131,7 +135,14 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             variant="outlined"
                             label="Мин"
                             value={minPrice}
-                            onChange={(e) => setMinPrice(Math.min(Number(e.target.value), maxPrice - minDistance))}
+                            onChange={(e) =>
+                                setMinPrice(
+                                    Math.min(
+                                        Number(e.target.value),
+                                        maxPrice - minDistance
+                                    )
+                                )
+                            }
                             inputProps={{
                                 min: 0,
                                 style: { textAlign: "center" },
@@ -152,7 +163,14 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             label="Макс"
                             variant="outlined"
                             value={maxPrice}
-                            onChange={(e) => setMaxPrice(Math.max(Number(e.target.value), minPrice + minDistance))}
+                            onChange={(e) =>
+                                setMaxPrice(
+                                    Math.max(
+                                        Number(e.target.value),
+                                        minPrice + minDistance
+                                    )
+                                )
+                            }
                             inputProps={{
                                 min: 0,
                                 style: { textAlign: "center" },
@@ -176,7 +194,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                         onChange={handleChange}
                         max={15000}
                         onChangeCommitted={handleChange1}
-                    // getAriaValueText={valuetext}
+                        // getAriaValueText={valuetext}
                     />
                 </Box>
             </Box>

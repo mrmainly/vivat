@@ -17,7 +17,7 @@ import Manufacturers from "./info-screens/manufacturers";
 import StaffDepartment from "./info-screens/staff-department";
 import Licenses from "./info-screens/licenses";
 import Advertising from "./info-screens/advertising";
-import TechnicalSupport from "./info-screens/technical-support"
+import TechnicalSupport from "./info-screens/technical-support";
 import Benefits from "./info-screens/benefits";
 import Vacancy from "./info-screens/vacancy";
 
@@ -43,8 +43,10 @@ import MyOrdersDetail from "./profile/my-orders/detail";
 import SearchPage from "./search-page";
 import Address from "./address";
 
-import SuccessPayment from './payment/success'
+import SuccessPayment from "./payment/success";
 import ErrorPayment from "./payment/error";
+
+import SearchPageMobile from "./search-page/mobile";
 
 export {
     Home,
@@ -87,4 +89,5 @@ export {
     TechnicalSupport,
     Benefits,
     Vacancy,
+    SearchPageMobile,
 };

@@ -52,14 +52,16 @@ const Home = () => {
     return (
         <div>
             {sliderLoading ? (
-                <Skeleton style={{ height: 500, borderRadius: 50 }} />
+                <Skeleton
+                    style={{ height: 500, borderRadius: 50, marginBottom: 50 }}
+                />
             ) : (
                 <HomeSlider data={dataBanner} />
             )}
 
-            <Box sx={{ mt: 5 }}>
+            <Box>
                 <HomeSecondSlider title="Наши преимущества" />
-                <MyText variant="h5" sx={{ mb: 1 }}>
+                <MyText variant="h5" sx={{ mb: 1, mt: 1 }}>
                     Лек. средства
                 </MyText>
                 <Pagination
