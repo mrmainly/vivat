@@ -139,7 +139,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                         sx={{
                             backgroundImage: data?.esphoto[0]?.fileData
                                 ? `url(data:image/jpeg;base64,${data.esphoto[0]?.fileData})`
-                                : "/img/tabletka.jpg",
+                                : "url(/img/vivat_background.png)",
                         }}
                     ></ItemImg>
                 </Grid>

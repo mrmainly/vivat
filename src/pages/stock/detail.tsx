@@ -38,14 +38,14 @@ const StockDetail = () => {
     }, []);
 
     return (
-        <Box sx={{ mt: 5 }}>
+        <Box sx={{ mt: 3 }}>
             {loading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
                     <CircularProgress />
                 </Box>
             ) : data ? (
                 <>
-                    <Grid container spacing={4}>
+                    <Grid container spacing={4} sx={{ mb: 4 }}>
                         <Grid item lg={4} xl={4} md={5} sm={12} xs={12}>
                             <Img src={data.image} />
                         </Grid>
@@ -95,7 +95,6 @@ const StockDetail = () => {
                     <MainCardsConstructor
                         title="Товары, участвующие в акции"
                         data={data.goods}
-                        sx={{ mt: 4 }}
                     />
                 </>
             ) : (
