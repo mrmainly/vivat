@@ -22,12 +22,10 @@ const ProductDetail = () => {
             await API.getProductId(params.id)
                 .then((res) => {
                     setData(res.data);
-                    console.log(res);
                     return res.data.id;
                 })
                 .then((resId) => {
                     API.getProductAnal(resId).then((res) => {
-                        console.log("anal", res);
                         if (res.data.results) {
                             setAnalogData(res.data.results);
                         } else {

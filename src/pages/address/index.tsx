@@ -30,7 +30,6 @@ const Address = () => {
             setLoading(true);
             await API.getAddress()
                 .then((res) => {
-                    console.log("address", res);
                     setData(res.data.unit);
                 })
                 .catch((error) => console.log(error));
@@ -42,7 +41,6 @@ const Address = () => {
     const dispatchMapCenter = (value: any) => {
         setMapCenter(value);
         setZoom(18);
-        console.log("value", value);
     };
 
     return (

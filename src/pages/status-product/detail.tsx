@@ -61,7 +61,6 @@ const StatusProductDetail = () => {
         const statusProductId = async () => {
             await API.getMeStatusId(params.id)
                 .then((res) => {
-                    console.log("res", res);
                     setData(res.data);
                     setDataItems(res.data.items);
                 })

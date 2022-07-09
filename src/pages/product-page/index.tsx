@@ -120,11 +120,6 @@ const ProductPage = () => {
                     setCount(res.data.count);
                 })
                 .catch((error) => console.log(error));
-            // await API.getProducerList(id)
-            //     .then((res) => {
-            //         console.log(res.data);
-            //     })
-            //     .catch((error) => console.log(error));
             setLoading(false);
         };
         getProducts();

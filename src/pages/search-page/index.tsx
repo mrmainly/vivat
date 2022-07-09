@@ -34,8 +34,6 @@ const SearchPage = () => {
 
     const { data, title } = state;
 
-    console.log(data);
-
     return (
         <Box>
             <Body title={title} data={data} loading={loading} />

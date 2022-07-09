@@ -90,16 +90,6 @@ const Header: React.FC<HeaderProps> = () => {
     const handleForgotOpen = () =>
         setState((prevState) => ({ ...prevState, forgot: true }));
 
-    // useEffect(() => {
-    //     API.getCartsList()
-    //         .then((res) => {
-    //             console.log(res);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }, []);
-
     return (
         <>
             <AppBar

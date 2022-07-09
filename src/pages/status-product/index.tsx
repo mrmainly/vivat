@@ -14,7 +14,6 @@ const StatusProduct = () => {
         const getOrdersMeStatus = async () => {
             await API.getOrdersMeStatus()
                 .then((res) => {
-                    console.log(res);
                     setData(res.data);
                 })
                 .catch((error) => console.log(error));

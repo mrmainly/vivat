@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import { toast } from "react-toastify";
 import { StateContext } from "../../../../store";
@@ -47,19 +47,22 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
-    '& .MuiOutlinedInput-root': {
-        '& fieldset': {
+    "& .MuiOutlinedInput-root": {
+        "& fieldset": {
             borderTopRightRadius: 0,
-            borderEndEndRadius: 0
+            borderEndEndRadius: 0,
         },
     },
 }));
 
 const CustomButton = styled(Button)(({ theme }) => ({
-    backgroundColor: ThemeMain.palette.primary.main, color: 'white', borderTopLeftRadius: 0, borderEndStartRadius: 0,
-    '&:hover': {
+    backgroundColor: ThemeMain.palette.primary.main,
+    color: "white",
+    borderTopLeftRadius: 0,
+    borderEndStartRadius: 0,
+    "&:hover": {
         color: ThemeMain.palette.primary.main,
-        borderColor: ThemeMain.palette.primary.main
+        borderColor: ThemeMain.palette.primary.main,
     },
 }));
 
@@ -116,7 +119,6 @@ const Bottom: React.FC<BottomProps> = ({
             API.getCartsList()
                 .then((res) => {
                     setBasketCount(res.data.total_qnt);
-                    console.log("effect");
                 })
                 .catch((error) => {
                     console.log(error);
@@ -146,7 +148,7 @@ const Bottom: React.FC<BottomProps> = ({
                     justifyContent: "center",
                 }}
             >
-                <ButtonGroup >
+                <ButtonGroup>
                     <Autocomplete
                         sx={{ width: "100%" }}
                         id="free-solo-2-demo"
@@ -165,11 +167,13 @@ const Bottom: React.FC<BottomProps> = ({
                                 {...params}
                                 fullWidth
                                 value={searchValue}
-                            // onChange={(e) => setSearchValue(e.target.value)}
+                                // onChange={(e) => setSearchValue(e.target.value)}
                             />
                         )}
                     />
-                    <CustomButton size="small" onClick={onSubmit}><SearchIcon /></CustomButton>
+                    <CustomButton size="small" onClick={onSubmit}>
+                        <SearchIcon />
+                    </CustomButton>
                 </ButtonGroup>
             </BottomBarItem>
             <BottomBarItem sx={{ ml: 2 }}>

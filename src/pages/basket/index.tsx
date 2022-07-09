@@ -66,7 +66,6 @@ const Basket = () => {
             setLoading(true);
             await API.getCartsList()
                 .then((res: any) => {
-                    console.log("basket", res);
                     setData(res.data);
                 })
                 .catch((error) => console.log(error));

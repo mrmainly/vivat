@@ -29,7 +29,6 @@ const Stock = () => {
                 .then((res) => {
                     setCount(res.data.count);
                     setData(res.data.results);
-                    console.log("stick", res);
                 })
                 .catch((error) => {
                     console.log(error);

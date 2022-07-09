@@ -28,7 +28,6 @@ const StockDetail = () => {
             setLoading(true);
             await API.getPromotionDetail(params.id)
                 .then((res) => {
-                    console.log(res);
                     setData(res.data);
                 })
                 .catch((error) => console.log(error));

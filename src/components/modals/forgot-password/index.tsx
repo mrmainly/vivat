@@ -116,7 +116,6 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
         setPhone(data.phone);
         API.sendPhoneMailForgotPassword(data, toggle)
             .then((res) => {
-                console.log("inside", res);
                 if (res) {
                     setSecondForm(true);
                     setFirstForm(false);
@@ -133,7 +132,6 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
     const verify = (data: any) => {
         API.sendVerifyCode({ code: data.code })
             .then((res) => {
-                console.log("res.inside", res);
                 setSecondForm(false);
                 setThreeForm(true);
             })
@@ -146,7 +144,6 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
         API.resend_phone(phone)
             .then((res) => {
                 toast.success("Код отправлен повторно");
-                console.log("refresh", res);
             })
             .catch((err) => {
                 toast.error("Не правильный код");
