@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import Description from "./Descriptions";
-import Analogues from "./Analogues";
 import { MainCardsConstructor } from "../../../constructor";
 
 interface TabPanelProps {

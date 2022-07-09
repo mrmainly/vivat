@@ -52,8 +52,9 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
         slidesToScroll: 1,
         slidesToShow: 1,
     };
+    console.log(data);
     return (
-        <Box style={{ marginBottom: data.lenght >= 0 ? 50 : 0 }}>
+        <Box style={{ marginBottom: data.length >= 0 ? 50 : 0 }}>
             <Slider {...settings}>
                 {data.map((item: any, index: number) => (
                     <Box key={index}>
