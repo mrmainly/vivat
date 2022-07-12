@@ -26,7 +26,6 @@ const Text = styled(MyText)(({ theme }) => ({
 }));
 
 const SearchPage = () => {
-    const [newData, setNewData] = useState({});
     const [loading, setLoading] = useState(false);
 
     const location = useLocation();

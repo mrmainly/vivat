@@ -4,15 +4,24 @@ import { ToastContainer } from "react-toastify";
 
 import "./layout.css";
 import { Header, Footer, MyContainer, MobileDown, Mobile } from "../components";
-import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const Layout = () => {
-    const { width } = useWindowDimensions();
+    const [mobileToShow, setMobileToShow] = useState(false);
+
+    useEffect(() => {
+        const setResponsiveness = () => {
+            return window.innerWidth < 900
+                ? setMobileToShow(true)
+                : setMobileToShow(false);
+        };
+        setResponsiveness();
+        window.addEventListener("resize", () => setResponsiveness());
+    }, []);
 
     return (
         <div style={{ overflow: "hidden" }}>
             <ToastContainer autoClose={1000} />
-            {width < 900 ? <Mobile /> : <Header />}
+            {mobileToShow ? <Mobile /> : <Header />}
             <MyContainer
                 wrapper={true}
                 minHeight={600}
@@ -22,7 +31,7 @@ const Layout = () => {
             >
                 <Outlet />
             </MyContainer>
-            {width < 900 ? <MobileDown /> : ""}
+            {mobileToShow ? <MobileDown /> : ""}
             <Footer />
         </div>
     );
