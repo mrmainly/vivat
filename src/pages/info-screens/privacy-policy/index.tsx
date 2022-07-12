@@ -301,7 +301,10 @@ const PrivacyPolicy = () => {
                                         {textItem.label}
                                     </MyText>
                                 ) : (
-                                    <li key={index} style={{ marginTop: 12 }}>
+                                    <li 
+                                        key={index}
+                                        style={{ marginTop: 12 }}
+                                    >
                                         {textItem.label}
                                     </li>
                                 )}

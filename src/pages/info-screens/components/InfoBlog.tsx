@@ -6,7 +6,7 @@ import { styled } from "@mui/system";
 import { MyText } from "../../../components";
 
 interface InfoBlogProps {
-  title?: string;
+  title?: any;
   children?: any;
 }
 

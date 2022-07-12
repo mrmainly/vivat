@@ -1,5 +1,7 @@
 import React from "react";
 
+import { FormattedMessage } from "react-intl";
+
 import InfoBlog from "../components/InfoBlog";
 import { MyText } from "../../../components";
 
@@ -14,32 +16,32 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 function createData(
-  first: string,
-  second: string,
+  first: any,
+  second: any,
 ) {
   return { first, second };
 }
 
 const AboutUs = () => {
   const data = {
-    title: "Реквизиты организации",
+    title: <FormattedMessage id="organization_details"/>,
     columns: [
-      "Реквизиты организации",
+      <FormattedMessage id="organization_details"/>,
       "«ВИВАТ»",
       "ИНН 1435276221/143501001  ОГРН 1141447000507  р/сч 40702810976000011494",
       "Якутское ОСБ №8603 ОАО «Сбербанк России»  БИК 049805609  к/сч 301101810400000000609",
       "ИНН 7707083893   КПП 143502001  ОГРН 1027700132195",
-      "677005, г. Якутск, ул. Лермонтова, 38, левое крыльцо , 1-й этаж",
-      "Тел. 8 (914) 280-13-13",
+      <FormattedMessage id="office_address"/>,
+      <FormattedMessage id="phone_number_1"/>,
       "farmvivat@mail.ru",
     ]
   };
   const rows = [
-    createData("Наименование заполняемого поля:", "Сведения об организации"),
-    createData("Полное название организации:", "Общество с ограниченной ответственностью «ВИВАТ»"),
-    createData("Краткое название организации:", "ООО «ВИВАТ»"),
-    createData("Юридический адрес:", "677005, Республика Саха (Якутия), город Якутск, улица Лермонтова, дом 38"),
-    createData("Фактический адрес:", "677005, Республика Саха (Якутия), город Якутск, улица Лермонтова, дом 38 (левое крыльцо, 1 эт.)"),
+    createData(<FormattedMessage id="field_name"/>, <FormattedMessage id="organization_info"/>),
+    createData(<FormattedMessage id="organization_fullName"/>, <FormattedMessage id="LLC_VIVAT"/>),
+    createData(<FormattedMessage id="organization_shortName"/>, <FormattedMessage id="LLC_VIVAT_short"/>),
+    createData(<FormattedMessage id="legal_address"/>, <FormattedMessage id="office_legal_address"/>),
+    createData(<FormattedMessage id="actual_address"/>, <FormattedMessage id="office_actual_address"/>),
     createData("ОГРН:", "1141447000507"),
     createData("ИНН:", "1435276221"),
     createData("КПП:", "143501001"),
@@ -48,18 +50,18 @@ const AboutUs = () => {
     createData("ОКТМО:", "98701000001"),
     createData("ОКАТО:", "98401000000"),
     createData("ОКФС/ОКОПФ:", "16/12165"),
-    createData("Наименование банка, в т.ч. место (город) нахождения:", "Якутское отделение № 8603 ПАО «Сбербанк России»"),
-    createData("Расчетный счёт:", "40702810976000011494"),
-    createData("Корреспондентский счет:", "30101810400000000609"),
+    createData(<FormattedMessage id="bank_name"/>, <FormattedMessage id="bank_address"/>),
+    createData(<FormattedMessage id="checking_account"/>, "40702810976000011494"),
+    createData(<FormattedMessage id="сorrespondent_account"/>, "30101810400000000609"),
     createData("БИК:", "049805609"),
-    createData("Должность руководителя  организации, на основании чего действует:", "Генеральный директор, действует на основании Устава"),
-    createData("ФИО руководителя организации:", "Михайлова Оксана Тагировна"),
-    createData("Номер телефона, адрес электронной почты:", "725-013 (офис), farmvivat@mail.ru"),
-    createData("Лицензия:", "№ЛО-14-01-002447 от 19 октября 2018 г."),
+    createData(<FormattedMessage id="organization_head_position"/>, <FormattedMessage id="general_directior"/>),
+    createData(<FormattedMessage id="organization_head_name"/>, "Михайлова Оксана Тагировна"),
+    createData(<FormattedMessage id="phoneNumber_mail"/>, "725-013 (офис), farmvivat@mail.ru"),
+    createData("Лицензия:", <FormattedMessage id="license_number"/>),
   ];
   return (
     <div>
-      <InfoBlog title="О нас">
+      <InfoBlog title={<FormattedMessage id="about_us" />}>
         <MyText variant="body1" sx={{ fontWeight: 600 }}>
           {data.title}
         </MyText>
