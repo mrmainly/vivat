@@ -40,6 +40,7 @@ const Home = () => {
             await API.getPromotionMain()
                 .then((res) => {
                     setDataBanner(res.data);
+                    console.log(res.data);
                 })
                 .catch((error) => console.log(error));
             setLoadingSlider(false);

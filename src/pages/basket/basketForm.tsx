@@ -37,7 +37,7 @@ const BasketForm = () => {
         "47CC211D-EECA-4D38-87A1-E255059DD16F"
     );
     const [commend, setCommend] = useState("");
-    const [payment, setPayment] = useState("");
+    const [payment, setPayment] = useState("CARD");
     const [delivery, setDelivery] = useState("");
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
@@ -90,7 +90,7 @@ const BasketForm = () => {
 
     const compliteOrders = () => {
         API.sendOrder({
-            payment_type: payment,
+            payment_type: "CARD",
             delivery_type: delivery,
             comment: commend,
             dep_id: adress,
@@ -296,7 +296,7 @@ const BasketForm = () => {
                                     value={commend}
                                     onChange={(e) => setCommend(e.target.value)}
                                 />
-                                <FormControl sx={{ mt: 2 }}>
+                                {/* <FormControl sx={{ mt: 2 }}>
                                     <FormLabel component="legend">
                                         Способ оплаты
                                     </FormLabel>
@@ -326,7 +326,7 @@ const BasketForm = () => {
                                             value="CARD"
                                         />
                                     </RadioGroup>
-                                </FormControl>
+                                </FormControl> */}
                                 <FormControl sx={{ mt: 2 }}>
                                     <FormLabel component="legend">
                                         Способ доставки
