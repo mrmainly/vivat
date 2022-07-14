@@ -11,11 +11,13 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { MyText, WorkCard } from "../../../components";
-import Wrapper from "../components/wrapper";
-import API from "../../../api";
+import { FormattedMessage } from "react-intl";
 
-import work_data from "../../../local_data/work_data";
+import { MyText, WorkCard } from "../../components";
+import InfoBlog from "../info-screens/components/InfoBlog";
+import API from "../../api";
+
+import work_data from "../../local_data/work_data";
 
 const Main = styled(Box)(({ theme }) => ({
     marginLeft: 30,
@@ -56,21 +58,23 @@ const PharmacyWork = () => {
     }, [city]);
 
     return (
-        <Wrapper title="Работа в аптеке">
+        <InfoBlog title={<FormattedMessage id="vacancy"/>}>
             <Main>
                 <FormControlLabel
-                    label="Выбор города:"
+                    label={<FormattedMessage id="city_choice"/>}
                     labelPlacement="start"
                     control={
                         <FormControl
                             sx={{ width: 150, bgcolor: "white", ml: 1 }}
                             size="small"
                         >
-                            <InputLabel>Города</InputLabel>
+                            <InputLabel>
+                                <FormattedMessage id="cities"/>
+                            </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                label="Города"
+                                label={<FormattedMessage id="cities"/>}
                                 defaultValue={cities[0].name}
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
@@ -80,7 +84,7 @@ const PharmacyWork = () => {
                                         {item.name}
                                     </MenuItem>
                                 ))}
-                                <MenuItem value={""}>Все города</MenuItem>
+                                <MenuItem value={""}><FormattedMessage id="all_cities"/></MenuItem>
                             </Select>
                         </FormControl>
                     }
@@ -119,13 +123,13 @@ const PharmacyWork = () => {
                             ))
                         ) : (
                             <MyText sx={{ ml: 4.2, mt: 2 }}>
-                                Нету вакансий
+                                <FormattedMessage id="no_vacancy"/>
                             </MyText>
                         )}
                     </Grid>
                 )}
             </Main>
-        </Wrapper>
+        </InfoBlog>
     );
 };
 

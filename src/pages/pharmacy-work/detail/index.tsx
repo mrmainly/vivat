@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 
-import API from "../../../../api";
-import { MyText, MyButton } from "../../../../components";
+import API from "../../../api";
+import { MyText, MyButton } from "../../../components";
 
 const PharmacyDetailWork = () => {
     const [data, setData] = useState<any>();

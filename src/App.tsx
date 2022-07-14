@@ -160,7 +160,7 @@ const App = () => {
                                         path={ROUTES.BENEFITS}
                                     />
                                     <Route
-                                        element={<Vacancy />}
+                                        element={<PharmacyWork />}
                                         path={ROUTES.VACANCY}
                                     />
                                     <Route

@@ -5,36 +5,37 @@ import { styled } from "@mui/system";
 import { MyText } from "../../../components";
 import ThemeMain from "../../../theme";
 import InfoBlog from "../components/InfoBlog";
+import { FormattedMessage } from "react-intl";
 
 const Benefits = () => {
     const data = [
         {
             img: "/img/benefits_1.png",
-            title: "Работа в крупной и стабильной компании",
+            title: <FormattedMessage id="our_benefits_1"/>,
         },
         {
             img: "/img/benefits_2.png",
-            title: "Возможность быстрого карьерного роста",
-        },,
+            title: <FormattedMessage id="our_benefits_2"/>,
+        },
         {
             img: "/img/benefits_3.png",
-            title: "Современные процессы и методы работы",
-        },,
+            title: <FormattedMessage id="our_benefits_3"/>,
+        },
         {
             img: "/img/benefits_4.png",
-            title: "Позитивный и дружный коллектив",
-        },,
+            title: <FormattedMessage id="our_benefits_4"/>,
+        },
         {
             img: "/img/benefits_5.png",
-            title: "Расширенный социальный пакет",
-        },,
+            title: <FormattedMessage id="our_benefits_5"/>,
+        },
         {
             img: "/img/benefits_6.png",
-            title: "Предоставление жилья иногородным",
+            title: <FormattedMessage id="our_benefits_6"/>,
         },
     ]
   return (
-    <InfoBlog title="Наши преимущества">
+    <InfoBlog title={<FormattedMessage id="our_benefits"/>}>
         <Grid
             container
             sx={{ display: "flex", justifyContent: "space-evenly" }}

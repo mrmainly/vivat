@@ -31,9 +31,9 @@ import Blog from "./blog";
 import BlogTheme from "./blog/themeBlog";
 
 import VivatInfo from "./pharmacy/vivat-info";
-import PharmacyWork from "./pharmacy/pharmacy-work";
+import PharmacyWork from "./pharmacy-work";
 import PharmacyContacts from "./pharmacy/pharmacy-contacts";
-import PharmacyDetailWork from "./pharmacy/pharmacy-work/detail";
+import PharmacyDetailWork from "./pharmacy-work/detail";
 
 import ProductPage from "./product-page";
 import StatusProduct from "./status-product";
