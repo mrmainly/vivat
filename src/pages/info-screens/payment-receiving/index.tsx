@@ -15,6 +15,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { FormattedMessage } from "react-intl";
 
 const Main = styled(Box)(({ theme }) => ({
   padding: 20,
@@ -33,9 +34,9 @@ const CustomTableContainer = styled(TableContainer)(({ theme }) => ({
 }));
 
 function createData(
-  first: string,
-  second: string,
-  third: string
+  first: any,
+  second: any,
+  third: any
 ) {
   return { first, second, third };
 }
@@ -43,103 +44,67 @@ function createData(
 const PaymentReceiving = () => {
   const array = [
     {
-        title: "Отказаться от заказа и его оплаты возможно в следующих случаях:",
-        columns: [
-            "товар не соответствует заказанному;",
-            "товар поврежден вследствие нарушения целостности упаковки;",
-            "товар поврежден вследствие несоответствия упаковки характеру вложения и условиям пересылки (за исключением требований по температурному режиму). Товар может быть возвращен только в момент принятия заказа.",
-        ]
+      title: <FormattedMessage id="payment_receipt_order_4_1"/>,
+      columns: [ 
+        <FormattedMessage id="payment_receipt_order_4_1_1"/>,
+        <FormattedMessage id="payment_receipt_order_4_1_2"/>,
+        <FormattedMessage id="payment_receipt_order_4_1_3"/>,
+      ]
     },
     {
-        title: "Согласно Постановлению Правительства РФ от 19.01.1998 г. №55 не подлежат обмену и возврату следующие товары надлежащего качества:",
-        columns: [
-            "предметы личной гигиены, средства гигиены полости рта;",
-            "инструменты, приборы и аппаратура медицинские, предметы санитарии и гигиены из металла, резины, текстиля и других материалов;",
-            "предметы по уходу за детьми;",
-            "линзы очковые;",
-            "парфюмерно-косметические товары.",
-        ]
+      title: <FormattedMessage id="payment_receipt_order_4_2"/>,
+      columns: [
+        <FormattedMessage id="payment_receipt_order_4_2_1"/>,
+        <FormattedMessage id="payment_receipt_order_4_2_2"/>,
+        <FormattedMessage id="payment_receipt_order_4_2_3"/>,
+        <FormattedMessage id="payment_receipt_order_4_2_4"/>,
+        <FormattedMessage id="payment_receipt_order_4_2_5"/>,
+      ]
     }
   ];
   const rows = [
-    createData("доставка в пределах 4 км", "200 руб	", "50 руб."),
-    createData("в отдаленные районы", "рассчитывается индивидуально", "рассчитывается индивидуально"),
+    createData(<FormattedMessage id="payment_receipt_order_3_2_1"/>, <FormattedMessage id="payment_receipt_order_3_2_2"/>, <FormattedMessage id="payment_receipt_order_3_2_3"/>),
+    createData(<FormattedMessage id="payment_receipt_order_3_3_1"/>, <FormattedMessage id="payment_receipt_order_3_3_2"/>, <FormattedMessage id="payment_receipt_order_3_3_3"/>),
   ];
 
   return (
     <div>
-      <InfoBlog title="Оплата и получение заказа">
+      <InfoBlog title={<FormattedMessage id="payment_receipt_order"/>}>
         <MyText variant="body2">
-            На сайте виват-аптека.рф для получения заказа необходимо обратиться в аптеку, выбранную при оформлении заказа.
+          <FormattedMessage id="payment_receipt_order_1"/>
         </MyText>
         <MyText variant="body2" sx={{ mt: 1.2 }}>
-            Оплата и получение при самовывозе.
+          <FormattedMessage id="payment_receipt_order_2"/>
         </MyText>
         <ol>
             <li style={{fontSize: 14}}>
                 <MyText variant="body2" sx={{ mt: 1.2 }}>
-                    Оплачиваете и получаете заказ прямо в аптеке. Проверяете на месте комплектность, стоимость, целостность, сроки годности, размер (для изделий мед. назначения) каждой позиции заказа. В случае несоответствия вы вправе отказаться от заказа.
+                  <FormattedMessage id="payment_receipt_order_2_1"/>
                 </MyText>
             </li>
             <li style={{fontSize: 14}}>
                 <MyText variant="body2" sx={{ mt: 1.2 }}>
-                    Оплачиваете на сайте и получаете заказ в аптеке. На месте называете номер вашего заказа, далее проверяете на месте комплектность, стоимость, целостность, сроки годности, размер (для изделий мед. назначения) каждой позиции заказа. В случае несоответствия вы вправе отказаться от заказа.
+                  <FormattedMessage id="payment_receipt_order_2_2"/>
                 </MyText>
             </li>
         </ol>
 
         <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
-          Оплата и получение при доставке курьером
+          <FormattedMessage id="payment_receipt_order_3"/>
         </MyText>
-        {/* <Grid container sx={{ width: "70%", mt: 1.2, minHeight: 126 }}>
-            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3", pl: 1.8, display: "flex", alignItems: "center" }}>
-                <MyText>
-                    Удаленность
-                </MyText>
-            </Grid>
-            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3", pl: 1.8, display: "flex", alignItems: "center" }}>
-                <MyText>
-                    Стоимость
-                </MyText>
-            </Grid>
-            <Grid item xs={4} sx={{ backgroundColor: "#E4FFE3", pl: 1.8, display: "flex", alignItems: "center" }}>
-                <MyText>
-                    Каждый дополнительный км
-                </MyText>
-            </Grid>
-            <Grid item xs={4} sx={{ pl: 1.8, display: "flex", alignItems: "center"}}>
-                <MyText>
-                    доставка в пределах 4 км
-                </MyText>
-            </Grid>
-            <Grid item xs={4} sx={{ pl: 1.8, display: "flex", alignItems: "center"}}>
-                <MyText>
-                    200 руб	
-                </MyText>
-            </Grid>
-            <Grid item xs={4} sx={{ pl: 1.8, display: "flex", alignItems: "center"}}>
-                <MyText>
-                    50 руб.
-                </MyText>
-            </Grid>
-            <Grid item xs={4} sx={{ backgroundColor: "#EDF1F4", pl: 1.8, display: "flex", alignItems: "center" }}>
-                <MyText>
-                    в отдаленные районы
-                </MyText>
-            </Grid>
-            <Grid item xs={8} sx={{ backgroundColor: "#EDF1F4", pl: 1.8, display: "flex", alignItems: "center" }}>
-                <MyText>
-                    рассчитывается индивидуально.
-                </MyText>
-            </Grid>
-        </Grid> */}
         <CustomTableContainer>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ backgroundColor: "#E4FFE3" }}>Удаленность</TableCell>
-                <TableCell sx={{ backgroundColor: "#E4FFE3" }} align="left">Стоимость</TableCell>
-                <TableCell sx={{ backgroundColor: "#E4FFE3" }} align="left">Каждый дополнительный км</TableCell>
+                <TableCell sx={{ backgroundColor: "#E4FFE3" }}>
+                  <FormattedMessage id="payment_receipt_order_3_1_1"/>
+                </TableCell>
+                <TableCell sx={{ backgroundColor: "#E4FFE3" }} align="left">
+                  <FormattedMessage id="payment_receipt_order_3_1_2"/>
+                </TableCell>
+                <TableCell sx={{ backgroundColor: "#E4FFE3" }} align="left">
+                  <FormattedMessage id="payment_receipt_order_3_1_3"/>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -159,14 +124,14 @@ const PaymentReceiving = () => {
           </Table>
         </CustomTableContainer>
         <MyText variant="body2" sx={{ mt: 1.2, ml: 1.8 }}>
-          при заказе от 1500 р в центре города действует бесплатная доставка.
+          <FormattedMessage id="payment_receipt_order_3_4"/>
         </MyText>
         <MyText variant="body2" sx={{ mt: 3.2 }}>
-          Оплата заказа производится онлайн на сайте в полном объеме (выбираете при оформлении заказа. В счет заказа выставляется цена на курьерскую доставку). При получении заказа проверяйте на месте содержимое заказа.
+          <FormattedMessage id="payment_receipt_order_3_5"/>
         </MyText>
 
         <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
-          Обмен/Возврат
+          <FormattedMessage id="payment_receipt_order_4"/>
         </MyText>
         {array.map((item, index) => (
           <Box key={index} sx={{ mt: 1.2 }}>

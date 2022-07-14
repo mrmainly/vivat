@@ -28,6 +28,10 @@ const drawer_links = [
         to: ROUTES.BLOG,
     },
     {
+        label: <FormattedMessage id='stock'/>,
+        to: ROUTES.STOCK,
+    },
+    {
         label: <FormattedMessage id='medication_booking'/>,
         to: ROUTES.BOOKING,
     },

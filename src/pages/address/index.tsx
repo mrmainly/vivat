@@ -13,6 +13,7 @@ import {
 
 import { MyText, AddressSideBar } from "../../components";
 import API from "../../api";
+import { FormattedMessage } from "react-intl";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -46,7 +47,7 @@ const Address = () => {
     return (
         <>
             <MyText variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
-                Наши аптеки
+                <FormattedMessage id="pharmacy"/>
             </MyText>
             {loading ? (
                 <Box sx={{ mt: 5, display: "flex", justifyContent: "center" }}>

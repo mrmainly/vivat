@@ -1,5 +1,7 @@
 import React from "react";
 
+import { FormattedMessage } from "react-intl";
+
 import InfoBlog from "../components/InfoBlog";
 import { MyText } from "../../../components";
 
@@ -8,59 +10,59 @@ import { Box } from "@mui/material";
 const Booking = () => {
   const data = [
     {
-      label: "Обращаем Ваше внимание!",
+      label: <FormattedMessage id="booking_1"/>,
       type: "text",
     },
     {
-      label: "При бронировании лекарств Покупатель самостоятельно забирает заказанные товары в аптеке.",
+      label: <FormattedMessage id="booking_2"/>,
       type: "text",
     },
     {
-      label: "Для того, чтобы процесс онлайн бронирования был наиболее быстрым и комфортным, пожалуйста, ознакомьтесь с некоторыми правилами, по которым наши аптеки откладывают товары для Вас:",
+      label: <FormattedMessage id="booking_3"/>,
       type: "text",
     },
     {
-      label: "Срок бронирования составляет 24 часа с момента подтверждения заказа аптекой;",
+      label: <FormattedMessage id="booking_4"/>,
       type: "column",
     },
     {
-      label: "Если Вы оформили бронь ошибочно или не успеваете выкупить заказ, то Вы можете отменить бронь через личный кабинет на сайте, перейдя в историю Ваших заказов;",
+      label: <FormattedMessage id="booking_5"/>,
       type: "column",
     },
     {
-      label: "Ваш заказ будет собран в течении 30 минут*, Вы получите СМС сообщение с подтверждением;",
+      label: <FormattedMessage id="booking_6"/>,
       type: "column",
     },
     {
-      label: "При необходимости сотрудник аптеки свяжется с Вами для уточнения деталей заказа (наличие в аптеке, стоимость, дозировку и т.п.);",
+      label: <FormattedMessage id="booking_7"/>,
       type: "column",
     },
     {
-      label: "Заказы обрабатываются в рабочее время аптеки;",
+      label: <FormattedMessage id="booking_8"/>,
       type: "column",
     },
     {
-      label: "Заказ без подтверждения готовности выдачи посредством СМС сообщения не может быть выдан клиенту;",
+      label: <FormattedMessage id="booking_9"/>,
       type: "column",
     },
     {
-      label: "Лекарства и препараты, подлежащие предметно-количественному учету (ПКУ), бронированию не подлежат;",
+      label: <FormattedMessage id="booking_10"/>,
       type: "column",
     },
     {
-      label: "При выкупе рецептурных лекарственных препаратов необходимо предъявить рецепт от врача сотруднику аптеки. Аптека в праве отказать в отпуске лекарственного препарата, если рецепт на него оформлен не в соответствии с приказами Минздрава.",
+      label: <FormattedMessage id="booking_11"/>,
       type: "column",
     },
     {
-      label: "Делая бронирование лекарств на сайте, Вы даёте согласие на обработку персональных данных согласно Федеральному закону РФ №152-ФЗ от 27 июля 2006г и соглашаетесь с правилами онлайн бронирования товаров сети аптек НЕОФАРМ, размещёнными на данной странице.",
+      label: <FormattedMessage id="booking_12"/>,
       type: "text",
     }
   ];
   return (
     <div>
-      <InfoBlog title="Бронирование лекарств">
+      <InfoBlog title={<FormattedMessage id="medication_booking"/>}>
         <MyText variant="body" sx={{ fontWeight: 600 }}>
-          Правила
+          <FormattedMessage id="rules"/>
         </MyText>
         <Box>
           {data.map((item: any, index: number) => (
@@ -88,7 +90,7 @@ const Booking = () => {
           ))}
         </Box>
         <MyText variant="body2" sx={{ mt: 1.2, color: "#828282" }}>
-          * 30 минут - среднее время сбора брони в аптеках сети аптек НЕОФАРМ. В случаях повышенного спроса на услугу бронирования товаров, время сбора заказа может быть увеличено.
+          <FormattedMessage id="booking_under"/>
         </MyText>
       </InfoBlog>
     </div>

@@ -1,4 +1,6 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
+
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -56,7 +58,7 @@ const Contacts = () => {
     },
   ];
   return (
-    <InfoBlog title="Контакты">
+    <InfoBlog title={<FormattedMessage id="contacts"/>}>
       {/* <MyText variant="h5">Контакты</MyText>
       <Box sx={{ mt: 1.6 }}>
         <MyText variant="h6">Время работы</MyText>
@@ -91,20 +93,20 @@ const Contacts = () => {
       ))} */}
       <Box>
         <MyText variant="body1" sx={{ fontWeight: 600 }}>
-          Связаться с нами:
+          <FormattedMessage id="connect_with_us"/>
         </MyText>
         <MyText variant="body2" sx={{ mt: 0.8 }}>
-          По вопросам связанным с оформлением, исполнение заказа вы можете обратиться:
+          <FormattedMessage id="asks_us"/>
         </MyText>
         <MyText variant="body2" sx={{ mt: 0.8 }}>
-          <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}>+7 (914) 280-13-13 </span> в Якутске;
+          <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}>+7 (914) 280-13-13 </span> <FormattedMessage id="in_yakutsk"/>;
         </MyText>
         <MyText variant="body2" sx={{ mt: 0.8 }}>
-          График работы клиентского сервиса: 
+          <FormattedMessage id="schedule"/>
           <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}> с 8:00 до 24:00</span>
         </MyText>
         <MyText variant="body2" sx={{ mt: 0.8 }}>
-          Круглосуточный прием обращений принимается по адресу: 
+          <FormattedMessage id="receiving_application"/>
           <span style={{ color: ThemeMain.palette.primary.main, whiteSpace: "pre-wrap" }}> farmvivat@mail.ru</span> 
         </MyText>
       </Box>
