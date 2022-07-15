@@ -22,7 +22,6 @@ import Benefits from "./info-screens/benefits";
 import Vacancy from "./info-screens/vacancy";
 
 import BasicInformation from "./profile/basic-information";
-import ChangePassword from "./profile/change-password";
 import MyOrders from "./profile/my-orders";
 import ProductDetail from "./product-detail";
 
@@ -53,7 +52,6 @@ export {
     Basket,
     BasketForm,
     BasicInformation,
-    ChangePassword,
     MyOrders,
     ProductDetail,
     AboutUs,

@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import {
-    Box,
-    Grid,
-    FormControlLabel,
-    FormGroup,
-    Checkbox,
-    Pagination,
-    CircularProgress,
-} from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, Grid, Pagination, CircularProgress } from "@mui/material";
 
 import { MyText, StockCard } from "../../components";
 import API from "../../api";
@@ -41,24 +32,6 @@ const Stock = () => {
     return (
         <Box>
             <MyText variant="h5">Акции</MyText>
-            {/* <FormGroup row sx={{ mb: 1.5, mt: 1.5 }}>
-                <FormControlLabel
-                    control={<Checkbox color="success" />}
-                    label="Со скидкой"
-                />
-                <FormControlLabel
-                    control={<Checkbox color="success" />}
-                    label="С подарком"
-                />
-                <FormControlLabel
-                    control={<Checkbox color="success" />}
-                    label="Спецпредложение"
-                />
-                <FormControlLabel
-                    control={<Checkbox color="success" />}
-                    label="Онлайн акция"
-                />
-            </FormGroup> */}
             {loading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
                     <CircularProgress />

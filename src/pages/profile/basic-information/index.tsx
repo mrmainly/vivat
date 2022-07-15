@@ -1,12 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import {
-    FormControlLabel,
-    Checkbox,
-    TextField,
-    Box,
-    CircularProgress,
-} from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
 import cookie from "js-cookie";
@@ -14,12 +8,10 @@ import cookie from "js-cookie";
 import {
     ProfileSideBar,
     MyButton,
-    MyText,
     ProfileUpdateModal,
     SkeletonBasicInformation,
 } from "../../../components";
 import API from "../../../api";
-import ThemeMain from "../../../theme";
 
 import { FormattedMessage } from "react-intl";
 
@@ -90,7 +82,9 @@ const BasicInformation = () => {
 
     return (
         <Main>
-            <ProfileSideBar title={<FormattedMessage id='basic_information'/>} />
+            <ProfileSideBar
+                title={<FormattedMessage id="basic_information" />}
+            />
             <Box sx={{ mt: 6.3, width: "100%" }}>
                 <ProfileForm>
                     <ProfileUpdateModal />
@@ -101,41 +95,41 @@ const BasicInformation = () => {
                     ) : (
                         <>
                             <InputProfile
-                                label={<FormattedMessage id='surname'/>}
+                                label={<FormattedMessage id="surname" />}
                                 fullWidth
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                             />
                             <InputProfile
-                                label={<FormattedMessage id='name'/>}
+                                label={<FormattedMessage id="name" />}
                                 margin="normal"
                                 fullWidth
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
                             <InputProfile
-                                label={<FormattedMessage id='patronymic'/>}
+                                label={<FormattedMessage id="patronymic" />}
                                 margin="normal"
                                 fullWidth
                                 value={patronymic}
                                 onChange={(e) => setPatronymic(e.target.value)}
                             />
                             <InputProfile
-                                label={<FormattedMessage id='phone_number'/>}
+                                label={<FormattedMessage id="phone_number" />}
                                 margin="normal"
                                 fullWidth
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                             />
                             <InputProfile
-                                label={<FormattedMessage id='mail'/>}
+                                label={<FormattedMessage id="mail" />}
                                 margin="normal"
                                 fullWidth
                                 value={mail}
                                 onChange={(e) => setMail(e.target.value)}
                             />
                             <InputProfile
-                                label={<FormattedMessage id='birth_date'/>}
+                                label={<FormattedMessage id="birth_date" />}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
