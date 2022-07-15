@@ -4,6 +4,7 @@ import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import API from "../../../api";
 import ROUTES from "../../../routes";
@@ -60,7 +61,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                     <Box key={index}>
                         <HomeSliderBox
                             sx={{
-                                background: `url(${item.base64_image_banner})`,
+                                background: `url(https://xn----7sbbagaytx2c4ad.xn--p1ai${item.banner_image})`,
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover",
                                 backgroundPosition: "left",

@@ -13,7 +13,7 @@ import API from "../../api";
 const Img = styled("img")(({ theme }) => ({
     width: "100%",
     borderRadius: 12,
-    height: "100%",
+    height: 300,
     objectFit: "cover",
 }));
 
@@ -29,6 +29,7 @@ const StockDetail = () => {
             await API.getPromotionDetail(params.id)
                 .then((res) => {
                     setData(res.data);
+                    console.log(res.data);
                 })
                 .catch((error) => console.log(error));
             setLoading(false);

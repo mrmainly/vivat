@@ -43,7 +43,7 @@ const StockCard: React.FC<StockCardProps> = ({
             sx={{ borderRadius: 4, background: "white" }}
             onClick={() => navigate(`${ROUTES.STOCK_DETAIL}/${id}`)}
         >
-            <Img src={image} />
+            <Img src={`https://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
             <Main>
                 <Box
                     sx={{
