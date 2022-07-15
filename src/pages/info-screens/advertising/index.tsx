@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 import InfoBlog from "../components/InfoBlog";
 import { MyText } from "../../../components";
@@ -9,41 +10,41 @@ import { Box } from "@mui/material";
 const Advertising = () => {
     return (
         <div>
-            <InfoBlog title="Реклама на сайте">
+            <InfoBlog title={<FormattedMessage id="advertising_in_website"/>}>
                 <Box>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        Что есть у нас?
+                        <FormattedMessage id="advertising_in_website_1"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        Виват-аптека.рф - это развитая рекламная площадка с большим выбором инструментов продвижения - вы не останетесь незамеченными! Большая, постоянная растущая аудитория сайта.
+                        <FormattedMessage id="advertising_in_website_1_1"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 0.8 }}>
-                        Лояльность и доверие наших покупателей к информации на сайте.
+                        <FormattedMessage id="advertising_in_website_1_2"/>
                     </MyText>
                 </Box>
 
                 <Box sx={{ mt: 2.4 }}>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        Что нужно вам?
+                        <FormattedMessage id="advertising_in_website_2"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        Вы ставите задачу - мы находим решение!
+                        <FormattedMessage id="advertising_in_website_2_1"/>
                     </MyText>
                 </Box>
 
                 <Box sx={{ mt: 2.4 }}>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        Реклама на сайте
+                        <FormattedMessage id="advertising_in_website"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        По вопросам размещения рекламы и акций на сайте и в аптеках:
+                        <FormattedMessage id="advertising_in_website_3_1"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 0.8 }}>
-                        Руководитель отдела рекламы: Иванов Иван Иванович
+                        <FormattedMessage id="advertising_in_website_3_2"/> Иванов Иван Иванович
                     </MyText>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Номер телефона:
+                            <FormattedMessage id="phone_number_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main}}>
                             +7 (914) 280-13-13
@@ -51,7 +52,7 @@ const Advertising = () => {
                     </Box>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Электронная почта:
+                            <FormattedMessage id="mail_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                             farmvivat@mail.ru
@@ -61,17 +62,17 @@ const Advertising = () => {
 
                 <Box sx={{ mt: 2.4 }}>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        Контент на сайте
+                        <FormattedMessage id="advertising_in_website_4"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        По вопросам размещения информации и фотографий товаров:
+                        <FormattedMessage id="advertising_in_website_4_1"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 0.8 }}>
-                        Контент-менеджер: Иванов Иван Иванович
+                        <FormattedMessage id="advertising_in_website_4_2"/> Иванов Иван Иванович
                     </MyText>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Номер телефона:
+                            <FormattedMessage id="phone_number_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main}}>
                             +7 (914) 280-13-13
@@ -79,7 +80,7 @@ const Advertising = () => {
                     </Box>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Электронная почта:
+                            <FormattedMessage id="mail_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                             farmvivat@mail.ru

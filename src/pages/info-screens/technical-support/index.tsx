@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 import InfoBlog from "../components/InfoBlog";
 import { MyText } from "../../../components";
@@ -9,17 +10,17 @@ import { Box } from "@mui/material";
 const TechnicalSupport = () => {
     return (
         <div>
-            <InfoBlog title="Техническая поддержка">
+            <InfoBlog title={<FormattedMessage id="technical_support"/>}>
                 <Box>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        Покупателям:
+                        <FormattedMessage id="technical_support_1"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        По вопросам и замечаниям работы сайта:
+                        <FormattedMessage id="technical_support_1_1"/>
                     </MyText>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Номер телефона:
+                            <FormattedMessage id="phone_number_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main}}>
                             +7 (914) 280-13-13
@@ -27,7 +28,7 @@ const TechnicalSupport = () => {
                     </Box>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Электронная почта:
+                            <FormattedMessage id="mail_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                             farmvivat@mail.ru
@@ -37,14 +38,14 @@ const TechnicalSupport = () => {
 
                 <Box sx={{ mt: 2.4 }}>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        Аптекам:
+                        <FormattedMessage id="technical_support_2"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        По вопросам технической поддержки:
+                        <FormattedMessage id="technical_support_2_1"/>
                     </MyText>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Номер телефона:
+                            <FormattedMessage id="phone_number_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main}}>
                             +7 (914) 280-13-13
@@ -52,7 +53,7 @@ const TechnicalSupport = () => {
                     </Box>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Электронная почта:
+                            <FormattedMessage id="mail_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                             farmvivat@mail.ru

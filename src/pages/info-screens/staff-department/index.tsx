@@ -1,5 +1,7 @@
 import React from "react";
 
+import { FormattedMessage } from "react-intl";
+
 import InfoBlog from "../components/InfoBlog";
 import { MyText } from "../../../components";
 
@@ -10,16 +12,16 @@ import theme from "../../../theme";
 const StaffDepartment = () => {
   return (
     <div>
-      <InfoBlog title="Отдел персонала">
+      <InfoBlog title={<FormattedMessage id="human_resource_department"/>}>
         <Box>
             <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                Контакты отдела подбора персонала
+                <FormattedMessage id="human_resource_department_1"/>
             </MyText>
             <MyText variant="body2" sx={{ mt: 1.2 }}>
-                Уважаемые соискатели, обращаем внимание, что собеседования и прием на работу проводятся в обычном режиме.
+                <FormattedMessage id="human_resource_department_1_1"/>
             </MyText>
             <MyText variant="body2" sx={{ mt: 1.2 }}>
-                По вопросам трудоустройства обращайтесь к нашему менеджеру:
+                <FormattedMessage id="human_resource_department_1_2"/>
             </MyText>
         </Box>
 
@@ -29,7 +31,7 @@ const StaffDepartment = () => {
             </MyText>
             <Box sx={{ display: "flex", mt: 0.8 }}>
                 <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                    Номер телефона:
+                    <FormattedMessage id="phone_number_2"/>
                 </MyText>
                 <MyText variant="body2" sx={{ color: theme.palette.primary.main}}>
                     +7 (914) 280-13-13
@@ -37,7 +39,7 @@ const StaffDepartment = () => {
             </Box>
             <Box sx={{ display: "flex", mt: 0.8 }}>
                 <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                    Электронная почта:
+                    <FormattedMessage id="mail_2"/>
                 </MyText>
                 <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                     farmvivat@mail.ru
@@ -50,7 +52,7 @@ const StaffDepartment = () => {
             </MyText>
             <Box sx={{ display: "flex", mt: 0.8 }}>
                 <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                    Номер телефона:
+                    <FormattedMessage id="phone_number_2"/>
                 </MyText>
                 <MyText variant="body2" sx={{ color: theme.palette.primary.main}}>
                     +7 (914) 280-13-13
@@ -58,7 +60,7 @@ const StaffDepartment = () => {
             </Box>
             <Box sx={{ display: "flex", mt: 0.8 }}>
                 <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                    Электронная почта:
+                    <FormattedMessage id="mail_2"/>
                 </MyText>
                 <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                     farmvivat@mail.ru
@@ -68,10 +70,10 @@ const StaffDepartment = () => {
 
         <Box sx={{ mt: 2.4 }}>
             <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                Адрес отдела подбора персонала
+                <FormattedMessage id="human_resource_department_2"/>
             </MyText>
             <MyText variant="body2" sx={{ mt: 1.2 }}>
-                677005, г. Якутск, ул. Лермонтова, 38, левое крыльцо , 1-й этаж
+                <FormattedMessage id="office_address"/>
             </MyText>
         </Box>
       </InfoBlog>

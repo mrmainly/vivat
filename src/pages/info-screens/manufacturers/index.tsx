@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 import InfoBlog from "../components/InfoBlog";
 import { MyText } from "../../../components";
@@ -9,31 +10,31 @@ import { Box } from "@mui/material";
 const Manufacturers = () => {
     return (
         <div>
-            <InfoBlog title="Производителям">
+            <InfoBlog title={<FormattedMessage id="manufacturers"/>}>
                 <Box>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        Для производителей лекарственных средств и БАД
+                        <FormattedMessage id="manufacturers_1"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        Отдел маркетинга:
+                        <FormattedMessage id="manufacturers_1_1"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 0.8 }}>
                         Иванов Иван Иванович
                     </MyText>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Номер телефона:
+                            <FormattedMessage id="phone_number_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main}}>
                             +7 (914) 280-13-13
                         </MyText>
                     </Box>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        Отдел собственных продуктов:
+                        <FormattedMessage id="manufacturers_1_2"/>
                     </MyText>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Электронная почта:
+                            <FormattedMessage id="mail_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                             farmvivat@mail.ru
@@ -43,17 +44,17 @@ const Manufacturers = () => {
 
                 <Box sx={{ mt: 2.4 }}>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        По вопросам размещения рекламы
+                        <FormattedMessage id="manufacturers_2"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        Руководитель отдела реклам:
+                        <FormattedMessage id="manufacturers_2_1"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 0.8 }}>
                         Иванов Иван Иванович
                     </MyText>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Номер телефона:
+                            <FormattedMessage id="phone_number_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main}}>
                             +7 (914) 280-13-13
@@ -61,7 +62,7 @@ const Manufacturers = () => {
                     </Box>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Электронная почта:
+                            <FormattedMessage id="mail_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                             farmvivat@mail.ru
@@ -71,14 +72,14 @@ const Manufacturers = () => {
 
                 <Box sx={{ mt: 2.4 }}>
                     <MyText variant="body1" sx={{ fontWeight: 600 }}>
-                        Для производителей
+                        <FormattedMessage id="manufacturers_3"/>
                     </MyText>
                     <MyText variant="body2" sx={{ mt: 1.2 }}>
-                        По вопросу размещения информации и фотографии товаров на сайте просим отправлять запрос
+                        <FormattedMessage id="manufacturers_3_1"/>
                     </MyText>
                     <Box sx={{ display: "flex", mt: 0.8 }}>
                         <MyText variant="body2" sx={{ width: 200, color: "#828282" }}>
-                            Электронная почта:
+                        <FormattedMessage id="mail_2"/>
                         </MyText>
                         <MyText variant="body2" sx={{ color: theme.palette.primary.main, textDecoration: "underline" }}>
                             farmvivat@mail.ru
@@ -87,7 +88,7 @@ const Manufacturers = () => {
                 </Box>
 
                 <MyText variant="body2" sx={{ mt: 0.8 }}>
-                    Технические требования для фото и описаний товаров доступны <a href="" style={{ color: theme.palette.primary.main, textDecoration: "none" }}>по ссылке</a>
+                    <FormattedMessage id="manufacturers_3_2"/> <a href="" style={{ color: theme.palette.primary.main, textDecoration: "none" }}><FormattedMessage id="link"/></a>
                 </MyText>
             </InfoBlog>
         </div>
