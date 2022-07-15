@@ -89,9 +89,13 @@ const App = () => {
                         <BrowserRouter>
                             <React.Suspense
                                 fallback={
-                                    <Box sx={{ height: 800 }}>
-                                        <h1>Loading...</h1>
-                                    </Box>
+                                    <Box
+                                        sx={{
+                                            height: 300,
+                                            width: 300,
+                                            backgroundColor: "gray",
+                                        }}
+                                    ></Box>
                                 }
                             >
                                 <Routes>
@@ -122,7 +126,6 @@ const App = () => {
                                             path={ROUTES.PRODUCT_PAGE}
                                         />
 
-                                        {/* profile */}
                                         <Route
                                             element={<MyOrders />}
                                             path={ROUTES.MYORDERS}
@@ -132,7 +135,6 @@ const App = () => {
                                             path={ROUTES.BASICINFORMATION}
                                         />
 
-                                        {/* Info-pages */}
                                         <Route
                                             element={<AboutUs />}
                                             path={ROUTES.ABOUT_US}
