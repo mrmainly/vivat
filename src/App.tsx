@@ -87,17 +87,7 @@ const App = () => {
                 <DispatchContext.Provider value={dispatch}>
                     <StateContext.Provider value={state}>
                         <BrowserRouter>
-                            <React.Suspense
-                                fallback={
-                                    <Box
-                                        sx={{
-                                            height: 300,
-                                            width: 300,
-                                            backgroundColor: "gray",
-                                        }}
-                                    ></Box>
-                                }
-                            >
+                            <React.Suspense fallback={<Box></Box>}>
                                 <Routes>
                                     <Route
                                         path={ROUTES.HOME}

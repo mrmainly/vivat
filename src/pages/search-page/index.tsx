@@ -1,29 +1,13 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
-import { styled } from "@mui/system";
 
-import { MyText } from "../../components";
 import Body from "./components/Body";
 
 interface CustomizedState {
     data: any;
     title: string;
 }
-
-const Root = styled(Box)(({ theme }) => ({
-    display: "flex",
-    [theme.breakpoints.down("md")]: {
-        flexDirection: "column",
-    },
-}));
-
-const Text = styled(MyText)(({ theme }) => ({
-    marginLeft: 20,
-    [theme.breakpoints.down("md")]: {
-        marginLeft: 0,
-    },
-}));
 
 const SearchPage = () => {
     const [loading, setLoading] = useState(false);
