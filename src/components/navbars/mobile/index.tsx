@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "@mui/system";
-import { Container, IconButton, Box, MenuItem, Button } from "@mui/material";
+import { Container, IconButton, Box, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { toast } from "react-toastify";
 import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import ThemeMain from "../../../theme";
-import { MyDrawer } from "../..";
 import ROUTES from "../../../routes";
+import { drawersSlice } from "../../../reducer/drawers_slice";
 
 const MobileWrapper = styled(Container)(({ theme }) => ({
     display: "none",
@@ -38,28 +39,20 @@ const IconWrapper = styled(Box)(({ theme }) => ({
 }));
 
 const Mobile = () => {
-    const [state, setState] = useState({
-        drawerOpen: false,
-    });
-
-    const { drawerOpen } = state;
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
 
-    const handleDrawerClose = () =>
-        setState((prevState) => ({ ...prevState, drawerOpen: false }));
-    const handleDrawerOpen = () =>
-        setState((prevState) => ({ ...prevState, drawerOpen: true }));
+    const dispatch = useDispatch();
+    const { handleMainDrawerOpen } = drawersSlice.actions;
 
     return (
         <MobileWrapper>
-            <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
             <IconWrapper>
                 <IconButton
                     color="primary"
                     aria-label="upload picture"
                     component="span"
-                    onClick={() => handleDrawerOpen()}
+                    onClick={() => dispatch(handleMainDrawerOpen(true))}
                     size="small"
                 >
                     <MenuIcon sx={{ color: "#55CD61" }} fontSize="large" />

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Drawer, Box, IconButton, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BorderLine } from "../..";
 import drawer_links from "../../../local_data/drawer_links";
@@ -10,14 +11,15 @@ import API from "../../../api";
 import ROUTES from "../../../routes";
 import ThemeMain from "../../../theme";
 import MyText from "../../text";
+import { drawersSlice } from "../../../reducer/drawers_slice";
 
-interface MainDrawerProps {
-    state: any;
-    handleClose: any;
-}
-
-const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
+const MainDrawer = () => {
     const [data, setData] = useState([]);
+    const { main_drawer_open } = useSelector(
+        (state: any) => state.drawers_slice
+    );
+    const { handleMainDrawerOpen } = drawersSlice.actions;
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -33,8 +35,8 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
         <Drawer
             {...{
                 anchor: "left",
-                open: state,
-                onClose: handleClose,
+                open: main_drawer_open,
+                onClose: () => dispatch(handleMainDrawerOpen(false)),
             }}
         >
             <Box
@@ -47,7 +49,9 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                 }}
             >
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <IconButton onClick={() => handleClose()}>
+                    <IconButton
+                        onClick={() => dispatch(handleMainDrawerOpen(false))}
+                    >
                         <CloseIcon
                             sx={{ color: ThemeMain.palette.primary.main }}
                             fontSize="large"
@@ -63,7 +67,7 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                                 navigate(ROUTES.PRODUCT_PAGE, {
                                     state: { id: item.id, title: item.name },
                                 });
-                                handleClose();
+                                dispatch(handleMainDrawerOpen(false));
                             }}
                         >
                             <MyText
@@ -87,7 +91,7 @@ const MainDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                         <MenuItem
                             onClick={() => {
                                 navigate(item.to);
-                                handleClose();
+                                dispatch(handleMainDrawerOpen(false));
                             }}
                             key={index}
                         >

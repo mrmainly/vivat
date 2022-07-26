@@ -20,11 +20,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import { toast } from "react-toastify";
 
-import { MyText, MyButton } from "../../..";
+import { MyText } from "../../..";
 import ROUTES from "../../../../routes";
 import ThemeMain from "../../../../theme";
 import API from "../../../../api";
 import { authModalSlice } from "../../../../reducer/auth_modal_slice";
+import { drawersSlice } from "../../../../reducer/drawers_slice";
 
 import { useDispatch } from "react-redux";
 
@@ -69,18 +70,10 @@ const CustomButton = styled(Button)(({ theme }) => ({
 }));
 
 interface BottomProps {
-    handleDrawerOpen: any;
-    handleLoginOpen: any;
-    handleFavoritesDrawerOpen: any;
     setLoading: any;
 }
 
-const Bottom: React.FC<BottomProps> = ({
-    handleDrawerOpen,
-    handleLoginOpen,
-    handleFavoritesDrawerOpen,
-    setLoading,
-}) => {
+const Bottom: React.FC<BottomProps> = ({ setLoading }) => {
     const [searchValue, setSearchValue] = useState("");
     const [basketCount, setBasketCount] = useState(0);
 
@@ -90,6 +83,8 @@ const Bottom: React.FC<BottomProps> = ({
     const jwttoken = cookie.get("jwttoken");
     const dispatch = useDispatch();
     const { openLoginModal } = authModalSlice.actions;
+    const { handleFavoritesDrawerOpen, handleMainDrawerOpen } =
+        drawersSlice.actions;
 
     const onSubmit = async () => {
         setLoading(true);
@@ -135,7 +130,7 @@ const Bottom: React.FC<BottomProps> = ({
                     color="primary"
                     aria-label="upload picture"
                     component="span"
-                    onClick={() => handleDrawerOpen()}
+                    onClick={() => dispatch(handleMainDrawerOpen(true))}
                 >
                     <MenuIcon sx={{ color: "#55CD61" }} fontSize="large" />
                 </IconButton>
@@ -200,7 +195,7 @@ const Bottom: React.FC<BottomProps> = ({
                     sx={{ mr: 1 }}
                     onClick={() => {
                         jwttoken
-                            ? handleFavoritesDrawerOpen()
+                            ? dispatch(handleFavoritesDrawerOpen(true))
                             : dispatch(openLoginModal(true));
                     }}
                 >

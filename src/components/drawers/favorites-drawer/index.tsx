@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Drawer, Box, IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/system";
 
 import { MyText, FavoritesCard } from "../..";
+import { useSelector, useDispatch } from "react-redux";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
+import { drawersSlice } from "../../../reducer/drawers_slice";
 
 const Main = styled(Box)(({ theme }) => ({
     width: 300,
@@ -18,15 +19,14 @@ const Main = styled(Box)(({ theme }) => ({
     },
 }));
 
-interface MainDrawerProps {
-    state?: any;
-    handleClose?: any;
-}
-
-const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
+const FavoritesDrawer = () => {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState("");
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+
+    const { favorite_open } = useSelector((state: any) => state.drawers_slice);
+    const { handleFavoritesDrawerOpen } = drawersSlice.actions;
 
     useEffect(() => {
         const getFavorites = async () => {
@@ -44,8 +44,8 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
         <Drawer
             {...{
                 anchor: "right",
-                open: state,
-                onClose: handleClose,
+                open: favorite_open,
+                onClose: () => dispatch(handleFavoritesDrawerOpen(false)),
             }}
         >
             <Main
@@ -56,7 +56,11 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
                 <Box
                     sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}
                 >
-                    <IconButton onClick={() => handleClose()}>
+                    <IconButton
+                        onClick={() =>
+                            dispatch(handleFavoritesDrawerOpen(false))
+                        }
+                    >
                         <CloseIcon
                             sx={{ color: ThemeMain.palette.primary.main }}
                             fontSize="large"

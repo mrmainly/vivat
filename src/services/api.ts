@@ -10,7 +10,7 @@ const baseQuery = fetchBaseQuery({
         // By default, if we have a token in the store, let's use that for authenticated requests
         const token = jwttoken;
         if (token) {
-            headers.set("authentication", `Token ${token}`);
+            headers.set("authorization", `Token ${token}`);
         }
         return headers;
     },
