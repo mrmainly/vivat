@@ -19,12 +19,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import { toast } from "react-toastify";
-import { StateContext } from "../../../../store";
 
 import { MyText, MyButton } from "../../..";
 import ROUTES from "../../../../routes";
 import ThemeMain from "../../../../theme";
 import API from "../../../../api";
+import { authModalSlice } from "../../../../reducer/auth_modal_slice";
+
+import { useDispatch } from "react-redux";
 
 const BottomBar = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -86,7 +88,8 @@ const Bottom: React.FC<BottomProps> = ({
 
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
-    const basketStatus = useContext(StateContext);
+    const dispatch = useDispatch();
+    const { openLoginModal } = authModalSlice.actions;
 
     const onSubmit = async () => {
         setLoading(true);
@@ -124,8 +127,7 @@ const Bottom: React.FC<BottomProps> = ({
                     console.log(error);
                 });
         }
-    }, [basketStatus.basket.status, jwttoken]);
-
+    }, [jwttoken]);
     return (
         <BottomBar>
             <BottomBarItem sx={{ mr: 2 }}>
@@ -141,9 +143,7 @@ const Bottom: React.FC<BottomProps> = ({
             <BottomBarItem
                 sx={{
                     width: "100%",
-
                     display: "flex",
-
                     flexDirection: "column",
                     justifyContent: "center",
                 }}
@@ -189,7 +189,7 @@ const Bottom: React.FC<BottomProps> = ({
                     onClick={() => {
                         jwttoken
                             ? navigate(ROUTES.STATUS_PRODUCT)
-                            : handleLoginOpen();
+                            : dispatch(openLoginModal(true));
                     }}
                 >
                     <FormattedMessage id="status_order" />
@@ -201,7 +201,7 @@ const Bottom: React.FC<BottomProps> = ({
                     onClick={() => {
                         jwttoken
                             ? handleFavoritesDrawerOpen()
-                            : handleLoginOpen();
+                            : dispatch(openLoginModal(true));
                     }}
                 >
                     <FavoriteBorderIcon
@@ -215,7 +215,7 @@ const Bottom: React.FC<BottomProps> = ({
                     onClick={() => {
                         jwttoken
                             ? navigate(ROUTES.BASICINFORMATION)
-                            : handleLoginOpen();
+                            : dispatch(openLoginModal(true));
                     }}
                 >
                     <AccountCircleIcon
@@ -226,10 +226,11 @@ const Bottom: React.FC<BottomProps> = ({
 
                 <MenuItem
                     onClick={() => {
-                        jwttoken ? navigate(ROUTES.BASKET) : handleLoginOpen();
+                        jwttoken
+                            ? navigate(ROUTES.BASKET)
+                            : dispatch(openLoginModal(true));
                     }}
                 >
-                    {" "}
                     <StyledBadge badgeContent={jwttoken ? basketCount : 0}>
                         <img src="/img/Bag_light.png" />
                     </StyledBadge>

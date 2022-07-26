@@ -8,7 +8,6 @@ import { styled } from "@mui/system";
 import { MyText, FavoritesCard } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
-import { StateContext } from "../../../store";
 
 const Main = styled(Box)(({ theme }) => ({
     width: 300,
@@ -29,8 +28,6 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
     const [status, setStatus] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const stateContext = useContext(StateContext);
-
     useEffect(() => {
         const getFavorites = async () => {
             setLoading(true);
@@ -42,7 +39,7 @@ const FavoritesDrawer: React.FC<MainDrawerProps> = ({ state, handleClose }) => {
             setLoading(false);
         };
         getFavorites();
-    }, [stateContext.favorite_status.status, status]);
+    }, [status]);
     return (
         <Drawer
             {...{

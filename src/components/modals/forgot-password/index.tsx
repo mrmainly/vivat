@@ -12,12 +12,13 @@ import {
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import InputMask from "react-input-mask";
+import { useDispatch, useSelector } from "react-redux";
 
-import { StateContext, DispatchContext } from "../../../store";
 import { Form, Input, MyButton, MyText, ToggleButton } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 import { SignModalProps } from "../../../interface";
+import { authModalSlice } from "../../../reducer/auth_modal_slice";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -100,16 +101,20 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
     const [threeForm, setThreeForm] = useState(false);
     const [phone, setPhone] = useState("");
 
+    const { openForgotPassword } = useSelector(
+        (state: any) => state.auth_modal_slice
+    );
+    const dispatch = useDispatch();
+    const { openForgotPasswordModal } = authModalSlice.actions;
+
     const [toggle, setToggle] = useState("Email");
-    const state = useContext(StateContext);
-    const dispatch = useContext(DispatchContext);
 
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });
 
     const handleClose = () => {
-        setForgotClose();
+        dispatch(openForgotPasswordModal(false));
     };
 
     const choiceAPI = (data: any) => {
@@ -168,7 +173,7 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
-                open={forgot}
+                open={openForgotPassword}
             >
                 <BootstrapDialogTitle
                     id="customized-dialog-title"

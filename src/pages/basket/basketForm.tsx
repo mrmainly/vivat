@@ -22,7 +22,6 @@ import { toast } from "react-toastify";
 import { MyText, MyButton, BasketFormSideBars } from "../../components";
 import API from "../../api";
 import ROUTES from "../../routes";
-import { DispatchContext, StateContext } from "../../store";
 
 const InputProfile = styled(TextField)(({ theme }) => ({
     background: "white",
@@ -51,8 +50,8 @@ const BasketForm = () => {
     const [AutoCompliteData, setAutoCopliteData] = useState([]);
 
     const navigate = useNavigate();
-    const dispatch = useContext(DispatchContext);
-    const basketState = useContext(StateContext);
+    // const dispatch = useContext(DispatchContext);
+    // const basketState = useContext(StateContext);
 
     useEffect(() => {
         const getOrders = async () => {
@@ -104,12 +103,12 @@ const BasketForm = () => {
         })
             .then((res) => {
                 toast.success("Заявка оформлена");
-                dispatch({
-                    type: "basket",
-                    payload: {
-                        status: basketState.basket.status + 1,
-                    },
-                });
+                // dispatch({
+                //     type: "basket",
+                //     payload: {
+                //         status: basketState.basket.status + 1,
+                //     },
+                // });
                 res.data === "Success"
                     ? navigate(ROUTES.SUCCESS_PAYMENT)
                     : (window.location.href = res.data);

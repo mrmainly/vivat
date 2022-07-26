@@ -26,7 +26,6 @@ import {
 } from "../..";
 import ROUTES from "../../../routes";
 import API from "../../../api";
-import { DispatchContext, StateContext } from "../../../store";
 
 const MobileBox = styled(Box)(({ theme }) => ({
     display: "none",
@@ -98,23 +97,23 @@ const MobileDown = () => {
 
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
-    const dispatch = useContext(DispatchContext);
-    const basketStatus = useContext(StateContext);
+    // const dispatch = useContext(DispatchContext);
+    // const basketStatus = useContext(StateContext);
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });
 
-    useEffect(() => {
-        if (jwttoken) {
-            API.getCartsList()
-                .then((res) => {
-                    setBasketCount(res.data.total_qnt);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    }, [basketStatus.basket.status, jwttoken]);
+    // useEffect(() => {
+    //     if (jwttoken) {
+    //         API.getCartsList()
+    //             .then((res) => {
+    //                 setBasketCount(res.data.total_qnt);
+    //             })
+    //             .catch((error) => {
+    //                 console.log(error);
+    //             });
+    //     }
+    // }, [basketStatus.basket.status, jwttoken]);
 
     return (
         <MobileBox>

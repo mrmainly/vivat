@@ -1,17 +1,23 @@
-import React, { useContext } from 'react';
-import { styled } from '@mui/material/styles';
-import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogTitle, DialogContent, IconButton, DialogActions } from '@mui/material'
+import React, { useContext } from "react";
+import { styled } from "@mui/material/styles";
+import CloseIcon from "@mui/icons-material/Close";
+import {
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    IconButton,
+    DialogActions,
+} from "@mui/material";
 
-import { StateContext, DispatchContext } from '../../../store';
-import { MyText, MyButton } from '../..'
-import ThemeMain from '../../../theme'
+// import { StateContext, DispatchContext } from '../../../store';
+import { MyText, MyButton } from "../..";
+import ThemeMain from "../../../theme";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
+    "& .MuiDialogContent-root": {
         padding: theme.spacing(2),
     },
-    '& .MuiDialogActions-root': {
+    "& .MuiDialogActions-root": {
         padding: theme.spacing(1),
     },
 }));
@@ -24,13 +30,13 @@ export interface DialogTitleProps {
 
 const ModalContent = styled(DialogContent)(({ theme }) => ({
     width: 500,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    [theme.breakpoints.down('sm')]: {
-        width: 250
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+        width: 250,
     },
-}))
+}));
 
 const BootstrapDialogTitle = (props: DialogTitleProps) => {
     const { children, onClose, ...other } = props;
@@ -43,7 +49,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
                     aria-label="close"
                     onClick={onClose}
                     sx={{
-                        position: 'absolute',
+                        position: "absolute",
                         right: 8,
                         top: 8,
                         color: (theme) => theme.palette.grey[500],
@@ -57,11 +63,8 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export default function ProfileUpdateModal() {
-    const state = useContext(StateContext)
-    const dispatch = useContext(DispatchContext)
-
     const handleClose = () => {
-        dispatch({ type: 'profile_modal', payload: { open: false, status: '' } })
+        // dispatch({ type: 'profile_modal', payload: { open: false, status: '' } })
     };
 
     return (
@@ -69,30 +72,31 @@ export default function ProfileUpdateModal() {
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
-                open={state.profile_modal.open}
+                open={false}
             >
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    {state.profile_modal.status == 'success'
+                <BootstrapDialogTitle
+                    id="customized-dialog-title"
+                    onClose={handleClose}
+                >
+                    {/* {state.profile_modal.status == 'success'
                         ?
                         'Успешно'
                         :
                         'Ошибка'
-                    }
+                    } */}
                 </BootstrapDialogTitle>
                 <ModalContent dividers>
-                    <MyText sx={{ textAlign: 'center' }}>
-                        {state.profile_modal.status == 'success'
+                    <MyText sx={{ textAlign: "center" }}>
+                        {/* {state.profile_modal.status == 'success'
                             ?
                             'Ваши данные сохранены'
                             :
                             'Заполните все обязательные поля'
-                        }
+                        } */}
                     </MyText>
                 </ModalContent>
                 <DialogActions>
-                    <MyButton onClick={handleClose}>
-                        OK
-                    </MyButton>
+                    <MyButton onClick={handleClose}>OK</MyButton>
                 </DialogActions>
             </BootstrapDialog>
         </div>

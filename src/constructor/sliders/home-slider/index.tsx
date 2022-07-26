@@ -60,7 +60,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                     <Box key={index}>
                         <HomeSliderBox
                             sx={{
-                                background: `url(https://xn----7sbbagaytx2c4ad.xn--p1ai${item.banner_image})`,
+                                background: `url(${item.banner_image})`,
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover",
                                 backgroundPosition: "left",

@@ -1,45 +1,22 @@
-import React from "react";
+import {
+    combineReducers,
+    configureStore,
+    getDefaultMiddleware,
+} from "@reduxjs/toolkit";
+// import productReducer from "../reducer/product_slice";
+import { api } from "../services/api";
+import auth_modal_slice from "../reducer/auth_modal_slice";
 
-export const defaultStore = {
-    auth_modal: {
-        login: false,
-    },
-    drawers: {
-        favorites_drawer: false,
-    },
-    register: {
-        danger_text: false,
-    },
-    profile_modal: {
-        status: "",
-        open: false,
-    },
-    verify_code: {
-        code: "",
-    },
-    register_version: {
-        v1: true,
-        password_version: false,
-        verify_version: false,
-    },
-    status_product: {
-        v1: false,
-        v2: false,
-    },
-    favorite_status: {
-        status: 0,
-    },
-    basket: {
-        status: 0,
-    },
-    basket_qnt: {
-        count: 0,
-    },
-    fav_qnt: {
-        count: 0,
-    },
+const rootReducer = combineReducers({
+    // productReducer,
+    [api.reducerPath]: api.reducer,
+    auth_modal_slice,
+});
+
+export const setupStore = () => {
+    return configureStore({
+        reducer: rootReducer,
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware().concat(api.middleware),
+    });
 };
-
-export const StateContext = React.createContext({} as any);
-export const DispatchContext = React.createContext({} as any);
-export const LanguageContext = React.createContext({} as any);

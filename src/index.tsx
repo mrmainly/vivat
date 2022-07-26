@@ -3,13 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { DataProvider } from "./store/DataFormContext";
+import { Provider } from "react-redux/";
+
+import { setupStore } from "./store";
+
+const store = setupStore();
 
 ReactDOM.render(
     <React.StrictMode>
-        <DataProvider>
+        <Provider store={store}>
             <App />
-        </DataProvider>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );

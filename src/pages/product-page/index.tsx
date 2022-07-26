@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import {
     Box,
     Grid,
@@ -14,9 +14,7 @@ import { Sling as Hamburger } from "hamburger-react";
 
 import { CatalogFilterSideBar, MyText } from "../../components";
 import { MainCardsConstructor } from "../../constructor";
-import { StateContext } from "../../store";
-import API from "../../api";
-import ThemeMain from "../../theme";
+import { useGetProductsQuery } from "../../services/ProductsService";
 
 const WrapperBox = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -85,10 +83,7 @@ const formReducer = (state: any, action: any) => {
 };
 
 const ProductPage = () => {
-    const [data, setData] = useState([]);
-    const [count, setCount] = useState<number>(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState<any>(1);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [sort, setSort] = useState("");
 
@@ -96,9 +91,15 @@ const ProductPage = () => {
 
     const location = useLocation();
     const state = location.state as CustomizedState;
-    const stateContext = useContext(StateContext);
 
     const { id, title } = state;
+
+    const { data, isFetching, error } = useGetProductsQuery({
+        id,
+        currentPage,
+        formState,
+        sort,
+    });
 
     function backToTop() {
         if (window.pageYOffset > 0) {
@@ -107,25 +108,7 @@ const ProductPage = () => {
         }
     }
 
-    useEffect(() => {
-        const getProducts = async () => {
-            setLoading(true);
-            await API.getProductsList(id, currentPage, formState, sort)
-                .then((res) => {
-                    if (res.data.results) {
-                        setData(res.data.results);
-                    } else {
-                        setData(res.data);
-                    }
-                    setCount(res.data.count);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        getProducts();
-    }, [currentPage, id, stateContext.favorite_status.status, formState, sort]);
-
-    let countNumber = Math.ceil(count / 20);
+    let countNumber = Math.ceil(data?.count / 20);
 
     const sortName = [
         {
@@ -210,7 +193,10 @@ const ProductPage = () => {
                                 </ButtonShow>
                             </BoxInside>
                         </WrapperBox>
-                        <MainCardsConstructor data={data} loading={loading} />
+                        <MainCardsConstructor
+                            data={data?.results}
+                            loading={isFetching}
+                        />
                         <Pagination
                             count={countNumber}
                             page={currentPage}

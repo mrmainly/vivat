@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -6,7 +6,6 @@ import {
     DialogTitle,
     DialogContent,
     IconButton,
-    MenuItem,
     Box,
     FormControlLabel,
     Checkbox,
@@ -14,12 +13,13 @@ import {
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import InputMask from "react-input-mask";
+import { useSelector, useDispatch } from "react-redux";
 
-import { StateContext, DispatchContext } from "../../../store";
 import { Form, Input, MyButton, MyText } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 import { SignModalProps } from "../../../interface";
+import { authModalSlice } from "../../../reducer/auth_modal_slice";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -90,11 +90,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-const SignUpModal: React.FC<SignModalProps> = ({
-    registerModal,
-    setRegisterClose,
-    setLoginOpen,
-}) => {
+const SignUpModal: React.FC<SignModalProps> = () => {
     const [passwordText, setPasswordText] = useState(false);
     const [v1, setV1] = useState(true);
     const [verifyVersion, setVerifyVersion] = useState(false);
@@ -102,9 +98,17 @@ const SignUpModal: React.FC<SignModalProps> = ({
     const [dangerText, setDangerText] = useState(false);
     const [code, setCode] = useState("");
 
+    const { openRegister } = useSelector(
+        (state: any) => state.auth_modal_slice
+    );
+    const { openLoginModal, openRegisterModal } = authModalSlice.actions;
+
+    const dispatch = useDispatch();
+
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });
+
     const onSubmit = (data: any) => {
         API.sendRegister({ ...data })
             .then((res) => {
@@ -139,19 +143,19 @@ const SignUpModal: React.FC<SignModalProps> = ({
             })
                 .then((res) => {
                     setPasswordV(false);
-                    setLoginOpen();
-                    setRegisterClose();
+                    setPasswordText(true);
+                    dispatch(openRegisterModal(false));
+                    dispatch(openLoginModal(true));
                 })
                 .catch((error) => {
                     toast.error("что то пошло не так");
                 });
-            setPasswordText(false);
         } else {
             setPasswordText(true);
         }
     };
     const handleClose = () => {
-        setRegisterClose();
+        dispatch(openRegisterModal(false));
     };
 
     return (
@@ -159,7 +163,7 @@ const SignUpModal: React.FC<SignModalProps> = ({
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
-                open={registerModal}
+                open={openRegister}
             >
                 <BootstrapDialogTitle
                     id="customized-dialog-title"
@@ -188,7 +192,10 @@ const SignUpModal: React.FC<SignModalProps> = ({
                                                 .main,
                                             cursor: "pointer",
                                         }}
-                                        onClick={setLoginOpen}
+                                        onClick={() => {
+                                            dispatch(openRegisterModal(false));
+                                            dispatch(openLoginModal(true));
+                                        }}
                                     >
                                         авторизоваться.
                                     </span>

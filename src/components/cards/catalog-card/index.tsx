@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import cookie from "js-cookie";
 
-import { DispatchContext, StateContext } from "../../../store";
 import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
@@ -73,19 +72,19 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     stocks,
 }) => {
     const navigate = useNavigate();
-    const dispatch = useContext(DispatchContext);
-    const stateContext = useContext(StateContext);
+    // const dispatch = useContext(DispatchContext);
+    // const stateContext = useContext(StateContext);
     const jwttoken = cookie.get("jwttoken");
 
     const addedFavorite = () => {
         API.addedFavorite(id)
             .then((res) => {
-                dispatch({
-                    type: "favorite_status",
-                    payload: {
-                        status: stateContext.favorite_status.status + 1,
-                    },
-                });
+                // dispatch({
+                //     type: "favorite_status",
+                //     payload: {
+                //         status: stateContext.favorite_status.status + 1,
+                //     },
+                // });
             })
             .catch((error) => toast.error("Товар не добавлен в избранное"));
     };
@@ -94,12 +93,12 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
         API.transferBasket(id)
             .then((res) => {
                 toast.success("Товар добавлен в корзину");
-                dispatch({
-                    type: "basket",
-                    payload: {
-                        status: stateContext.basket.status + 1,
-                    },
-                });
+                // dispatch({
+                //     type: "basket",
+                //     payload: {
+                //         status: stateContext.basket.status + 1,
+                //     },
+                // });
             })
             .catch(() => toast.error("Товар не найден"));
     };
@@ -107,12 +106,12 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
     const deleteFavorite = () => {
         API.deleteFavorite(fav?.fav_id)
             .then(() => {
-                dispatch({
-                    type: "favorite_status",
-                    payload: {
-                        status: stateContext.favorite_status.status + 1,
-                    },
-                });
+                // dispatch({
+                //     type: "favorite_status",
+                //     payload: {
+                //         status: stateContext.favorite_status.status + 1,
+                //     },
+                // });
             })
             .catch(() => {
                 toast.error("Товар не удален");

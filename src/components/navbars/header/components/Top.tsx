@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { MyText } from "../../..";
 import ROUTES from "../../../../routes";
 import { LOCALES } from "../../../../i18n/locales";
-import { LanguageContext } from "../../../../store";
+import { LanguageContext } from "../../../../store/LanguageContext";
 
 const TopBar = styled(Box)(({ theme }) => ({
     display: "flex",

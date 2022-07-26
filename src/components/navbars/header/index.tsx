@@ -122,25 +122,9 @@ const Header: React.FC<HeaderProps> = () => {
             </AppBar>
             <MyDrawer state={drawerOpen} handleClose={handleDrawerClose} />
 
-            <SignUpModal
-                registerModal={registerModal}
-                setRegisterClose={handleRegisterClose}
-                setRegisterOpen={handleRegisterOpen}
-                setLoginOpen={handleLoginOpen}
-            />
-            <SignInModal
-                login={login}
-                setLoginClose={handleLoginClose}
-                setRegisterClose={handleRegisterClose}
-                setRegisterOpen={handleRegisterOpen}
-                setForgotOpen={handleForgotOpen}
-            />
-
-            <ForgotPasswordModal
-                forgot={forgot}
-                setForgotClose={handleForgotClose}
-                setLoginOpen={handleLoginOpen}
-            />
+            <SignUpModal />
+            <SignInModal />
+            <ForgotPasswordModal />
 
             <ProfileDrawer
                 state={drawerProfileOpen}

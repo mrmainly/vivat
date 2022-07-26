@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import cookie from "js-cookie";
@@ -13,14 +13,15 @@ import {
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
+import { useDispatch, useSelector } from "react-redux";
 
-import { StateContext, DispatchContext } from "../../../store";
 import { toast } from "react-toastify";
 import { Form, Input, MyButton, MyText, BorderLine } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 import ROUTES from "../../../routes";
 import { SignModalProps } from "../../../interface";
+import { authModalSlice } from "../../../reducer/auth_modal_slice";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -101,47 +102,25 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-const SignIn: React.FC<SignModalProps> = ({
-    login,
-    setLoginClose,
-    setRegisterOpen,
-    setForgotOpen,
-}) => {
-    const state = useContext(StateContext);
-    const dispatch = useContext(DispatchContext);
+const SignIn: React.FC<SignModalProps> = () => {
+    const { openLogin } = useSelector((state: any) => state.auth_modal_slice);
 
     const navigate = useNavigate();
-    const jwttoken = cookie.get("jwttoken");
+    const dispatch = useDispatch();
+    const { openLoginModal, openRegisterModal, openForgotPasswordModal } =
+        authModalSlice.actions;
 
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });
-    const handleClose = () => {
-        {
-            state.auth_modal.login
-                ? dispatch({
-                      type: "auth_modal",
-                      payload: {
-                          login: false,
-                      },
-                  })
-                : setLoginClose();
-        }
-    };
 
     const onSubmit = (data: any) => {
         API.getToken({ ...data })
             .then((res) => {
+                dispatch(openLoginModal(false));
                 toast.success("авторизация прошла успешно");
                 cookie.set("jwttoken", res.data.token);
-                setLoginClose();
                 navigate(ROUTES.BASICINFORMATION);
-                dispatch({
-                    type: "basket",
-                    payload: {
-                        status: state.basket.status + 1,
-                    },
-                });
             })
             .catch((error) => {
                 toast.error("такого пользователя не существует");
@@ -149,13 +128,13 @@ const SignIn: React.FC<SignModalProps> = ({
     };
     return (
         <BootstrapDialog
-            onClose={handleClose}
+            onClose={() => dispatch(openLoginModal(false))}
             aria-labelledby="customized-dialog-title"
-            open={login}
+            open={openLogin}
         >
             <BootstrapDialogTitle
                 id="customized-dialog-title"
-                onClose={handleClose}
+                onClose={() => dispatch(openLoginModal(false))}
             >
                 Авторизация
             </BootstrapDialogTitle>
@@ -195,8 +174,8 @@ const SignIn: React.FC<SignModalProps> = ({
                                 justifyContent: "center",
                             }}
                             onClick={() => {
-                                handleClose();
-                                setForgotOpen();
+                                dispatch(openLoginModal(false));
+                                dispatch(openForgotPasswordModal(true));
                             }}
                         >
                             Забыли пароль?
@@ -209,19 +188,14 @@ const SignIn: React.FC<SignModalProps> = ({
                     <MyButton
                         fullWidth
                         onClick={() => {
-                            handleClose();
-                            setRegisterOpen();
+                            dispatch(openLoginModal(false));
+                            dispatch(openRegisterModal(true));
                         }}
                     >
                         Регистрация
                     </MyButton>
                 </FormWrapper>
             </ModalContent>
-            {/* <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
-                        Save changes
-                    </Button>
-                </DialogActions> */}
         </BootstrapDialog>
     );
 };
