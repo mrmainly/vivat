@@ -15,6 +15,7 @@ import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import MyContainer from "../../container";
 import {
@@ -149,7 +150,10 @@ const MobileDown = () => {
                                 : handleLoginOpen();
                         }}
                     >
-                        <img src="/img/User_cicrle_light.png" />
+                        <AccountCircleIcon
+                            sx={{ color: "#55CD61" }}
+                            fontSize="large"
+                        />
                     </IconButton>
                     <IconButton
                         onClick={() => {
