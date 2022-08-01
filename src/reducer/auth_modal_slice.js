@@ -4,6 +4,7 @@ const initialState = {
     openLogin: false,
     openRegister: false,
     openForgotPassword: false,
+    auth_status: false,
 };
 
 export const authModalSlice = createSlice({
@@ -18,6 +19,9 @@ export const authModalSlice = createSlice({
         },
         openForgotPasswordModal(state, action) {
             state.openForgotPassword = action.payload;
+        },
+        changeAuthStatus(state, action) {
+            state.auth_status = action.payload;
         },
     },
 });

@@ -19,6 +19,12 @@ import ThemeMain from "../../../theme";
 import API from "../../../api";
 import { SignModalProps } from "../../../interface";
 import { authModalSlice } from "../../../reducer/auth_modal_slice";
+import {
+    useForgotPasswordChangePhoneAndMailMutation,
+    useForgotPasswordV1Mutation,
+    useForgotPasswordV2Mutation,
+    useForgotPasswordV3Mutation,
+} from "../../../services/AuthService";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -106,6 +112,10 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
     );
     const dispatch = useDispatch();
     const { openForgotPasswordModal } = authModalSlice.actions;
+    const [togglePhoneAndMail] = useForgotPasswordChangePhoneAndMailMutation();
+    const [postForgotV1] = useForgotPasswordV1Mutation();
+    const [postForgotV2] = useForgotPasswordV2Mutation();
+    const [postForgotV3] = useForgotPasswordV3Mutation();
 
     const [toggle, setToggle] = useState("Email");
 
@@ -119,29 +129,36 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
 
     const choiceAPI = (data: any) => {
         setPhone(data.phone);
-        API.sendPhoneMailForgotPassword(data, toggle)
-            .then((res) => {
-                if (res) {
+        togglePhoneAndMail({ data: data, toggle: toggle })
+            .then((res: any) => {
+                console.log(res);
+                if (res.data) {
                     setSecondForm(true);
                     setFirstForm(false);
+                } else {
+                    toast.error(
+                        toggle === "phone"
+                            ? "Номер телефона не найден"
+                            : "Электронная почта не найдена"
+                    );
                 }
             })
-            .catch((err) => {
-                toast.error(
-                    toggle === "phone"
-                        ? "Номер телефона не найден"
-                        : "Электронная почта не найдена"
-                );
+            .catch(() => {
+                toast.error("что то пошло не так");
             });
     };
     const verify = (data: any) => {
-        API.sendVerifyCode({ code: data.code })
-            .then((res) => {
-                setSecondForm(false);
-                setThreeForm(true);
+        postForgotV1({ code: data.code })
+            .then((res: any) => {
+                if (res.data) {
+                    setSecondForm(false);
+                    setThreeForm(true);
+                } else {
+                    toast.error(res.error.data.errors[0]);
+                }
             })
             .catch((err) => {
-                toast.error("Не правильный код");
+                toast.error("что то пошло не так");
             });
     };
 
@@ -157,12 +174,15 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
 
     const resetPassword = (data: any) => {
         if (data.password === data.forgot_password) {
-            API.reset_password(data)
-                .then((res) => {
-                    handleClose();
-                    setLoginOpen();
-                })
-                .catch((err) => toast.error("что то пошло не так"));
+            postForgotV3(data).then((res: any) => {
+                if (res.data) {
+                    // handleClose();
+                    // setLoginOpen();
+                } else {
+                    toast.error("что то пошло не так");
+                }
+                console.log(res);
+            });
         } else {
             alert("error");
         }

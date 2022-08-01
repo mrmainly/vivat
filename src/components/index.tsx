@@ -8,7 +8,6 @@ import BorderLine from "./borderLine";
 import Footer from "./footer";
 import ProductCard from "./cards/product-card";
 import MyButton from "./UI/button";
-import ProfileDrawer from "./drawers/profile-drawer";
 import Input from "./UI/input";
 import SignInModal from "./modals/sign-in";
 import SignUpModal from "./modals/sign-up";
@@ -33,7 +32,6 @@ import Tag from "./tag";
 import StockCard from "./cards/stock-card";
 import Mobile from "./navbars/mobile";
 import StatusCard from "./cards/status-card";
-import SubProductDrawer from "./drawers/sub-product-drawer";
 import AddressSideBar from "./sidebars/address-sidebar";
 
 import SkeletonCatalogVersion from "./skeletons/catalog-card-skeleton";
@@ -59,7 +57,6 @@ export {
     Footer,
     ProductCard,
     MyButton,
-    ProfileDrawer,
     Input,
     SignInModal,
     SignUpModal,
@@ -84,7 +81,6 @@ export {
     StockCard,
     Mobile,
     StatusCard,
-    SubProductDrawer,
     SkeletonCatalogVersion,
     SkeletonBasicInformation,
     SkeletonProductDetail,

@@ -22,6 +22,7 @@ import API from "../../../api";
 import ROUTES from "../../../routes";
 import { SignModalProps } from "../../../interface";
 import { authModalSlice } from "../../../reducer/auth_modal_slice";
+import { useLoginMutation } from "../../../services/AuthService";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -104,6 +105,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 const SignIn: React.FC<SignModalProps> = () => {
     const { openLogin } = useSelector((state: any) => state.auth_modal_slice);
+    const [postLogin] = useLoginMutation();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -115,15 +117,20 @@ const SignIn: React.FC<SignModalProps> = () => {
     });
 
     const onSubmit = (data: any) => {
-        API.getToken({ ...data })
-            .then((res) => {
-                dispatch(openLoginModal(false));
-                toast.success("авторизация прошла успешно");
-                cookie.set("jwttoken", res.data.token);
-                navigate(ROUTES.BASICINFORMATION);
+        postLogin({ ...data })
+            .then((res: any) => {
+                if (res.data) {
+                    dispatch(openLoginModal(false));
+                    toast.success("авторизация прошла успешно");
+                    cookie.set("jwttoken", res.data.token);
+                    navigate(ROUTES.BASICINFORMATION);
+                    window.location.reload();
+                } else {
+                    toast.error(res.error.data.errors[0]);
+                }
             })
             .catch((error) => {
-                toast.error("такого пользователя не существует");
+                toast.error("что то пошло нет так");
             });
     };
     return (

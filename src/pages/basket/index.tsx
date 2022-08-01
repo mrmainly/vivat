@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import { Box, MenuItem, CircularProgress } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,10 @@ import { styled } from "@mui/system";
 import { BasketCard, MyText, MyButton } from "../../components";
 import API from "../../api";
 import ROUTES from "../../routes";
+import {
+    useGetBasketQuery,
+    useDeleteBasketAllMutation,
+} from "../../services/BasketService";
 
 const ActionBox = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -52,54 +56,31 @@ const TotalBox = styled(Box)(({ theme }) => ({
 }));
 
 const Basket = () => {
-    const [data, setData] = useState<any>([]);
-    const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState("");
-
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const getOrders = async () => {
-            setLoading(true);
-            await API.getCartsList()
-                .then((res: any) => {
-                    setData(res.data);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-
-        getOrders();
-    }, [status]);
+    const { data, isLoading, isFetching } = useGetBasketQuery("");
+    const [deleteteBasketAll] = useDeleteBasketAllMutation();
 
     const deleteBasket = () => {
-        API.deleteOrdersAll()
+        deleteteBasketAll("")
             .then((res) => {
-                setStatus(`delete_all ${status + 1}`);
                 toast.success("Корзина удалена");
-                // dispatch({
-                //     type: "basket",
-                //     payload: {
-                //         status: basketStatus.basket.status + 1,
-                //     },
-                // });
             })
             .catch(() => toast.error("Что то пошло не так"));
     };
 
-    const skeletonData = 1;
+    console.log(data);
 
     return (
         <>
             <MyText variant="h6">Корзина</MyText>
 
-            {loading ? (
+            {isLoading ? (
                 <Box sx={{ mt: 10, display: "flex", justifyContent: "center" }}>
                     {" "}
                     <CircularProgress />
                 </Box>
             ) : data.items ? (
-                <Box sx={{ opacity: loading ? 0.5 : 1 }}>
+                <Box sx={{ opacity: isFetching ? 0.5 : 1 }}>
                     <ActionBox>
                         <MyText variant="body2" sx={{ color: "grey" }}>
                             {data.total_count} товаров на сумму{" "}
@@ -115,12 +96,7 @@ const Basket = () => {
                         </DeleteBox>
                     </ActionBox>
                     {data?.items.map((item: any, index: number) => (
-                        <BasketCard
-                            key={index}
-                            {...item}
-                            status={status}
-                            setStatus={setStatus}
-                        />
+                        <BasketCard key={index} {...item} />
                     ))}
                     <TotalBox>
                         <Box

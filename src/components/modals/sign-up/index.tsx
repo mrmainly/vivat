@@ -20,6 +20,11 @@ import ThemeMain from "../../../theme";
 import API from "../../../api";
 import { SignModalProps } from "../../../interface";
 import { authModalSlice } from "../../../reducer/auth_modal_slice";
+import {
+    useRegisterV1Mutation,
+    useRegisterV2Mutation,
+    useRegisterV3Mutation,
+} from "../../../services/AuthService";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -102,6 +107,9 @@ const SignUpModal: React.FC<SignModalProps> = () => {
         (state: any) => state.auth_modal_slice
     );
     const { openLoginModal, openRegisterModal } = authModalSlice.actions;
+    const [postRegisterV1] = useRegisterV1Mutation();
+    const [postRegisterV2] = useRegisterV2Mutation();
+    const [postRegsiterV3] = useRegisterV3Mutation();
 
     const dispatch = useDispatch();
 
@@ -110,29 +118,29 @@ const SignUpModal: React.FC<SignModalProps> = () => {
     });
 
     const onSubmit = (data: any) => {
-        API.sendRegister({ ...data })
-            .then((res) => {
+        postRegisterV1({ ...data }).then((res: any) => {
+            if (res.data) {
                 setCode(res.data.code);
                 setV1(false);
                 setVerifyVersion(true);
-            })
-            .catch((error) => {
+            } else {
                 setDangerText(true);
-            });
+            }
+        });
     };
     const onSubmitVerify = (data: any) => {
-        API.sendVerifyCode({ ...data })
-            .then((res) => {
+        postRegisterV2({ ...data }).then((res: any) => {
+            if (res.data) {
                 setVerifyVersion(false);
                 setPasswordV(true);
-            })
-            .catch(() => {
+            } else {
                 toast.error("вы ввели не правильные данные");
-            });
+            }
+        });
     };
     const onSubmitPassword = (data: any) => {
         if (data.password == data.forgot_password) {
-            API.sendPassword({
+            postRegsiterV3({
                 password: data.password,
                 code: code,
                 first_name: data.first_name,
@@ -141,11 +149,16 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                 email: data.email,
                 birth_date: data.birth_date,
             })
-                .then((res) => {
-                    setPasswordV(false);
-                    setPasswordText(true);
-                    dispatch(openRegisterModal(false));
-                    dispatch(openLoginModal(true));
+                .then((res: any) => {
+                    if (res.data) {
+                        setPasswordV(false);
+                        setPasswordText(true);
+                        dispatch(openRegisterModal(false));
+                        dispatch(openLoginModal(true));
+                    } else {
+                        toast.error("что то пошло не так");
+                        console.log(res);
+                    }
                 })
                 .catch((error) => {
                     toast.error("что то пошло не так");

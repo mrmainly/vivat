@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { TextField, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
@@ -14,6 +13,7 @@ import {
 import API from "../../../api";
 
 import { FormattedMessage } from "react-intl";
+import { useGetAccountUserQuery } from "../../../services/AccountUser";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box, IconButton } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,10 @@ import { BorderLine, MyText, MyButton } from "../..";
 import ThemeMain from "../../../theme";
 import API from "../../../api";
 import ROUTES from "../../../routes";
+import {
+    useDeleteFavoriteMutation,
+    useTransferToBasketMutation,
+} from "../../../services/FavoritesService";
 
 interface FavoritesCardProps {
     GoodsCode: any;
@@ -24,47 +28,36 @@ interface FavoritesCardProps {
 
 const FavoritesCard: React.FC<FavoritesCardProps> = ({
     stock,
-    deliveryStatus,
     price,
-    number,
     id,
     discountVal,
-    status,
-    setStatus,
     GoodsCode,
 }) => {
+    const [deleteFavoriteId] = useDeleteFavoriteMutation();
+    const [transferToBasket] = useTransferToBasketMutation();
     const navigate = useNavigate();
 
     const TransferFavorite = () => {
-        API.transferFavorite(id)
-            .then((res) => {
-                // dispatch({
-                //     type: "basket",
-                //     payload: {
-                //         status: stateContext.basket.status + 1,
-                //     },
-                // });
-                navigate(ROUTES.BASKET);
-                toast.success("Товар добавлен в корзину");
+        transferToBasket({ id })
+            .then((res: any) => {
+                if (res.data) {
+                    navigate(ROUTES.BASKET);
+                    toast.success("Товар добавлен в корзину");
+                } else {
+                    toast.error("Товар не найден");
+                }
             })
             .catch(() => toast.error("Товар не найден"));
     };
 
     const deleteFavorite = () => {
-        API.deleteFavorite(id)
-            .then(() => {
+        deleteFavoriteId({ id }).then((res: any) => {
+            if (res.data) {
                 toast.success("Товар удален");
-                setStatus(`delete ${status + 1}`);
-                // dispatch({
-                //     type: "favorite_status",
-                //     payload: {
-                //         status: stateContext.favorite_status.status + 1,
-                //     },
-                // });
-            })
-            .catch(() => {
+            } else {
                 toast.error("Товар не удален");
-            });
+            }
+        });
     };
 
     return (

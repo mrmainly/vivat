@@ -1,43 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
 import MainInfo from "./components/MainInfo";
 import DescriptionScreen from "./components/Tab";
-import API from "../../api";
-import { CircularProgress } from "@mui/material";
 import { SkeletonProductDetail } from "../../components";
+import {
+    useGetProductDetailQuery,
+    useGetProductAnalQuery,
+} from "../../services/ProductsService";
 
 const ProductDetail = () => {
-    const [data, setData] = useState<any>();
-    const [analogData, setAnalogData] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [instructions, setInstructions] = useState("");
-
     const params = useParams();
 
-    useEffect(() => {
-        const getProductId = async () => {
-            setLoading(true);
-            await API.getProductId(params.id)
-                .then((res) => {
-                    setData(res.data);
-                    return res.data.id;
-                })
-                .then((resId) => {
-                    API.getProductAnal(resId).then((res) => {
-                        if (res.data.results) {
-                            setAnalogData(res.data.results);
-                        } else {
-                            setAnalogData(res.data);
-                        }
-                    });
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        getProductId();
-    }, [params.id]);
+    const { data } = useGetProductDetailQuery({
+        id: params.id,
+    });
+    const { data: dataAnalog, isFetching: isFetchingAnalog } =
+        useGetProductAnalQuery({ id: params.id });
+
+    console.log(dataAnalog);
+
     return (
         <>
             {data ? (
@@ -49,8 +32,8 @@ const ProductDetail = () => {
                     /> */}
                     <DescriptionScreen
                         instructions={data.esgood[0]}
-                        analData={analogData}
-                        loading={loading}
+                        analData={dataAnalog?.results}
+                        loading={isFetchingAnalog}
                     />
                 </>
             ) : (

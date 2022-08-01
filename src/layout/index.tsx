@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import cookie from "js-cookie";
+import { useSelector } from "react-redux";
 
 import "./layout.css";
 import {
@@ -18,19 +19,7 @@ import {
 } from "../components";
 
 const Layout = () => {
-    const [mobileToShow, setMobileToShow] = useState(false);
-
     const jwttoken = cookie.get("jwttoken");
-
-    // useEffect(() => {
-    //     const setResponsiveness = () => {
-    //         return window.innerWidth < 900
-    //             ? setMobileToShow(true)
-    //             : setMobileToShow(false);
-    //     };
-    //     setResponsiveness();
-    //     window.addEventListener("resize", () => setResponsiveness());
-    // }, []);
 
     return (
         <div style={{ overflow: "hidden" }}>

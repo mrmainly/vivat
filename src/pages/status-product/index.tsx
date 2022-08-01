@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 import ROUTES from "../../routes";
 
 import API from "../../api";
 import { MyOrdersTable } from "../../components";
+import { useGetOrdersMeStatusQuery } from "../../services/StatusService";
 
 const StatusProduct = () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { data, isLoading } = useGetOrdersMeStatusQuery("");
 
-    useEffect(() => {
-        const getOrdersMeStatus = async () => {
-            await API.getOrdersMeStatus()
-                .then((res) => {
-                    setData(res.data);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        getOrdersMeStatus();
-    }, []);
+    console.log(data);
 
     return (
         <Box>
-            {loading ? (
+            {isLoading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>

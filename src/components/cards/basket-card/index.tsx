@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 
-import { Box, IconButton, Button, TextField, ButtonGroup } from "@mui/material";
+import { Box, IconButton, Button, ButtonGroup } from "@mui/material";
 import { styled } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
@@ -11,12 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { MyText } from "../..";
 import API from "../../../api";
 import ROUTES from "../../../routes";
-// import { DispatchContext, StateContext } from "../../../store";
+import {
+    useDeleteBasketMutation,
+    usePatchBasketCountMutation,
+} from "../../../services/BasketService";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
-    // alignItems: 'center',
-    // justifyContent: 'center',
     background: "#FFFFFF",
     borderRadius: 12,
     margin: "5px 0px",
@@ -102,54 +103,38 @@ interface BasketProps {
 
 const BasketCard: React.FC<BasketProps> = ({
     price,
-    qnt,
     GoodsCode,
-    discountVal,
-    discountPr,
-    order,
     id,
-    status,
-    setStatus,
     count,
     price_one_goods,
 }) => {
+    const [deleteBasketId] = useDeleteBasketMutation();
+    const [patchBasketCount] = usePatchBasketCountMutation();
+
     const patchCountBasket = async (type: string) => {
         if (count) {
             let newCount;
             newCount = type === "plus" ? count + 1 : count - 1;
-            API.patchBasket(id, newCount)
-                .then((res) => {
-                    setStatus(`delete_item_ ${status + 1}`);
-                    // dispatch({
-                    //     type: "basket",
-                    //     payload: {
-                    //         status: basketStatus.basket.status + 1,
-                    //     },
-                    // });
+            patchBasketCount({ id, newCount })
+                .then((res: any) => {
+                    if (res.error) {
+                        toast.error(
+                            "Количество товара на данный момент нельзя изменить"
+                        );
+                    }
                 })
                 .catch((error) => {
-                    toast.error(
-                        "Количество товара на данный момент нельзя изменить"
-                    );
+                    toast.error("что то пошло не так");
                 });
         }
     };
 
     const navigate = useNavigate();
-    // const dispatch = useContext(DispatchContext);
-    // const basketStatus = useContext(StateContext);
 
     const deleteProduct = () => {
-        API.deleteProductItem(id)
+        deleteBasketId({ id })
             .then((res) => {
                 toast.success("Товар удален");
-                setStatus(`delete_item_ ${status + 1}`);
-                // dispatch({
-                //     type: "basket",
-                //     payload: {
-                //         status: basketStatus.basket.status + 1,
-                //     },
-                // });
             })
             .catch((err) => {
                 toast.error("Товар не удален");
@@ -191,9 +176,7 @@ const BasketCard: React.FC<BasketProps> = ({
                 <MyText variant="body2">
                     Код товара:<span style={{ marginLeft: 15 }}>{id}</span>
                 </MyText>
-                {/* <MyText variant="body2">
-                    Цена:<span style={{ marginLeft: 15 }}>{price}</span>
-                </MyText> */}
+
                 <MyText variant="body2" sx={{ color: "#55CD61" }}>
                     В наличии
                 </MyText>

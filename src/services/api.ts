@@ -1,14 +1,10 @@
-import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import cookie from "js-cookie";
 
-const jwttoken = cookie.get("jwttoken");
-
-// Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
     baseUrl: "https://xn----7sbbagaytx2c4ad.xn--p1ai/",
     prepareHeaders: (headers, { getState }) => {
-        // By default, if we have a token in the store, let's use that for authenticated requests
-        const token = jwttoken;
+        const token = cookie.get("jwttoken");
         if (token) {
             headers.set("authorization", `Token ${token}`);
         }
@@ -16,14 +12,18 @@ const baseQuery = fetchBaseQuery({
     },
 });
 
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 6 });
-
 export const api = createApi({
     reducerPath: "splitApi",
 
-    baseQuery: baseQueryWithRetry,
+    baseQuery: baseQuery,
 
-    tagTypes: ["Products", "Provider"],
+    tagTypes: [
+        "Baskets",
+        "Products",
+        "Markets_Detail",
+        "Favorites",
+        "Product_detail",
+    ],
 
     endpoints: () => ({}),
 });

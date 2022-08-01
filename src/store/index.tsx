@@ -7,12 +7,13 @@ import {
 import { api } from "../services/api";
 import auth_modal_slice from "../reducer/auth_modal_slice";
 import drawers_slice from "../reducer/drawers_slice";
+import basket_count_slice from "../reducer/basket_count_slice";
 
 const rootReducer = combineReducers({
-    // productReducer,
     [api.reducerPath]: api.reducer,
     auth_modal_slice,
     drawers_slice,
+    basket_count_slice,
 });
 
 export const setupStore = () => {

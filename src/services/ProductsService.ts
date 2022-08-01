@@ -32,9 +32,25 @@ export const products = api.injectEndpoints({
                           }`
                         : ""
                 }`,
-            providesTags: (result) => [{ type: "Products" }],
+            providesTags: ["Products"],
+        }),
+        getProductCatalog: build.query({
+            query: () => `api/v1/goods/catalogue/`,
+        }),
+        getProductDetail: build.query({
+            query: ({ id }) => `api/v1/goods/${id}/`,
+            providesTags: ["Products", "Product_detail"],
+        }),
+        getProductAnal: build.query({
+            query: ({ id }) => `api/v1/goods/analogue/${id}`,
+            providesTags: ["Products"],
         }),
     }),
 });
 
-export const { useGetProductsQuery } = products;
+export const {
+    useGetProductsQuery,
+    useGetProductCatalogQuery,
+    useGetProductDetailQuery,
+    useGetProductAnalQuery,
+} = products;

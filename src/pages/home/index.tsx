@@ -26,6 +26,8 @@ const Home = () => {
                 <Skeleton
                     style={{ height: 500, borderRadius: 50, marginBottom: 50 }}
                 />
+            ) : error ? (
+                ""
             ) : (
                 <HomeSlider data={promotion?.results} />
             )}

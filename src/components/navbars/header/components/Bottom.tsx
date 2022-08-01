@@ -1,9 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/system";
 import {
     Box,
     MenuItem,
-    Grid,
     Badge,
     ButtonGroup,
     IconButton,
@@ -112,17 +111,17 @@ const Bottom: React.FC<BottomProps> = ({ setLoading }) => {
             .catch((error) => console.log(error));
     };
 
-    useEffect(() => {
-        if (jwttoken) {
-            API.getCartsList()
-                .then((res) => {
-                    setBasketCount(res.data.total_qnt);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    }, [jwttoken]);
+    // useEffect(() => {
+    //     if (jwttoken) {
+    //         API.getCartsList()
+    //             .then((res) => {
+    //                 setBasketCount(res.data.total_qnt);
+    //             })
+    //             .catch((error) => {
+    //                 console.log(error);
+    //             });
+    //     }
+    // }, [jwttoken]);
     return (
         <BottomBar>
             <BottomBarItem sx={{ mr: 2 }}>

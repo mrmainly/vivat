@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import { Grid, Box, IconButton, MenuItem } from "@mui/material";
+import { Grid, Box, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -11,8 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { MyText, MyButton } from "../../../components";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ThemeMain from "../../../theme";
-import API from "../../../api";
 import ROUTES from "../../../routes";
+import { useTransferBasketMutation } from "../../../services/BasketService";
+import {
+    useAddedFavoriteMutation,
+    useDeleteFavoriteMutation,
+} from "../../../services/FavoritesService";
 
 const Item = styled(Box)(({ theme }) => ({
     background: "white",
@@ -67,54 +71,42 @@ interface MainInfoProps {
 }
 
 const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
-    // const state = useContext(StateContext);
-    // const dispatch = useContext(DispatchContext);
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
 
-    // const transferBasket = () => {
-    //     API.transferBasket(data.id)
-    //         .then((res) => {
-    //             toast.success("Товар добавлен в корзину");
-    //             dispatch({
-    //                 type: "basket",
-    //                 payload: {
-    //                     status: state.basket.status + 1,
-    //                 },
-    //             });
-    //         })
-    //         .catch((error) => {
-    //             toast.error("Товар не найден");
-    //         });
-    // };
+    const [transferBasketId] = useTransferBasketMutation();
+    const [addedTransferId] = useAddedFavoriteMutation();
+    const [deleteFavoriteId] = useDeleteFavoriteMutation();
 
-    // const addedFavorite = () => {
-    //     API.addedFavorite(data.id)
-    //         .then((res) => {
-    //             dispatch({
-    //                 type: "favorite_status",
-    //                 payload: {
-    //                     status: state.favorite_status.status + 1,
-    //                 },
-    //             });
-    //         })
-    //         .catch((error) => toast.error("Товар не добавлен в избранное"));
-    // };
+    const addedFavorite = () => {
+        addedTransferId({ id: data.id })
+            .then((res: any) => {
+                if (res.error) {
+                    toast.error("Товар не добавлен в избранное");
+                }
+            })
+            .catch((error) => toast.error("Товар не добавлен в избранное"));
+    };
 
-    // const deleteFavorite = () => {
-    //     API.deleteFavorite(data.fav?.fav_id)
-    //         .then(() => {
-    //             dispatch({
-    //                 type: "favorite_status",
-    //                 payload: {
-    //                     status: state.favorite_status.status + 1,
-    //                 },
-    //             });
-    //         })
-    //         .catch(() => {
-    //             toast.error("Товар не удален");
-    //         });
-    // };
+    const TransferBasket = () => {
+        transferBasketId({ id: data.id })
+            .then((res: any) => {
+                if (res.data) {
+                    toast.success("Товар добавлен в корзину");
+                } else {
+                    toast.error("Товара нет в наличии");
+                }
+            })
+            .catch(() => toast.error("Товар не найден"));
+    };
+
+    const deleteFavorite = () => {
+        deleteFavoriteId({ id: data.fav?.fav_id }).then((res: any) => {
+            if (res.error) {
+                toast.error("Товар не удален");
+            }
+        });
+    };
 
     const array = [
         {
@@ -265,13 +257,13 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                         )}
                         <Box sx={{ mt: 2 }}>
                             <MyButton
-                            // onClick={() => {
-                            //     jwttoken
-                            //         ? transferBasket()
-                            //         : toast.error(
-                            //               "данная операция доступно только при авторизации"
-                            //           );
-                            // }}
+                                onClick={() => {
+                                    jwttoken
+                                        ? TransferBasket()
+                                        : toast.error(
+                                              "данная операция доступно только при авторизации"
+                                          );
+                                }}
                             >
                                 Добавить в корзину
                             </MyButton>
@@ -279,7 +271,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             {data?.fav?.is_fav ? (
                                 <IconButton
                                     sx={{ ml: 5 }}
-                                    // onClick={deleteFavorite}
+                                    onClick={deleteFavorite}
                                 >
                                     <FavoriteIcon
                                         sx={{ color: "#55CD61" }}
@@ -289,13 +281,13 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             ) : (
                                 <IconButton
                                     sx={{ ml: 5 }}
-                                    // onClick={() => {
-                                    //     jwttoken;
-                                    //     ? addedFavorite()
-                                    //     : toast.error(
-                                    //           "данная операция доступно только при авторизации"
-                                    //       );
-                                    // }}
+                                    onClick={() => {
+                                        jwttoken
+                                            ? addedFavorite()
+                                            : toast.error(
+                                                  "данная операция доступно только при авторизации"
+                                              );
+                                    }}
                                 >
                                     <FavoriteBorderIcon
                                         sx={{ color: "#55CD61" }}

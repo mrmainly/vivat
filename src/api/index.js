@@ -30,28 +30,6 @@ const api = (url) => {
 };
 
 class API {
-    //sign-in
-    getToken({ username, password }) {
-        const result = api("api/v1/users/login/").post(null, {
-            username: username,
-            password: password,
-        });
-        return result;
-    }
-
-    //sign-up
-    sendRegister(data) {
-        return api("api/v1/users/code/1/send/").post(null, data);
-    }
-
-    sendPassword(data) {
-        const result = api("api/v1/users/code/3/set_password/").post(
-            null,
-            data
-        );
-        return result;
-    }
-
     //verifi code
     sendVerifyCode(data) {
         const result = api("api/v1/users/code/2/verify/").post(null, data);
@@ -94,31 +72,6 @@ class API {
         });
     }
 
-    //products
-    async getProductsList(id, page, formState, sort) {
-        let result = await api(
-            `api/v1/goods/?group_id=${id}&page=${page}
-            ${formState
-                ? `
-            &notRecept=${formState.notRecept ? formState.notRecept : ""
-                }&jnvls=${formState.jnvls ? formState.jnvls : ""}&ordering_qty=${formState.ordering_qty ? formState.ordering_qty : ""
-                }&price_min=${formState.min_price}&price_max=${formState.max_price
-                }&producer=${formState.producer}${sort == "name" || sort == "-name"
-                    ? `&ordering_name=${sort ? sort : ""}`
-                    : ""
-                }${sort == "priceSale" || sort == "-priceSale"
-                    ? `&ordering_price=${sort ? sort : ""}`
-                    : ""
-                }${sort == "good_views" || sort == "-good_views"
-                    ? `&good_views=${sort ? sort : ""}`
-                    : ""
-                }`
-                : ""
-            }`
-        ).get();
-        return result;
-    }
-
     getAutoComplite(value) {
         const result = api(`api/v1/goods/autocomplete/?name=${value}`).get();
         return result;
@@ -126,33 +79,6 @@ class API {
 
     productsSearch(name) {
         const result = api(`api/v1/goods/search/?name=${name}`).get();
-        return result;
-    }
-
-    transferBasket(id) {
-        const result = api(`api/v1/carts/${id}/`).post(null);
-        return result;
-    }
-
-    async getProductCatalog() {
-        let result = await api(`api/v1/goods/catalogue/`).get();
-        return result;
-    }
-
-    async getProductAnal(id) {
-        let result = await api(`api/v1/goods/analogue/${id}`).get();
-        return result;
-    }
-
-    async getProductSubCatalog(id) {
-        let result = await api(
-            `api/v1/goods/catalogue/subcatalogue/${id}`
-        ).get();
-        return result;
-    }
-
-    async getProductId(id) {
-        let result = await api(`api/v1/goods/${id}/`).get();
         return result;
     }
 
@@ -249,11 +175,12 @@ class API {
     //blog
     async getBlog(query, type) {
         let result = await api(
-            `api/v1/blogs/${type == "query"
-                ? query
-                    ? `?query=${query}`
-                    : ""
-                : `?tags_query=${query}`
+            `api/v1/blogs/${
+                type == "query"
+                    ? query
+                        ? `?query=${query}`
+                        : ""
+                    : `?tags_query=${query}`
             }`
         ).get();
         return result;

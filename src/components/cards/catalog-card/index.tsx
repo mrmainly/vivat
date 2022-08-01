@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 
 import { Box, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
@@ -11,14 +11,17 @@ import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
 import API from "../../../api";
+import { useTransferBasketMutation } from "../../../services/BasketService";
+import {
+    useAddedFavoriteMutation,
+    useDeleteFavoriteMutation,
+} from "../../../services/FavoritesService";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "start",
     alignItems: "start",
-    // alignItems: 'center',
-    // justifyContent: 'center',
     padding: 10,
     background: "#FFFFFF",
     margin: "0 auto",
@@ -32,11 +35,6 @@ const Root = styled(Box)(({ theme }) => ({
     [theme.breakpoints.down("sm")]: {
         width: "92%",
     },
-}));
-
-const Img = styled("img")(({ theme }) => ({
-    background: "red",
-    width: "100%",
 }));
 
 const ImgItem = styled(Box)(({ theme }) => ({
@@ -59,63 +57,47 @@ const CombinedBox = styled(Box)(({ theme }) => ({
 
 const CatalogCard: React.FC<GoodsCardProps> = ({
     img,
-    description,
-    price,
-    specialPrice,
     specialText,
     id,
     name,
-    status,
-    setStatus,
     producer,
     fav,
     stocks,
 }) => {
     const navigate = useNavigate();
-    // const dispatch = useContext(DispatchContext);
-    // const stateContext = useContext(StateContext);
     const jwttoken = cookie.get("jwttoken");
+    const [transferBasketId] = useTransferBasketMutation();
+    const [addedTransferId] = useAddedFavoriteMutation();
+    const [deleteFavoriteId] = useDeleteFavoriteMutation();
 
     const addedFavorite = () => {
-        API.addedFavorite(id)
-            .then((res) => {
-                // dispatch({
-                //     type: "favorite_status",
-                //     payload: {
-                //         status: stateContext.favorite_status.status + 1,
-                //     },
-                // });
+        addedTransferId({ id })
+            .then((res: any) => {
+                if (res.error) {
+                    toast.error("Товар не добавлен в избранное");
+                }
             })
             .catch((error) => toast.error("Товар не добавлен в избранное"));
     };
 
-    const TransferFavorite = () => {
-        API.transferBasket(id)
-            .then((res) => {
-                toast.success("Товар добавлен в корзину");
-                // dispatch({
-                //     type: "basket",
-                //     payload: {
-                //         status: stateContext.basket.status + 1,
-                //     },
-                // });
+    const TransferBasket = () => {
+        transferBasketId({ id })
+            .then((res: any) => {
+                if (res.data) {
+                    toast.success("Товар добавлен в корзину");
+                } else {
+                    toast.error("Товара нет в наличии");
+                }
             })
             .catch(() => toast.error("Товар не найден"));
     };
 
     const deleteFavorite = () => {
-        API.deleteFavorite(fav?.fav_id)
-            .then(() => {
-                // dispatch({
-                //     type: "favorite_status",
-                //     payload: {
-                //         status: stateContext.favorite_status.status + 1,
-                //     },
-                // });
-            })
-            .catch(() => {
+        deleteFavoriteId({ id: fav?.fav_id }).then((res: any) => {
+            if (res.error) {
                 toast.error("Товар не удален");
-            });
+            }
+        });
     };
 
     return (
@@ -213,7 +195,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                     size="medium"
                     onClick={() => {
                         jwttoken
-                            ? TransferFavorite()
+                            ? TransferBasket()
                             : toast.error(
                                   "данная операция доступно только при авторизации"
                               );
