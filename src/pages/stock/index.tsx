@@ -1,45 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Box, Grid, Pagination, CircularProgress } from "@mui/material";
 
 import { MyText, StockCard } from "../../components";
-import API from "../../api";
+import { useGetPromotionQuery } from "../../services/PromotionService";
 
 const Stock = () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [count, setCount] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState(1);
 
-    let countNumber = Math.ceil(count / 10);
+    const { data, isFetching, error } = useGetPromotionQuery({ currentPage });
 
-    useEffect(() => {
-        const getPromotion = async () => {
-            setLoading(true);
-            await API.getPromotion()
-                .then((res) => {
-                    setCount(res.data.count);
-                    setData(res.data.results);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            setLoading(false);
-        };
-        getPromotion();
-    }, []);
+    let countNumber = Math.ceil(data?.count / 10);
 
     return (
         <Box>
             <MyText variant="h5">Акции</MyText>
-            {loading ? (
+            {isFetching ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
                     <CircularProgress />
                 </Box>
             ) : (
                 <>
                     <Grid container spacing={2} sx={{ mt: 2 }}>
-                        {data.map((item: any, index: number) => (
+                        {data?.results.map((item: any, index: number) => (
                             <Grid
                                 item
                                 lg={3}

@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 import { MyText, Tag } from "../../components";
-import API from "../../api";
+import { useGetBlogDetailQuery } from "../../services/BlogService";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
-    // alignItems: 'center',
-    // justifyContent: 'center',
     borderRadius: "12px 0",
     justifyContent: "start",
     width: "100%",
@@ -34,35 +31,14 @@ const Img = styled("img")(({ theme }) => ({
     },
 }));
 
-interface DataProps {
-    name: string;
-}
-
 const BlogDetail = () => {
-    const [data, setData] = useState<any>();
-    const [loading, setLoading] = useState(false);
-
     const params = useParams();
 
-    useEffect(() => {
-        const getBlogDetail = async () => {
-            setLoading(true);
-            await API.getBlogDetail(params.id)
-                .then((res) => {
-                    console.log(res);
-                    setData(res.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            setLoading(false);
-        };
-        getBlogDetail();
-    }, []);
+    const { data, isLoading, error } = useGetBlogDetailQuery({ id: params.id });
 
     return (
         <Root>
-            {loading ? (
+            {isLoading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>

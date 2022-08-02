@@ -25,6 +25,7 @@ import ThemeMain from "../../../../theme";
 import API from "../../../../api";
 import { authModalSlice } from "../../../../reducer/auth_modal_slice";
 import { drawersSlice } from "../../../../reducer/drawers_slice";
+import { useProductsSearchQuery } from "../../../../services/ProductsService";
 
 import { useDispatch } from "react-redux";
 
@@ -75,8 +76,15 @@ interface BottomProps {
 const Bottom: React.FC<BottomProps> = ({ setLoading }) => {
     const [searchValue, setSearchValue] = useState("");
     const [basketCount, setBasketCount] = useState(0);
+    const [skip, setSkip] = useState(true);
 
     const [AutoCompliteData, setAutoCompliteData] = useState([]);
+    const { data, isFetching, isSuccess } = useProductsSearchQuery(
+        searchValue,
+        {
+            skip,
+        }
+    );
 
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
@@ -86,17 +94,14 @@ const Bottom: React.FC<BottomProps> = ({ setLoading }) => {
         drawersSlice.actions;
 
     const onSubmit = async () => {
-        setLoading(true);
-        await API.productsSearch(searchValue)
-            .then((res) => {
-                navigate(ROUTES.SEARCH_PAGE, {
-                    state: { data: res.data, title: searchValue },
-                });
-            })
-            .catch((error) => {
-                toast.error("error");
+        setSkip((prev) => !prev);
+        if (isSuccess) {
+            navigate(ROUTES.SEARCH_PAGE, {
+                state: { data: data, title: searchValue },
             });
-        setLoading(false);
+        } else {
+            toast.error("error");
+        }
     };
 
     const handleAutoComplite = (newValue: any) => {

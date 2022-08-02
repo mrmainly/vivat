@@ -5,7 +5,11 @@ export const stocks = api.injectEndpoints({
         getPromotion: build.query({
             query: () => `api/v1/promotion/`,
         }),
+        getPromotionDetail: build.query({
+            query: ({ id }) => `api/v1/promotion/${id}`,
+            providesTags: ["Promotion"],
+        }),
     }),
 });
 
-export const { useGetPromotionQuery } = stocks;
+export const { useGetPromotionQuery, useGetPromotionDetailQuery } = stocks;

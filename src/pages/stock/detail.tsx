@@ -8,6 +8,7 @@ import { MyText } from "../../components";
 import ThemeMain from "../../theme";
 import { MainCardsConstructor } from "../../constructor";
 import product_data from "../../local_data/product_data";
+import { useGetPromotionDetailQuery } from "../../services/PromotionService";
 import API from "../../api";
 
 const Img = styled("img")(({ theme }) => ({
@@ -18,28 +19,15 @@ const Img = styled("img")(({ theme }) => ({
 }));
 
 const StockDetail = () => {
-    const [data, setData] = useState<any>();
-    const [loading, setLoading] = useState(false);
-
     const params = useParams();
 
-    useEffect(() => {
-        const getEmploymentsDetail = async () => {
-            setLoading(true);
-            await API.getPromotionDetail(params.id)
-                .then((res) => {
-                    setData(res.data);
-                    console.log(res.data);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        getEmploymentsDetail();
-    }, []);
+    const { data, isFetching, error } = useGetPromotionDetailQuery({
+        id: params.id,
+    });
 
     return (
         <Box sx={{ mt: 3 }}>
-            {loading ? (
+            {isFetching ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
                     <CircularProgress />
                 </Box>

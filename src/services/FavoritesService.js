@@ -13,7 +13,7 @@ export const favoriotes = api.injectEndpoints({
                     method: "POST",
                 };
             },
-            invalidatesTags: [{ type: "Favorites" }],
+            invalidatesTags: [{ type: "Favorites" }, { type: "Promotion" }],
         }),
         addedFavorite: build.mutation({
             query({ id }) {
@@ -26,6 +26,7 @@ export const favoriotes = api.injectEndpoints({
                 { type: "Favorites" },
                 { type: "Products" },
                 { type: "Product_detail" },
+                { type: "Promotion" },
             ],
         }),
         deleteFavorite: build.mutation({
@@ -39,6 +40,7 @@ export const favoriotes = api.injectEndpoints({
                 { type: "Products" },
                 { type: "Favorites" },
                 { type: "Product_detail" },
+                { type: "Promotion" },
             ],
         }),
         transferToBasket: build.mutation({

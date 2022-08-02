@@ -45,6 +45,9 @@ export const products = api.injectEndpoints({
             query: ({ id }) => `api/v1/goods/analogue/${id}`,
             providesTags: ["Products"],
         }),
+        productsSearch: build.query({
+            query: (searchValue) => `api/v1/goods/search/?name=${searchValue}`,
+        }),
     }),
 });
 
@@ -53,4 +56,5 @@ export const {
     useGetProductCatalogQuery,
     useGetProductDetailQuery,
     useGetProductAnalQuery,
+    useProductsSearchQuery,
 } = products;
