@@ -3,33 +3,20 @@ import { Box, CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import API from "../../../api";
-import { MyText, MyButton } from "../../../components";
+import { MyText } from "../../../components";
+import { useGetWorkDetailQuery } from "../../../services/WorkService";
 
 const PharmacyDetailWork = () => {
-    const [data, setData] = useState<any>();
-    const [loading, setLoading] = useState(false);
-
     const params = useParams();
 
-    useEffect(() => {
-        const getEmploymentsDetail = async () => {
-            setLoading(true);
-            await API.getEmploymentsDetail(params.id)
-                .then((res) => {
-                    setData(res.data);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        getEmploymentsDetail();
-    }, []);
+    const { data, isLoading, error } = useGetWorkDetailQuery({ id: params.id });
     return (
         <Box>
-            {loading ? (
+            {isLoading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>
-            ) : data ? (
+            ) : error ? (
                 <Box>
                     <MyText variant="h4">{data.name}</MyText>
                     <div

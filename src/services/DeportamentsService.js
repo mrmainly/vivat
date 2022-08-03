@@ -1,6 +1,6 @@
 import { api } from "./api";
 
-export const address = api.injectEndpoints({
+export const deportaments = api.injectEndpoints({
     endpoints: (build) => ({
         getDeportaments: build.query({
             query: () => ({
@@ -10,4 +10,4 @@ export const address = api.injectEndpoints({
     }),
 });
 
-export const { useGetDeportamentsQuery } = address;
+export const { useGetDeportamentsQuery } = deportaments;

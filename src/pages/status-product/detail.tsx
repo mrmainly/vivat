@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Box, Grid, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 
-import API from "../../api";
 import {
     StatusCard,
     MyText,
@@ -12,7 +11,7 @@ import {
     translationDelivery,
 } from "../../components";
 import ThemeMain from "../../theme";
-import { LargeNumberLike } from "crypto";
+import { useGetOrderMeDetailQuery } from "../../services/ProductsService";
 
 const Main = styled(Box)(({ theme }) => ({}));
 
@@ -41,63 +40,20 @@ const TextWrapper = styled(Box)(({ theme }) => ({
     },
 }));
 
-interface DataProps {
-    id: number;
-    total_price: string | null;
-    created: string | null;
-    orderStatus: string;
-    delivery_type: string;
-}
-
 const StatusProductDetail = () => {
-    const [dataItems, setDataItems] = useState([]);
-    const [data, setData] = useState<DataProps>();
-
-    const [loading, setLoading] = useState(true);
-
     const params = useParams();
 
-    useEffect(() => {
-        const statusProductId = async () => {
-            await API.getMeStatusId(params.id)
-                .then((res) => {
-                    setData(res.data);
-                    setDataItems(res.data.items);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        statusProductId();
-    }, []);
-
-    const dataCard = [
-        {
-            title: "Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч 22",
-            img: "",
-            producer: "Nurofenproizvoditel",
-            price: "1000 ₽",
-            stock: true,
-            GoodsCode: "322",
-            id: 1,
-        },
-        {
-            title: "Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч 22",
-            img: "",
-            producer: "Nurofenproizvoditel",
-            price: "1000 ₽",
-            stock: true,
-            GoodsCode: "322",
-            id: 1,
-        },
-    ];
+    const { data, isLoading, error } = useGetOrderMeDetailQuery({
+        id: params.id,
+    });
 
     return (
         <>
-            {loading ? (
+            {isLoading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>
-            ) : dataItems.length ? (
+            ) : data.items.length ? (
                 <Main>
                     <Box
                         sx={{
@@ -119,7 +75,7 @@ const StatusProductDetail = () => {
                         </Box>
                     </Box>
                     <Grid container spacing={2}>
-                        {dataItems.map((item: any, index: number) => (
+                        {data.items.map((item: any, index: number) => (
                             <Grid
                                 item
                                 lg={12}
