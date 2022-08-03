@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TextField, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
-import cookie from "js-cookie";
+import { useForm } from "react-hook-form";
 
 import {
     ProfileSideBar,
@@ -10,7 +10,6 @@ import {
     ProfileUpdateModal,
     SkeletonBasicInformation,
 } from "../../../components";
-import API from "../../../api";
 
 import { FormattedMessage } from "react-intl";
 import {
@@ -29,7 +28,7 @@ const InputProfile = styled(TextField)(({ theme }) => ({
     background: "white",
 }));
 
-const ProfileForm = styled(Box)(({ theme }) => ({
+const ProfileForm = styled("form")(({ theme }) => ({
     width: 350,
     [theme.breakpoints.down("md")]: {
         width: "100%",
@@ -37,43 +36,20 @@ const ProfileForm = styled(Box)(({ theme }) => ({
 }));
 
 const BasicInformation = () => {
-    const [phone, setPhone] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [date, setDate] = useState("");
-    const [patronymic, setPatronymic] = useState("");
-    const [mail, setMail] = useState("");
-    const [loading, setLoading] = useState(true);
+    const { data, isFetching, error } = useGetAccountUserQuery("");
+    const { register, handleSubmit } = useForm({
+        mode: "onBlur",
+    });
 
     const [patchAccountUser] = usePatchAccountUserMutation();
 
-    useEffect(() => {
-        const getAccount = async () => {
-            await API.getAccountUser().then((res) => {
-                const data = res.data;
-                setPhone(data.phone);
-                setFirstName(data.first_name);
-                setLastName(data.last_name);
-                setMail(data.email);
-                setPatronymic(data.patronymic);
-                setDate(data.birth_date);
-                cookie.set(
-                    "name",
-                    `${data.first_name} ${data.last_name} ${data.patronymic}`
-                );
-            });
-            setLoading(false);
-        };
-        getAccount();
-    }, []);
-
-    const putAccountUser = () => {
+    const onSubmit = (data: any) => {
         patchAccountUser({
-            email: mail,
-            first_name: firstName,
-            last_name: lastName,
-            patronymic: patronymic,
-            birth_date: date,
+            email: data.email,
+            first_name: data.first_name,
+            last_name: data.last_name,
+            patronymic: data.patronymic,
+            birth_date: data.birth_date,
             sex: "male",
         })
             .then((res: any) => {
@@ -97,9 +73,8 @@ const BasicInformation = () => {
                 title={<FormattedMessage id="basic_information" />}
             />
             <Box sx={{ mt: 6.3, width: "100%" }}>
-                <ProfileForm>
-                    <ProfileUpdateModal />
-                    {loading ? (
+                <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+                    {isFetching ? (
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
                             <SkeletonBasicInformation />
                         </Box>
@@ -108,35 +83,36 @@ const BasicInformation = () => {
                             <InputProfile
                                 label={<FormattedMessage id="surname" />}
                                 fullWidth
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                defaultValue={data.last_name}
+                                {...register("last_name")}
                             />
                             <InputProfile
                                 label={<FormattedMessage id="name" />}
                                 margin="normal"
                                 fullWidth
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                defaultValue={data.first_name}
+                                {...register("first_name")}
                             />
                             <InputProfile
                                 label={<FormattedMessage id="patronymic" />}
                                 margin="normal"
                                 fullWidth
-                                value={patronymic}
-                                onChange={(e) => setPatronymic(e.target.value)}
+                                defaultValue={data.patronymic}
+                                {...register("patronymic")}
                             />
                             <InputProfile
                                 label={<FormattedMessage id="phone_number" />}
                                 margin="normal"
                                 fullWidth
-                                value={phone}
+                                value={data.phone}
+                                {...register("phone")}
                             />
                             <InputProfile
                                 label={<FormattedMessage id="mail" />}
                                 margin="normal"
                                 fullWidth
-                                value={mail}
-                                onChange={(e) => setMail(e.target.value)}
+                                defaultValue={data.email}
+                                {...register("email")}
                             />
                             <InputProfile
                                 label={<FormattedMessage id="birth_date" />}
@@ -146,14 +122,10 @@ const BasicInformation = () => {
                                 margin="normal"
                                 type="date"
                                 fullWidth
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
+                                defaultValue={data.birth_date}
+                                {...register("birth_date")}
                             />
-                            <MyButton
-                                style={{ marginTop: 15 }}
-                                fullWidth
-                                onClick={() => putAccountUser()}
-                            >
+                            <MyButton style={{ marginTop: 15 }} fullWidth>
                                 Сохранить
                             </MyButton>
                         </>
