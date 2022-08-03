@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 
-import API from "../../../api";
 import { MyText } from "../../../components";
 import { useGetWorkDetailQuery } from "../../../services/WorkService";
 

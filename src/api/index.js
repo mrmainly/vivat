@@ -155,17 +155,6 @@ class API {
         return api(`api/v1/favorites/${id}/`).post(null);
     }
 
-    //employments
-    async getEmployments(city) {
-        let result = await api(`api/v1/employments/?city_name=${city}`).get();
-        return result;
-    }
-
-    async getEmploymentsDetail(id) {
-        let result = await api(`api/v1/employments/${id}/`).get();
-        return result;
-    }
-
     //city
     async getCity() {
         let result = await api(`api/v1/cities/`).get();

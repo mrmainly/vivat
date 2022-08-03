@@ -32,7 +32,9 @@ const ProductDetail = () => {
                     /> */}
                     <DescriptionScreen
                         instructions={data.esgood[0]}
-                        analData={dataAnalog?.results}
+                        analData={
+                            dataAnalog?.results ? dataAnalog?.results : []
+                        }
                         loading={isFetchingAnalog}
                     />
                 </>
