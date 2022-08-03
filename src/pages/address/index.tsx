@@ -36,12 +36,6 @@ const Address = () => {
                 </Box>
             ) : (
                 <Grid container spacing={3}>
-                    {/* <Grid item lg={3} xl={3}>
-                        <AddressSideBar
-                            data={data}
-                            dispatchMapCenter={dispatchMapCenter}
-                        />
-                    </Grid> */}
                     <Grid item lg={12} xl={12} md={12} xs={12} sm={12}>
                         <YMaps>
                             <Map

@@ -3,7 +3,6 @@ import { TextField, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
 import cookie from "js-cookie";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
 
 import {
     ProfileSideBar,
@@ -14,7 +13,10 @@ import {
 import API from "../../../api";
 
 import { FormattedMessage } from "react-intl";
-import { useGetAccountUserQuery } from "../../../services/AccountUser";
+import {
+    useGetAccountUserQuery,
+    usePatchAccountUserMutation,
+} from "../../../services/AccountUser";
 
 const Main = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -43,6 +45,8 @@ const BasicInformation = () => {
     const [mail, setMail] = useState("");
     const [loading, setLoading] = useState(true);
 
+    const [patchAccountUser] = usePatchAccountUserMutation();
+
     useEffect(() => {
         const getAccount = async () => {
             await API.getAccountUser().then((res) => {
@@ -64,17 +68,23 @@ const BasicInformation = () => {
     }, []);
 
     const putAccountUser = () => {
-        API.putAccountUser({
+        patchAccountUser({
             email: mail,
             first_name: firstName,
             last_name: lastName,
             patronymic: patronymic,
-            // phone: phone,
             birth_date: date,
             sex: "male",
         })
-            .then((res) => {
-                toast.success("Профиль изменен");
+            .then((res: any) => {
+                if (res.data) {
+                    toast.success("Профиль изменен");
+                } else {
+                    toast.error(
+                        `${res.error.data.errors[0]} ${res.error.data.errors[1]}`
+                    );
+                }
+                console.log(res);
             })
             .catch((err) => {
                 toast.error("Профиль не изменен");
@@ -120,7 +130,6 @@ const BasicInformation = () => {
                                 margin="normal"
                                 fullWidth
                                 value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
                             />
                             <InputProfile
                                 label={<FormattedMessage id="mail" />}
