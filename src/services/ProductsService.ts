@@ -48,6 +48,12 @@ export const products = api.injectEndpoints({
         productsSearch: build.query({
             query: (searchValue) => `api/v1/goods/search/?name=${searchValue}`,
         }),
+        getOrderMe: build.query({
+            query: () => `api/v1/orders/me/`,
+        }),
+        getOrderMeDetail: build.query({
+            query: ({ id }) => `api/v1/orders/${id}/`,
+        }),
     }),
 });
 
@@ -57,4 +63,6 @@ export const {
     useGetProductDetailQuery,
     useGetProductAnalQuery,
     useProductsSearchQuery,
+    useGetOrderMeQuery,
+    useGetOrderMeDetailQuery,
 } = products;

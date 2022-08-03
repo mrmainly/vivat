@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState } from "react";
 import {
     Grid,
     FormControl,
@@ -23,72 +23,40 @@ import { MyText, MyButton, BasketFormSideBars } from "../../components";
 import API from "../../api";
 import ROUTES from "../../routes";
 
+import { useGetAccountUserQuery } from "../../services/AccountUser";
+import { useGetBasketQuery } from "../../services/BasketService";
+import { useGetDeportamentsQuery } from "../../services/DeportamentsService";
+import { usePostBasketMutation } from "../../services/BasketService";
+
 const InputProfile = styled(TextField)(({ theme }) => ({
     background: "white",
 }));
 
 const BasketForm = () => {
-    const [phone, setPhone] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [mail, setMail] = useState("");
     const [adress, setAdress] = useState(
         "47CC211D-EECA-4D38-87A1-E255059DD16F"
     );
     const [commend, setCommend] = useState("");
     const [payment, setPayment] = useState("CARD");
     const [delivery, setDelivery] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState([]);
-    const [totalPrice, setTotalPrice] = useState("");
     const [costTotalPrice, setCostTotalPrice] = useState(0);
-    const [adresses, setAddresses] = useState([]);
     const [myAddress, setMyAddress] = useState("");
     const [floor, setFloor] = useState("");
     const [apartment, setApartament] = useState("");
     const [entrance, setEntrance] = useState("");
     const [AutoCompliteData, setAutoCopliteData] = useState([]);
 
-    const navigate = useNavigate();
-    // const dispatch = useContext(DispatchContext);
-    // const basketState = useContext(StateContext);
+    const { data: accountUser, isLoading, error } = useGetAccountUserQuery("");
+    const { data: basketList, isLoading: isBasketLoading } =
+        useGetBasketQuery("");
+    const { data: deportaments, isLoading: isDeportamentsLoading } =
+        useGetDeportamentsQuery("");
+    const [postBasket] = usePostBasketMutation();
 
-    useEffect(() => {
-        const getOrders = async () => {
-            setLoading(true);
-            await API.getAccountUser()
-                .then((res) => {
-                    const data = res.data;
-                    setPhone(data.phone);
-                    setFirstName(data.first_name);
-                    setLastName(data.last_name);
-                    setMail(data.email);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            await API.getCartsList()
-                .then((res: any) => {
-                    setTotalPrice(res.data.total_price);
-                    if (res.data.items) {
-                        setData(res.data.items);
-                    } else {
-                        setData(res.data);
-                    }
-                })
-                .catch((error) => console.log(error));
-            await API.getDeportaments()
-                .then((res: any) => {
-                    setAddresses(res.data);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        getOrders();
-    }, []);
+    const navigate = useNavigate();
 
     const compliteOrders = () => {
-        API.sendOrder({
+        postBasket({
             payment_type: "CARD",
             delivery_type: delivery,
             comment: commend,
@@ -100,20 +68,16 @@ const BasketForm = () => {
             floor: floor,
             entrance: entrance,
             apartment: apartment,
-        })
-            .then((res) => {
-                toast.success("Заявка оформлена");
-                // dispatch({
-                //     type: "basket",
-                //     payload: {
-                //         status: basketState.basket.status + 1,
-                //     },
-                // });
+        }).then((res: any) => {
+            if (res.data) {
+                toast.success("заявка оформлена");
                 res.data === "Success"
                     ? navigate(ROUTES.SUCCESS_PAYMENT)
                     : (window.location.href = res.data);
-            })
-            .catch((error) => toast.error("Заявка не оформлена"));
+            } else {
+                toast.error("заявка не оформлена");
+            }
+        });
     };
 
     const handleAutoComplite = (e: any) => {
@@ -160,7 +124,7 @@ const BasketForm = () => {
 
     return (
         <>
-            {loading ? (
+            {isLoading || isBasketLoading || isDeportamentsLoading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>
@@ -188,25 +152,25 @@ const BasketForm = () => {
                                 <InputProfile
                                     label="Телефон"
                                     fullWidth
-                                    value={phone}
+                                    value={accountUser.phone}
                                     margin="normal"
                                 />
                                 <InputProfile
                                     label="Имя"
                                     fullWidth
-                                    value={firstName}
+                                    value={accountUser.first_name}
                                     margin="normal"
                                 />
                                 <InputProfile
                                     label="Фамилия"
                                     fullWidth
-                                    value={lastName}
+                                    value={accountUser.last_name}
                                     margin="normal"
                                 />
                                 <InputProfile
                                     label="Электронная почта"
                                     fullWidth
-                                    value={mail}
+                                    value={accountUser.email}
                                     margin="normal"
                                 />
                                 <Autocomplete
@@ -275,7 +239,7 @@ const BasketForm = () => {
                                             setAdress(e.target.value)
                                         }
                                     >
-                                        {adresses.map(
+                                        {deportaments.map(
                                             (item: any, index: number) => (
                                                 <MenuItem
                                                     key={index}
@@ -395,8 +359,9 @@ const BasketForm = () => {
                                     <MyText variant="body1">Итого</MyText>
                                     <MyText variant="body2">
                                         {delivery === "DELIVERY"
-                                            ? totalPrice + costTotalPrice
-                                            : totalPrice}
+                                            ? basketList.total_price +
+                                              costTotalPrice
+                                            : basketList.total_price}
                                         ₽
                                     </MyText>
                                 </Box>
@@ -410,8 +375,8 @@ const BasketForm = () => {
                         </Grid>
                         <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                             <BasketFormSideBars
-                                data={data}
-                                totalPrice={totalPrice}
+                                data={basketList.items}
+                                totalPrice={basketList.total_price}
                                 costTotalPrice={costTotalPrice}
                                 delivery={delivery}
                             />

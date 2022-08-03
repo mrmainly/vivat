@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { Box, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { ProfileSideBar, MyOrdersTable } from "../../../components";
 import API from "../../../api";
 import ROUTES from "../../../routes";
+import { useGetOrderMeQuery } from "../../../services/ProductsService";
 
 import { FormattedMessage } from "react-intl";
 
@@ -17,26 +17,13 @@ const Main = styled(Box)(({ theme }) => ({
 }));
 
 const MyOrders = () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const getOrderMe = async () => {
-            await API.getOrdersMe()
-                .then((res) => {
-                    setData(res.data);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        getOrderMe();
-    }, []);
+    const { data, isLoading, error } = useGetOrderMeQuery("");
     return (
         <Main>
-            <ProfileSideBar title={<FormattedMessage id='my_orders'/>} />
+            <ProfileSideBar title={<FormattedMessage id="my_orders" />} />
 
             <Box sx={{ mt: 6.3, width: "100%" }}>
-                {loading ? (
+                {isLoading ? (
                     <Box
                         sx={{
                             display: "flex",

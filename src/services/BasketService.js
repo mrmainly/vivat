@@ -54,6 +54,16 @@ export const baskets = api.injectEndpoints({
             },
             invalidatesTags: [{ type: "Baskets" }],
         }),
+        postBasket: build.mutation({
+            query(body) {
+                return {
+                    url: `api/v1/carts/complete/`,
+                    method: "POST",
+                    body,
+                };
+            },
+            invalidatesTags: [{ type: "Baskets" }],
+        }),
     }),
 });
 
@@ -64,4 +74,5 @@ export const {
     useDeleteBasketMutation,
     useTransferBasketMutation,
     usePatchBasketCountMutation,
+    usePostBasketMutation,
 } = baskets;

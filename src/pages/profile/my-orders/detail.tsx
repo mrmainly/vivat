@@ -9,6 +9,7 @@ import { StatusCard, MyText, ProfileSideBar } from "../../../components";
 import ThemeMain from "../../../theme";
 
 import { FormattedMessage } from "react-intl";
+import { useGetOrderMeDetailQuery } from "../../../services/ProductsService";
 
 const Main = styled(Box)(({ theme }) => ({
     marginTop: 50,
@@ -73,25 +74,11 @@ interface DataProps {
 }
 
 const MyOrderDetail = () => {
-    const [data, setData] = useState<DataProps>();
-    const [dataItems, setDataItems] = useState([]);
-    const [loading, setLoading] = useState(true);
-
     const params = useParams();
 
-    useEffect(() => {
-        const statusProductId = async () => {
-            await API.getMeStatusId(params.id)
-                .then((res) => {
-                    console.log(res);
-                    setData(res.data);
-                    setDataItems(res.data.items);
-                })
-                .catch((error) => console.log(error));
-            setLoading(false);
-        };
-        statusProductId();
-    }, []);
+    const { data, isLoading, error } = useGetOrderMeDetailQuery({
+        id: params.id,
+    });
 
     const dataCard = [
         {
@@ -119,11 +106,11 @@ const MyOrderDetail = () => {
             <ProfileSideBar
                 title={<FormattedMessage id="basic_information" />}
             />
-            {loading ? (
+            {isLoading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>
-            ) : dataItems.length ? (
+            ) : data?.items.length ? (
                 <Main>
                     <TopBar>
                         <MyText>
@@ -136,7 +123,7 @@ const MyOrderDetail = () => {
                         </MenuItem>
                     </TopBar>
                     <Grid container>
-                        {dataItems.map((item: any, index: number) => (
+                        {data?.items.map((item: any, index: number) => (
                             <Grid
                                 item
                                 lg={12}
