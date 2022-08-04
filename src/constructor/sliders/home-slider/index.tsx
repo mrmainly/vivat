@@ -32,7 +32,6 @@ const HomeSliderBox = styled(Box)(({ theme }) => ({
     display: "flex",
     alignItems: "end",
     justifyContent: "center",
-
     [theme.breakpoints.down("md")]: {
         height: 300,
     },
@@ -54,7 +53,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
     };
 
     return (
-        <Box style={{ marginBottom: data.length >= 0 ? 50 : 0 }}>
+        <Box>
             <Slider {...settings}>
                 {data.map((item: any, index: number) => (
                     <Box key={index}>

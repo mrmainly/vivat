@@ -42,8 +42,7 @@ const Home = () => {
             ) : (
                 <HomeSlider data={promotion?.results} />
             )}
-
-            <Box>
+            <Box sx={{ marginTop: promotion?.results.length ? 5 : 0 }}>
                 <HomeSecondSlider title="Наши преимущества" />
                 <MyText variant="h5" sx={{ mb: 1, mt: 1 }}>
                     Лек. средства
