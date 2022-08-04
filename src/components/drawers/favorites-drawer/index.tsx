@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Drawer, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/system";
+import cookie from "js-cookie";
 
 import { MyText, FavoritesCard } from "../..";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,11 +21,24 @@ const Main = styled(Box)(({ theme }) => ({
 }));
 
 const FavoritesDrawer = () => {
+    const [skipFavorite, setSkipFavorite] = useState(true);
+
     const dispatch = useDispatch();
+    const jwttoken = cookie.get("jwttoken");
 
     const { favorite_open } = useSelector((state: any) => state.drawers_slice);
     const { handleFavoritesDrawerOpen } = drawersSlice.actions;
-    const { data, isFetching, isLoading, error } = useGetFavoritesQuery("");
+    const { data, isFetching, isLoading, error } = useGetFavoritesQuery("", {
+        skip: skipFavorite,
+    });
+
+    useEffect(() => {
+        if (jwttoken) {
+            setSkipFavorite(false);
+        } else {
+            setSkipFavorite(true);
+        }
+    }, [jwttoken]);
 
     return (
         <Drawer
@@ -74,14 +88,20 @@ const FavoritesDrawer = () => {
                             Избранные товары
                         </MyText>
                     </Box>
-                    <MyText variant="body1" sx={{ mt: 1.5 }}>
-                        <span>{data.length}</span> товара
-                    </MyText>
-                    {data.length !== 0
-                        ? data.map((item: any, index: number) => (
-                              <FavoritesCard {...item} key={index} />
-                          ))
-                        : "Нет избранных товаров"}
+                    {jwttoken ? (
+                        <MyText variant="body1" sx={{ mt: 1.5 }}>
+                            <span>{data ? data.length : "Нет"}</span> товара
+                        </MyText>
+                    ) : (
+                        ""
+                    )}
+                    {data
+                        ? data?.length !== 0
+                            ? data.map((item: any, index: number) => (
+                                  <FavoritesCard {...item} key={index} />
+                              ))
+                            : "Нет избранных товаров"
+                        : ""}
                 </Main>
             )}
         </Drawer>

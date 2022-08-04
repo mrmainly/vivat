@@ -18,15 +18,13 @@ import {
 } from "../components";
 
 const Layout = () => {
-    const jwttoken = cookie.get("jwttoken");
-
     return (
         <div style={{ overflow: "hidden" }}>
             <ToastContainer autoClose={1000} />
             <Header />
             <Mobile />
             <MyDrawer />
-            {jwttoken ? <FavoritesDrawer /> : ""}
+            <FavoritesDrawer />
             <SignInModal />
             <SignUpModal />
             <ForgotPasswordModal />

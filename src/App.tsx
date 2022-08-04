@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -57,20 +57,6 @@ import {
     BlogDetail,
 } from "./pages";
 import ROUTES from "./routes";
-// const ProductPage = React.lazy(() => import("./pages/product-page"));
-// const HomePage = React.lazy(() => import("./pages/home"));
-// const Basket = React.lazy(() => import("./pages/basket"));
-// const BasketForm = React.lazy(() => import("./pages/basket/basketForm"));
-// const ProductDetail = React.lazy(() => import("./pages/product-detail"));
-// const IssueOrdering = React.lazy(() => import("./pages/issue-ordering"));
-// const MyOrders = React.lazy(() => import("./pages/profile/my-orders"));
-// const BasicInformation = React.lazy(
-//     () => import("./pages/profile/basic-information")
-// );
-// const AboutUs = React.lazy(() => import("./pages/info-screens/about-us"));
-// const Blog = React.lazy(() => import("./pages/blog"));
-// const BlogDetail = React.lazy(() => import("./pages/blog/blogDetail"));
-// const BlogTheme = React.lazy(() => import("./pages/blog/themeBlog"));
 
 const App = () => {
     const [currentLocale, setCurrentLocale] = useState(LOCALES.RUSSIAN);

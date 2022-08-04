@@ -123,7 +123,6 @@ const SignIn: React.FC<SignModalProps> = () => {
                     toast.success("авторизация прошла успешно");
                     cookie.set("jwttoken", res.data.token);
                     navigate(ROUTES.BASICINFORMATION);
-                    window.location.reload();
                 } else {
                     toast.error(res.error.data.errors[0]);
                 }
