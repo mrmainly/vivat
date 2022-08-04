@@ -3,7 +3,6 @@ import { Box, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { ProfileSideBar, MyOrdersTable } from "../../../components";
-import API from "../../../api";
 import ROUTES from "../../../routes";
 import { useGetOrderMeQuery } from "../../../services/ProductsService";
 

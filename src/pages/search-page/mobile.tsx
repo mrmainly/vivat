@@ -5,10 +5,10 @@ import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SearchIcon from "@mui/icons-material/Search";
+import API from "../../api";
 
 import { MyText } from "../../components";
 import Body from "./components/Body";
-import API from "../../api";
 import ROUTES from "../../routes";
 import ThemeMain from "../../theme";
 

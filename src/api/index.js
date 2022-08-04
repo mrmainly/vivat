@@ -33,28 +33,7 @@ class API {
         return result;
     }
 
-    //me
-    async getAccountUser() {
-        let result = await api(`api/v1/users/me/`).get();
-        return result;
-    }
-    putAccountUser(data) {
-        const result = api("api/v1/users/me/").patch(null, data);
-        return result;
-    }
-
     //forgot
-    sendPhoneMailForgotPassword(data, type) {
-        const result = api(
-            type == "phone"
-                ? `api/v1/users/reset_phone/`
-                : "api/v1/users/reset_email/"
-        ).post(
-            null,
-            type == "phone" ? { phone: data.phone } : { email: data.email }
-        );
-        return result;
-    }
 
     reset_password(data) {
         return api("api/v1/users/reset_password/").post(null, {
@@ -134,95 +113,19 @@ class API {
         return api(`api/v1/carts/${id}/`).delete(null);
     }
 
-    //favorites
-    async getFavorites() {
-        let result = await api(`api/v1/favorites/`).get();
-        return result;
-    }
-
-    deleteFavorite(id) {
-        return api(`api/v1/favorites/${id}/`).delete();
-    }
-
-    transferFavorite(id, dispatch) {
-        return api(`api/v1/favorites/transfer/${id}/`).post();
-    }
-
-    addedFavorite(id) {
-        return api(`api/v1/favorites/${id}/`).post(null);
-    }
-
-    //city
-    async getCity() {
-        let result = await api(`api/v1/cities/`).get();
-        return result;
-    }
-
-    //blog
-    async getBlog(query, type) {
-        let result = await api(
-            `api/v1/blogs/${
-                type == "query"
-                    ? query
-                        ? `?query=${query}`
-                        : ""
-                    : `?tags_query=${query}`
-            }`
-        ).get();
-        return result;
-    }
-
-    async getBlogDetail(id) {
-        let result = await api(`api/v1/blogs/${id}/`).get();
-        return result;
-    }
-
-    async getTopic() {
-        let result = await api(`api/v1/blogs/tags/`).get();
-        return result;
-    }
-
-    //promotion
-    async getPromotion() {
-        let result = await api(`api/v1/promotion/`).get();
-        return result;
-    }
-
-    async getPromotionMain() {
-        let result = await api(`api/v1/promotion/main/`).get();
-        return result;
-    }
-
-    async getPromotionDetail(id) {
-        let result = await api(`api/v1/promotion/${id}`).get();
-        return result;
-    }
-
     //my-status
     async getMeStatus() {
         let result = await api(`api/v1/orders/me/status/`).get();
         return result;
     }
 
-    async getMeArchieve() {
-        let result = await api(`api/v1/orders/me/archieve/`).get();
-        return result;
-    }
+    // async getMeArchieve() {
+    //     let result = await api(`api/v1/orders/me/archieve/`).get();
+    //     return result;
+    // }
 
     async getMeStatusId(id) {
         let result = await api(`api/v1/orders/${id}/`).get();
-        return result;
-    }
-
-    //departaments
-    async getDeportaments() {
-        let result = await api(`api/v1/departments/`).get();
-        return result;
-    }
-
-    //Address
-    async getAddress() {
-        let result = await api(`api/v1/departments/organisations/1`).get();
         return result;
     }
 }

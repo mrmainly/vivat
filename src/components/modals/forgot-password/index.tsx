@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Form, Input, MyButton, MyText, ToggleButton } from "../..";
 import ThemeMain from "../../../theme";
-import API from "../../../api";
 import { SignModalProps } from "../../../interface";
 import { authModalSlice } from "../../../reducer/auth_modal_slice";
 import {

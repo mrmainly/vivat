@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { styled } from "@mui/system";
 
 import { BasketCard, MyText, MyButton } from "../../components";
-import API from "../../api";
 import ROUTES from "../../routes";
 import {
     useGetBasketQuery,

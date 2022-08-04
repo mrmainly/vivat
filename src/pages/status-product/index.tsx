@@ -3,7 +3,6 @@ import React from "react";
 import { Box, CircularProgress } from "@mui/material";
 import ROUTES from "../../routes";
 
-import API from "../../api";
 import { MyOrdersTable } from "../../components";
 import { useGetOrdersMeStatusQuery } from "../../services/StatusService";
 

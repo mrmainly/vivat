@@ -5,7 +5,6 @@ import { styled } from "@mui/system";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 
-import API from "../../../api";
 import ROUTES from "../../../routes";
 
 interface HomeSliderProps {

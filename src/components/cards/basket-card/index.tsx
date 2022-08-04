@@ -9,7 +9,6 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useNavigate } from "react-router-dom";
 
 import { MyText } from "../..";
-import API from "../../../api";
 import ROUTES from "../../../routes";
 import {
     useDeleteBasketMutation,

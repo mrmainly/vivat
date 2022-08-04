@@ -10,7 +10,6 @@ import cookie from "js-cookie";
 import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
-import API from "../../../api";
 import { useTransferBasketMutation } from "../../../services/BasketService";
 import {
     useAddedFavoriteMutation,

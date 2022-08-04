@@ -9,7 +9,6 @@ import ThemeMain from "../../theme";
 import { MainCardsConstructor } from "../../constructor";
 import product_data from "../../local_data/product_data";
 import { useGetPromotionDetailQuery } from "../../services/PromotionService";
-import API from "../../api";
 
 const Img = styled("img")(({ theme }) => ({
     width: "100%",

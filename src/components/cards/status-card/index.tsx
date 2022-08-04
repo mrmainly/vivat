@@ -1,13 +1,10 @@
 import React from "react";
 
-import { Box, IconButton, CardActionArea } from "@mui/material";
+import { Box, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
-import CloseIcon from "@mui/icons-material/Close";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { MyText } from "../..";
-import API from "../../../api";
 import ROUTES from "../../../routes";
 
 const ImgBox = styled(Box)(({ theme }) => ({

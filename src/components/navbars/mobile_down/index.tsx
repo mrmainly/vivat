@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 
-import {
-    Box,
-    IconButton,
-    Badge,
-} from "@mui/material";
+import { Box, IconButton, Badge } from "@mui/material";
 import { styled } from "@mui/system";
 import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +9,6 @@ import { useDispatch } from "react-redux";
 
 import MyContainer from "../../container";
 import ROUTES from "../../../routes";
-import API from "../../../api";
 import { drawersSlice } from "../../../reducer/drawers_slice";
 import { authModalSlice } from "../../../reducer/auth_modal_slice";
 

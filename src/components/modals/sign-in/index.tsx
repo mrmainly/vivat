@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Form, Input, MyButton, MyText, BorderLine } from "../..";
 import ThemeMain from "../../../theme";
-import API from "../../../api";
 import ROUTES from "../../../routes";
 import { SignModalProps } from "../../../interface";
 import { authModalSlice } from "../../../reducer/auth_modal_slice";

@@ -4,7 +4,6 @@ import { Box, CircularProgress, Grid } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 import { MyText, BlogCardTheme } from "../../components";
-import API from "../../api";
 import { useGetBlogQuery } from "../../services/BlogService";
 
 interface NameProps {
@@ -23,19 +22,6 @@ const ThemeBlog = () => {
         query: value,
         type: type,
     });
-
-    // useEffect(() => {
-    //     const getTheme = async () => {
-    //         setLoading(true);
-    //         await API.getBlog(value, type)
-    //             .then((res) => {
-    //                 setData(res.data.results);
-    //             })
-    //             .catch((error) => console.log(error));
-    //         setLoading(false);
-    //     };
-    //     getTheme();
-    // }, [name]);
 
     return (
         <Box>

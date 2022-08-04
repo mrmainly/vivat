@@ -4,7 +4,6 @@ import { Box, Grid, CircularProgress, MenuItem } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 
-import API from "../../../api";
 import { StatusCard, MyText, ProfileSideBar } from "../../../components";
 import ThemeMain from "../../../theme";
 
