@@ -43,22 +43,34 @@ import {
     Benefits,
     Vacancy,
     SearchPageMobile,
+    Home,
+    Basket,
+    ProductDetail,
+    IssueOrdering,
+    ProductPage,
+    MyOrders,
+    BasicInformation,
+    AboutUs,
+    BasketForm,
+    Blog,
+    BlogTheme,
+    BlogDetail,
 } from "./pages";
 import ROUTES from "./routes";
-const ProductPage = React.lazy(() => import("./pages/product-page"));
-const HomePage = React.lazy(() => import("./pages/home"));
-const Basket = React.lazy(() => import("./pages/basket"));
-const BasketForm = React.lazy(() => import("./pages/basket/basketForm"));
-const ProductDetail = React.lazy(() => import("./pages/product-detail"));
-const IssueOrdering = React.lazy(() => import("./pages/issue-ordering"));
-const MyOrders = React.lazy(() => import("./pages/profile/my-orders"));
-const BasicInformation = React.lazy(
-    () => import("./pages/profile/basic-information")
-);
-const AboutUs = React.lazy(() => import("./pages/info-screens/about-us"));
-const Blog = React.lazy(() => import("./pages/blog"));
-const BlogDetail = React.lazy(() => import("./pages/blog/blogDetail"));
-const BlogTheme = React.lazy(() => import("./pages/blog/themeBlog"));
+// const ProductPage = React.lazy(() => import("./pages/product-page"));
+// const HomePage = React.lazy(() => import("./pages/home"));
+// const Basket = React.lazy(() => import("./pages/basket"));
+// const BasketForm = React.lazy(() => import("./pages/basket/basketForm"));
+// const ProductDetail = React.lazy(() => import("./pages/product-detail"));
+// const IssueOrdering = React.lazy(() => import("./pages/issue-ordering"));
+// const MyOrders = React.lazy(() => import("./pages/profile/my-orders"));
+// const BasicInformation = React.lazy(
+//     () => import("./pages/profile/basic-information")
+// );
+// const AboutUs = React.lazy(() => import("./pages/info-screens/about-us"));
+// const Blog = React.lazy(() => import("./pages/blog"));
+// const BlogDetail = React.lazy(() => import("./pages/blog/blogDetail"));
+// const BlogTheme = React.lazy(() => import("./pages/blog/themeBlog"));
 
 const App = () => {
     const [currentLocale, setCurrentLocale] = useState(LOCALES.RUSSIAN);
@@ -74,172 +86,161 @@ const App = () => {
         >
             <LanguageContext.Provider value={{ currentLocale, changeLocale }}>
                 <BrowserRouter>
-                    <React.Suspense fallback={<Box></Box>}>
-                        <Routes>
-                            <Route path={ROUTES.HOME} element={<Layout />}>
-                                <Route index element={<HomePage />} />
-                                <Route
-                                    element={<Basket />}
-                                    path={ROUTES.BASKET}
-                                />
-                                <Route
-                                    element={<BasketForm />}
-                                    path={ROUTES.BASKET_FORM}
-                                />
-                                <Route
-                                    path={`${ROUTES.PRODUCT_DETAIL}/:id`}
-                                    element={<ProductDetail />}
-                                />
-                                <Route
-                                    element={<IssueOrdering />}
-                                    path={ROUTES.ISSUE_ORDERING}
-                                />
+                    <Routes>
+                        <Route path={ROUTES.HOME} element={<Layout />}>
+                            <Route index element={<Home />} />
+                            <Route element={<Basket />} path={ROUTES.BASKET} />
+                            <Route
+                                element={<BasketForm />}
+                                path={ROUTES.BASKET_FORM}
+                            />
+                            <Route
+                                path={`${ROUTES.PRODUCT_DETAIL}/:id`}
+                                element={<ProductDetail />}
+                            />
+                            <Route
+                                element={<IssueOrdering />}
+                                path={ROUTES.ISSUE_ORDERING}
+                            />
 
-                                <Route
-                                    element={<ProductPage />}
-                                    path={ROUTES.PRODUCT_PAGE}
-                                />
+                            <Route
+                                element={<ProductPage />}
+                                path={ROUTES.PRODUCT_PAGE}
+                            />
 
-                                <Route
-                                    element={<MyOrders />}
-                                    path={ROUTES.MYORDERS}
-                                />
-                                <Route
-                                    element={<BasicInformation />}
-                                    path={ROUTES.BASICINFORMATION}
-                                />
+                            <Route
+                                element={<MyOrders />}
+                                path={ROUTES.MYORDERS}
+                            />
+                            <Route
+                                element={<BasicInformation />}
+                                path={ROUTES.BASICINFORMATION}
+                            />
 
-                                <Route
-                                    element={<AboutUs />}
-                                    path={ROUTES.ABOUT_US}
-                                />
-                                <Route
-                                    element={<Delivery />}
-                                    path={ROUTES.DELIVERY}
-                                />
-                                <Route
-                                    element={<PrivacyPolicy />}
-                                    path={ROUTES.PRIVACY_POLICY}
-                                />
-                                <Route
-                                    element={<PaymentReceiving />}
-                                    path={ROUTES.PAYMENT_RECEIVING}
-                                />
-                                <Route
-                                    element={<Manufacturers />}
-                                    path={ROUTES.MANUFACTURERS}
-                                />
-                                <Route
-                                    element={<StaffDepartment />}
-                                    path={ROUTES.STAFF_DEPARTMENT}
-                                />
-                                <Route
-                                    element={<Licenses />}
-                                    path={ROUTES.LICENSES}
-                                />
-                                <Route
-                                    element={<Advertising />}
-                                    path={ROUTES.ADVERTISING}
-                                />
-                                <Route
-                                    element={<TechnicalSupport />}
-                                    path={ROUTES.TECHNICAL_SUPPORT}
-                                />
-                                <Route
-                                    element={<Benefits />}
-                                    path={ROUTES.BENEFITS}
-                                />
-                                <Route
-                                    element={<PharmacyWork />}
-                                    path={ROUTES.VACANCY}
-                                />
-                                <Route element={<Work />} path={ROUTES.WORK} />
-                                <Route
-                                    element={<Contacts />}
-                                    path={ROUTES.CONTACTS}
-                                />
-                                <Route
-                                    element={<Booking />}
-                                    path={ROUTES.BOOKING}
-                                />
-                                <Route
-                                    element={<Stock />}
-                                    path={ROUTES.STOCK}
-                                />
-                                <Route
-                                    element={<StockDetail />}
-                                    path={`${ROUTES.STOCK_DETAIL}/:id`}
-                                />
-                                <Route
-                                    element={<Order />}
-                                    path={ROUTES.ORDER}
-                                />
+                            <Route
+                                element={<AboutUs />}
+                                path={ROUTES.ABOUT_US}
+                            />
+                            <Route
+                                element={<Delivery />}
+                                path={ROUTES.DELIVERY}
+                            />
+                            <Route
+                                element={<PrivacyPolicy />}
+                                path={ROUTES.PRIVACY_POLICY}
+                            />
+                            <Route
+                                element={<PaymentReceiving />}
+                                path={ROUTES.PAYMENT_RECEIVING}
+                            />
+                            <Route
+                                element={<Manufacturers />}
+                                path={ROUTES.MANUFACTURERS}
+                            />
+                            <Route
+                                element={<StaffDepartment />}
+                                path={ROUTES.STAFF_DEPARTMENT}
+                            />
+                            <Route
+                                element={<Licenses />}
+                                path={ROUTES.LICENSES}
+                            />
+                            <Route
+                                element={<Advertising />}
+                                path={ROUTES.ADVERTISING}
+                            />
+                            <Route
+                                element={<TechnicalSupport />}
+                                path={ROUTES.TECHNICAL_SUPPORT}
+                            />
+                            <Route
+                                element={<Benefits />}
+                                path={ROUTES.BENEFITS}
+                            />
+                            <Route
+                                element={<PharmacyWork />}
+                                path={ROUTES.VACANCY}
+                            />
+                            <Route element={<Work />} path={ROUTES.WORK} />
+                            <Route
+                                element={<Contacts />}
+                                path={ROUTES.CONTACTS}
+                            />
+                            <Route
+                                element={<Booking />}
+                                path={ROUTES.BOOKING}
+                            />
+                            <Route element={<Stock />} path={ROUTES.STOCK} />
+                            <Route
+                                element={<StockDetail />}
+                                path={`${ROUTES.STOCK_DETAIL}/:id`}
+                            />
+                            <Route element={<Order />} path={ROUTES.ORDER} />
 
-                                <Route element={<Blog />} path={ROUTES.BLOG} />
-                                <Route
-                                    element={<BlogTheme />}
-                                    path={ROUTES.BLOG_THEME}
-                                />
-                                <Route
-                                    element={<BlogDetail />}
-                                    path={`${ROUTES.BLOG_DETAIL}/:id`}
-                                />
+                            <Route element={<Blog />} path={ROUTES.BLOG} />
+                            <Route
+                                element={<BlogTheme />}
+                                path={ROUTES.BLOG_THEME}
+                            />
+                            <Route
+                                element={<BlogDetail />}
+                                path={`${ROUTES.BLOG_DETAIL}/:id`}
+                            />
 
-                                <Route
-                                    element={<VivatInfo />}
-                                    path={ROUTES.VIVAT_INFO}
-                                />
+                            <Route
+                                element={<VivatInfo />}
+                                path={ROUTES.VIVAT_INFO}
+                            />
 
-                                <Route
-                                    element={<PharmacyWork />}
-                                    path={ROUTES.PHARMACY_WORK}
-                                />
+                            <Route
+                                element={<PharmacyWork />}
+                                path={ROUTES.PHARMACY_WORK}
+                            />
 
-                                <Route
-                                    element={<PharmacyContacts />}
-                                    path={ROUTES.PHARMACY_CONTACTS}
-                                />
+                            <Route
+                                element={<PharmacyContacts />}
+                                path={ROUTES.PHARMACY_CONTACTS}
+                            />
 
-                                <Route
-                                    element={<PharmacyDetailWork />}
-                                    path={`${ROUTES.PHARMACY_DETAIL_WORK}/:id`}
-                                />
+                            <Route
+                                element={<PharmacyDetailWork />}
+                                path={`${ROUTES.PHARMACY_DETAIL_WORK}/:id`}
+                            />
 
-                                <Route
-                                    element={<StatusProduct />}
-                                    path={ROUTES.STATUS_PRODUCT}
-                                />
-                                <Route
-                                    element={<StatusProductDetail />}
-                                    path={`${ROUTES.STATUS_PRODUCT_DETAIL}/:id`}
-                                />
-                                <Route
-                                    element={<MyOrdersDetail />}
-                                    path={`${ROUTES.MY_ORDERS_DETAIL}/:id`}
-                                />
-                                <Route
-                                    element={<SearchPage />}
-                                    path={ROUTES.SEARCH_PAGE}
-                                />
-                                <Route
-                                    element={<Address />}
-                                    path={ROUTES.ADDRESS}
-                                />
-                                <Route
-                                    element={<SuccessPayment />}
-                                    path={ROUTES.SUCCESS_PAYMENT}
-                                />
-                                <Route
-                                    element={<ErrorPayment />}
-                                    path={ROUTES.ERROR_PAYMENT}
-                                />
-                                <Route
-                                    element={<SearchPageMobile />}
-                                    path={ROUTES.SEARCH_PAGE_MOBILE}
-                                />
-                            </Route>
-                        </Routes>
-                    </React.Suspense>
+                            <Route
+                                element={<StatusProduct />}
+                                path={ROUTES.STATUS_PRODUCT}
+                            />
+                            <Route
+                                element={<StatusProductDetail />}
+                                path={`${ROUTES.STATUS_PRODUCT_DETAIL}/:id`}
+                            />
+                            <Route
+                                element={<MyOrdersDetail />}
+                                path={`${ROUTES.MY_ORDERS_DETAIL}/:id`}
+                            />
+                            <Route
+                                element={<SearchPage />}
+                                path={ROUTES.SEARCH_PAGE}
+                            />
+                            <Route
+                                element={<Address />}
+                                path={ROUTES.ADDRESS}
+                            />
+                            <Route
+                                element={<SuccessPayment />}
+                                path={ROUTES.SUCCESS_PAYMENT}
+                            />
+                            <Route
+                                element={<ErrorPayment />}
+                                path={ROUTES.ERROR_PAYMENT}
+                            />
+                            <Route
+                                element={<SearchPageMobile />}
+                                path={ROUTES.SEARCH_PAGE_MOBILE}
+                            />
+                        </Route>
+                    </Routes>
                 </BrowserRouter>
             </LanguageContext.Provider>
         </IntlProvider>

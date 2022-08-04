@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/system";
 import {
     Box,
@@ -26,6 +26,7 @@ import API from "../../../../api";
 import { authModalSlice } from "../../../../reducer/auth_modal_slice";
 import { drawersSlice } from "../../../../reducer/drawers_slice";
 import { useProductsSearchQuery } from "../../../../services/ProductsService";
+import { useGetBasketQuery } from "../../../../services/BasketService";
 
 import { useDispatch } from "react-redux";
 
@@ -69,16 +70,16 @@ const CustomButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-interface BottomProps {
-    setLoading: any;
-}
-
-const Bottom: React.FC<BottomProps> = ({ setLoading }) => {
+const Bottom = () => {
     const [searchValue, setSearchValue] = useState("");
-    const [basketCount, setBasketCount] = useState(0);
     const [skip, setSkip] = useState(true);
+    const [skipBasket, setSkipBasket] = useState(true);
 
     const [AutoCompliteData, setAutoCompliteData] = useState([]);
+    const { data: countBasket, isFetching: isBasketFetching } =
+        useGetBasketQuery("", {
+            skip: skipBasket,
+        });
     const { data, isFetching, isSuccess } = useProductsSearchQuery(
         searchValue,
         {
@@ -116,17 +117,13 @@ const Bottom: React.FC<BottomProps> = ({ setLoading }) => {
             .catch((error) => console.log(error));
     };
 
-    // useEffect(() => {
-    //     if (jwttoken) {
-    //         API.getCartsList()
-    //             .then((res) => {
-    //                 setBasketCount(res.data.total_qnt);
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error);
-    //             });
-    //     }
-    // }, [jwttoken]);
+    useEffect(() => {
+        if (jwttoken) {
+            setSkipBasket(false);
+        } else {
+            setSkipBasket(true);
+        }
+    }, [jwttoken]);
     return (
         <BottomBar>
             <BottomBarItem sx={{ mr: 2 }}>
@@ -230,7 +227,15 @@ const Bottom: React.FC<BottomProps> = ({ setLoading }) => {
                             : dispatch(openLoginModal(true));
                     }}
                 >
-                    <StyledBadge badgeContent={jwttoken ? basketCount : 0}>
+                    <StyledBadge
+                        badgeContent={
+                            isBasketFetching
+                                ? 0
+                                : jwttoken
+                                ? countBasket?.total_qnt
+                                : 0
+                        }
+                    >
                         <img src="/img/Bag_light.png" />
                     </StyledBadge>
                     <MyText

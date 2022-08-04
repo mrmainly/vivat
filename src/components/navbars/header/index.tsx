@@ -31,8 +31,6 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = () => {
-    const [loading, setLoading] = useState(false);
-
     return (
         <>
             <DesktopWrapper position="static">
@@ -42,10 +40,10 @@ const Header: React.FC<HeaderProps> = () => {
                         <BorderLine />
                         <Middle />
                         <BorderLine />
-                        <Bottom setLoading={setLoading} />
+                        <Bottom />
                     </Main>
                 </Container>
-                {loading ? <LinearProgress /> : ""}
+                {/* {loading ? <LinearProgress /> : ""} */}
             </DesktopWrapper>
             <MyDrawer />
         </>
