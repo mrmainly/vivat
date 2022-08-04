@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Box, Pagination } from "@mui/material";
+import { styled } from "@mui/system";
 
 import {
     HomeSlider,
@@ -10,6 +11,18 @@ import {
 import { MyText } from "../../components";
 import { useGetPromotionQuery } from "../../services/PromotionService";
 import { useGetProductsQuery } from "../../services/ProductsService";
+
+const BannerSkeleton = styled(Skeleton)(({ theme }) => ({
+    height: 500,
+    borderRadius: 50,
+    marginBottom: 50,
+    [theme.breakpoints.down("md")]: {
+        height: 300,
+    },
+    [theme.breakpoints.down("sm")]: {
+        height: 200,
+    },
+}));
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -23,9 +36,7 @@ const Home = () => {
     return (
         <div>
             {isFetching ? (
-                <Skeleton
-                    style={{ height: 500, borderRadius: 50, marginBottom: 50 }}
-                />
+                <BannerSkeleton />
             ) : error ? (
                 ""
             ) : (

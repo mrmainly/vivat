@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
 
-import description_data from "../../../local_data/description_product_card";
 import { MyText } from "../../../components";
 
 interface DescriptionDataPorps {

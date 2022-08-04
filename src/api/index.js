@@ -2,9 +2,6 @@ import axios from "axios";
 import React from "react";
 import cookie from "js-cookie";
 
-import ROUTES from "../routes";
-
-const testURL = "https://127.0.0.1:8000/";
 const publicURL = "https://xn----7sbbagaytx2c4ad.xn--p1ai/";
 
 const api = (url) => {

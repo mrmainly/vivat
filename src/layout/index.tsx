@@ -2,7 +2,6 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import cookie from "js-cookie";
-import { useSelector } from "react-redux";
 
 import "./layout.css";
 import {

@@ -111,7 +111,7 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
         (state: any) => state.auth_modal_slice
     );
     const dispatch = useDispatch();
-    const { openForgotPasswordModal } = authModalSlice.actions;
+    const { openForgotPasswordModal, openLoginModal } = authModalSlice.actions;
     const [togglePhoneAndMail] = useForgotPasswordChangePhoneAndMailMutation();
     const [postForgotV1] = useForgotPasswordV1Mutation();
     const [postForgotV2] = useForgotPasswordV2Mutation();
@@ -163,9 +163,13 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
     };
 
     const resend_code = () => {
-        API.resend_phone(phone)
-            .then((res) => {
-                toast.success("Код отправлен повторно");
+        postForgotV2(phone)
+            .then((res: any) => {
+                if (res.data) {
+                    toast.success("Код отправлен повторно");
+                } else {
+                    toast.error("Не правильный код");
+                }
             })
             .catch((err) => {
                 toast.error("Не правильный код");
@@ -176,15 +180,15 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
         if (data.password === data.forgot_password) {
             postForgotV3(data).then((res: any) => {
                 if (res.data) {
-                    // handleClose();
-                    // setLoginOpen();
+                    handleClose();
+                    dispatch(openLoginModal(true));
                 } else {
                     toast.error("что то пошло не так");
                 }
                 console.log(res);
             });
         } else {
-            alert("error");
+            toast.error("что то пошло не так");
         }
     };
 
