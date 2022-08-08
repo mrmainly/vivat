@@ -85,7 +85,13 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                 if (res.data) {
                     toast.success("Товар добавлен в корзину");
                 } else {
-                    toast.error("Товара нет в наличии");
+                    if (res.error.data.errors[0] === "NotRecept False") {
+                        toast.error(
+                            "Это лекарственное средство отпускается по рецепту"
+                        );
+                    } else {
+                        toast.error("Товара нет в наличии");
+                    }
                 }
             })
             .catch(() => toast.error("Товар не найден"));

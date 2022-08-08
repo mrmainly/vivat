@@ -47,7 +47,7 @@ export const favoriotes = api.injectEndpoints({
             query({ id }) {
                 return {
                     url: `api/v1/favorites/transfer/${id}/`,
-                    method: "DELETE",
+                    method: "POST",
                 };
             },
             invalidatesTags: [{ type: "Baskets" }],

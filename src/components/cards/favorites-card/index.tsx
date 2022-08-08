@@ -10,7 +10,7 @@ import API from "../../../api";
 import ROUTES from "../../../routes";
 import {
     useDeleteFavoriteMutation,
-    useTransferToBasketMutation,
+    useTransferFavoriteMutation,
 } from "../../../services/FavoritesService";
 
 interface FavoritesCardProps {
@@ -34,17 +34,22 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     GoodsCode,
 }) => {
     const [deleteFavoriteId] = useDeleteFavoriteMutation();
-    const [transferToBasket] = useTransferToBasketMutation();
+    const [transferToBasket] = useTransferFavoriteMutation();
     const navigate = useNavigate();
 
     const TransferFavorite = () => {
         transferToBasket({ id })
             .then((res: any) => {
                 if (res.data) {
-                    navigate(ROUTES.BASKET);
                     toast.success("Товар добавлен в корзину");
                 } else {
-                    toast.error("Товар не найден");
+                    if (res.error.data.errors[0] === "NotRecept False") {
+                        toast.error(
+                            "Это лекарственное средство отпускается по рецепту"
+                        );
+                    } else {
+                        toast.error("Товара нет в наличии");
+                    }
                 }
             })
             .catch(() => toast.error("Товар не найден"));
