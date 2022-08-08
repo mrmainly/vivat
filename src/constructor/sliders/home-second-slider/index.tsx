@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { Box, Grid } from "@mui/material";
-import Slider from "react-slick";
-import { styled } from "@mui/system";
 
 import { MyText } from "../../../components";
 import { HomeSecondSliderProps } from "../../../interface/index";
@@ -19,7 +17,7 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
 
     return (
         <Box>
-            <MyText variant="h5" sx={{ mb: 3 }}>
+            <MyText variant="h5" sx={{ mb: 2 }}>
                 {title}
             </MyText>
             <Grid container>

@@ -82,52 +82,6 @@ class API {
         ).get();
         return result;
     }
-
-    patchBasket(id, count) {
-        const result = api(`api/v1/carts/${id}/`).patch(null, {
-            count: count,
-        });
-        return result;
-    }
-
-    async getOrdersMe() {
-        let result = await api(`api/v1/orders/me/`).get();
-        return result;
-    }
-
-    async getOrdersMeStatus() {
-        let result = await api(`api/v1/orders/me/status/`).get();
-        return result;
-    }
-
-    deleteOrdersAll() {
-        return api(`api/v1/carts/delete_all_items/`).delete(null);
-    }
-
-    sendOrder(data) {
-        const result = api("api/v1/carts/complete/").post(null, data);
-        return result;
-    }
-
-    deleteProductItem(id) {
-        return api(`api/v1/carts/${id}/`).delete(null);
-    }
-
-    //my-status
-    async getMeStatus() {
-        let result = await api(`api/v1/orders/me/status/`).get();
-        return result;
-    }
-
-    // async getMeArchieve() {
-    //     let result = await api(`api/v1/orders/me/archieve/`).get();
-    //     return result;
-    // }
-
-    async getMeStatusId(id) {
-        let result = await api(`api/v1/orders/${id}/`).get();
-        return result;
-    }
 }
 
 export default new API();

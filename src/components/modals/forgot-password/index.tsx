@@ -16,13 +16,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Form, Input, MyButton, MyText, ToggleButton } from "../..";
 import ThemeMain from "../../../theme";
-import { SignModalProps } from "../../../interface";
 import { authModalSlice } from "../../../reducer/auth_modal_slice";
 import {
     useForgotPasswordChangePhoneAndMailMutation,
     useForgotPasswordV1Mutation,
     useForgotPasswordV2Mutation,
     useForgotPasswordV3Mutation,
+    useForgotResetEmailMutation,
+    useForgotResetPhoneMutation,
 } from "../../../services/AuthService";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -96,15 +97,12 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-const ForgotPasswordModal: React.FC<SignModalProps> = ({
-    forgot,
-    setForgotClose,
-    setLoginOpen,
-}) => {
+const ForgotPasswordModal = () => {
     const [secondForm, setSecondForm] = useState(false);
     const [firstForm, setFirstForm] = useState(true);
     const [threeForm, setThreeForm] = useState(false);
     const [phone, setPhone] = useState("");
+    const [mail, setMail] = useState("");
 
     const { openForgotPassword } = useSelector(
         (state: any) => state.auth_modal_slice
@@ -115,6 +113,8 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
     const [postForgotV1] = useForgotPasswordV1Mutation();
     const [postForgotV2] = useForgotPasswordV2Mutation();
     const [postForgotV3] = useForgotPasswordV3Mutation();
+    const [resendPhone] = useForgotResetPhoneMutation();
+    const [resendMail] = useForgotResetEmailMutation();
 
     const [toggle, setToggle] = useState("Email");
 
@@ -127,7 +127,12 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
     };
 
     const choiceAPI = (data: any) => {
-        setPhone(data.phone);
+        if (toggle === "phone") {
+            setPhone(data.phone);
+        } else {
+            setMail(data.email);
+        }
+
         togglePhoneAndMail({ data: data, toggle: toggle })
             .then((res: any) => {
                 console.log(res);
@@ -162,17 +167,31 @@ const ForgotPasswordModal: React.FC<SignModalProps> = ({
     };
 
     const resend_code = () => {
-        postForgotV2(phone)
-            .then((res: any) => {
-                if (res.data) {
-                    toast.success("Код отправлен повторно");
-                } else {
+        if (toggle === "Email") {
+            resendMail({ email: mail })
+                .then((res: any) => {
+                    if (res.data) {
+                        toast.success("Код отправлен повторно");
+                    } else {
+                        toast.error("Не правильный код");
+                    }
+                })
+                .catch((err) => {
                     toast.error("Не правильный код");
-                }
-            })
-            .catch((err) => {
-                toast.error("Не правильный код");
-            });
+                });
+        } else {
+            resendPhone({ phone: phone })
+                .then((res: any) => {
+                    if (res.data) {
+                        toast.success("Код отправлен повторно");
+                    } else {
+                        toast.error("Не правильный код");
+                    }
+                })
+                .catch((err) => {
+                    toast.error("Не правильный код");
+                });
+        }
     };
 
     const resetPassword = (data: any) => {

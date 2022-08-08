@@ -82,6 +82,24 @@ export const login = api.injectEndpoints({
                 };
             },
         }),
+        forgotResetPhone: build.mutation({
+            query(body) {
+                return {
+                    url: `api/v1/users/reset_phone/`,
+                    method: "POST",
+                    body,
+                };
+            },
+        }),
+        forgotResetEmail: build.mutation({
+            query(body) {
+                return {
+                    url: `api/v1/users/reset_email/`,
+                    method: "POST",
+                    body,
+                };
+            },
+        }),
     }),
 });
 
@@ -94,4 +112,6 @@ export const {
     useForgotPasswordV1Mutation,
     useForgotPasswordV2Mutation,
     useForgotPasswordV3Mutation,
+    useForgotResetEmailMutation,
+    useForgotResetPhoneMutation,
 } = login;

@@ -35,7 +35,6 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
 }) => {
     const [deleteFavoriteId] = useDeleteFavoriteMutation();
     const [transferToBasket] = useTransferFavoriteMutation();
-    const navigate = useNavigate();
 
     const TransferFavorite = () => {
         transferToBasket({ id })

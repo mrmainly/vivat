@@ -72,7 +72,6 @@ const CustomButton = styled(Button)(({ theme }) => ({
 
 const Bottom = () => {
     const [searchValue, setSearchValue] = useState("");
-    const [skip, setSkip] = useState(true);
     const [skipBasket, setSkipBasket] = useState(true);
 
     const [AutoCompliteData, setAutoCompliteData] = useState([]);
@@ -80,12 +79,6 @@ const Bottom = () => {
         useGetBasketQuery("", {
             skip: skipBasket,
         });
-    const { data, isFetching, isSuccess } = useProductsSearchQuery(
-        searchValue,
-        {
-            skip,
-        }
-    );
 
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
@@ -95,14 +88,15 @@ const Bottom = () => {
         drawersSlice.actions;
 
     const onSubmit = async () => {
-        setSkip((prev) => !prev);
-        if (isSuccess) {
-            navigate(ROUTES.SEARCH_PAGE, {
-                state: { data: data, title: searchValue },
+        await API.productsSearch(searchValue)
+            .then((res) => {
+                navigate(ROUTES.SEARCH_PAGE, {
+                    state: { data: res.data, title: searchValue },
+                });
+            })
+            .catch((error) => {
+                toast.error("error");
             });
-        } else {
-            toast.error("error");
-        }
     };
 
     const handleAutoComplite = (newValue: any) => {

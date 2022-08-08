@@ -13,7 +13,11 @@ export const favoriotes = api.injectEndpoints({
                     method: "POST",
                 };
             },
-            invalidatesTags: [{ type: "Favorites" }, { type: "Promotion" }],
+            invalidatesTags: [
+                { type: "Favorites" },
+                { type: "Promotion" },
+                { type: "Baskets" },
+            ],
         }),
         addedFavorite: build.mutation({
             query({ id }) {
@@ -43,15 +47,15 @@ export const favoriotes = api.injectEndpoints({
                 { type: "Promotion" },
             ],
         }),
-        transferToBasket: build.mutation({
-            query({ id }) {
-                return {
-                    url: `api/v1/favorites/transfer/${id}/`,
-                    method: "POST",
-                };
-            },
-            invalidatesTags: [{ type: "Baskets" }],
-        }),
+        // transferToBasket: build.mutation({
+        //     query({ id }) {
+        //         return {
+        //             url: `api/v1/favorites/transfer/${id}/`,
+        //             method: "POST",
+        //         };
+        //     },
+        //     invalidatesTags: [],
+        // }),
     }),
 });
 
@@ -60,5 +64,5 @@ export const {
     useTransferFavoriteMutation,
     useAddedFavoriteMutation,
     useDeleteFavoriteMutation,
-    useTransferToBasketMutation,
+    // useTransferToBasketMutation,
 } = favoriotes;
