@@ -72,8 +72,9 @@ const SearchPageMobile = () => {
     };
 
     const handleAutoComplite = (newValue: any) => {
-        setSearchValue(newValue);
-        API.getAutoComplite(newValue)
+        let newStr = newValue[0].toUpperCase() + newValue.slice(1);
+        setSearchValue(newStr);
+        API.getAutoComplite(newStr)
             .then((res) => {
                 const newData = res.data.map((item: any) => {
                     return item.name;
