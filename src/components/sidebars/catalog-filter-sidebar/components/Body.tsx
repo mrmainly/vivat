@@ -35,14 +35,11 @@ interface CatalogFilterSideBarProps {
 const Body: React.FC<CatalogFilterSideBarProps> = ({
     formState,
     formDispatch,
-    open,
-    setOpen,
 }) => {
     const [minPrice, setMinPrice] = useState(formState.min_price);
     const [maxPrice, setMaxPrice] = useState(formState.max_price);
     const [producer, setProducer] = useState("");
 
-    const navigate = useNavigate();
     const minDistance = 10;
 
     const handleCheckbox = (e: any, type: string) => {
@@ -101,7 +98,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             onChange={(e) => handleCheckbox(e, "checkbox")}
                         />
                     }
-                    label="с рецептом"
+                    label="С рецептом"
                 /> */}
             </Box>
             <BorderLine sx={{ mt: "-5px" }} />

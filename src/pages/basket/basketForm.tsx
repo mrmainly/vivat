@@ -259,6 +259,13 @@ const BasketForm = () => {
                                     value={commend}
                                     onChange={(e) => setCommend(e.target.value)}
                                 />
+                                <MyText
+                                    variant="body1"
+                                    sx={{ mt: 1, color: "grey" }}
+                                >
+                                    Здесь вы можете написать свои пожелания к
+                                    заказу и т.п
+                                </MyText>
                                 {/* <FormControl sx={{ mt: 2 }}>
                                     <FormLabel component="legend">
                                         Способ оплаты

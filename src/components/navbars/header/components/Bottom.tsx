@@ -101,9 +101,10 @@ const Bottom = () => {
             });
     };
 
-    const handleAutoComplite = (newValue: any) => {
-        setSearchValue(newValue);
-        API.getAutoComplite(newValue)
+    const handleAutoComplite = async (newValue: any) => {
+        let newStr = newValue[0].toUpperCase() + newValue.slice(1);
+        setSearchValue(newStr);
+        API.getAutoComplite(newStr)
             .then((res) => {
                 const newData = res.data.map((item: any) => {
                     return item.name;
