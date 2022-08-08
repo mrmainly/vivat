@@ -1,10 +1,21 @@
 import { api } from "./api";
+import { basketCountSlice } from "../reducer/basket_count_slice";
+
+const { basketCount } = basketCountSlice.actions;
 
 export const baskets = api.injectEndpoints({
     endpoints: (build) => ({
         getBasket: build.query({
             query: () => `api/v1/carts/`,
             providesTags: ["Baskets"],
+            async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(basketCount(data.total_qnt));
+                } catch (err) {
+                    console.log(err);
+                }
+            },
         }),
         patchBasket: build.mutation({
             query(body) {

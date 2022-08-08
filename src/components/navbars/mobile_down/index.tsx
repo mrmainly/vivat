@@ -5,7 +5,7 @@ import { styled } from "@mui/system";
 import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import MyContainer from "../../container";
 import ROUTES from "../../../routes";
@@ -41,6 +41,8 @@ const MobileDown = () => {
     const dispatch = useDispatch();
     const { handleFavoritesDrawerOpen } = drawersSlice.actions;
     const { openLoginModal } = authModalSlice.actions;
+    const { count } = useSelector((state: any) => state.basket_count_slice);
+    console.log("count", count);
 
     // useEffect(() => {
     //     if (jwttoken) {
@@ -99,7 +101,7 @@ const MobileDown = () => {
                                 : dispatch(openLoginModal(true));
                         }}
                     >
-                        <StyledBadge badgeContent={jwttoken ? basketCount : 0}>
+                        <StyledBadge badgeContent={jwttoken ? count : 0}>
                             <img src="/img/Bag_light.png" />
                         </StyledBadge>
                     </IconButton>

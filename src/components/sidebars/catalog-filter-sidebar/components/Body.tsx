@@ -93,6 +93,16 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                     }
                     label="Без рецепта"
                 />
+                {/* <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={formState.notRecept}
+                            name="notRecept"
+                            onChange={(e) => handleCheckbox(e, "checkbox")}
+                        />
+                    }
+                    label="с рецептом"
+                /> */}
             </Box>
             <BorderLine sx={{ mt: "-5px" }} />
             <Box sx={{ p: 2 }}>

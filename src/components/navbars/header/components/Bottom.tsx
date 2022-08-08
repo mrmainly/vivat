@@ -27,6 +27,7 @@ import { authModalSlice } from "../../../../reducer/auth_modal_slice";
 import { drawersSlice } from "../../../../reducer/drawers_slice";
 import { useProductsSearchQuery } from "../../../../services/ProductsService";
 import { useGetBasketQuery } from "../../../../services/BasketService";
+import { basketCountSlice } from "../../../../reducer/basket_count_slice";
 
 import { useDispatch } from "react-redux";
 
@@ -84,6 +85,7 @@ const Bottom = () => {
     const jwttoken = cookie.get("jwttoken");
     const dispatch = useDispatch();
     const { openLoginModal } = authModalSlice.actions;
+    const { basketCount } = basketCountSlice.actions;
     const { handleFavoritesDrawerOpen, handleMainDrawerOpen } =
         drawersSlice.actions;
 

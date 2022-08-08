@@ -27,27 +27,6 @@ const api = (url) => {
 };
 
 class API {
-    //verifi code
-    sendVerifyCode(data) {
-        const result = api("api/v1/users/code/2/verify/").post(null, data);
-        return result;
-    }
-
-    //forgot
-
-    reset_password(data) {
-        return api("api/v1/users/reset_password/").post(null, {
-            code: data.code,
-            password: data.password,
-        });
-    }
-
-    resend_phone(data) {
-        return api("api/v1/users/code/1.5/resend/").post(null, {
-            phone: data,
-        });
-    }
-
     getAutoComplite(value) {
         const result = api(`api/v1/goods/autocomplete/?name=${value}`).get();
         return result;
@@ -55,17 +34,6 @@ class API {
 
     productsSearch(name) {
         const result = api(`api/v1/goods/search/?name=${name}`).get();
-        return result;
-    }
-
-    //orders || basket
-    async getCartsList() {
-        let result = await api(`api/v1/carts/`).get();
-        return result;
-    }
-
-    async getProducerList(id) {
-        let result = await api(`api/v1/goods/producer_list/${id}`).get();
         return result;
     }
 
