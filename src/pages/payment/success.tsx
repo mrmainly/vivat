@@ -34,7 +34,6 @@ const SuccessPayment = () => {
             >
                 Посмотреть статус заказа
             </Button>
-            {/* <MyText variant="body1"></MyText> */}
         </Root>
     );
 };

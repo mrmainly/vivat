@@ -19,8 +19,6 @@ const ProductDetail = () => {
     const { data: dataAnalog, isFetching: isFetchingAnalog } =
         useGetProductAnalQuery({ id: params.id });
 
-    console.log(dataAnalog);
-
     return (
         <>
             {data ? (

@@ -135,7 +135,6 @@ const ForgotPasswordModal = () => {
 
         togglePhoneAndMail({ data: data, toggle: toggle })
             .then((res: any) => {
-                console.log(res);
                 if (res.data) {
                     setSecondForm(true);
                     setFirstForm(false);
@@ -203,7 +202,6 @@ const ForgotPasswordModal = () => {
                 } else {
                     toast.error("что то пошло не так");
                 }
-                console.log(res);
             });
         } else {
             toast.error("что то пошло не так");

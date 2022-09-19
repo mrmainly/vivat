@@ -9,8 +9,6 @@ import { useGetOrdersMeStatusQuery } from "../../services/StatusService";
 const StatusProduct = () => {
     const { data, isLoading } = useGetOrdersMeStatusQuery("");
 
-    console.log(data);
-
     return (
         <Box>
             {isLoading ? (

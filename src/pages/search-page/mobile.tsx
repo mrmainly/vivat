@@ -63,7 +63,6 @@ const SearchPageMobile = () => {
         await API.productsSearch(searchValue)
             .then((res) => {
                 setData(res.data);
-                console.log(res);
             })
             .catch((error) => {
                 toast.error("error");

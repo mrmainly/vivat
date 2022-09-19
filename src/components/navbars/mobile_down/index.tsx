@@ -42,7 +42,6 @@ const MobileDown = () => {
     const { handleFavoritesDrawerOpen } = drawersSlice.actions;
     const { openLoginModal } = authModalSlice.actions;
     const { count } = useSelector((state: any) => state.basket_count_slice);
-    console.log("count", count);
 
     // useEffect(() => {
     //     if (jwttoken) {

@@ -67,8 +67,6 @@ const Basket = () => {
             .catch(() => toast.error("Что то пошло не так"));
     };
 
-    console.log(data);
-
     return (
         <>
             <MyText variant="h6">Корзина</MyText>

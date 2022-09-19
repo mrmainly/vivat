@@ -51,6 +51,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
         slidesToShow: 1,
         autoplay: true,
         autoplaySpeed: 4000,
+        pauseOnHover: false,
     };
 
     return (

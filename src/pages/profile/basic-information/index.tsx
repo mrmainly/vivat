@@ -60,7 +60,6 @@ const BasicInformation = () => {
                         `${res.error.data.errors[0]} ${res.error.data.errors[1]}`
                     );
                 }
-                console.log(res);
             })
             .catch((err) => {
                 toast.error("Профиль не изменен");

@@ -156,7 +156,6 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                         dispatch(openLoginModal(true));
                     } else {
                         toast.error("что то пошло не так");
-                        console.log(res);
                     }
                 })
                 .catch((error) => {
