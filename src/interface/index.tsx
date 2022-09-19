@@ -53,6 +53,7 @@ interface ButtonProps {
     color?: any;
     size?: any;
     fullWidth?: any;
+    disabled?: boolean;
 }
 
 interface MySelectProps {

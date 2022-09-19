@@ -133,7 +133,7 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                 setVerifyVersion(false);
                 setPasswordV(true);
             } else {
-                toast.error("вы ввели не правильные данные");
+                toast.error(res.error.data.errors[0]);
             }
         });
     };
@@ -155,8 +155,9 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                         dispatch(openRegisterModal(false));
                         dispatch(openLoginModal(true));
                     } else {
-                        toast.error("что то пошло не так");
+                        toast.error(res.error.data.errors[0]);
                     }
+                    console.log(res);
                 })
                 .catch((error) => {
                     toast.error("что то пошло не так");

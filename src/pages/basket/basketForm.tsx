@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     Grid,
     FormControl,
@@ -46,7 +46,7 @@ const BasketForm = () => {
     const [entrance, setEntrance] = useState("");
     const [AutoCompliteData, setAutoCopliteData] = useState([]);
 
-    const { data: accountUser, isLoading, error } = useGetAccountUserQuery("");
+    const { data: accountUser, isLoading } = useGetAccountUserQuery("");
     const { data: basketList, isLoading: isBasketLoading } =
         useGetBasketQuery("");
     const { data: deportaments, isLoading: isDeportamentsLoading } =
@@ -70,12 +70,17 @@ const BasketForm = () => {
             apartment: apartment,
         }).then((res: any) => {
             if (res.data) {
-                toast.success("заявка оформлена");
+                toast.success("Заявка оформлена");
                 res.data === "Success"
                     ? navigate(ROUTES.SUCCESS_PAYMENT)
                     : (window.location.href = res.data);
+            } else if (
+                res.error.data.errors[0] ===
+                "{'delivery_type': [ErrorDetail(string='Значения  нет среди допустимых вариантов.', code='invalid_choice')]}"
+            ) {
+                toast.error("Ваша корзина пуста");
             } else {
-                toast.error("заявка не оформлена");
+                toast.error("Заявка оформлена");
             }
         });
     };
@@ -87,7 +92,6 @@ const BasketForm = () => {
                 const newData = res?.data?.result?.items.map((item: any) => {
                     return item.full_name;
                 });
-
                 if (newData === undefined) {
                     setAutoCopliteData([]);
                 } else {
@@ -221,7 +225,6 @@ const BasketForm = () => {
                                         setEntrance(e.target.value)
                                     }
                                 />
-
                                 <FormControl
                                     fullWidth
                                     margin="normal"
@@ -266,37 +269,6 @@ const BasketForm = () => {
                                     Здесь вы можете написать свои пожелания к
                                     заказу и т.п
                                 </MyText>
-                                {/* <FormControl sx={{ mt: 2 }}>
-                                    <FormLabel component="legend">
-                                        Способ оплаты
-                                    </FormLabel>
-                                    <RadioGroup
-                                        aria-labelledby="demo-radio-buttons-group-label"
-                                        defaultValue="female"
-                                        name="radio-buttons-group"
-                                        value={payment}
-                                        onChange={(e) => handlePayment(e)}
-                                    >
-                                        <FormControlLabel
-                                            control={
-                                                <Radio
-                                                    checked={payment === "CASH"}
-                                                />
-                                            }
-                                            label="Наличными при получении"
-                                            value="CASH"
-                                        />
-                                        <FormControlLabel
-                                            control={
-                                                <Radio
-                                                    checked={payment === "CARD"}
-                                                />
-                                            }
-                                            label="Оплата картой онлайн"
-                                            value="CARD"
-                                        />
-                                    </RadioGroup>
-                                </FormControl> */}
                                 <FormControl sx={{ mt: 2 }}>
                                     <FormLabel component="legend">
                                         Способ доставки
@@ -323,21 +295,8 @@ const BasketForm = () => {
                                 <MyText variant="body1" sx={{ mt: 2 }}>
                                     Подтвердите ваш заказ
                                 </MyText>
-                                {/* <Box
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        mt: 1,
-                                    }}
-                                >
-                                    <MyText variant="body2">
-                                        Стоимость товара без скидки:
-                                    </MyText>
-                                    <MyText variant="body2">
-                                        {totalPrice} ₽
-                                    </MyText>
-                                </Box> */}
-                                {delivery === "DELIVERY" ? (
+
+                                {delivery === "DELIVERY" && (
                                     <Box
                                         sx={{
                                             display: "flex",
@@ -352,8 +311,6 @@ const BasketForm = () => {
                                             {costTotalPrice} ₽
                                         </MyText>
                                     </Box>
-                                ) : (
-                                    ""
                                 )}
                                 <Box
                                     sx={{
@@ -372,12 +329,24 @@ const BasketForm = () => {
                                         ₽
                                     </MyText>
                                 </Box>
-                                <MyButton
-                                    style={{ marginTop: 20 }}
-                                    onClick={compliteOrders}
-                                >
-                                    Подтвердить заказ
-                                </MyButton>
+                                {delivery === "DELIVERY" ? (
+                                    <MyButton
+                                        style={{ marginTop: 20 }}
+                                        onClick={compliteOrders}
+                                        disabled={
+                                            myAddress === "" ? true : false
+                                        }
+                                    >
+                                        Подтвердить заказ
+                                    </MyButton>
+                                ) : (
+                                    <MyButton
+                                        style={{ marginTop: 20 }}
+                                        onClick={compliteOrders}
+                                    >
+                                        Подтвердить заказ
+                                    </MyButton>
+                                )}
                             </Box>
                         </Grid>
                         <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>

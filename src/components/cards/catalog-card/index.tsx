@@ -89,8 +89,15 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                         toast.error(
                             "Это лекарственное средство отпускается по рецепту"
                         );
+                    } else if (
+                        res.error.data.errors[0] ===
+                        "item.count more than stocks.qty"
+                    ) {
+                        toast.error(
+                            "Кол-во товаров в вашей корзине на данный момент превышает кол-во товаров на складе"
+                        );
                     } else {
-                        toast.error("Товара нет в наличии");
+                        toast.error("Товар не найден");
                     }
                 }
             })

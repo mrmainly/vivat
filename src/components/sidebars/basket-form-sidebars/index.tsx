@@ -47,7 +47,7 @@ const BasketFormSideBars: React.FC<BasketFormSideBarsProps> = ({
                 >
                     Ваш заказ:
                 </MyText>
-                {data.map((item: any, index: number) => (
+                {data?.map((item: any, index: number) => (
                     <Box
                         key={index}
                         sx={{
