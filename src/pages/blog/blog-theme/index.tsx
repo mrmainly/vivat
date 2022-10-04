@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-
 import { Box, CircularProgress, Grid } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
-import { MyText, BlogCardTheme } from "../../components";
-import { useGetBlogQuery } from "../../services/BlogService";
+import { MyText, BlogCardTheme } from "../../../components";
+import { useGetBlogQuery } from "../../../services/BlogService";
 
 interface NameProps {
     name?: string;

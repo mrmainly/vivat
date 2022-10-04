@@ -87,7 +87,7 @@ const MainDrawer = () => {
                         <BorderLine sx={{ mb: 2, mt: 2 }} />
                     </Box>
                     <Box>
-                        {drawer_links.map((item: any, index: number) => (
+                        {drawer_links?.map((item: any, index: number) => (
                             <MenuItem
                                 onClick={() => {
                                     navigate(item.to);

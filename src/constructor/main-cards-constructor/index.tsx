@@ -44,8 +44,8 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                                 <SkeletonCatalogVersion />
                             </Grid>
                         ))
-                ) : data.length > 0 ? (
-                    data.map((item: any, index: number) => (
+                ) : data?.length > 0 ? (
+                    data?.map((item: any, index: number) => (
                         <Grid
                             item
                             lg={3}

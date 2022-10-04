@@ -1,11 +1,9 @@
-import React from "react";
-
 import { Box, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 
-import { MyText, Tag } from "../../components";
-import { useGetBlogDetailQuery } from "../../services/BlogService";
+import { MyText, Tag } from "../../../components";
+import { useGetBlogDetailQuery } from "../../../services/BlogService";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",

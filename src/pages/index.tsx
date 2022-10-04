@@ -25,9 +25,9 @@ import BasicInformation from "./profile/basic-information";
 import MyOrders from "./profile/my-orders";
 import ProductDetail from "./product-detail";
 
-import BlogDetail from "./blog/blogDetail";
-import Blog from "./blog";
-import BlogTheme from "./blog/themeBlog";
+import BlogDetail from "./blog/blog-detail";
+import Blog from "./blog/main-blog";
+import BlogTheme from "./blog/blog-theme";
 
 import VivatInfo from "./pharmacy/vivat-info";
 import PharmacyWork from "./pharmacy-work";

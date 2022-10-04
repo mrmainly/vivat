@@ -1,16 +1,6 @@
-import React, { useCallback, useState, useEffect } from "react";
-import {
-    Box,
-    Grid,
-    Select,
-    FormControlLabel,
-    InputLabel,
-    MenuItem,
-    FormControl,
-} from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, Grid } from "@mui/material";
 
-import { BlogCard, BlogCardMain, MyText } from "../../../components";
+import { BlogCard, BlogCardMain } from "../../../../../components";
 
 interface ThemeMainProps {
     theme: any;
