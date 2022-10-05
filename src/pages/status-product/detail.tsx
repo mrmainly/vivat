@@ -128,7 +128,7 @@ const StatusProductDetail = () => {
                 </Main>
             ) : (
                 <Box>
-                    <MyText variant="h6">У вас нету заказов</MyText>
+                    <MyText variant="h6">У вас нет заказов</MyText>
                 </Box>
             )}
         </>

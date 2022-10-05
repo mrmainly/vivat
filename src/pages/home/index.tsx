@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Box, Pagination } from "@mui/material";
 import { styled } from "@mui/system";
@@ -47,26 +47,30 @@ const Home = () => {
                 <MyText variant="h5" sx={{ mb: 1, mt: 1 }}>
                     Лек. средства
                 </MyText>
-                <Pagination
-                    count={countNumber}
-                    page={currentPage}
-                    style={{ marginBottom: 20, marginTop: 20 }}
-                    onChange={(event, value) => {
-                        setCurrentPage(value);
-                    }}
-                />
+                {products?.results.length && (
+                    <Pagination
+                        count={countNumber}
+                        page={currentPage}
+                        style={{ marginBottom: 20, marginTop: 20 }}
+                        onChange={(event, value) => {
+                            setCurrentPage(value);
+                        }}
+                    />
+                )}
                 <MainCardsConstructor
                     data={products?.results}
                     loading={isProductsFetching}
                 />
-                <Pagination
-                    count={countNumber}
-                    page={currentPage}
-                    style={{ marginTop: 20 }}
-                    onChange={(event, value) => {
-                        setCurrentPage(value);
-                    }}
-                />
+                {products?.results.length && (
+                    <Pagination
+                        count={countNumber}
+                        page={currentPage}
+                        style={{ marginTop: 20 }}
+                        onChange={(event, value) => {
+                            setCurrentPage(value);
+                        }}
+                    />
+                )}
             </Box>
         </div>
     );

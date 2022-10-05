@@ -217,7 +217,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                             >
                                 {data?.stocks?.priceSale
                                     ? data?.stocks?.priceSale
-                                    : "Нету цены"}{" "}
+                                    : "Нет цены"}{" "}
                                 ₽
                             </MyText>
                             {/* <MyText

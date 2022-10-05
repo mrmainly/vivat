@@ -73,7 +73,7 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                 ) : (
                     <Box sx={{ ml: 3 }}>
                         <MyText variant="h6">
-                            На данный момент нету лекарств
+                            На данный момент нет лекарств
                         </MyText>
                     </Box>
                 )}

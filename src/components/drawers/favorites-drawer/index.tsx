@@ -51,7 +51,7 @@ const FavoritesDrawer = () => {
             {isLoading ? (
                 ""
             ) : error ? (
-                <div>У вас нету фаворитов</div>
+                <div>У вас нет фаворитов</div>
             ) : (
                 <Main
                     style={{

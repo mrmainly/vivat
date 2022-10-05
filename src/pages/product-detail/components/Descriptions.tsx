@@ -78,7 +78,7 @@ const Description: React.FC<DescriptionDataPorps> = ({ instructions }) => {
                 })
             ) : (
                 <MyText variant="h6" sx={{ mt: 2 }}>
-                    Для данного товара нету описания
+                    Для данного товара нет описания
                 </MyText>
             )}
         </Box>

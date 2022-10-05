@@ -176,7 +176,7 @@ const MyOrderDetail = () => {
                 </Main>
             ) : (
                 <Box sx={{ mt: 6 }}>
-                    <MyText variant="h6">У вас нету заказов</MyText>
+                    <MyText variant="h6">У вас нет заказов</MyText>
                 </Box>
             )}
         </Root>

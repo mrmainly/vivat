@@ -61,7 +61,7 @@ const BlogDetail = () => {
                             {`${data.author.last_name} ${data.author.first_name} ${data.author.patronymic}`}
                         </MyText>
                     ) : (
-                        "Нету автора"
+                        "Нет автора"
                     )}
                     <Tag>{data.tags.name}</Tag>
                     <Img

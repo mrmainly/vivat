@@ -185,7 +185,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                                 ml: 1,
                             }}
                         >
-                            Нету
+                            Нет цены
                         </MyText>
                     )}
                     {/* <MyText
