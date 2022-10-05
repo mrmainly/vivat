@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     Box,
     Grid,
@@ -30,7 +30,7 @@ const Main = styled(Box)(({ theme }) => ({
 const PharmacyWork = () => {
     const [city, setCity] = useState("");
 
-    const { data, isFetching, error } = useGetWorkQuery({ city: city });
+    const { data, isFetching } = useGetWorkQuery({ city: city });
     const { data: cities, isFetching: isCitiesLoading } = useGetCityQuery("");
 
     if (isFetching || isCitiesLoading) {
@@ -66,8 +66,8 @@ const PharmacyWork = () => {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 label={<FormattedMessage id="cities" />}
-                                defaultValue={cities[0].name}
-                                value={city}
+                                defaultValue={cities[0]?.name}
+                                // value={city}
                                 onChange={(e) => setCity(e.target.value)}
                             >
                                 {cities.map((item: any, index: number) => (

@@ -230,7 +230,7 @@ const Bottom = () => {
                                 : 0
                         }
                     >
-                        <img src="/img/Bag_light.png" />
+                        <img src="/img/Bag_light.png" alt="" />
                     </StyledBadge>
                     <MyText
                         variant="h6"

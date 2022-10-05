@@ -35,25 +35,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const MobileDown = () => {
-    const [basketCount, setBasketCount] = useState(0);
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { handleFavoritesDrawerOpen } = drawersSlice.actions;
     const { openLoginModal } = authModalSlice.actions;
     const { count } = useSelector((state: any) => state.basket_count_slice);
-
-    // useEffect(() => {
-    //     if (jwttoken) {
-    //         API.getCartsList()
-    //             .then((res) => {
-    //                 setBasketCount(res.data.total_qnt);
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error);
-    //             });
-    //     }
-    // }, [basketStatus.basket.status, jwttoken]);
 
     return (
         <MobileBox>
@@ -65,12 +52,12 @@ const MobileDown = () => {
                     }}
                 >
                     <IconButton onClick={() => navigate(ROUTES.HOME)}>
-                        <img src="/img/darhboard.png" />
+                        <img src="/img/darhboard.png" alt="" />
                     </IconButton>
                     <IconButton
                         onClick={() => navigate(ROUTES.SEARCH_PAGE_MOBILE)}
                     >
-                        <img src="/img/Component17.png" />
+                        <img src="/img/Component17.png" alt="" />
                     </IconButton>
                     <IconButton
                         onClick={() => {
@@ -79,7 +66,7 @@ const MobileDown = () => {
                                 : dispatch(openLoginModal(true));
                         }}
                     >
-                        <img src="/img/Favorite_light.png" />
+                        <img src="/img/Favorite_light.png" alt="" />
                     </IconButton>
                     <IconButton
                         onClick={() => {
@@ -101,7 +88,7 @@ const MobileDown = () => {
                         }}
                     >
                         <StyledBadge badgeContent={jwttoken ? count : 0}>
-                            <img src="/img/Bag_light.png" />
+                            <img src="/img/Bag_light.png" alt="" />
                         </StyledBadge>
                     </IconButton>
                 </Box>

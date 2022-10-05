@@ -39,7 +39,6 @@ import {
     Advertising,
     TechnicalSupport,
     Benefits,
-    Vacancy,
     SearchPageMobile,
     Home,
     Basket,
