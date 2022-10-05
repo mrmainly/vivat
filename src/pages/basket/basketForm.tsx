@@ -37,14 +37,14 @@ const BasketForm = () => {
         "47CC211D-EECA-4D38-87A1-E255059DD16F"
     );
     const [commend, setCommend] = useState("");
-    const [payment, setPayment] = useState("CARD");
-    const [delivery, setDelivery] = useState("");
+    // const [payment, setPayment] = useState("CARD");
+    const [delivery, setDelivery] = useState("PICKUP");
     const [costTotalPrice, setCostTotalPrice] = useState(0);
     const [myAddress, setMyAddress] = useState("");
     const [floor, setFloor] = useState("");
     const [apartment, setApartament] = useState("");
     const [entrance, setEntrance] = useState("");
-    const [AutoCompliteData, setAutoCopliteData] = useState([]);
+    // const [AutoCompliteData, setAutoCopliteData] = useState([]);
 
     const { data: accountUser, isLoading } = useGetAccountUserQuery("");
     const { data: basketList, isLoading: isBasketLoading } =
@@ -85,46 +85,46 @@ const BasketForm = () => {
         });
     };
 
-    const handleAutoComplite = (e: any) => {
-        setMyAddress(e.target.value);
-        API.getAddressAutoComplete(e.target.value)
-            .then((res) => {
-                const newData = res?.data?.result?.items.map((item: any) => {
-                    return item.full_name;
-                });
-                if (newData === undefined) {
-                    setAutoCopliteData([]);
-                } else {
-                    setAutoCopliteData(newData);
-                }
-            })
-            .catch((error) => console.log(error));
-    };
+    // const handleAutoComplite = (e: any) => {
+    //     setMyAddress(e.target.value);
+    //     API.getAddressAutoComplete(e.target.value)
+    //         .then((res) => {
+    //             const newData = res?.data?.result?.items.map((item: any) => {
+    //                 return item.full_name;
+    //             });
+    //             if (newData === undefined) {
+    //                 setAutoCopliteData([]);
+    //             } else {
+    //                 setAutoCopliteData(newData);
+    //             }
+    //         })
+    //         .catch((error) => console.log(error));
+    // };
 
-    const getCost = (event: any, values: any) => {
-        setMyAddress(values);
-        API.getGogoCost(values)
-            .then((res) => {
-                setCostTotalPrice(res.data.organisation_cost);
-            })
-            .catch((error) => console.log(error));
-    };
+    // const getCost = (event: any, values: any) => {
+    //     setMyAddress(values);
+    //     API.getGogoCost(values)
+    //         .then((res) => {
+    //             setCostTotalPrice(res.data.organisation_cost);
+    //         })
+    //         .catch((error) => console.log(error));
+    // };
 
-    const handleDelivery = (e: any) => {
-        setDelivery(e.target.value);
-        if (e.target.value === "DELIVERY") {
-            setPayment("CARD");
-        } else {
-            setPayment("CASH");
-        }
-    };
+    // const handleDelivery = (e: any) => {
+    //     setDelivery(e.target.value);
+    //     if (e.target.value === "DELIVERY") {
+    //         setPayment("CARD");
+    //     } else {
+    //         setPayment("CASH");
+    //     }
+    // };
 
-    const handlePayment = (e: any) => {
-        // setPayment(e.target.value);
-        if (delivery === "PICKUP") {
-            setPayment(e.target.value);
-        }
-    };
+    // const handlePayment = (e: any) => {
+
+    //     if (delivery === "PICKUP") {
+    //         setPayment(e.target.value);
+    //     }
+    // };
 
     return (
         <>
@@ -177,7 +177,7 @@ const BasketForm = () => {
                                     value={accountUser.email}
                                     margin="normal"
                                 />
-                                <Autocomplete
+                                {/* <Autocomplete
                                     freeSolo
                                     id="free-solo-2-demo"
                                     fullWidth
@@ -224,7 +224,7 @@ const BasketForm = () => {
                                     onChange={(e) =>
                                         setEntrance(e.target.value)
                                     }
-                                />
+                                /> */}
                                 <FormControl
                                     fullWidth
                                     margin="normal"
@@ -278,7 +278,7 @@ const BasketForm = () => {
                                         defaultValue="female"
                                         name="radio-buttons-group"
                                         value={delivery}
-                                        onChange={(e) => handleDelivery(e)}
+                                        // onChange={(e) => handleDelivery(e)}
                                     >
                                         <FormControlLabel
                                             control={<Radio />}
@@ -286,8 +286,9 @@ const BasketForm = () => {
                                             value="PICKUP"
                                         />
                                         <FormControlLabel
+                                            disabled
                                             control={<Radio />}
-                                            label="Доставка курьером"
+                                            label="Доставка курьером (функция пока не доступна)"
                                             value="DELIVERY"
                                         />
                                     </RadioGroup>

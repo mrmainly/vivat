@@ -149,63 +149,71 @@ const ProductPage = () => {
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
                     <>
-                        <WrapperBox>
-                            <Pagination
-                                page={currentPage}
-                                count={countNumber}
-                                onChange={(event, value) => {
-                                    setCurrentPage(value);
-                                }}
-                            />
-                            <BoxInside>
-                                <SelectDesktop size="small">
-                                    <InputLabel id="demo-simple-select-label">
-                                        Сортировка
-                                    </InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        label="Сортировка"
-                                        value={sort}
-                                        onChange={(e) =>
-                                            setSort(e.target.value)
-                                        }
-                                    >
-                                        {sortName.map((item, index) => (
-                                            <MenuItem
-                                                value={item.value}
-                                                key={index}
-                                            >
-                                                {item.label}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </SelectDesktop>
-                                <ButtonShow
-                                    onClick={() => {
-                                        setDrawerOpen(true);
+                        {data?.results?.length ? (
+                            <WrapperBox>
+                                <Pagination
+                                    page={currentPage}
+                                    count={countNumber}
+                                    onChange={(event, value) => {
+                                        setCurrentPage(value);
                                     }}
-                                >
-                                    <Hamburger
-                                        toggled={drawerOpen}
-                                        color="#55CD61"
-                                    />
-                                </ButtonShow>
-                            </BoxInside>
-                        </WrapperBox>
+                                />
+                                <BoxInside>
+                                    <SelectDesktop size="small">
+                                        <InputLabel id="demo-simple-select-label">
+                                            Сортировка
+                                        </InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            label="Сортировка"
+                                            value={sort}
+                                            onChange={(e) =>
+                                                setSort(e.target.value)
+                                            }
+                                        >
+                                            {sortName.map((item, index) => (
+                                                <MenuItem
+                                                    value={item.value}
+                                                    key={index}
+                                                >
+                                                    {item.label}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </SelectDesktop>
+                                    <ButtonShow
+                                        onClick={() => {
+                                            setDrawerOpen(true);
+                                        }}
+                                    >
+                                        <Hamburger
+                                            toggled={drawerOpen}
+                                            color="#55CD61"
+                                        />
+                                    </ButtonShow>
+                                </BoxInside>
+                            </WrapperBox>
+                        ) : (
+                            ""
+                        )}
                         <MainCardsConstructor
                             data={data?.results}
                             loading={isFetching}
                         />
-                        <Pagination
-                            count={countNumber}
-                            page={currentPage}
-                            style={{ marginTop: 20 }}
-                            onChange={(event, value) => {
-                                setCurrentPage(value);
-                                backToTop();
-                            }}
-                        />
+                        {data?.results?.length ? (
+                            <Pagination
+                                count={countNumber}
+                                page={currentPage}
+                                style={{ marginTop: 20 }}
+                                onChange={(event, value) => {
+                                    setCurrentPage(value);
+                                    backToTop();
+                                }}
+                            />
+                        ) : (
+                            ""
+                        )}
                     </>
                 </Grid>
             </Grid>
