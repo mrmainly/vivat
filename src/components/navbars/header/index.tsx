@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Box, Container, LinearProgress } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { MyDrawer, BorderLine } from "../..";
@@ -43,7 +43,6 @@ const Header: React.FC<HeaderProps> = () => {
                         <Bottom />
                     </Main>
                 </Container>
-                {/* {loading ? <LinearProgress /> : ""} */}
             </DesktopWrapper>
             <MyDrawer />
         </>

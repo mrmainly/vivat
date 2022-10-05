@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { styled } from "@mui/system";
 import { Box, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 import { FormattedMessage } from "react-intl";

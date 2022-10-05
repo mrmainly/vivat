@@ -61,6 +61,7 @@ const Mobile = () => {
                 <img
                     src="/img/Frame60.png"
                     style={{ height: 48, objectFit: "cover", marginLeft: 5 }}
+                    alt=""
                 />
             </IconWrapper>
             <Box sx={{ display: "flex" }}>

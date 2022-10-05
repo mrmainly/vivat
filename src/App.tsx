@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Box } from "@mui/material";
+import { useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -14,7 +13,6 @@ import { LOCALES } from "./i18n/locales";
 import { messages } from "./i18n/messages";
 import Layout from "./layout";
 import {
-    // ProductPage,
     Order,
     Delivery,
     Work,
