@@ -14,6 +14,7 @@ import { messages } from "./i18n/messages";
 import Layout from "./layout";
 import ROUTES from "./routes";
 import PageList from "./pages";
+import { PageLoading } from "./components";
 
 const LazyHome = lazy(() => import("./pages/home"));
 
@@ -37,7 +38,7 @@ const App = () => {
                             <Route
                                 index
                                 element={
-                                    <Suspense fallback={<div>Loading...</div>}>
+                                    <Suspense fallback={<PageLoading />}>
                                         <LazyHome />
                                     </Suspense>
                                 }
@@ -46,9 +47,7 @@ const App = () => {
                                 <Route
                                     key={index}
                                     element={
-                                        <Suspense
-                                            fallback={<div>Loading...</div>}
-                                        >
+                                        <Suspense fallback={<PageLoading />}>
                                             {item.element}
                                         </Suspense>
                                     }

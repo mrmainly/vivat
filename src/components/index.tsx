@@ -45,6 +45,7 @@ import {
     translationPayment,
 } from "./translation-status";
 import BasketFormSideBars from "./sidebars/basket-form-sidebars";
+import PageLoading from "./laodings/PageLoading";
 
 export {
     Header,
@@ -91,4 +92,5 @@ export {
     translationDelivery,
     translationPayment,
     BasketFormSideBars,
+    PageLoading,
 };
