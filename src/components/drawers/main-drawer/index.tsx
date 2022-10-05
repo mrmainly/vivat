@@ -23,6 +23,16 @@ const MainDrawer = () => {
 
     const navigate = useNavigate();
 
+    const handleNavigate = (item: any) => {
+        navigate(ROUTES.PRODUCT_PAGE, {
+            state: {
+                id: item.id,
+                title: item.name,
+            },
+        });
+        dispatch(handleMainDrawerOpen(false));
+    };
+
     return (
         <Drawer
             {...{
@@ -57,18 +67,10 @@ const MainDrawer = () => {
                     </Box>
                     <Box>
                         <BorderLine sx={{ mb: 2, mt: 2 }} />
-                        {data.results.map((item: any, index: number) => (
+                        {data?.results?.map((item: any, index: number) => (
                             <MenuItem
                                 key={index}
-                                onClick={() => {
-                                    navigate(ROUTES.PRODUCT_PAGE, {
-                                        state: {
-                                            id: item.id,
-                                            title: item.name,
-                                        },
-                                    });
-                                    dispatch(handleMainDrawerOpen(false));
-                                }}
+                                onClick={() => handleNavigate(item)}
                             >
                                 <MyText
                                     sx={{

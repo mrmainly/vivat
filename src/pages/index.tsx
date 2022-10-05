@@ -1,91 +1,203 @@
-import Home from "./home";
-import Basket from "./basket";
-import BasketForm from "./basket/basketForm";
-import IssueOrdering from "./issue-ordering";
+import { lazy, Suspense } from "react";
 
-import AboutUs from "./info-screens/about-us";
-import Delivery from "./info-screens/delivery";
-import Work from "./info-screens/work";
-import Contacts from "./info-screens/contacts";
-import Booking from "./info-screens/booking";
-import Stock from "./stock";
-import StockDetail from "./stock/detail";
-import Order from "./info-screens/order";
-import PrivacyPolicy from "./info-screens/privacy-policy";
-import PaymentReceiving from "./info-screens/payment-receiving";
-import Manufacturers from "./info-screens/manufacturers";
-import StaffDepartment from "./info-screens/staff-department";
-import Licenses from "./info-screens/licenses";
-import Advertising from "./info-screens/advertising";
-import TechnicalSupport from "./info-screens/technical-support";
-import Benefits from "./info-screens/benefits";
-import Vacancy from "./info-screens/vacancy";
+import ROUTES from "../routes";
 
-import BasicInformation from "./profile/basic-information";
-import MyOrders from "./profile/my-orders";
-import ProductDetail from "./product-detail";
+const Basket = lazy(() => import("./basket"));
+const BasketForm = lazy(() => import("./basket/basketForm"));
+const IssueOrdering = lazy(() => import("./issue-ordering"));
+const AboutUs = lazy(() => import("./info-screens/about-us"));
+const Delivery = lazy(() => import("./info-screens/delivery"));
+const Work = lazy(() => import("./info-screens/work"));
+const Contacts = lazy(() => import("./info-screens/contacts"));
+const Booking = lazy(() => import("./info-screens/booking"));
+const Stock = lazy(() => import("./stock"));
+const StockDetail = lazy(() => import("./stock/detail"));
+const Order = lazy(() => import("./info-screens/order"));
+const PrivacyPolicy = lazy(() => import("./info-screens/privacy-policy"));
+const PaymentReceiving = lazy(() => import("./info-screens/payment-receiving"));
+const Manufacturers = lazy(() => import("./info-screens/manufacturers"));
+const StaffDepartment = lazy(() => import("./info-screens/staff-department"));
+const Licenses = lazy(() => import("./info-screens/licenses"));
+const Advertising = lazy(() => import("./info-screens/advertising"));
+const TechnicalSupport = lazy(() => import("./info-screens/technical-support"));
+const Benefits = lazy(() => import("./info-screens/benefits"));
+const BasicInformation = lazy(() => import("./profile/basic-information"));
+const MyOrders = lazy(() => import("./profile/my-orders"));
+const ProductDetail = lazy(() => import("./product-detail"));
+const BlogDetail = lazy(() => import("./blog/blog-detail"));
+const Blog = lazy(() => import("./blog/main-blog"));
+const BlogTheme = lazy(() => import("./blog/blog-theme"));
+const VivatInfo = lazy(() => import("./pharmacy/vivat-info"));
+const PharmacyWork = lazy(() => import("./pharmacy-work"));
+const PharmacyContacts = lazy(() => import("./pharmacy/pharmacy-contacts"));
+const PharmacyDetailWork = lazy(() => import("./pharmacy-work/detail"));
+const ProductPage = lazy(() => import("./product-page"));
+const StatusProduct = lazy(() => import("./status-product"));
+const StatusProductDetail = lazy(() => import("./status-product/detail"));
+const MyOrdersDetail = lazy(() => import("./profile/my-orders/detail"));
+const SearchPage = lazy(() => import("./search-page"));
+const Address = lazy(() => import("./address"));
+const ErrorPayment = lazy(() => import("./payment/error"));
+const SearchPageMobile = lazy(() => import("./search-page/mobile"));
+const SuccessPayment = lazy(() => import("./payment/success"));
 
-import BlogDetail from "./blog/blog-detail";
-import Blog from "./blog/main-blog";
-import BlogTheme from "./blog/blog-theme";
+const PageList = [
+    {
+        element: <Basket />,
+        path: ROUTES.BASKET,
+    },
+    {
+        element: <BasketForm />,
+        path: ROUTES.BASKET_FORM,
+    },
+    {
+        element: <ProductDetail />,
+        path: `${ROUTES.PRODUCT_DETAIL}/:id`,
+    },
+    {
+        element: <IssueOrdering />,
+        path: ROUTES.ISSUE_ORDERING,
+    },
+    {
+        element: <ProductPage />,
+        path: ROUTES.PRODUCT_PAGE,
+    },
+    {
+        element: <MyOrders />,
+        path: ROUTES.MYORDERS,
+    },
+    {
+        element: <BasicInformation />,
+        path: ROUTES.BASICINFORMATION,
+    },
+    {
+        element: <AboutUs />,
+        path: ROUTES.ABOUT_US,
+    },
+    {
+        element: <Delivery />,
+        path: ROUTES.DELIVERY,
+    },
+    {
+        element: <PrivacyPolicy />,
+        path: ROUTES.PRIVACY_POLICY,
+    },
+    {
+        element: <PaymentReceiving />,
+        path: ROUTES.PAYMENT_RECEIVING,
+    },
+    {
+        element: <StaffDepartment />,
+        path: ROUTES.STAFF_DEPARTMENT,
+    },
+    {
+        element: <Manufacturers />,
+        path: ROUTES.MANUFACTURERS,
+    },
+    {
+        element: <Licenses />,
+        path: ROUTES.LICENSES,
+    },
+    {
+        element: <Advertising />,
+        path: ROUTES.ADVERTISING,
+    },
+    {
+        element: <TechnicalSupport />,
+        path: ROUTES.TECHNICAL_SUPPORT,
+    },
+    {
+        element: <Benefits />,
+        path: ROUTES.BENEFITS,
+    },
+    {
+        element: <PharmacyWork />,
+        path: ROUTES.VACANCY,
+    },
+    {
+        element: <Work />,
+        path: ROUTES.WORK,
+    },
+    {
+        element: <Contacts />,
+        path: ROUTES.CONTACTS,
+    },
+    {
+        element: <Booking />,
+        path: ROUTES.BOOKING,
+    },
+    {
+        element: <Stock />,
+        path: ROUTES.STOCK,
+    },
+    {
+        element: <StockDetail />,
+        path: `${ROUTES.STOCK_DETAIL}/:id`,
+    },
+    {
+        element: <Order />,
+        path: ROUTES.ORDER,
+    },
+    {
+        element: <Blog />,
+        path: ROUTES.BLOG,
+    },
+    {
+        element: <BlogTheme />,
+        path: ROUTES.BLOG_THEME,
+    },
+    {
+        element: <BlogDetail />,
+        path: `${ROUTES.BLOG_DETAIL}/:id`,
+    },
+    {
+        element: <VivatInfo />,
+        path: ROUTES.VIVAT_INFO,
+    },
+    {
+        element: <PharmacyWork />,
+        path: ROUTES.PHARMACY_WORK,
+    },
+    {
+        element: <PharmacyContacts />,
+        path: ROUTES.PHARMACY_CONTACTS,
+    },
+    {
+        element: <PharmacyDetailWork />,
+        path: `${ROUTES.PHARMACY_DETAIL_WORK}/:id`,
+    },
+    {
+        element: <StatusProduct />,
+        path: ROUTES.STATUS_PRODUCT,
+    },
+    {
+        element: <StatusProductDetail />,
+        path: `${ROUTES.STATUS_PRODUCT_DETAIL}/:id`,
+    },
+    {
+        element: <MyOrdersDetail />,
+        path: `${ROUTES.MY_ORDERS_DETAIL}/:id`,
+    },
+    {
+        element: <SearchPage />,
+        path: ROUTES.SEARCH_PAGE,
+    },
+    {
+        element: <Address />,
+        path: ROUTES.ADDRESS,
+    },
+    {
+        element: <SuccessPayment />,
+        path: ROUTES.SUCCESS_PAYMENT,
+    },
+    {
+        element: <ErrorPayment />,
+        path: ROUTES.ERROR_PAYMENT,
+    },
+    {
+        element: <SearchPageMobile />,
+        path: ROUTES.SEARCH_PAGE_MOBILE,
+    },
+];
 
-import VivatInfo from "./pharmacy/vivat-info";
-import PharmacyWork from "./pharmacy-work";
-import PharmacyContacts from "./pharmacy/pharmacy-contacts";
-import PharmacyDetailWork from "./pharmacy-work/detail";
-
-import ProductPage from "./product-page";
-import StatusProduct from "./status-product";
-import StatusProductDetail from "./status-product/detail";
-import MyOrdersDetail from "./profile/my-orders/detail";
-
-import SearchPage from "./search-page";
-import Address from "./address";
-
-import SuccessPayment from "./payment/success";
-import ErrorPayment from "./payment/error";
-
-import SearchPageMobile from "./search-page/mobile";
-
-export {
-    Home,
-    Basket,
-    BasketForm,
-    BasicInformation,
-    MyOrders,
-    ProductDetail,
-    AboutUs,
-    Delivery,
-    Work,
-    Contacts,
-    Booking,
-    Stock,
-    Order,
-    IssueOrdering,
-    BlogTheme,
-    Blog,
-    BlogDetail,
-    PrivacyPolicy,
-    VivatInfo,
-    PharmacyWork,
-    PharmacyContacts,
-    ProductPage,
-    PharmacyDetailWork,
-    StockDetail,
-    StatusProduct,
-    StatusProductDetail,
-    MyOrdersDetail,
-    SearchPage,
-    Address,
-    SuccessPayment,
-    ErrorPayment,
-    PaymentReceiving,
-    Manufacturers,
-    StaffDepartment,
-    Licenses,
-    Advertising,
-    TechnicalSupport,
-    Benefits,
-    Vacancy,
-    SearchPageMobile,
-};
+export default PageList;
