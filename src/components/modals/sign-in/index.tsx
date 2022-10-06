@@ -102,7 +102,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-const SignIn: React.FC<SignModalProps> = () => {
+const SignInModal: React.FC<SignModalProps> = () => {
     const { openLogin } = useSelector((state: any) => state.auth_modal_slice);
     const [postLogin] = useLoginMutation();
 
@@ -205,4 +205,4 @@ const SignIn: React.FC<SignModalProps> = () => {
     );
 };
 
-export default SignIn;
+export default SignInModal;

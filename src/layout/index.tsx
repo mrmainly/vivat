@@ -1,7 +1,6 @@
-import React from "react";
+import { lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import cookie from "js-cookie";
 
 import "./layout.css";
 import {
@@ -10,12 +9,18 @@ import {
     MyContainer,
     MobileDown,
     Mobile,
-    MyDrawer,
     FavoritesDrawer,
-    SignInModal,
-    SignUpModal,
-    ForgotPasswordModal,
 } from "../components";
+
+const LazySignInModal = lazy(() => import("../components/modals/sign-in"));
+const LazySignUpModal = lazy(() => import("../components/modals/sign-up"));
+const LazyForgotModal = lazy(
+    () => import("../components/modals/forgot-password")
+);
+const LazyMyDrawer = lazy(() => import("../components/drawers/main-drawer"));
+const LazyFavoriteDrawer = lazy(
+    () => import("../components/drawers/favorites-drawer")
+);
 
 const Layout = () => {
     return (
@@ -23,11 +28,13 @@ const Layout = () => {
             <ToastContainer autoClose={1000} />
             <Header />
             <Mobile />
-            <MyDrawer />
-            <FavoritesDrawer />
-            <SignInModal />
-            <SignUpModal />
-            <ForgotPasswordModal />
+            <Suspense fallback={null}>
+                <LazySignInModal />
+                <LazySignUpModal />
+                <LazyForgotModal />
+                <LazyMyDrawer />
+                <LazyFavoriteDrawer />
+            </Suspense>
             <MyContainer
                 wrapper={true}
                 minHeight={600}
