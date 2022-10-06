@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { Box, IconButton, Badge } from "@mui/material";
 import { styled } from "@mui/system";
 import cookie from "js-cookie";
@@ -26,13 +24,13 @@ const MobileBox = styled(Box)(({ theme }) => ({
     },
 }));
 
-const StyledBadge = styled(Badge)(({ theme }) => ({
+const StyledBadge = styled(Badge)({
     "& .MuiBadge-badge": {
         background: "red",
         color: "white",
     },
     marginRight: 10,
-}));
+});
 
 const MobileDown = () => {
     const jwttoken = cookie.get("jwttoken");

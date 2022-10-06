@@ -29,36 +29,36 @@ import { useGetBasketQuery } from "../../../../services/BasketService";
 
 import { useDispatch } from "react-redux";
 
-const BottomBar = styled(Box)(({ theme }) => ({
+const BottomBar = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
     padding: 5,
-}));
+});
 
-const BottomBarItem = styled(Box)(({ theme }) => ({
+const BottomBarItem = styled(Box)({
     display: "flex",
-}));
+});
 
-const StyledBadge = styled(Badge)(({ theme }) => ({
+const StyledBadge = styled(Badge)({
     "& .MuiBadge-badge": {
         background: "red",
         color: "white",
     },
     marginRight: 10,
-}));
+});
 
-const CustomTextField = styled(TextField)(({ theme }) => ({
+const CustomTextField = styled(TextField)({
     "& .MuiOutlinedInput-root": {
         "& fieldset": {
             borderTopRightRadius: 0,
             borderEndEndRadius: 0,
         },
     },
-}));
+});
 
-const CustomButton = styled(Button)(({ theme }) => ({
+const CustomButton = styled(Button)({
     backgroundColor: ThemeMain.palette.primary.main,
     color: "white",
     borderTopLeftRadius: 0,
@@ -67,7 +67,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
         color: ThemeMain.palette.primary.main,
         borderColor: ThemeMain.palette.primary.main,
     },
-}));
+});
 
 const Bottom = () => {
     const [searchValue, setSearchValue] = useState("");

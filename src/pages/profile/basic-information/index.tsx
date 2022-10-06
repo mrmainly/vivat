@@ -1,4 +1,3 @@
-import React from "react";
 import { TextField, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
@@ -7,7 +6,6 @@ import { useForm } from "react-hook-form";
 import {
     ProfileSideBar,
     MyButton,
-    ProfileUpdateModal,
     SkeletonBasicInformation,
 } from "../../../components";
 
@@ -24,9 +22,9 @@ const Main = styled(Box)(({ theme }) => ({
     },
 }));
 
-const InputProfile = styled(TextField)(({ theme }) => ({
+const InputProfile = styled(TextField)({
     background: "white",
-}));
+});
 
 const ProfileForm = styled("form")(({ theme }) => ({
     width: 350,
@@ -36,7 +34,7 @@ const ProfileForm = styled("form")(({ theme }) => ({
 }));
 
 const BasicInformation = () => {
-    const { data, isFetching, error } = useGetAccountUserQuery("");
+    const { data, isFetching } = useGetAccountUserQuery("");
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
     });

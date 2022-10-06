@@ -9,19 +9,19 @@ import ROUTES from "../../../../routes";
 import { LOCALES } from "../../../../i18n/locales";
 import { LanguageContext } from "../../../../store/LanguageContext";
 
-const TopBar = styled(Box)(({ theme }) => ({
+const TopBar = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
     marginTop: 5,
-}));
+});
 
-const TopBarItem = styled(Box)(({ theme }) => ({
+const TopBarItem = styled(Box)({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-}));
+});
 
 const Top = () => {
     const languages = [

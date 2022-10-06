@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
     Paper,
     TableRow,
@@ -8,55 +6,23 @@ import {
     TableCell,
     TableBody,
     Table,
-    Button,
     Box,
-    CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 
-import ROUTES from "../../../routes";
-import { translationStatus } from "../..";
+import { statusChoise } from "../../../constants";
 
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    id: number
-) {
-    return { name, calories, fat, carbs, id };
-}
-
-const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 1),
-    createData("Ice cream sandwich", 237, 9.0, 37, 2),
-    createData("Eclair", 262, 16.0, 24, 3),
-    createData("Cupcake", 305, 3.7, 67, 4),
-    createData("Gingerbread", 356, 16.0, 49, 5),
-];
-
-const Arrow = styled(Box)(({ theme }) => ({
+const Arrow = styled(Box)({
     cursor: "pointer",
     transition: "all 0.5s ease",
     color: "#55CD61",
     "&:hover": {
         color: "red",
     },
-}));
-
-interface MyOrdersTableProps {
-    data?: any;
-    loading?: boolean;
-    navigate_to?: any;
-}
-
-const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
-    data,
-    loading,
-    navigate_to,
-}) => {
+});
+const MyOrdersTable = ({ data, navigate_to }) => {
     const navigate = useNavigate();
     return (
         <TableContainer component={Paper}>
@@ -73,7 +39,7 @@ const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
                 </TableHead>
                 <TableBody>
                     {data?.length ? (
-                        data.map((row: any, index: number) => (
+                        data.map((row, index) => (
                             <TableRow
                                 key={index}
                                 sx={{
@@ -101,7 +67,7 @@ const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
                                     Лермонтова 38
                                 </TableCell>
                                 <TableCell align="center">
-                                    {translationStatus(row.orderStatus)}
+                                    {statusChoise[row.orderStatus]}
                                 </TableCell>
                                 <TableCell align="center">
                                     <Arrow

@@ -1,36 +1,18 @@
-import React from "react";
-
 import { Box, Grid, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 
-import {
-    StatusCard,
-    MyText,
-    translationStatus,
-    translationDelivery,
-} from "../../components";
+import { StatusCard, MyText } from "../../components";
 import ThemeMain from "../../theme";
 import { useGetOrderMeDetailQuery } from "../../services/ProductsService";
+import { deliveryChoise, statusChoise } from "../../constants";
 
-const Main = styled(Box)(({ theme }) => ({}));
-
-const Info = styled(Box)(({ theme }) => ({
+const Info = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 20,
-}));
-
-const CardsBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexWrap: "wrap",
-    [theme.breakpoints.down("sm")]: {
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "center",
-    },
-}));
+});
 
 const TextWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -43,7 +25,7 @@ const TextWrapper = styled(Box)(({ theme }) => ({
 const StatusProductDetail = () => {
     const params = useParams();
 
-    const { data, isLoading, error } = useGetOrderMeDetailQuery({
+    const { data, isLoading } = useGetOrderMeDetailQuery({
         id: params.id,
     });
 
@@ -54,7 +36,7 @@ const StatusProductDetail = () => {
                     <CircularProgress />
                 </Box>
             ) : data.items.length ? (
-                <Main>
+                <Box>
                     <Box
                         sx={{
                             display: "flex",
@@ -70,12 +52,12 @@ const StatusProductDetail = () => {
                             <MyText
                                 sx={{ color: ThemeMain.palette.primary.main }}
                             >
-                                {translationDelivery(data?.delivery_type)}
+                                {deliveryChoise[data?.delivery_type]}
                             </MyText>
                         </Box>
                     </Box>
                     <Grid container spacing={2}>
-                        {data.items.map((item: any, index: number) => (
+                        {data.items.map((item, index) => (
                             <Grid
                                 item
                                 lg={12}
@@ -109,7 +91,7 @@ const StatusProductDetail = () => {
                                     marginLeft: 1,
                                 }}
                             >
-                                {translationStatus(data?.orderStatus)}
+                                {statusChoise[data?.orderStatus]}
                             </MyText>
                         </TextWrapper>
                         <TextWrapper>
@@ -125,7 +107,7 @@ const StatusProductDetail = () => {
                             </MyText>
                         </TextWrapper>
                     </Info>
-                </Main>
+                </Box>
             ) : (
                 <Box>
                     <MyText variant="h6">У вас нет заказов</MyText>

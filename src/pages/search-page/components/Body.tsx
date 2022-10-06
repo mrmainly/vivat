@@ -23,19 +23,23 @@ const Text = styled(MyText)(({ theme }) => ({
 }));
 
 interface SearchPageBody {
-    loading: boolean;
+    loading?: boolean;
     data: any;
     title: string;
 }
 
 const SearchPageBody: React.FC<SearchPageBody> = ({ loading, data, title }) => {
+    if (loading) {
+        return (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
+
     return (
         <div>
-            {loading ? (
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-                    <CircularProgress />
-                </Box>
-            ) : data.results ? (
+            {data.results && (
                 <>
                     <Root>
                         <MyText
@@ -55,8 +59,6 @@ const SearchPageBody: React.FC<SearchPageBody> = ({ loading, data, title }) => {
                         <MainCardsConstructor data={data.results} />
                     </Box>
                 </>
-            ) : (
-                ""
             )}
         </div>
     );

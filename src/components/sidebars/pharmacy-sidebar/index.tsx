@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Box, MenuItem } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
@@ -17,7 +15,7 @@ const Root = styled(Box)(({ theme }) => ({
     },
 }));
 
-const CusLink = styled(Link)(({ theme }) => ({
+const CusLink = styled(Link)({
     marginTop: 15,
     textDecoration: "none",
     color: "#babbba",
@@ -25,7 +23,7 @@ const CusLink = styled(Link)(({ theme }) => ({
         color: "#007C57",
     },
     fontSize: 18,
-}));
+});
 
 const PharmacySideBar = () => {
     const menuItems = [

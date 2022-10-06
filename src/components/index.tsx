@@ -16,7 +16,6 @@ import MyOrdersTable from "./tables/my-orders-table";
 import ForgotPasswordModal from "./modals/forgot-password";
 import ToggleButton from "./UI/toggle-button";
 import MobileDown from "./navbars/mobile_down";
-import ProfileUpdateModal from "./modals/profile-update-modal";
 import BasketCard from "./cards/basket-card";
 import PharmacySideBar from "./sidebars/pharmacy-sidebar";
 import WorkCard from "./cards/work-card";
@@ -39,11 +38,6 @@ import SkeletonBasicInformation from "./skeletons/basic-informations-skeleton";
 import SkeletonProductDetail from "./skeletons/catalog-card-detail-skeleton";
 import SkeletonBlog from "./skeletons/blog-skeleton";
 import SecondSliderCardSkeleton from "./skeletons/second-slider-card-skeleton";
-import {
-    translationStatus,
-    translationDelivery,
-    translationPayment,
-} from "./translation-status";
 import BasketFormSideBars from "./sidebars/basket-form-sidebars";
 import PageLoading from "./laodings/PageLoading";
 
@@ -66,7 +60,6 @@ export {
     ForgotPasswordModal,
     ToggleButton,
     MobileDown,
-    ProfileUpdateModal,
     BasketCard,
     PharmacySideBar,
     WorkCard,
@@ -88,9 +81,6 @@ export {
     SkeletonBlog,
     AddressSideBar,
     SecondSliderCardSkeleton,
-    translationStatus,
-    translationDelivery,
-    translationPayment,
     BasketFormSideBars,
     PageLoading,
 };

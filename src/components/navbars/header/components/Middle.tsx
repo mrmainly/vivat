@@ -7,19 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { MyText } from "../../..";
 import ROUTES from "../../../../routes";
 
-const MidleBar = styled(Box)(({ theme }) => ({
+const MidleBar = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
     height: 105,
     marginBottom: "-6px",
-}));
+});
 
-const MidleBarItem = styled(Box)(({ theme }) => ({
+const MidleBarItem = styled(Box)({
     display: "flex",
     alignItems: "center",
-}));
+});
 
 const Middle = () => {
     const navigate = useNavigate();

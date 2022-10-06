@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import { useState, useReducer } from "react";
 import {
     Box,
     Grid,
@@ -94,7 +94,7 @@ const ProductPage = () => {
 
     const { id, title } = state;
 
-    const { data, isFetching, error } = useGetProductsQuery({
+    const { data, isFetching } = useGetProductsQuery({
         id,
         currentPage,
         formState,
@@ -149,7 +149,7 @@ const ProductPage = () => {
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
                     <>
-                        {data?.results?.length ? (
+                        {data?.results?.length && (
                             <WrapperBox>
                                 <Pagination
                                     page={currentPage}
@@ -194,14 +194,12 @@ const ProductPage = () => {
                                     </ButtonShow>
                                 </BoxInside>
                             </WrapperBox>
-                        ) : (
-                            ""
                         )}
                         <MainCardsConstructor
                             data={data?.results}
                             loading={isFetching}
                         />
-                        {data?.results?.length ? (
+                        {data?.results?.length && (
                             <Pagination
                                 count={countNumber}
                                 page={currentPage}
@@ -211,8 +209,6 @@ const ProductPage = () => {
                                     backToTop();
                                 }}
                             />
-                        ) : (
-                            ""
                         )}
                     </>
                 </Grid>

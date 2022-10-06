@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Drawer, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -28,7 +28,7 @@ const FavoritesDrawer = () => {
 
     const { favorite_open } = useSelector((state: any) => state.drawers_slice);
     const { handleFavoritesDrawerOpen } = drawersSlice.actions;
-    const { data, isFetching, isLoading, error } = useGetFavoritesQuery("", {
+    const { data, isFetching } = useGetFavoritesQuery("", {
         skip: skipFavorite,
     });
 
@@ -48,62 +48,54 @@ const FavoritesDrawer = () => {
                 onClose: () => dispatch(handleFavoritesDrawerOpen(false)),
             }}
         >
-            {isLoading ? (
-                ""
-            ) : error ? (
-                <div>У вас нет фаворитов</div>
-            ) : (
-                <Main
-                    style={{
-                        opacity: isFetching ? 0.5 : 1,
+            <Main
+                style={{
+                    opacity: isFetching ? 0.5 : 1,
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        mb: 2,
                     }}
                 >
-                    <Box
+                    <IconButton
+                        onClick={() =>
+                            dispatch(handleFavoritesDrawerOpen(false))
+                        }
+                    >
+                        <CloseIcon
+                            sx={{ color: ThemeMain.palette.primary.main }}
+                            fontSize="large"
+                        />
+                    </IconButton>
+                </Box>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <img src="/img/Favorite_light.png" alt="" />
+                    <MyText
+                        variant="h6"
                         sx={{
-                            display: "flex",
-                            justifyContent: "flex-end",
-                            mb: 2,
+                            ml: 1,
+                            color: ThemeMain.palette.primary.main,
                         }}
                     >
-                        <IconButton
-                            onClick={() =>
-                                dispatch(handleFavoritesDrawerOpen(false))
-                            }
-                        >
-                            <CloseIcon
-                                sx={{ color: ThemeMain.palette.primary.main }}
-                                fontSize="large"
-                            />
-                        </IconButton>
-                    </Box>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <img src="/img/Favorite_light.png" />
-                        <MyText
-                            variant="h6"
-                            sx={{
-                                ml: 1,
-                                color: ThemeMain.palette.primary.main,
-                            }}
-                        >
-                            Избранные товары
-                        </MyText>
-                    </Box>
-                    {jwttoken ? (
+                        Избранные товары
+                    </MyText>
+                </Box>
+                {data?.length ? (
+                    <>
                         <MyText variant="body1" sx={{ mt: 1.5 }}>
-                            <span>{data ? data.length : "Нет"}</span> товара
+                            <span>{data.length}</span> товара
                         </MyText>
-                    ) : (
-                        ""
-                    )}
-                    {data
-                        ? data?.length !== 0
-                            ? data.map((item: any, index: number) => (
-                                  <FavoritesCard {...item} key={index} />
-                              ))
-                            : "Нет избранных товаров"
-                        : ""}
-                </Main>
-            )}
+                        {data.map((item: any, index: number) => (
+                            <FavoritesCard {...item} key={index} />
+                        ))}
+                    </>
+                ) : (
+                    <Box sx={{ mt: 2 }}>Нет избранных товаров</Box>
+                )}
+            </Main>
         </Drawer>
     );
 };

@@ -17,13 +17,13 @@ const Main = styled(Box)(({ theme }) => ({
     },
 }));
 
-const CusMenuItem = styled(MenuItem)(({ theme }) => ({
+const CusMenuItem = styled(MenuItem)({
     height: 60,
-}));
+});
 
-const Title = styled(Box)(({ theme }) => ({
+const Title = styled(Box)({
     padding: 15,
-}));
+});
 
 interface AddressSideBarInterface {
     data: any;
@@ -38,7 +38,7 @@ const AddressSideBar: React.FC<AddressSideBarInterface> = ({
         <Main>
             <Title>
                 <MyText variant="h6">
-                    Аптеки в{" "}
+                    Аптеки в
                     <span style={{ color: ThemeMain.palette.primary.main }}>
                         якутске
                     </span>

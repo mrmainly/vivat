@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "@mui/system";
 import { Container, IconButton, Box, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -32,11 +31,11 @@ const ButtonCustom = styled(Button)(({ theme }) => ({
     },
 }));
 
-const IconWrapper = styled(Box)(({ theme }) => ({
+const IconWrapper = styled(Box)({
     display: "flex",
     alignItems: "center",
     marginLeft: "-10px",
-}));
+});
 
 const Mobile = () => {
     const jwttoken = cookie.get("jwttoken");

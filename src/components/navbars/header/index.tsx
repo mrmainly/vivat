@@ -8,13 +8,13 @@ import Top from "./components/Top";
 import Middle from "./components/Middle";
 import Bottom from "./components/Bottom";
 
-const Main = styled(Box)(({ theme }) => ({
+const Main = styled(Box)({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
     width: "100%",
-}));
+});
 
 const DesktopWrapper = styled(Box)(({ theme }) => ({
     backgroundColor: "white",

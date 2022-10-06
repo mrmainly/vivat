@@ -18,11 +18,11 @@ import {
     useDeleteFavoriteMutation,
 } from "../../../services/FavoritesService";
 
-const Item = styled(Box)(({ theme }) => ({
+const Item = styled(Box)({
     background: "white",
     padding: 20,
     minHeight: 520,
-}));
+});
 
 const ItemImg = styled(Box)(({ theme }) => ({
     background: "white",
@@ -40,23 +40,13 @@ const ItemImg = styled(Box)(({ theme }) => ({
     },
 }));
 
-const Img = styled("img")(({ theme }) => ({
-    width: 300,
-    objectFit: "cover",
-    [theme.breakpoints.down("sm")]: {
-        width: "100%",
-    },
-}));
-
 const PriceBlog = styled(Box)(({ theme }) => ({
     display: "flex",
-    // justifyContent: 'center',
-    // alignItems: 'center'
     flexDirection: "row",
     marginTop: 5,
 }));
 
-const Span = styled("span")(({ theme }) => ({
+const Span = styled("span")({
     marginLeft: 15,
     color: "black",
     cursor: "pointer",
@@ -64,7 +54,7 @@ const Span = styled("span")(({ theme }) => ({
         textDecoration: "underline",
     },
     transition: "all 1s ease",
-}));
+});
 
 interface MainInfoProps {
     data?: any;
@@ -302,25 +292,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                 </IconButton>
                             )}
                         </Box>
-                        <Box sx={{ mt: 2 }}>
-                            {/* {array2.map((item, index) => (
-                                <MyText
-                                    variant="body1"
-                                    key={index}
-                                    sx={{ mt: 0.8, color: "#9B9B9B" }}
-                                >
-                                    {item.label}
-                                    <span
-                                        style={{
-                                            marginLeft: 15,
-                                            color: "black",
-                                        }}
-                                    >
-                                        {item.value}
-                                    </span>
-                                </MyText>
-                            ))} */}
-                        </Box>
+                        <Box sx={{ mt: 2 }}></Box>
                     </Item>
                 </Grid>
             </Grid>

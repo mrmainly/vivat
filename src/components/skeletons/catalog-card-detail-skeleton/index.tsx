@@ -1,7 +1,5 @@
-import React from "react";
 import Skeleton from "react-loading-skeleton";
-import { Grid, Box } from "@mui/material";
-import { styled } from "@mui/system";
+import { Grid } from "@mui/material";
 
 const CatalogCardDetailSkeleton = () => {
     return (

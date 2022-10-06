@@ -24,10 +24,6 @@ const ProductDetail = () => {
             {data ? (
                 <>
                     <MainInfo data={data} />
-                    {/* <ProductCardsSlider
-                        title="Форма выпуска"
-                        data={product_data}
-                    /> */}
                     <DescriptionScreen
                         instructions={data.esgood[0]}
                         analData={

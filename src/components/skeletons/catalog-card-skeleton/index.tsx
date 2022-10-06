@@ -4,12 +4,12 @@ import { Box } from "@mui/material";
 
 import Skeleton from "react-loading-skeleton";
 
-const SkeletonCard = styled(Box)(({ theme }) => ({
+const SkeletonCard = styled(Box)({
     width: "92%",
     height: 400,
     background: "white",
     padding: 10,
-}));
+});
 
 const SkeletonVersion = () => {
     return (

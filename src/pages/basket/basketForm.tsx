@@ -20,7 +20,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { MyText, MyButton, BasketFormSideBars } from "../../components";
-import API from "../../api";
 import ROUTES from "../../routes";
 
 import { useGetAccountUserQuery } from "../../services/AccountUser";

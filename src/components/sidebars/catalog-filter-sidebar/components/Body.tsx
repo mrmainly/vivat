@@ -7,7 +7,6 @@ import {
     Slider,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { useNavigate } from "react-router-dom";
 
 import { MyText, BorderLine } from "../../..";
 
@@ -90,16 +89,6 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                     }
                     label="Без рецепта"
                 />
-                {/* <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={formState.notRecept}
-                            name="notRecept"
-                            onChange={(e) => handleCheckbox(e, "checkbox")}
-                        />
-                    }
-                    label="С рецептом"
-                /> */}
             </Box>
             <BorderLine sx={{ mt: "-5px" }} />
             <Box sx={{ p: 2 }}>
@@ -159,9 +148,8 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             }}
                             sx={{ mr: 0.5 }}
                             onKeyDown={(e) =>
-                                e.key === "Enter"
-                                    ? handleInput(minPrice, "min_price")
-                                    : ""
+                                e.key === "Enter" &&
+                                handleInput(minPrice, "min_price")
                             }
                         />
                         <InputNumber
@@ -187,9 +175,8 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                                 handleInput(maxPrice, "max_price");
                             }}
                             onKeyDown={(e) =>
-                                e.key === "Enter"
-                                    ? handleInput(maxPrice, "max_price")
-                                    : ""
+                                e.key === "Enter" &&
+                                handleInput(maxPrice, "max_price")
                             }
                         />
                     </Box>
@@ -201,7 +188,6 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                         onChange={handleChange}
                         max={15000}
                         onChangeCommitted={handleChange1}
-                        // getAriaValueText={valuetext}
                     />
                 </Box>
             </Box>
@@ -218,9 +204,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                         handleInput(producer, "producer");
                     }}
                     onKeyDown={(e) =>
-                        e.key === "Enter"
-                            ? handleInput(producer, "producer")
-                            : ""
+                        e.key === "Enter" && handleInput(producer, "producer")
                     }
                 />
             </Box>

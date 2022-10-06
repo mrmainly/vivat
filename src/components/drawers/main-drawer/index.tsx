@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Drawer, Box, IconButton, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
@@ -18,7 +16,7 @@ const MainDrawer = () => {
         (state: any) => state.drawers_slice
     );
     const { handleMainDrawerOpen } = drawersSlice.actions;
-    const { data, isLoading } = useGetProductCatalogQuery("");
+    const { data } = useGetProductCatalogQuery("");
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
@@ -41,33 +39,29 @@ const MainDrawer = () => {
                 onClose: () => dispatch(handleMainDrawerOpen(false)),
             }}
         >
-            {isLoading ? (
-                <div>Loading</div>
-            ) : (
-                <Box
-                    style={{
-                        width: 300,
-                        padding: 15,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "100%",
-                    }}
-                >
-                    <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                        <IconButton
-                            onClick={() =>
-                                dispatch(handleMainDrawerOpen(false))
-                            }
-                        >
-                            <CloseIcon
-                                sx={{ color: ThemeMain.palette.primary.main }}
-                                fontSize="large"
-                            />
-                        </IconButton>
-                    </Box>
-                    <Box>
-                        <BorderLine sx={{ mb: 2, mt: 2 }} />
-                        {data?.results?.map((item: any, index: number) => (
+            <Box
+                style={{
+                    width: 300,
+                    padding: 15,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                }}
+            >
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                    <IconButton
+                        onClick={() => dispatch(handleMainDrawerOpen(false))}
+                    >
+                        <CloseIcon
+                            sx={{ color: ThemeMain.palette.primary.main }}
+                            fontSize="large"
+                        />
+                    </IconButton>
+                </Box>
+                <Box>
+                    <BorderLine sx={{ mb: 2, mt: 2 }} />
+                    {data?.results.length &&
+                        data?.results?.map((item: any, index: number) => (
                             <MenuItem
                                 key={index}
                                 onClick={() => handleNavigate(item)}
@@ -86,24 +80,23 @@ const MainDrawer = () => {
                             </MenuItem>
                         ))}
 
-                        <BorderLine sx={{ mb: 2, mt: 2 }} />
-                    </Box>
-                    <Box>
-                        {drawer_links?.map((item: any, index: number) => (
-                            <MenuItem
-                                onClick={() => {
-                                    navigate(item.to);
-                                    dispatch(handleMainDrawerOpen(false));
-                                }}
-                                key={index}
-                            >
-                                {item.label}
-                            </MenuItem>
-                        ))}
-                        <BorderLine sx={{ mt: 1 }} />
-                    </Box>
+                    <BorderLine sx={{ mb: 2, mt: 2 }} />
                 </Box>
-            )}
+                <Box>
+                    {drawer_links?.map((item: any, index: number) => (
+                        <MenuItem
+                            onClick={() => {
+                                navigate(item.to);
+                                dispatch(handleMainDrawerOpen(false));
+                            }}
+                            key={index}
+                        >
+                            {item.label}
+                        </MenuItem>
+                    ))}
+                    <BorderLine sx={{ mt: 1 }} />
+                </Box>
+            </Box>
         </Drawer>
     );
 };

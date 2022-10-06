@@ -1,35 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Autocomplete, TextField, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { FormattedMessage } from "react-intl";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SearchIcon from "@mui/icons-material/Search";
 import API from "../../api";
 
-import { MyText } from "../../components";
 import Body from "./components/Body";
-import ROUTES from "../../routes";
 import ThemeMain from "../../theme";
-
-interface CustomizedState {
-    data: any;
-    title: string;
-}
-
-const Root = styled(Box)(({ theme }) => ({
-    display: "flex",
-    [theme.breakpoints.down("md")]: {
-        flexDirection: "column",
-    },
-}));
-
-const Text = styled(MyText)(({ theme }) => ({
-    marginLeft: 20,
-    [theme.breakpoints.down("md")]: {
-        marginLeft: 0,
-    },
-}));
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
     background: "white",

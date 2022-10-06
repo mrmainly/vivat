@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-
 import { Box, Grid, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
@@ -7,30 +5,33 @@ import { useParams } from "react-router-dom";
 import { MyText } from "../../components";
 import ThemeMain from "../../theme";
 import { MainCardsConstructor } from "../../constructor";
-import product_data from "../../local_data/product_data";
 import { useGetPromotionDetailQuery } from "../../services/PromotionService";
 
-const Img = styled("img")(({ theme }) => ({
+const Img = styled("img")({
     width: "100%",
     borderRadius: 12,
     height: 300,
     objectFit: "cover",
-}));
+});
 
 const StockDetail = () => {
     const params = useParams();
 
-    const { data, isFetching, error } = useGetPromotionDetailQuery({
+    const { data, isFetching } = useGetPromotionDetailQuery({
         id: params.id,
     });
 
+    if (isFetching) {
+        return (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
+
     return (
         <Box sx={{ mt: 3 }}>
-            {isFetching ? (
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
-                    <CircularProgress />
-                </Box>
-            ) : data ? (
+            {data && (
                 <>
                     <Grid container spacing={4} sx={{ mb: 4 }}>
                         <Grid item lg={4} xl={4} md={5} sm={12} xs={12}>
@@ -84,8 +85,6 @@ const StockDetail = () => {
                         data={data.goods}
                     />
                 </>
-            ) : (
-                ""
             )}
         </Box>
     );
