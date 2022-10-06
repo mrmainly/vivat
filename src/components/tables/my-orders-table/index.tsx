@@ -72,7 +72,7 @@ const MyOrdersTable: React.FC<MyOrdersTableProps> = ({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.length ? (
+                    {data?.length ? (
                         data.map((row: any, index: number) => (
                             <TableRow
                                 key={index}
