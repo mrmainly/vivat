@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-
 import { Box } from "@mui/material";
 import Slider from "react-slick";
 
-import { ProductCard, MyText, CatalogCard } from "../../../components";
+import { ProductCard, MyText } from "../../../components";
 import { ProductSliderProps } from "../../../interface";
 
 const ProductCardsSlider: React.FC<ProductSliderProps> = ({ title, data }) => {

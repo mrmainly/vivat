@@ -66,6 +66,7 @@ const BlogDetail = () => {
                     <Tag>{data.tags.name}</Tag>
                     <Img
                         src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`}
+                        alt=""
                     />
                     <Box sx={{ display: "flex", color: "gray" }}>
                         <MyText variant="body1" sx={{ mr: 8 }}>
@@ -75,6 +76,7 @@ const BlogDetail = () => {
                             <img
                                 src="/img/View.png"
                                 style={{ width: 20, height: 20 }}
+                                alt=""
                             />
                             <MyText variant="body1" sx={{ ml: 0.5 }}>
                                 {data.views}

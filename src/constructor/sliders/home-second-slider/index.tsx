@@ -30,6 +30,7 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
                                 objectFit: "cover",
                                 borderRadius: "10px",
                             }}
+                            alt=""
                         />
                     </Grid>
                 ))}

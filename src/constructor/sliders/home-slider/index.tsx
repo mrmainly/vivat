@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-
 import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import Slider from "react-slick";

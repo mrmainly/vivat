@@ -24,8 +24,6 @@ const ImgBox = styled(Box)(({ theme }) => ({
 
 const Root = styled(CardActionArea)(({ theme }) => ({
     display: "flex",
-    // alignItems: 'center',
-    // justifyContent: 'center',
     background: "#FFFFFF",
     borderRadius: 12,
     margin: "5px 0px",
@@ -36,17 +34,6 @@ const Root = styled(CardActionArea)(({ theme }) => ({
         flexDirection: "column",
         alignItems: "center",
         width: 280,
-    },
-}));
-
-const Img = styled("img")(({ theme }) => ({
-    height: "100%",
-    borderRadius: 9,
-    filter: "drop-shadow(2px 3px 8px rgba(0, 0, 0, 0.1))",
-    objectFit: "cover",
-    [theme.breakpoints.down("sm")]: {
-        height: 150,
-        width: "100%",
     },
 }));
 

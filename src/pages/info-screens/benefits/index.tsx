@@ -56,7 +56,7 @@ const Benefits = () => {
                             padding: "26px 20px 47px",
                         }}
                     >
-                        <img src={item.img} />
+                        <img src={item.img} alt="" />
                         <MyText
                             variant="h6"
                             sx={{ mt: 2, maxWidth: 260, textAlign: "center" }}

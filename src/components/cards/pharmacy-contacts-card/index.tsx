@@ -47,7 +47,7 @@ const PharmacyContactsCard: React.FC<PharmacyContactsCardProps> = ({
 }) => {
     return (
         <Root>
-            <Img src={img} />
+            <Img src={img} alt="" />
             <Box sx={{ ml: 2.5 }}>
                 <MyText variant="h6" sx={{ fontWeight: 600 }}>
                     {title}

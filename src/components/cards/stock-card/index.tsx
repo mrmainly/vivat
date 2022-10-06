@@ -9,24 +9,24 @@ import ThemeMain from "../../../theme";
 import { StockCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
 
-const Img = styled("img")(({ theme }) => ({
+const Img = styled("img")({
     height: 160,
     width: "100%",
     borderTopRightRadius: 12,
     borderTopLeftRadius: 12,
     objectFit: "cover",
-}));
+});
 
-const Main = styled(Box)(({ theme }) => ({
+const Main = styled(Box)({
     height: 72,
     padding: 10,
     borderRadius: 12,
-}));
+});
 
-const TextWrapper = styled(Box)(({ theme }) => ({
+const TextWrapper = styled(Box)({
     height: 50,
     overflow: "hidden",
-}));
+});
 
 const StockCard: React.FC<StockCardProps> = ({
     image,
@@ -34,7 +34,6 @@ const StockCard: React.FC<StockCardProps> = ({
     date_start,
     date_end,
     id,
-    city,
 }) => {
     const navigate = useNavigate();
 
@@ -43,7 +42,7 @@ const StockCard: React.FC<StockCardProps> = ({
             sx={{ borderRadius: 4, background: "white" }}
             onClick={() => navigate(`${ROUTES.STOCK_DETAIL}/${id}`)}
         >
-            <Img src={image} />
+            <Img src={image} alt="" />
             <Main>
                 <Box
                     sx={{

@@ -35,7 +35,7 @@ const StockDetail = () => {
                 <>
                     <Grid container spacing={4} sx={{ mb: 4 }}>
                         <Grid item lg={4} xl={4} md={5} sm={12} xs={12}>
-                            <Img src={data.image} />
+                            <Img src={data.image} alt="" />
                         </Grid>
                         <Grid item lg={8} xl={8} md={7} sm={12} xs={12}>
                             <Box
