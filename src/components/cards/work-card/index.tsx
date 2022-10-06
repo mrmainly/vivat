@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, CardActionArea } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
@@ -30,9 +30,6 @@ const WorkCard: React.FC<WorkCardProps> = ({ title, city, id }) => {
             <MyText variant="body1" sx={{ color: "#343434" }}>
                 {city.name}
             </MyText>
-            {/* <MyText variant="body1" sx={{ color: "#343434" }}>
-                Зарплата: от<span>{price}</span>
-            </MyText> */}
         </Root>
     );
 };

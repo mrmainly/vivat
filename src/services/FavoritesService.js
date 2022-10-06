@@ -47,15 +47,6 @@ export const favoriotes = api.injectEndpoints({
                 { type: "Promotion" },
             ],
         }),
-        // transferToBasket: build.mutation({
-        //     query({ id }) {
-        //         return {
-        //             url: `api/v1/favorites/transfer/${id}/`,
-        //             method: "POST",
-        //         };
-        //     },
-        //     invalidatesTags: [],
-        // }),
     }),
 });
 

@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Grid } from "@mui/material";
 
 import { MyText } from "../../../components";
-import { HomeSecondSliderProps } from "../../../interface/index";
+import { HomeSecondSliderProps } from "../../../interface";
 
 const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
     const sliders = [

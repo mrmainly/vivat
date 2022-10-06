@@ -1,9 +1,6 @@
-import React from "react";
-import { Box, Grid } from "@mui/material";
-import { styled } from "@mui/system";
+import { Grid } from "@mui/material";
 
 import { MyText } from "../../../components";
-import ThemeMain from "../../../theme";
 import InfoBlog from "../components/InfoBlog";
 import { FormattedMessage } from "react-intl";
 

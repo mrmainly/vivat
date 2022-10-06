@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/system";
 import Skeleton from "react-loading-skeleton";
@@ -27,12 +25,12 @@ const SkeletonMenu = styled(Skeleton)(({ theme }) => ({
     },
 }));
 
-const BlogTheme = styled(Box)(({ theme }) => ({
+const BlogTheme = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 20,
-}));
+});
 
 const BlogCardV2 = styled(Skeleton)(({ theme }) => ({
     height: 247,

@@ -1,5 +1,3 @@
-import React from "react";
-
 import InfoBlog from "../components/InfoBlog";
 import { MyText } from "../../../components";
 
@@ -119,29 +117,13 @@ const Vacancy = () => {
                             {item.post}
                         </MyText>
                         {item.texts.map((textItem, index) => (
-                            <CustomGrid container>
-                                <Grid
-                                    item
-                                    xl={4}
-                                    lg={4}
-                                    md={4}
-                                    sm={4}
-                                    xs={4}
-                                    key={index}
-                                >
+                            <CustomGrid container key={index}>
+                                <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
                                     <MyText variant="body2">
                                         {textItem.label}
                                     </MyText>
                                 </Grid>
-                                <Grid
-                                    item
-                                    xl={8}
-                                    lg={8}
-                                    md={8}
-                                    sm={8}
-                                    xs={8}
-                                    key={index}
-                                >
+                                <Grid item xl={8} lg={8} md={8} sm={8} xs={8}>
                                     <MyText variant="body2">
                                         {textItem.value}
                                     </MyText>
@@ -155,7 +137,7 @@ const Vacancy = () => {
                             </span>
                         </MyText>
                         <>
-                            {item.type !== "end" ? (
+                            {item.type !== "end" && (
                                 <Box
                                     sx={{
                                         border: "1px solid #CDCDCD",
@@ -163,8 +145,6 @@ const Vacancy = () => {
                                         mb: 2.8,
                                     }}
                                 ></Box>
-                            ) : (
-                                ""
                             )}
                         </>
                     </Box>

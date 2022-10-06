@@ -5,13 +5,11 @@ import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
 import { MyText, Tag } from "../..";
-import ThemeMain from "../../../theme";
 import { BlogCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
 
 const Root = styled(CardActionArea)(({ theme }) => ({
     display: "flex",
-    // alignItems: 'center',
     justifyContent: "start",
     background: "#FFFFFF",
     borderRadius: 12,
@@ -23,26 +21,26 @@ const Root = styled(CardActionArea)(({ theme }) => ({
     },
 }));
 
-const TextWrapper = styled(Box)(({ theme }) => ({
+const TextWrapper = styled(Box)({
     overflow: "hidden",
     height: 46,
-}));
+});
 
-const Img = styled("img")(({ theme }) => ({
+const Img = styled("img")({
     height: 360,
     width: "100%",
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
     objectFit: "cover",
-}));
+});
 
-const Main = styled(Box)(({ theme }) => ({
+const Main = styled(Box)({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     padding: 10,
     height: "100%",
-}));
+});
 
 const BlogCardMain: React.FC<BlogCardProps> = ({
     description,

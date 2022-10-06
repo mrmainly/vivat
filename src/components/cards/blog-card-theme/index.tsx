@@ -5,7 +5,6 @@ import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
 import { MyText } from "../..";
-import ThemeMain from "../../../theme";
 import { BlogCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
 
@@ -21,8 +20,6 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({
 
     const Root = styled(CardActionArea)(({ theme }) => ({
         display: "flex",
-        // alignItems: 'center',
-        // justifyContent: 'center',
         background: "#FFFFFF",
         borderRadius: "12px 0",
         justifyContent: "start",
@@ -55,15 +52,6 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({
             height: 120,
             paddingRight: 10,
         },
-    }));
-
-    const Tag = styled(Box)(({ theme }) => ({
-        padding: 5,
-        background:
-            "linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), #55CD61",
-        width: "max-content",
-        borderRadius: 8,
-        color: ThemeMain.palette.primary.main,
     }));
 
     const Main = styled(Box)(({ theme }) => ({

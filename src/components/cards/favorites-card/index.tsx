@@ -1,13 +1,10 @@
 import React from "react";
 import { Box, IconButton } from "@mui/material";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { BorderLine, MyText, MyButton } from "../..";
 import ThemeMain from "../../../theme";
-import API from "../../../api";
-import ROUTES from "../../../routes";
 import {
     useDeleteFavoriteMutation,
     useTransferFavoriteMutation,
@@ -84,20 +81,6 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
                     </MyText>
                 )}
             </Box>
-            {/* <Box sx={{ mb: 1 }}>
-                {deliveryStatus ? (
-                    <MyText
-                        variant="body2"
-                        sx={{ color: ThemeMain.palette.primary.main }}
-                    >
-                        Возможна доставка курьером
-                    </MyText>
-                ) : (
-                    <MyText variant="body2" sx={{ color: "red" }}>
-                        Возможна доставка курьером
-                    </MyText>
-                )}
-            </Box> */}
             {discountVal ? (
                 <Box sx={{ display: "flex", mt: 1 }}>
                     <MyText variant="h6" sx={{ fontWeight: 600 }}>

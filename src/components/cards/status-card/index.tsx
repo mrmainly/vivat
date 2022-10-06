@@ -107,12 +107,6 @@ const StatusCard: React.FC<StatusCardProps> = ({
                             {price} ₽
                         </span>
                     </MyText>
-                    {/* <MyText variant="body2" sx={{ color: "gray" }}>
-                        Код товара:
-                        <span style={{ marginLeft: 15, color: "black" }}>
-                            {GoodsCode}
-                        </span>
-                    </MyText> */}
                 </Box>
             </InfoBox>
         </Root>

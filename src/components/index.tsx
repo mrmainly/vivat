@@ -37,7 +37,6 @@ import SkeletonCatalogVersion from "./skeletons/catalog-card-skeleton";
 import SkeletonBasicInformation from "./skeletons/basic-informations-skeleton";
 import SkeletonProductDetail from "./skeletons/catalog-card-detail-skeleton";
 import SkeletonBlog from "./skeletons/blog-skeleton";
-import SecondSliderCardSkeleton from "./skeletons/second-slider-card-skeleton";
 import BasketFormSideBars from "./sidebars/basket-form-sidebars";
 import PageLoading from "./laodings/PageLoading";
 
@@ -80,7 +79,6 @@ export {
     SkeletonProductDetail,
     SkeletonBlog,
     AddressSideBar,
-    SecondSliderCardSkeleton,
     BasketFormSideBars,
     PageLoading,
 };

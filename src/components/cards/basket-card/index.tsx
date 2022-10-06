@@ -56,11 +56,11 @@ const InfoBox = styled(Box)(({ theme }) => ({
     },
 }));
 
-const CountBox = styled(ButtonGroup)(({ theme }) => ({
+const CountBox = styled(ButtonGroup)({
     display: "flex",
     alignItems: "center",
     marginTop: 20,
-}));
+});
 
 const IconButtonDesctop = styled(IconButton)(({ theme }) => ({
     [theme.breakpoints.down("sm")]: {

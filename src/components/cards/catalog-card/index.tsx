@@ -36,7 +36,7 @@ const Root = styled(Box)(({ theme }) => ({
     },
 }));
 
-const ImgItem = styled(Box)(({ theme }) => ({
+const ImgItem = styled(Box)({
     width: "100%",
     height: 170,
     boxShadow: "1px 1px 11px -3px rgba(34, 60, 80, 0.2)",
@@ -44,15 +44,15 @@ const ImgItem = styled(Box)(({ theme }) => ({
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-}));
+});
 
-const CombinedBox = styled(Box)(({ theme }) => ({
+const CombinedBox = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 5,
     width: "100%",
-}));
+});
 
 const CatalogCard: React.FC<GoodsCardProps> = ({
     img,
@@ -148,16 +148,10 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
             >
                 {producer}
             </MyText>
-            {stocks ? (
-                stocks.qty === 0 ? (
-                    <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>
-                        Нет в наличии
-                    </MyText>
-                ) : (
-                    <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
-                        В наличии
-                    </MyText>
-                )
+            {stocks || stocks.qty === 0 ? (
+                <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
+                    В наличии
+                </MyText>
             ) : (
                 <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>
                     Нет в наличии
@@ -188,14 +182,6 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                             Нет цены
                         </MyText>
                     )}
-                    {/* <MyText
-                        variant="body2"
-                        sx={{
-                           
-                        }}
-                    >
-                        {specialPrice}₽
-                    </MyText> */}
                 </Box>
             </CombinedBox>
             <MyText variant="body2" sx={{ color: "#EB5757" }}>
@@ -215,7 +201,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                 >
                     В корзину
                 </MyButton>
-                {/* onClick={deleteFavorite} */}
+
                 {fav?.is_fav ? (
                     <IconButton
                         size="small"
@@ -239,7 +225,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                                   );
                         }}
                     >
-                        <img src="/img/Favorite_light.png" />
+                        <img src="/img/Favorite_light.png" alt="" />
                     </IconButton>
                 )}
             </CombinedBox>

@@ -75,7 +75,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                     toast.error("Товар не добавлен в избранное");
                 }
             })
-            .catch((error) => toast.error("Товар не добавлен в избранное"));
+            .catch(() => toast.error("Товар не добавлен в избранное"));
     };
 
     const TransferBasket = () => {

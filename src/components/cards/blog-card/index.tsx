@@ -22,13 +22,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
     const Root = styled(CardActionArea)(({ theme }) => ({
         display: "flex",
-        // alignItems: 'center',
-        // justifyContent: 'center',
         background: "#FFFFFF",
         borderRadius: "12px 0",
         justifyContent: "start",
         width: "100%",
-        flexDirection: type == "v2" ? "column" : "row",
+        flexDirection: type === "v2" ? "column" : "row",
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column",
             justifyContent: "center",
@@ -36,30 +34,29 @@ const BlogCard: React.FC<BlogCardProps> = ({
     }));
 
     const Img = styled("img")(({ theme }) => ({
-        height: type == "v2" ? 118 : 139,
+        height: type === "v2" ? 118 : 139,
         objectFit: "cover",
-        width: type == "v2" ? "100%" : 120,
+        width: type === "v2" ? "100%" : 120,
         borderTopLeftRadius: 10,
-        borderTopRightRadius: type == "v2" ? 10 : "",
+        borderTopRightRadius: type === "v2" ? 10 : "",
         [theme.breakpoints.down("sm")]: {
             width: "100%",
             height: 150,
         },
     }));
 
-    const TextWrapper = styled(Box)(({ theme }) => ({
+    const TextWrapper = styled(Box)({
         overflow: "hidden",
-
         height: 40,
-    }));
+    });
 
-    const Main = styled(Box)(({ theme }) => ({
+    const Main = styled(Box)({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         height: 106,
         padding: 10,
-    }));
+    });
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
             <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
