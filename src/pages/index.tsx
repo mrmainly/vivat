@@ -1,10 +1,9 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 
 import ROUTES from "../routes";
 
 const Basket = lazy(() => import("./basket"));
 const BasketForm = lazy(() => import("./basket/basketForm"));
-const IssueOrdering = lazy(() => import("./issue-ordering"));
 const AboutUs = lazy(() => import("./info-screens/about-us"));
 const Delivery = lazy(() => import("./info-screens/delivery"));
 const Work = lazy(() => import("./info-screens/work"));
@@ -53,10 +52,6 @@ const PageList = [
     {
         element: <ProductDetail />,
         path: `${ROUTES.PRODUCT_DETAIL}/:id`,
-    },
-    {
-        element: <IssueOrdering />,
-        path: ROUTES.ISSUE_ORDERING,
     },
     {
         element: <ProductPage />,

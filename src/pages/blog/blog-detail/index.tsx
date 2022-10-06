@@ -32,7 +32,7 @@ const Img = styled("img")(({ theme }) => ({
 const BlogDetail = () => {
     const params = useParams();
 
-    const { data, isLoading, error } = useGetBlogDetailQuery({ id: params.id });
+    const { data, isLoading } = useGetBlogDetailQuery({ id: params.id });
 
     return (
         <Root>

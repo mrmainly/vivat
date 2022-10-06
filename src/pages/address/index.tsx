@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { CircularProgress, styled } from "@mui/material";
+import { useState } from "react";
+import { CircularProgress } from "@mui/material";
 import { Box, Grid } from "@mui/material";
 import {
     YMaps,
@@ -18,7 +18,7 @@ const Address = () => {
     const [mapCenter, setMapCenter] = useState([62.027316, 129.732271]);
     const [zoom, setZoom] = useState(13);
 
-    const { data, isFetching, error } = useGetAddressQuery({ mapCenter });
+    const { data, isFetching } = useGetAddressQuery({ mapCenter });
 
     const dispatchMapCenter = (value: any) => {
         setMapCenter(value);
@@ -52,56 +52,54 @@ const Address = () => {
                                         content: "Выбор аптеки",
                                     }}
                                 >
-                                    {data?.unit.map(
-                                        (item: any, index: number) => (
-                                            <ListBoxItem
-                                                onClick={() =>
-                                                    dispatchMapCenter(
-                                                        item.location
-                                                    )
-                                                }
-                                                data={{
-                                                    content: item.address,
-                                                }}
-                                                options={{
-                                                    selectOnClick: false,
-                                                }}
-                                                key={index}
-                                            />
-                                        )
-                                    )}
+                                    {data &&
+                                        data?.unit.map(
+                                            (item: any, index: number) => (
+                                                <ListBoxItem
+                                                    onClick={() =>
+                                                        dispatchMapCenter(
+                                                            item.location
+                                                        )
+                                                    }
+                                                    data={{
+                                                        content: item.address,
+                                                    }}
+                                                    options={{
+                                                        selectOnClick: false,
+                                                    }}
+                                                    key={index}
+                                                />
+                                            )
+                                        )}
                                 </ListBox>
 
-                                {data
-                                    ? data?.unit.map(
-                                          (item: any, index: number) => (
-                                              <Placemark
-                                                  geometry={item.location}
-                                                  key={index}
-                                                  modules={[
-                                                      "geoObject.addon.balloon",
-                                                  ]}
-                                                  options={{
-                                                      iconLayout:
-                                                          "default#image",
-                                                      iconImageHref:
-                                                          "/img/LocationOr.png",
-                                                      iconImageSize: [42, 42],
-                                                  }}
-                                                  properties={{
-                                                      balloonContentHeader:
-                                                          item.address,
-                                                      balloonContentBody: `
+                                {data &&
+                                    data?.unit.map(
+                                        (item: any, index: number) => (
+                                            <Placemark
+                                                geometry={item.location}
+                                                key={index}
+                                                modules={[
+                                                    "geoObject.addon.balloon",
+                                                ]}
+                                                options={{
+                                                    iconLayout: "default#image",
+                                                    iconImageHref:
+                                                        "/img/LocationOr.png",
+                                                    iconImageSize: [42, 42],
+                                                }}
+                                                properties={{
+                                                    balloonContentHeader:
+                                                        item.address,
+                                                    balloonContentBody: `
                                                 
                                                       <p>${item.work_time}</p>
                                                       <p>Номер телефона: ${item.unit_phone}</p>
                                                   `,
-                                                      // iconContent: mapIcon
-                                                  }}
-                                              />
-                                          )
-                                      )
-                                    : ""}
+                                                }}
+                                            />
+                                        )
+                                    )}
                             </Map>
                         </YMaps>
                     </Grid>

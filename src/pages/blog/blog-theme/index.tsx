@@ -16,7 +16,7 @@ const ThemeBlog = () => {
 
     const { name, value, type } = state;
 
-    const { data, isLoading, error } = useGetBlogQuery({
+    const { data, isLoading } = useGetBlogQuery({
         query: value,
         type: type,
     });

@@ -138,7 +138,7 @@ const SignUpModal: React.FC<SignModalProps> = () => {
         });
     };
     const onSubmitPassword = (data: any) => {
-        if (data.password == data.forgot_password) {
+        if (data.password === data.forgot_password) {
             postRegsiterV3({
                 password: data.password,
                 code: code,

@@ -3,7 +3,6 @@ import {
     configureStore,
     getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-// import productReducer from "../reducer/product_slice";
 import { api } from "../services/api";
 import auth_modal_slice from "../reducer/auth_modal_slice";
 import drawers_slice from "../reducer/drawers_slice";

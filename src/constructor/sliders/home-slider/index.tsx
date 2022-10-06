@@ -52,8 +52,6 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
         pauseOnHover: false,
     };
 
-    console.log(data);
-
     return (
         <Box>
             <Slider {...settings}>

@@ -29,13 +29,17 @@ const StatusProductDetail = () => {
         id: params.id,
     });
 
+    if (isLoading) {
+        return (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
+
     return (
         <>
-            {isLoading ? (
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-                    <CircularProgress />
-                </Box>
-            ) : data.items.length ? (
+            {data?.items.length ? (
                 <Box>
                     <Box
                         sx={{
