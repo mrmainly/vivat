@@ -118,7 +118,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({
                 sx={{
                     backgroundImage: img
                         ? `url(data:image/jpeg;base64,${img})`
-                        : "url(/img/vivat_background.png)",
+                        : "url(/img/Frame1319-min.png)",
                 }}
                 onClick={() => {
                     navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`);

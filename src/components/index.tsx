@@ -6,7 +6,6 @@ import MyLink from "./link";
 import MyDrawer from "./drawers/main-drawer";
 import BorderLine from "./borderLine";
 import Footer from "./footer";
-import ProductCard from "./cards/product-card";
 import MyButton from "./UI/button";
 import Input from "./UI/input";
 import SignInModal from "./modals/sign-in";
@@ -49,7 +48,6 @@ export {
     MyDrawer,
     BorderLine,
     Footer,
-    ProductCard,
     MyButton,
     Input,
     SignInModal,

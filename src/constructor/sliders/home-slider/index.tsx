@@ -52,6 +52,8 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
         pauseOnHover: false,
     };
 
+    console.log(data);
+
     return (
         <Box>
             <Slider {...settings}>
@@ -59,7 +61,9 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                     <Box key={index}>
                         <HomeSliderBox
                             sx={{
-                                background: `url(${item.banner_image})`,
+                                background: item.banner_image
+                                    ? `url(${item.banner_image})`
+                                    : `url(/img/Frame1319-min.png)`,
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover",
                                 backgroundPosition: "left",

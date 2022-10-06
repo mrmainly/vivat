@@ -1,20 +1,8 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import { styled } from "@mui/system";
-import Skeleton from "react-loading-skeleton";
 
 import { MainCardsConstructorProps } from "../../interface";
-import {
-    MyText,
-    ProductCard,
-    CatalogCard,
-    SkeletonCatalogVersion,
-} from "../../components";
-
-const Root = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexWrap: "wrap",
-}));
+import { MyText, CatalogCard, SkeletonCatalogVersion } from "../../components";
 
 const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
     data,
@@ -44,7 +32,7 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                                 <SkeletonCatalogVersion />
                             </Grid>
                         ))
-                ) : data?.length > 0 ? (
+                ) : data?.length ? (
                     data?.map((item: any, index: number) => (
                         <Grid
                             item

@@ -3,14 +3,7 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import "./layout.css";
-import {
-    Header,
-    Footer,
-    MyContainer,
-    MobileDown,
-    Mobile,
-    FavoritesDrawer,
-} from "../components";
+import { Header, Footer, MyContainer, MobileDown, Mobile } from "../components";
 
 const LazySignInModal = lazy(() => import("../components/modals/sign-in"));
 const LazySignUpModal = lazy(() => import("../components/modals/sign-up"));
