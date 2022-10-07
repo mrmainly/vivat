@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid, Box, IconButton } from "@mui/material";
+import { Grid, Box, IconButton, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -58,9 +58,10 @@ const Span = styled("span")({
 
 interface MainInfoProps {
     data?: any;
+    isFetching: boolean;
 }
 
-const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
+const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
     const jwttoken = cookie.get("jwttoken");
     const navigate = useNavigate();
 
@@ -264,32 +265,38 @@ const MainInfo: React.FC<MainInfoProps> = ({ data }) => {
                                 Добавить в корзину
                             </MyButton>
 
-                            {data?.fav?.is_fav ? (
-                                <IconButton
-                                    sx={{ ml: 5 }}
-                                    onClick={deleteFavorite}
-                                >
-                                    <FavoriteIcon
-                                        sx={{ color: "#55CD61" }}
-                                        fontSize="large"
-                                    />
-                                </IconButton>
+                            {isFetching ? (
+                                <CircularProgress sx={{ ml: 5 }} />
                             ) : (
-                                <IconButton
-                                    sx={{ ml: 5 }}
-                                    onClick={() => {
-                                        jwttoken
-                                            ? addedFavorite()
-                                            : toast.error(
-                                                  "данная операция доступно только при авторизации"
-                                              );
-                                    }}
-                                >
-                                    <FavoriteBorderIcon
-                                        sx={{ color: "#55CD61" }}
-                                        fontSize="large"
-                                    />
-                                </IconButton>
+                                <>
+                                    {data?.fav?.is_fav ? (
+                                        <IconButton
+                                            sx={{ ml: 5 }}
+                                            onClick={deleteFavorite}
+                                        >
+                                            <FavoriteIcon
+                                                sx={{ color: "#55CD61" }}
+                                                fontSize="large"
+                                            />
+                                        </IconButton>
+                                    ) : (
+                                        <IconButton
+                                            sx={{ ml: 5 }}
+                                            onClick={() => {
+                                                jwttoken
+                                                    ? addedFavorite()
+                                                    : toast.error(
+                                                          "данная операция доступно только при авторизации"
+                                                      );
+                                            }}
+                                        >
+                                            <FavoriteBorderIcon
+                                                sx={{ color: "#55CD61" }}
+                                                fontSize="large"
+                                            />
+                                        </IconButton>
+                                    )}
+                                </>
                             )}
                         </Box>
                         <Box sx={{ mt: 2 }}></Box>
