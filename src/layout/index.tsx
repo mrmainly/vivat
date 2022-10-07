@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 import "./layout.css";
 import { Header, Footer, MyContainer, MobileDown, Mobile } from "../components";
@@ -16,15 +17,19 @@ const LazyFavoriteDrawer = lazy(
 );
 
 const Layout = () => {
+    const { openLogin, openRegister, openForgotPassword } = useSelector(
+        (state: any) => state.auth_modal_slice
+    );
+
     return (
         <div style={{ overflow: "hidden" }}>
             <ToastContainer autoClose={1000} />
             <Header />
             <Mobile />
             <Suspense fallback={null}>
-                <LazySignInModal />
-                <LazySignUpModal />
-                <LazyForgotModal />
+                {openLogin && <LazySignInModal />}
+                {openRegister && <LazySignUpModal />}
+                {openForgotPassword && <LazyForgotModal />}
                 <LazyMyDrawer />
                 <LazyFavoriteDrawer />
             </Suspense>

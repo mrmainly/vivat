@@ -10,11 +10,9 @@ import { setupStore } from "./store";
 const store = setupStore();
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </React.StrictMode>,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById("root")
 );
 

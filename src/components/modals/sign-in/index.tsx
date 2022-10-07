@@ -115,6 +115,8 @@ const SignInModal: React.FC<SignModalProps> = () => {
         mode: "onBlur",
     });
 
+    console.log("asd");
+
     const onSubmit = (data: any) => {
         postLogin({ ...data })
             .then((res: any) => {

@@ -26,10 +26,6 @@ const Root = styled(Box)({
     "&::-webkit-scrollbar-thumb": {
         backgroundColor: "grey",
     },
-    //  "&::-webkit-scrollbar-thumb": {
-    //     borderRadius: "10",
-    //     backgroundColor: "#18aaaa",
-    // },
 });
 
 const MainDrawer = () => {
