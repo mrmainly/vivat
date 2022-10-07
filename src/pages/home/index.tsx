@@ -27,7 +27,7 @@ const BannerSkeleton = styled(Skeleton)(({ theme }) => ({
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const { data: promotion, isFetching, error } = useGetPromotionQuery("");
+    const { data: promotion, isFetching } = useGetPromotionQuery("");
     const { data: products, isFetching: isProductsFetching } =
         useGetProductsQuery({ id: 1, currentPage });
 
@@ -37,8 +37,6 @@ const Home = () => {
         <div>
             {isFetching ? (
                 <BannerSkeleton />
-            ) : error ? (
-                ""
             ) : (
                 <HomeSlider data={promotion?.results} />
             )}

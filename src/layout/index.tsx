@@ -2,8 +2,8 @@ import { lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
 
-import "./layout.css";
 import { Header, Footer, MyContainer, MobileDown, Mobile } from "../components";
 
 const LazySignInModal = lazy(() => import("../components/modals/sign-in"));
