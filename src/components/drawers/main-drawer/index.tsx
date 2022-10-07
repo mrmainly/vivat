@@ -2,6 +2,7 @@ import { Drawer, Box, IconButton, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
+import { styled } from "@mui/system";
 
 import { BorderLine } from "../..";
 import drawer_links from "../../../local_data/drawer_links";
@@ -10,6 +11,26 @@ import ThemeMain from "../../../theme";
 import MyText from "../../text";
 import { drawersSlice } from "../../../reducer/drawers_slice";
 import { useGetProductCatalogQuery } from "../../../services/ProductsService";
+
+const Root = styled(Box)({
+    width: 300,
+    padding: 15,
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    overflow: "auto",
+    "&::-webkit-scrollbar": {
+        width: 10,
+        backgroundColor: "#f9f9fd",
+    },
+    "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "grey",
+    },
+    //  "&::-webkit-scrollbar-thumb": {
+    //     borderRadius: "10",
+    //     backgroundColor: "#18aaaa",
+    // },
+});
 
 const MainDrawer = () => {
     const { main_drawer_open } = useSelector(
@@ -39,15 +60,7 @@ const MainDrawer = () => {
                 onClose: () => dispatch(handleMainDrawerOpen(false)),
             }}
         >
-            <Box
-                style={{
-                    width: 300,
-                    padding: 15,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                }}
-            >
+            <Root>
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <IconButton
                         onClick={() => dispatch(handleMainDrawerOpen(false))}
@@ -96,7 +109,7 @@ const MainDrawer = () => {
                     ))}
                     <BorderLine sx={{ mt: 1 }} />
                 </Box>
-            </Box>
+            </Root>
         </Drawer>
     );
 };
