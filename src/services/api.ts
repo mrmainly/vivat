@@ -7,6 +7,7 @@ const baseQuery = fetchBaseQuery({
         const token = cookie.get("jwttoken");
         if (token) {
             headers.set("authorization", `Token ${token}`);
+            headers.set("Accept-Encoding", "gzip");
         }
         return headers;
     },
