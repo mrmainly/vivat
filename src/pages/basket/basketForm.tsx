@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Grid,
     FormControl,
@@ -13,7 +13,6 @@ import {
     Radio,
     RadioGroup,
     CircularProgress,
-    Autocomplete,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
@@ -36,37 +35,31 @@ const BasketForm = () => {
         "47CC211D-EECA-4D38-87A1-E255059DD16F"
     );
     const [commend, setCommend] = useState("");
-    // const [payment, setPayment] = useState("CARD");
-    const [delivery, setDelivery] = useState("PICKUP");
-    const [costTotalPrice, setCostTotalPrice] = useState(0);
-    const [myAddress, setMyAddress] = useState("");
-    const [floor, setFloor] = useState("");
-    const [apartment, setApartament] = useState("");
-    const [entrance, setEntrance] = useState("");
-    // const [AutoCompliteData, setAutoCopliteData] = useState([]);
+    const [phone, setPhone] = useState("");
 
     const { data: accountUser, isLoading } = useGetAccountUserQuery("");
     const { data: basketList, isLoading: isBasketLoading } =
         useGetBasketQuery("");
     const { data: deportaments, isLoading: isDeportamentsLoading } =
         useGetDeportamentsQuery("");
+
     const [postBasket] = usePostBasketMutation();
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        setPhone(accountUser?.phone);
+    }, [accountUser]);
+
     const compliteOrders = () => {
         postBasket({
             payment_type: "CARD",
-            delivery_type: delivery,
+            delivery_type: "PICKUP",
             comment: commend,
-            dep_id: adress,
             SuccessURL:
                 "https://xn----7sbbagaytx2c4ad.xn--p1ai/success-payment",
             FailURL: "https://xn----7sbbagaytx2c4ad.xn--p1ai/error-payment",
-            address: myAddress,
-            floor: floor,
-            entrance: entrance,
-            apartment: apartment,
+            recipient_phone: phone,
         }).then((res: any) => {
             if (res.data) {
                 toast.success("Заявка оформлена");
@@ -83,47 +76,6 @@ const BasketForm = () => {
             }
         });
     };
-
-    // const handleAutoComplite = (e: any) => {
-    //     setMyAddress(e.target.value);
-    //     API.getAddressAutoComplete(e.target.value)
-    //         .then((res) => {
-    //             const newData = res?.data?.result?.items.map((item: any) => {
-    //                 return item.full_name;
-    //             });
-    //             if (newData === undefined) {
-    //                 setAutoCopliteData([]);
-    //             } else {
-    //                 setAutoCopliteData(newData);
-    //             }
-    //         })
-    //         .catch((error) => console.log(error));
-    // };
-
-    // const getCost = (event: any, values: any) => {
-    //     setMyAddress(values);
-    //     API.getGogoCost(values)
-    //         .then((res) => {
-    //             setCostTotalPrice(res.data.organisation_cost);
-    //         })
-    //         .catch((error) => console.log(error));
-    // };
-
-    // const handleDelivery = (e: any) => {
-    //     setDelivery(e.target.value);
-    //     if (e.target.value === "DELIVERY") {
-    //         setPayment("CARD");
-    //     } else {
-    //         setPayment("CASH");
-    //     }
-    // };
-
-    // const handlePayment = (e: any) => {
-
-    //     if (delivery === "PICKUP") {
-    //         setPayment(e.target.value);
-    //     }
-    // };
 
     return (
         <>
@@ -155,7 +107,8 @@ const BasketForm = () => {
                                 <InputProfile
                                     label="Телефон"
                                     fullWidth
-                                    value={accountUser.phone}
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
                                     margin="normal"
                                 />
                                 <InputProfile
@@ -176,54 +129,6 @@ const BasketForm = () => {
                                     value={accountUser.email}
                                     margin="normal"
                                 />
-                                {/* <Autocomplete
-                                    freeSolo
-                                    id="free-solo-2-demo"
-                                    fullWidth
-                                    sx={{
-                                        opacity:
-                                            delivery === "DELIVERY" ? 1 : 0.5,
-                                    }}
-                                    disabled={delivery != "DELIVERY"}
-                                    options={AutoCompliteData}
-                                    onInputChange={(event, newInputValue) =>
-                                        handleAutoComplite(event)
-                                    }
-                                    onChange={getCost}
-                                    renderInput={(params) => (
-                                        <InputProfile
-                                            label="Адрес"
-                                            margin="normal"
-                                            {...params}
-                                            value={myAddress}
-                                        />
-                                    )}
-                                />
-                                <InputProfile
-                                    label="Этаж"
-                                    fullWidth
-                                    margin="normal"
-                                    value={floor}
-                                    onChange={(e) => setFloor(e.target.value)}
-                                />
-                                <InputProfile
-                                    label="Квартира"
-                                    fullWidth
-                                    margin="normal"
-                                    value={apartment}
-                                    onChange={(e) =>
-                                        setApartament(e.target.value)
-                                    }
-                                />
-                                <InputProfile
-                                    label="Подьезд"
-                                    fullWidth
-                                    margin="normal"
-                                    value={entrance}
-                                    onChange={(e) =>
-                                        setEntrance(e.target.value)
-                                    }
-                                /> */}
                                 <FormControl
                                     fullWidth
                                     margin="normal"
@@ -276,8 +181,7 @@ const BasketForm = () => {
                                         aria-labelledby="demo-radio-buttons-group-label"
                                         defaultValue="female"
                                         name="radio-buttons-group"
-                                        value={delivery}
-                                        // onChange={(e) => handleDelivery(e)}
+                                        value="PICKUP"
                                     >
                                         <FormControlLabel
                                             control={<Radio />}
@@ -296,22 +200,6 @@ const BasketForm = () => {
                                     Подтвердите ваш заказ
                                 </MyText>
 
-                                {delivery === "DELIVERY" && (
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            mt: 1,
-                                        }}
-                                    >
-                                        <MyText variant="body2">
-                                            Оплата доставки:
-                                        </MyText>
-                                        <MyText variant="body2">
-                                            {costTotalPrice} ₽
-                                        </MyText>
-                                    </Box>
-                                )}
                                 <Box
                                     sx={{
                                         display: "flex",
@@ -322,39 +210,21 @@ const BasketForm = () => {
                                 >
                                     <MyText variant="body1">Итого</MyText>
                                     <MyText variant="body2">
-                                        {delivery === "DELIVERY"
-                                            ? basketList.total_price +
-                                              costTotalPrice
-                                            : basketList.total_price}
-                                        ₽
+                                        {basketList.total_price}₽
                                     </MyText>
                                 </Box>
-                                {delivery === "DELIVERY" ? (
-                                    <MyButton
-                                        style={{ marginTop: 20 }}
-                                        onClick={compliteOrders}
-                                        disabled={
-                                            myAddress === "" ? true : false
-                                        }
-                                    >
-                                        Подтвердить заказ
-                                    </MyButton>
-                                ) : (
-                                    <MyButton
-                                        style={{ marginTop: 20 }}
-                                        onClick={compliteOrders}
-                                    >
-                                        Подтвердить заказ
-                                    </MyButton>
-                                )}
+                                <MyButton
+                                    style={{ marginTop: 20 }}
+                                    onClick={compliteOrders}
+                                >
+                                    Подтвердить заказ
+                                </MyButton>
                             </Box>
                         </Grid>
                         <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                             <BasketFormSideBars
                                 data={basketList.items}
                                 totalPrice={basketList.total_price}
-                                costTotalPrice={costTotalPrice}
-                                delivery={delivery}
                             />
                         </Grid>
                     </Grid>

@@ -24,16 +24,13 @@ const InfoBlog = styled(Box)(({ theme }) => ({
 
 interface BasketFormSideBarsProps {
     data: any;
-    delivery: any;
     totalPrice: any;
-    costTotalPrice: any;
 }
 
 const BasketFormSideBars: React.FC<BasketFormSideBarsProps> = ({
     data,
-    delivery,
+
     totalPrice,
-    costTotalPrice,
 }) => {
     return (
         <InfoBlog>
@@ -87,10 +84,7 @@ const BasketFormSideBars: React.FC<BasketFormSideBarsProps> = ({
                             color: ThemeMain.palette.primary.main,
                         }}
                     >
-                        {delivery === "DELIVERY"
-                            ? totalPrice + costTotalPrice
-                            : totalPrice}
-                        ₽
+                        {totalPrice}₽
                     </MyText>
                 </Box>
                 <BorderLine />
