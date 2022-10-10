@@ -23,7 +23,13 @@ const StockDetail = () => {
 
     if (isFetching) {
         return (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mt: 8,
+                }}
+            >
                 <CircularProgress />
             </Box>
         );

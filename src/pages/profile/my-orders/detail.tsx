@@ -66,7 +66,15 @@ const MyOrderDetail = () => {
                 title={<FormattedMessage id="basic_information" />}
             />
             {isLoading ? (
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        mt: 8,
+                        alignItems: "center",
+                        width: "100%",
+                    }}
+                >
                     <CircularProgress />
                 </Box>
             ) : data?.items.length ? (
