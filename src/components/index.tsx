@@ -31,6 +31,7 @@ import StockCard from "./cards/stock-card";
 import Mobile from "./navbars/mobile";
 import StatusCard from "./cards/status-card";
 import AddressSideBar from "./sidebars/address-sidebar";
+import StatusPaymentError from "./modals/status-payment-error";
 
 import SkeletonCatalogVersion from "./skeletons/catalog-card-skeleton";
 import SkeletonBasicInformation from "./skeletons/basic-informations-skeleton";
@@ -79,4 +80,5 @@ export {
     AddressSideBar,
     BasketFormSideBars,
     PageLoading,
+    StatusPaymentError,
 };

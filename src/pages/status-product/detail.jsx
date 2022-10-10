@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import { Box, Grid, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 
-import { StatusCard, MyText } from "../../components";
+import { StatusCard, MyText, StatusPaymentError } from "../../components";
 import ThemeMain from "../../theme";
 import { useGetOrderMeDetailQuery } from "../../services/ProductsService";
 import { deliveryChoise, statusChoise } from "../../constants";
@@ -23,11 +24,23 @@ const TextWrapper = styled(Box)(({ theme }) => ({
 }));
 
 const StatusProductDetail = () => {
+    const [open, setOpen] = useState(false);
+
     const params = useParams();
 
     const { data, isLoading } = useGetOrderMeDetailQuery({
         id: params.id,
     });
+
+    const handleOpen = () => {
+        setOpen(!open);
+    };
+
+    useEffect(() => {
+        if (!data?.transactions[0].is_payed) {
+            handleOpen();
+        }
+    }, []);
 
     if (isLoading) {
         return (
@@ -39,6 +52,11 @@ const StatusProductDetail = () => {
 
     return (
         <>
+            <StatusPaymentError
+                open={open}
+                handleOpen={handleOpen}
+                href={data?.transactions[0].formUrl}
+            />
             {data?.items.length ? (
                 <Box>
                     <Box
@@ -52,7 +70,7 @@ const StatusProductDetail = () => {
                             <MyText>{data?.created}</MyText>
                         </Box>
                         <Box sx={{ display: "flex" }}>
-                            <MyText>Тип доставки:</MyText>&nbsp;
+                            <MyText>Статус доставки</MyText>&nbsp;
                             <MyText
                                 sx={{ color: ThemeMain.palette.primary.main }}
                             >
@@ -80,7 +98,7 @@ const StatusProductDetail = () => {
                                     price={item.price}
                                     producer={item.GoodsCode.producer}
                                     img={item.GoodsCode?.esphoto[0]?.fileData}
-                                    id={item.GoodsCode?.id}
+                                    id={item?.GoodsCode.id}
                                 />
                             </Grid>
                         ))}

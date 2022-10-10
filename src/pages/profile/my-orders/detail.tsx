@@ -28,24 +28,14 @@ const Root = styled(Box)(({ theme }) => ({
     },
 }));
 
-const Info = styled(Box)(({ theme }) => ({
+const Info = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 20,
-}));
+});
 
-const CardsBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexWrap: "wrap",
-    [theme.breakpoints.down("sm")]: {
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "center",
-    },
-}));
-
-const TopBar = styled(Box)(({ theme }) => ({
+const TopBar = styled(Box)({
     background: "white",
     padding: "10px 20px 10px 20px",
     display: "flex",
@@ -53,7 +43,7 @@ const TopBar = styled(Box)(({ theme }) => ({
     alignItems: "center",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-}));
+});
 
 const TextWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -63,40 +53,12 @@ const TextWrapper = styled(Box)(({ theme }) => ({
     },
 }));
 
-interface DataProps {
-    id: number;
-    total_price: string | null;
-    created: string | null;
-    orderStatus: string;
-}
-
 const MyOrderDetail = () => {
     const params = useParams();
 
-    const { data, isLoading, error } = useGetOrderMeDetailQuery({
+    const { data, isLoading } = useGetOrderMeDetailQuery({
         id: params.id,
     });
-
-    const dataCard = [
-        {
-            title: "Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч 22",
-            img: "",
-            producer: "Nurofenproizvoditel",
-            price: "1000 ₽",
-            stock: true,
-            GoodsCode: "322",
-            id: 1,
-        },
-        {
-            title: "Нурофен лонг 0,2+0,5 N12 Табл П/Плен/Оболоч 22",
-            img: "",
-            producer: "Nurofenproizvoditel",
-            price: "1000 ₽",
-            stock: true,
-            GoodsCode: "322",
-            id: 1,
-        },
-    ];
 
     return (
         <Root>
@@ -147,7 +109,7 @@ const MyOrderDetail = () => {
                     <Info>
                         <TextWrapper>
                             <MyText variant="body1">
-                                <FormattedMessage id="current_status" />{" "}
+                                <FormattedMessage id="current_status" />
                             </MyText>
                             <MyText
                                 variant="body1"

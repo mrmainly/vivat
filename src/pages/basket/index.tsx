@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, MenuItem, CircularProgress } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
@@ -70,7 +69,6 @@ const Basket = () => {
     return (
         <>
             <MyText variant="h6">Корзина</MyText>
-
             {isLoading ? (
                 <Box sx={{ mt: 10, display: "flex", justifyContent: "center" }}>
                     {" "}
@@ -117,7 +115,7 @@ const Basket = () => {
                     </TotalBox>
                 </Box>
             ) : (
-                <MyText variant="h6">У вас нет заказов</MyText>
+                <MyText variant="h6">У вас нет товаров</MyText>
             )}
         </>
     );

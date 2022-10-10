@@ -7,7 +7,7 @@ import { MyOrdersTable } from "../../components";
 import { useGetOrdersMeStatusQuery } from "../../services/StatusService";
 
 const StatusProduct = () => {
-    const { data, isLoading } = useGetOrdersMeStatusQuery("");
+    const { data, isLoading, isFetching } = useGetOrdersMeStatusQuery("");
 
     return (
         <Box>

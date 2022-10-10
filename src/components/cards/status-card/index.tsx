@@ -59,6 +59,7 @@ interface StatusCardProps {
     img?: string;
     producer?: string;
     stock?: any;
+    transactions?: any;
 }
 
 const StatusCard: React.FC<StatusCardProps> = ({
@@ -68,8 +69,10 @@ const StatusCard: React.FC<StatusCardProps> = ({
     title,
     img,
     producer,
+    transactions,
 }) => {
     const navigate = useNavigate();
+
     return (
         <Root onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`)}>
             <ImgBox
