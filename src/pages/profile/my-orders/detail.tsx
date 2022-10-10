@@ -1,6 +1,6 @@
 import { Box, Grid, CircularProgress, MenuItem } from "@mui/material";
 import { styled } from "@mui/system";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { StatusCard, MyText, ProfileSideBar } from "../../../components";
 import ThemeMain from "../../../theme";
@@ -55,6 +55,7 @@ const TextWrapper = styled(Box)(({ theme }) => ({
 
 const MyOrderDetail = () => {
     const params = useParams();
+    const navigate = useNavigate();
 
     const { data, isLoading } = useGetOrderMeDetailQuery({
         id: params.id,
@@ -85,6 +86,7 @@ const MyOrderDetail = () => {
                         </MyText>
                         <MenuItem
                             sx={{ color: ThemeMain.palette.primary.main }}
+                            onClick={() => navigate(-1)}
                         >
                             <FormattedMessage id="back_to_archive" />
                         </MenuItem>
