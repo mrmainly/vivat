@@ -47,7 +47,7 @@ export const baskets = api.injectEndpoints({
         deleteBasketAll: build.mutation({
             query() {
                 return {
-                    url: `api/v1/carts/delete_all_items/`,
+                    url: `api/v1/carts/`,
                     method: "DELETE",
                 };
             },
@@ -68,7 +68,7 @@ export const baskets = api.injectEndpoints({
         postBasket: build.mutation({
             query(body) {
                 return {
-                    url: `api/v1/carts/complete/`,
+                    url: `api/v1/carts/`,
                     method: "POST",
                     body,
                 };

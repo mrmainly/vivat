@@ -252,7 +252,13 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                                 </MyText>
                             </Box>
                         )}
-                        <Box sx={{ mt: 2 }}>
+                        <Box
+                            sx={{
+                                mt: 2,
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                        >
                             <MyButton
                                 onClick={() => {
                                     jwttoken
@@ -261,45 +267,49 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                                               "Данная операция доступно только при авторизации"
                                           );
                                 }}
+                                style={{ minHeight: 40 }}
                             >
                                 Добавить в корзину
                             </MyButton>
 
-                            {isFetching ? (
-                                <CircularProgress sx={{ ml: 5 }} />
-                            ) : (
-                                <>
-                                    {data?.fav?.is_fav ? (
-                                        <IconButton
-                                            sx={{ ml: 5 }}
-                                            onClick={deleteFavorite}
-                                        >
-                                            <FavoriteIcon
-                                                sx={{ color: "#55CD61" }}
-                                                fontSize="large"
-                                            />
-                                        </IconButton>
-                                    ) : (
-                                        <IconButton
-                                            sx={{ ml: 5 }}
-                                            onClick={() => {
-                                                jwttoken
-                                                    ? addedFavorite()
-                                                    : toast.error(
-                                                          "данная операция доступно только при авторизации"
-                                                      );
-                                            }}
-                                        >
-                                            <FavoriteBorderIcon
-                                                sx={{ color: "#55CD61" }}
-                                                fontSize="large"
-                                            />
-                                        </IconButton>
-                                    )}
-                                </>
-                            )}
+                            {/* {isFetching ? (
+                                <CircularProgress
+                                    sx={{ ml: 5 }}
+                                    size={50}
+                                    color="success"
+                                />
+                            ) : ( */}
+                            <>
+                                {data?.fav?.is_fav ? (
+                                    <IconButton
+                                        sx={{ ml: 5 }}
+                                        onClick={deleteFavorite}
+                                    >
+                                        <FavoriteIcon
+                                            sx={{ color: "#55CD61" }}
+                                            fontSize="large"
+                                        />
+                                    </IconButton>
+                                ) : (
+                                    <IconButton
+                                        sx={{ ml: 5 }}
+                                        onClick={() => {
+                                            jwttoken
+                                                ? addedFavorite()
+                                                : toast.error(
+                                                      "данная операция доступно только при авторизации"
+                                                  );
+                                        }}
+                                    >
+                                        <FavoriteBorderIcon
+                                            sx={{ color: "#55CD61" }}
+                                            fontSize="large"
+                                        />
+                                    </IconButton>
+                                )}
+                            </>
+                            {/* )} */}
                         </Box>
-                        <Box sx={{ mt: 2 }}></Box>
                     </Item>
                 </Grid>
             </Grid>
