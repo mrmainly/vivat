@@ -4,10 +4,12 @@ import { MenuItem, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
+import { toast } from "react-toastify";
 
 import { MyText } from "../..";
 import { ProfileSideBarProps } from "../../../interface";
 import ROUTES from "../../../routes";
+import { useDeleteProfileMutation } from "../../../services/AccountUser";
 
 import { FormattedMessage } from "react-intl";
 
@@ -17,13 +19,15 @@ const Menu = styled(Box)(({ theme }) => ({
     width: 240,
     background: "white",
     marginRight: 30,
-    height: 220,
+    height: 250,
     [theme.breakpoints.down("md")]: {
         width: "100%",
     },
 }));
 
 const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
+    const [deleteProfile] = useDeleteProfileMutation();
+
     const navigate = useNavigate();
     const links = [
         {
@@ -39,6 +43,23 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
             to: ROUTES.MYORDERS,
         },
     ];
+
+    const handleExit = () => {
+        cookie.remove("jwttoken");
+        navigate(ROUTES.HOME);
+    };
+
+    const handleDeleteProfile = () => {
+        deleteProfile("").then((res: any) => {
+            if (res.data) {
+                cookie.remove("jwttoken");
+                navigate(ROUTES.HOME);
+            } else {
+                toast.error("Ваш аккаунт не удалился");
+            }
+        });
+    };
+
     return (
         <Box>
             <MyText variant="h5" sx={{ mb: 2.4 }}>
@@ -59,12 +80,12 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
                     </MenuItem>
                 ))}
                 <MenuItem
-                    sx={{ pl: 2.4, height: 56 }}
-                    onClick={() => {
-                        cookie.remove("jwttoken");
-                        navigate("/");
-                    }}
+                    sx={{ pl: 2.4, height: 56, color: "red" }}
+                    onClick={handleDeleteProfile}
                 >
+                    Удалить профиль
+                </MenuItem>
+                <MenuItem sx={{ pl: 2.4, height: 56 }} onClick={handleExit}>
                     <FormattedMessage id="quit" />
                 </MenuItem>
             </Menu>

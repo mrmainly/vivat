@@ -14,8 +14,19 @@ export const accountUser = api.injectEndpoints({
                 };
             },
         }),
+        deleteProfile: build.mutation({
+            query() {
+                return {
+                    url: `api/v1/users/me/`,
+                    method: "PUT",
+                };
+            },
+        }),
     }),
 });
 
-export const { useGetAccountUserQuery, usePatchAccountUserMutation } =
-    accountUser;
+export const {
+    useGetAccountUserQuery,
+    usePatchAccountUserMutation,
+    useDeleteProfileMutation,
+} = accountUser;
