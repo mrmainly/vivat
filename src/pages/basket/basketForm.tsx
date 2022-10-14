@@ -60,6 +60,7 @@ const BasketForm = () => {
                 "https://xn----7sbbagaytx2c4ad.xn--p1ai/success-payment",
             FailURL: "https://xn----7sbbagaytx2c4ad.xn--p1ai/error-payment",
             recipient_phone: phone,
+            dep_id: adress,
         }).then((res: any) => {
             if (res.data) {
                 toast.success("Заявка оформлена");

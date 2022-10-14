@@ -71,7 +71,6 @@ const Basket = () => {
             <MyText variant="h6">Корзина</MyText>
             {isLoading ? (
                 <Box sx={{ mt: 10, display: "flex", justifyContent: "center" }}>
-                    {" "}
                     <CircularProgress />
                 </Box>
             ) : data.items ? (
