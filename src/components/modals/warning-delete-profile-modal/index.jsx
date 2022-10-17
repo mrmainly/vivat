@@ -8,6 +8,8 @@ import {
 import { styled } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 
+import { MyButton } from "../..";
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
         padding: theme.spacing(2),
@@ -72,7 +74,11 @@ const BootstrapDialogTitle = (props) => {
     );
 };
 
-const WarningDeleteProfileModal = ({ handleOpen, open, href }) => {
+const WarningDeleteProfileModal = ({
+    handleOpen,
+    open,
+    handleDeleteProfile,
+}) => {
     return (
         <BootstrapDialog
             onClose={handleOpen}
@@ -83,10 +89,15 @@ const WarningDeleteProfileModal = ({ handleOpen, open, href }) => {
                 id="customized-dialog-title"
                 onClose={handleOpen}
             >
-                Ваша оплата не прошла
+                Удаление профиля
             </BootstrapDialogTitle>
             <ModalContent>
-                <a href={href}>Перейдите по ссылке чтобы оплатить заказ</a>
+                <MyButton
+                    style={{ background: "red" }}
+                    onClick={handleDeleteProfile}
+                >
+                    Удалить
+                </MyButton>
             </ModalContent>
         </BootstrapDialog>
     );

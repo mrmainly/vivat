@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 import { MenuItem, Box } from "@mui/material";
 import { styled } from "@mui/system";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 import { toast } from "react-toastify";
 
-import { MyText } from "../..";
+import { MyText, WarningDeleteProfileModal } from "../..";
 import { ProfileSideBarProps } from "../../../interface";
 import ROUTES from "../../../routes";
 import { useDeleteProfileMutation } from "../../../services/AccountUser";
@@ -26,6 +26,8 @@ const Menu = styled(Box)(({ theme }) => ({
 }));
 
 const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
+    const [open, setOpen] = useState(false);
+
     const [deleteProfile] = useDeleteProfileMutation();
 
     const navigate = useNavigate();
@@ -49,6 +51,10 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
         navigate(ROUTES.HOME);
     };
 
+    const handleOpen = () => {
+        setOpen(!open);
+    };
+
     const handleDeleteProfile = () => {
         deleteProfile("").then((res: any) => {
             if (res.data) {
@@ -62,6 +68,13 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
 
     return (
         <Box>
+            {open && (
+                <WarningDeleteProfileModal
+                    open={open}
+                    handleOpen={handleOpen}
+                    handleDeleteProfile={handleDeleteProfile}
+                />
+            )}
             <MyText variant="h5" sx={{ mb: 2.4 }}>
                 {title}
             </MyText>
@@ -81,7 +94,7 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
                 ))}
                 <MenuItem
                     sx={{ pl: 2.4, height: 56, color: "red" }}
-                    onClick={handleDeleteProfile}
+                    onClick={handleOpen}
                 >
                     Удалить профиль
                 </MenuItem>
