@@ -33,6 +33,7 @@ import StatusCard from "./cards/status-card";
 import AddressSideBar from "./sidebars/address-sidebar";
 import StatusPaymentError from "./modals/status-payment-error";
 import WarningDeleteProfileModal from "./modals/warning-delete-profile-modal";
+import ProductCard from "./cards/product-card";
 
 import SkeletonCatalogVersion from "./skeletons/catalog-card-skeleton";
 import SkeletonBasicInformation from "./skeletons/basic-informations-skeleton";
@@ -82,5 +83,6 @@ export {
     BasketFormSideBars,
     PageLoading,
     StatusPaymentError,
+    ProductCard,
     WarningDeleteProfileModal,
 };

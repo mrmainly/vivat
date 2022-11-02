@@ -9,7 +9,10 @@ export const stocks = api.injectEndpoints({
             query: ({ id }) => `api/v1/promotion/${id}`,
             providesTags: ["Promotion"],
         }),
+        getPromotionCatalog: build.query({
+            query: () => `api/v1/promotion/collection/`,
+        }),
     }),
 });
 
-export const { useGetPromotionQuery, useGetPromotionDetailQuery } = stocks;
+export const { useGetPromotionQuery, useGetPromotionDetailQuery, useGetPromotionCatalogQuery } = stocks;
