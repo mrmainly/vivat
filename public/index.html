@@ -5,20 +5,38 @@
         <link rel="icon" href="%PUBLIC_URL%/img/Group21.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <meta
-            name="description"
-            content="Виват аптека - это сервис заказа лекарств и медицинских товаров через интернет с возможностью ДОСТАВКИ на дом."
-        />
+        <meta name="description" content="Виват аптека - это сервис заказа лекарств и медицинских товаров через интернет с возможностью ДОСТАВКИ на дом." />
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
         <title>Vivat</title>
         <link rel="preload" as="image" href="%PUBLIC_URL%/img/Frame_1265.png" />
-        <link
-            rel="preload"
-            as="image"
-            href="%PUBLIC_URL%/img/Frame_1264-min.png"
-        />
+        <link rel="preload" as="image" href="%PUBLIC_URL%/img/Frame_1264-min.png" />
     </head>
     <body>
+        <script type="text/javascript">
+            (function (m, e, t, r, i, k, a) {
+                m[i] =
+                    m[i] ||
+                    function () {
+                        (m[i].a = m[i].a || []).push(arguments);
+                    };
+                m[i].l = 1 * new Date();
+                for (var j = 0; j < document.scripts.length; j++) {
+                    if (document.scripts[j].src === r) {
+                        return;
+                    }
+                }
+                (k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]), (k.async = 1), (k.src = r), a.parentNode.insertBefore(k, a);
+            })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+            ym(91012522, "init", {
+                clickmap: true,
+                trackLinks: true,
+                accurateTrackBounce: true,
+            });
+        </script>
+        <noscript
+            ><div><img src="https://mc.yandex.ru/watch/91012522" style="position: absolute; left: -9999px" alt="" /></div
+        ></noscript>
         <div id="root"></div>
     </body>
 </html>
