@@ -53,10 +53,12 @@ const BasketFormSideBars: React.FC<BasketFormSideBarsProps> = ({
                             mt: 1,
                         }}
                     >
-                        <MyText variant="body2">
-                            {index + 1}.{item.GoodsCode.name}
-                            &nbsp; x{item.count}
-                        </MyText>
+                        <Box sx={{ width: "80%" }}>
+                            <MyText variant="body2" sx={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>
+                                {index + 1}.{item.GoodsCode.name}
+                                &nbsp; x{item.count}
+                            </MyText>
+                        </Box>
                         <MyText variant="body2" sx={{ fontWeight: 600 }}>
                             {item.price} ₽
                         </MyText>

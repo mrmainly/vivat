@@ -8,10 +8,10 @@ import { HomeSecondSliderProps } from "../../../interface";
 const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title }) => {
     const sliders = [
         {
-            img: "/img/Frame_1264-min.png",
+            img: "/img/Frame1264.png",
         },
         {
-            img: "/img/Frame_1265.png",
+            img: "/img/Frame1265.png",
         },
     ];
 
