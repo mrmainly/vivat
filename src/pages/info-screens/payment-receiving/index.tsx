@@ -27,11 +27,7 @@ const PaymentReceiving = () => {
     const array = [
         {
             title: <FormattedMessage id="payment_receipt_order_4_1" />,
-            columns: [
-                <FormattedMessage id="payment_receipt_order_4_1_1" />,
-                <FormattedMessage id="payment_receipt_order_4_1_2" />,
-                <FormattedMessage id="payment_receipt_order_4_1_3" />,
-            ],
+            columns: [<FormattedMessage id="payment_receipt_order_4_1_1" />, <FormattedMessage id="payment_receipt_order_4_1_2" />, <FormattedMessage id="payment_receipt_order_4_1_3" />],
         },
         {
             title: <FormattedMessage id="payment_receipt_order_4_2" />,
@@ -45,16 +41,8 @@ const PaymentReceiving = () => {
         },
     ];
     const rows = [
-        createData(
-            <FormattedMessage id="payment_receipt_order_3_2_1" />,
-            <FormattedMessage id="payment_receipt_order_3_2_2" />,
-            <FormattedMessage id="payment_receipt_order_3_2_3" />
-        ),
-        createData(
-            <FormattedMessage id="payment_receipt_order_3_3_1" />,
-            <FormattedMessage id="payment_receipt_order_3_3_2" />,
-            <FormattedMessage id="payment_receipt_order_3_3_3" />
-        ),
+        createData(<FormattedMessage id="payment_receipt_order_3_2_1" />, <FormattedMessage id="payment_receipt_order_3_2_2" />, <FormattedMessage id="payment_receipt_order_3_2_3" />),
+        createData(<FormattedMessage id="payment_receipt_order_3_3_1" />, <FormattedMessage id="payment_receipt_order_3_3_2" />, <FormattedMessage id="payment_receipt_order_3_3_3" />),
     ];
 
     return (
@@ -79,7 +67,7 @@ const PaymentReceiving = () => {
                     </li>
                 </ol>
 
-                <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
+                {/* <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
                     <FormattedMessage id="payment_receipt_order_3" />
                 </MyText>
                 <CustomTableContainer>
@@ -156,7 +144,7 @@ const PaymentReceiving = () => {
                             ))}
                         </Box>
                     </Box>
-                ))}
+                ))} */}
             </InfoBlog>
         </div>
     );

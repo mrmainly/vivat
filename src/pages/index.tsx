@@ -39,6 +39,7 @@ const Address = lazy(() => import("./address"));
 const ErrorPayment = lazy(() => import("./payment/error"));
 const SearchPageMobile = lazy(() => import("./search-page/mobile"));
 const SuccessPayment = lazy(() => import("./payment/success"));
+const UserAgreements = lazy(() => import("./info-screens/user-agreements"));
 
 const PageList = [
     {
@@ -192,6 +193,10 @@ const PageList = [
     {
         element: <SearchPageMobile />,
         path: ROUTES.SEARCH_PAGE_MOBILE,
+    },
+    {
+        element: <UserAgreements />,
+        path: ROUTES.USER_AGREEMENTS,
     },
 ];
 

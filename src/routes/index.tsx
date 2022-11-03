@@ -43,6 +43,7 @@ enum ROUTES {
     BENEFITS = "/benefits",
     VACANCY = "/vacancy",
     SEARCH_PAGE_MOBILE = "/search-page-mobile",
+    USER_AGREEMENTS = "/user-agreement",
 }
 
 export default ROUTES;

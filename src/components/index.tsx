@@ -41,6 +41,7 @@ import SkeletonProductDetail from "./skeletons/catalog-card-detail-skeleton";
 import SkeletonBlog from "./skeletons/blog-skeleton";
 import BasketFormSideBars from "./sidebars/basket-form-sidebars";
 import PageLoading from "./laodings/PageLoading";
+import SkeletonCatalogSlider from "./skeletons/skeleton-catalog-slider";
 
 export {
     Header,
@@ -85,4 +86,5 @@ export {
     StatusPaymentError,
     ProductCard,
     WarningDeleteProfileModal,
+    SkeletonCatalogSlider,
 };

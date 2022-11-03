@@ -298,9 +298,7 @@ const PrivacyPolicy = () => {
                                         {textItem.label}
                                     </MyText>
                                 ) : (
-                                    <li style={{ marginTop: 12 }}>
-                                        {textItem.label}
-                                    </li>
+                                    <li style={{ marginTop: 12 }}>{textItem.label}</li>
                                 )}
                             </div>
                         ))}
@@ -308,10 +306,7 @@ const PrivacyPolicy = () => {
                 ))}
                 <MyText
                     variant="body2"
-                    onClick={() =>
-                        (window.location.href =
-                            "https://docs.google.com/document/d/1aQqpTYsuiH490vCqcjLFtpboay_MrkOOqxwec7r5aAk/edit")
-                    }
+                    onClick={() => (window.location.href = "https://docs.google.com/document/d/1aQqpTYsuiH490vCqcjLFtpboay_MrkOOqxwec7r5aAk/edit")}
                     sx={{
                         display: "inline-block",
                         mt: 1.2,

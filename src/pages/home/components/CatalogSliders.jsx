@@ -1,7 +1,10 @@
 import { CatalogSlider } from "../../../constructor";
+import { SkeletonCatalogSlider } from "../../../components";
 
 const CatalogSliders = ({ data, loading }) => {
-    console.log(data);
+    if (loading) {
+        return <SkeletonCatalogSlider />;
+    }
     return (
         <div>
             {data?.results?.map((item, index) => (
