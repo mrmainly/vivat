@@ -1,6 +1,7 @@
 import { CatalogSlider } from "../../../constructor";
 
 const CatalogSliders = ({ data, loading }) => {
+    console.log(data);
     return (
         <div>
             {data?.results?.map((item, index) => (

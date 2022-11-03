@@ -3,41 +3,101 @@ import React from "react";
 import { Box, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import cookie from "js-cookie";
 
 import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
-import ThemeMain from "../../../theme";
+import { useTransferBasketMutation } from "../../../services/BasketService";
+import { useAddedFavoriteMutation, useDeleteFavoriteMutation } from "../../../services/FavoritesService";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
-    width: 200,
+    justifyContent: "start",
+    alignItems: "start",
+    padding: 10,
     background: "#FFFFFF",
-    marginTop: 20,
-    padding: 20,
+    width: 200,
+
+    height: 400,
+    overflow: "hidden",
     marginRight: 10,
 }));
 
-const Img = styled("img")(({ theme }) => ({
+const ImgItem = styled(Box)({
     width: "100%",
     height: 170,
-    objectFit: "cover",
     boxShadow: "1px 1px 11px -3px rgba(34, 60, 80, 0.2)",
-}));
+    cursor: "pointer",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+});
 
-const CombinedBox = styled(Box)(({ theme }) => ({
+const CombinedBox = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 5,
-}));
+    width: "100%",
+});
 
-const ProductCard: React.FC<GoodsCardProps> = ({ img, description, price, specialPrice, specialText, id }) => {
+const ProductCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks }) => {
     const navigate = useNavigate();
+    const jwttoken = cookie.get("jwttoken");
+    const [transferBasketId] = useTransferBasketMutation();
+    const [addedTransferId] = useAddedFavoriteMutation();
+    const [deleteFavoriteId] = useDeleteFavoriteMutation();
+
+    const addedFavorite = () => {
+        addedTransferId({ id })
+            .then((res: any) => {
+                if (res.error) {
+                    toast.error("Товар не добавлен в избранное");
+                }
+            })
+            .catch((error) => toast.error("Товар не добавлен в избранное"));
+    };
+
+    const TransferBasket = () => {
+        transferBasketId({ id })
+            .then((res: any) => {
+                if (res.data) {
+                    toast.success("Товар добавлен в корзину");
+                } else {
+                    if (res.error.data.errors[0] === "NotRecept False") {
+                        toast.error("Это лекарственное средство отпускается по рецепту");
+                    } else if (res.error.data.errors[0] === "item.count more than stocks.qty") {
+                        toast.error("Кол-во товаров в вашей корзине на данный момент превышает кол-во товаров на складе");
+                    } else {
+                        toast.error("Товар не найден");
+                    }
+                }
+            })
+            .catch(() => toast.error("Товар не найден"));
+    };
+
+    const deleteFavorite = () => {
+        deleteFavoriteId({ id: fav?.fav_id }).then((res: any) => {
+            if (res.error) {
+                toast.error("Товар не удален");
+            }
+        });
+    };
+
     return (
         <Root>
-            <Img src={img} />
+            <ImgItem
+                sx={{
+                    backgroundImage: img ? `url(data:image/jpeg;base64,${img})` : "url(/img/Frame1319-min.png)",
+                }}
+                onClick={() => {
+                    navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`);
+                }}
+            ></ImgItem>
             <MyText
                 variant="body1"
                 sx={{
@@ -49,52 +109,84 @@ const ProductCard: React.FC<GoodsCardProps> = ({ img, description, price, specia
                     overflow: "hidden",
                 }}
             >
-                {description}...
+                {name}...
             </MyText>
-            <MyText variant="body1" sx={{ color: "#2F80ED", mt: 0.5, cursor: "pointer" }}>
-                Производитель
+            <MyText
+                variant="body2"
+                sx={{
+                    color: "#2F80ED",
+                    mt: 0.5,
+                    height: 40,
+                    overflow: "hidden",
+                }}
+            >
+                {producer}
             </MyText>
-            <MyText variant="body1" sx={{ color: "#55CD61", mt: 0.5, cursor: "pointer" }}>
-                В наличии
-            </MyText>
+            {stocks || stocks.qty === 0 ? (
+                <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
+                    В наличии
+                </MyText>
+            ) : (
+                <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>
+                    Нет в наличии
+                </MyText>
+            )}
             <CombinedBox>
                 <Box sx={{ display: "flex" }}>
-                    <MyText
-                        variant="h6"
-                        sx={{
-                            fontWeight: "bold",
-                            fontFamily: "Montserrat",
-                        }}
-                    >
-                        {price}₽
-                    </MyText>
-                    <MyText
-                        variant="body2"
-                        sx={{
-                            fontWeight: "bold",
-                            fontFamily: "Montserrat",
-                            color: "#999999",
-                            textDecoration: "line-through",
-                            ml: 1,
-                        }}
-                    >
-                        {specialPrice}₽
-                    </MyText>
+                    {stocks ? (
+                        <MyText
+                            variant="h6"
+                            sx={{
+                                fontWeight: "bold",
+                                fontFamily: "Montserrat",
+                            }}
+                        >
+                            {stocks.priceSale}₽
+                        </MyText>
+                    ) : (
+                        <MyText
+                            sx={{
+                                fontWeight: "bold",
+                                fontFamily: "Montserrat",
+                                color: "#999999",
+                                textDecoration: "line-through",
+                                ml: 1,
+                            }}
+                        >
+                            Нет цены
+                        </MyText>
+                    )}
                 </Box>
-                <IconButton size="small" sx={{ mr: 1 }}>
-                    <img src="/img/Frame1208.png" alt="" />
-                </IconButton>
             </CombinedBox>
             <MyText variant="body2" sx={{ color: "#EB5757" }}>
                 {specialText}
             </MyText>
             <CombinedBox>
-                <MyButton sx={{ width: 130 }} size="medium" onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`)}>
+                <MyButton
+                    sx={{ width: 130 }}
+                    size="medium"
+                    onClick={() => {
+                        jwttoken ? TransferBasket() : toast.error("данная операция доступно только при авторизации");
+                    }}
+                >
                     В корзину
                 </MyButton>
-                <IconButton size="small" sx={{ mr: 1 }}>
-                    <img src="/img/Favorite_light.png" alt="" />
-                </IconButton>
+
+                {fav?.is_fav ? (
+                    <IconButton size="small" sx={{ mr: 1 }} onClick={deleteFavorite}>
+                        <FavoriteIcon sx={{ color: "#55CD61" }} fontSize="large" />
+                    </IconButton>
+                ) : (
+                    <IconButton
+                        size="small"
+                        sx={{ mr: 1 }}
+                        onClick={() => {
+                            jwttoken ? addedFavorite() : toast.error("данная операция доступно только при авторизации");
+                        }}
+                    >
+                        <img src="/img/Favorite_light.png" alt="" />
+                    </IconButton>
+                )}
             </CombinedBox>
         </Root>
     );

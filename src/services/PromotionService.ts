@@ -10,7 +10,7 @@ export const stocks = api.injectEndpoints({
             providesTags: ["Promotion"],
         }),
         getPromotionCatalog: build.query({
-            query: () => `api/v1/promotion/collection/`,
+            query: () => `api/v1/promotion/collection/?is_active=true`,
         }),
     }),
 });
