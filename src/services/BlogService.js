@@ -3,14 +3,7 @@ import { api } from "./api";
 export const blog = api.injectEndpoints({
     endpoints: (build) => ({
         getBlog: build.query({
-            query: ({ query, type }) =>
-                `api/v1/blogs/${
-                    type == "query"
-                        ? query
-                            ? `?query=${query}`
-                            : ""
-                        : `?tags_query=${query}`
-                }`,
+            query: ({ query, type }) => `api/v1/blogs/${type == "query" ? (query ? `?query=${query}` : "") : `?tags_query=${query}`}`,
             providesTags: ["Blog"],
         }),
         getBlogDetail: build.query({
@@ -19,8 +12,10 @@ export const blog = api.injectEndpoints({
         getTopic: build.query({
             query: () => `api/v1/blogs/tags/`,
         }),
+        getAdvantage: build.query({
+            query: () => `api/v1/blogs/advantage/?department=47CC211D-EECA-4D38-87A1-E255059DD16F`,
+        }),
     }),
 });
 
-export const { useGetBlogQuery, useGetTopicQuery, useGetBlogDetailQuery } =
-    blog;
+export const { useGetBlogQuery, useGetTopicQuery, useGetBlogDetailQuery, useGetAdvantageQuery } = blog;

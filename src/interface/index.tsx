@@ -187,6 +187,8 @@ interface SignModalProps {
 
 interface HomeSecondSliderProps {
     title: string;
+    data: any;
+    loading: boolean;
 }
 
 export type {

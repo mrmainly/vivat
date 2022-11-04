@@ -42,6 +42,7 @@ import SkeletonBlog from "./skeletons/blog-skeleton";
 import BasketFormSideBars from "./sidebars/basket-form-sidebars";
 import PageLoading from "./laodings/PageLoading";
 import SkeletonCatalogSlider from "./skeletons/skeleton-catalog-slider";
+import SkeletonAdvetage from "./skeletons/skeleton-advetage";
 
 export {
     Header,
@@ -87,4 +88,5 @@ export {
     ProductCard,
     WarningDeleteProfileModal,
     SkeletonCatalogSlider,
+    SkeletonAdvetage,
 };
