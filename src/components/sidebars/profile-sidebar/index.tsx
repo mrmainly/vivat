@@ -19,7 +19,6 @@ const Menu = styled(Box)(({ theme }) => ({
     width: 240,
     background: "white",
     marginRight: 30,
-    height: 250,
     [theme.breakpoints.down("md")]: {
         width: "100%",
     },
@@ -38,10 +37,6 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
         },
         {
             label: <FormattedMessage id="my_orders" />,
-            to: ROUTES.MYORDERS,
-        },
-        {
-            label: <FormattedMessage id="loyalty_program" />,
             to: ROUTES.MYORDERS,
         },
     ];
@@ -68,13 +63,7 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
 
     return (
         <Box>
-            {open && (
-                <WarningDeleteProfileModal
-                    open={open}
-                    handleOpen={handleOpen}
-                    handleDeleteProfile={handleDeleteProfile}
-                />
-            )}
+            {open && <WarningDeleteProfileModal open={open} handleOpen={handleOpen} handleDeleteProfile={handleDeleteProfile} />}
             <MyText variant="h5" sx={{ mb: 2.4 }}>
                 {title}
             </MyText>
@@ -92,10 +81,7 @@ const ProfileSideBar: React.FC<ProfileSideBarProps> = ({ title }) => {
                         {item.label}
                     </MenuItem>
                 ))}
-                <MenuItem
-                    sx={{ pl: 2.4, height: 56, color: "red" }}
-                    onClick={handleOpen}
-                >
+                <MenuItem sx={{ pl: 2.4, height: 56, color: "red" }} onClick={handleOpen}>
                     Удалить профиль
                 </MenuItem>
                 <MenuItem sx={{ pl: 2.4, height: 56 }} onClick={handleExit}>
