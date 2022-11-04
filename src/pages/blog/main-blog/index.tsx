@@ -17,7 +17,11 @@ const Blog = () => {
         query: "created",
         type: "query",
     });
-    const { data: theme, isFetching } = useGetBlogQuery({
+    const {
+        data: theme,
+        isFetching,
+        isLoading: isThemeLoading,
+    } = useGetBlogQuery({
         query: topic,
         type: "topic",
     });
@@ -27,7 +31,7 @@ const Blog = () => {
         setTopic(e.target.value);
     };
 
-    if (isFetchingPopular && isFetchingCreated) {
+    if (isFetchingPopular && isFetchingCreated && isThemeLoading && isLoadingTopics) {
         return <SkeletonBlog />;
     }
 
@@ -41,13 +45,13 @@ const Blog = () => {
                 <Grid container spacing={2} sx={{ display: "flex", justifyContent: "center" }}>
                     <FilterBlogList name="Последние статьи" data={created} value="created" />
                     <Grid item lg={5} xl={5} md={4} sm={6} xs={12}>
-                        {created.results.slice(0, 1).map((item: any, index: number) => (
+                        {created?.results.slice(0, 1).map((item: any, index: number) => (
                             <BlogCardMain key={index} {...item} />
                         ))}
                     </Grid>
                     <FilterBlogList name="Популярное" data={popularity} value="popularity_all_time" />
                 </Grid>
-                <ConstructorThemeBlogList data={theme} topics={topics.results} isFetching={isFetching} handleSetTopics={handleSetTopics} isLoadingTopics={isLoadingTopics} />
+                <ConstructorThemeBlogList data={theme} topics={topics?.results} isFetching={isFetching} handleSetTopics={handleSetTopics} isLoadingTopics={isLoadingTopics} />
             </Box>
         </>
     );
