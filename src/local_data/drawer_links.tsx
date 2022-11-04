@@ -12,6 +12,18 @@ const drawer_links = [
         to: ROUTES.PRIVACY_POLICY,
     },
     {
+        label: <FormattedMessage id="user_agreements" />,
+        to: ROUTES.USER_AGREEMENTS,
+    },
+    {
+        label: <FormattedMessage id="payment_receipt_order" />,
+        to: ROUTES.PAYMENT_RECEIVING,
+    },
+    {
+        label: <FormattedMessage id="license" />,
+        to: ROUTES.LICENSES,
+    },
+    {
         label: <FormattedMessage id="contacts" />,
         to: ROUTES.CONTACTS,
     },
@@ -19,10 +31,7 @@ const drawer_links = [
         label: <FormattedMessage id="pharmacy" />,
         to: ROUTES.ADDRESS,
     },
-    {
-        label: <FormattedMessage id="license" />,
-        to: ROUTES.LICENSES,
-    },
+
     {
         label: <FormattedMessage id="news" />,
         to: ROUTES.BLOG,
@@ -35,10 +44,7 @@ const drawer_links = [
         label: <FormattedMessage id="medication_booking" />,
         to: ROUTES.BOOKING,
     },
-    {
-        label: <FormattedMessage id="payment_receipt_order" />,
-        to: ROUTES.PAYMENT_RECEIVING,
-    },
+
     {
         label: <FormattedMessage id="benefits_working" />,
         to: ROUTES.BENEFITS,
@@ -62,10 +68,6 @@ const drawer_links = [
     {
         label: <FormattedMessage id="technical_support" />,
         to: ROUTES.TECHNICAL_SUPPORT,
-    },
-    {
-        label: <FormattedMessage id="user_agreements" />,
-        to: ROUTES.USER_AGREEMENTS,
     },
 ];
 

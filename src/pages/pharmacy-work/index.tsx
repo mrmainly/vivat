@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-    Box,
-    Grid,
-    FormControl,
-    Select,
-    MenuItem,
-    FormControlLabel,
-    InputLabel,
-    CircularProgress,
-} from "@mui/material";
+import { Box, Grid, FormControl, Select, MenuItem, FormControlLabel, InputLabel, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { FormattedMessage } from "react-intl";
@@ -21,6 +12,7 @@ import { useGetCityQuery } from "../../services/CityService";
 const Main = styled(Box)(({ theme }) => ({
     marginLeft: 30,
     width: "100%",
+    minHeight: 800,
     [theme.breakpoints.down("md")]: {
         flexDirection: "column",
         marginLeft: 0,
@@ -32,6 +24,8 @@ const PharmacyWork = () => {
 
     const { data, isFetching } = useGetWorkQuery({ city: city });
     const { data: cities, isFetching: isCitiesLoading } = useGetCityQuery("");
+
+    console.log(data);
 
     if (isFetching || isCitiesLoading) {
         return (
@@ -55,10 +49,7 @@ const PharmacyWork = () => {
                     label={<FormattedMessage id="city_choice" />}
                     labelPlacement="start"
                     control={
-                        <FormControl
-                            sx={{ width: 150, bgcolor: "white", ml: 1 }}
-                            size="small"
-                        >
+                        <FormControl sx={{ width: 150, bgcolor: "white", ml: 1 }} size="small">
                             <InputLabel>
                                 <FormattedMessage id="cities" />
                             </InputLabel>
@@ -86,20 +77,8 @@ const PharmacyWork = () => {
                 <Grid container spacing={2} sx={{ mt: 2 }}>
                     {data?.results?.length > 0 ? (
                         data.results.map((item: any, index: number) => (
-                            <Grid
-                                item
-                                key={index}
-                                lg={6}
-                                xl={6}
-                                md={6}
-                                sm={12}
-                                xs={12}
-                            >
-                                <WorkCard
-                                    id={item.id}
-                                    title={item.name}
-                                    city={item.city}
-                                />
+                            <Grid item key={index} lg={6} xl={6} md={6} sm={12} xs={12}>
+                                <WorkCard id={item.id} title={item.name} city={item.city} />
                             </Grid>
                         ))
                     ) : (

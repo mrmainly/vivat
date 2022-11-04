@@ -30,25 +30,16 @@ interface AddressSideBarInterface {
     dispatchMapCenter?: any;
 }
 
-const AddressSideBar: React.FC<AddressSideBarInterface> = ({
-    data,
-    dispatchMapCenter,
-}) => {
+const AddressSideBar: React.FC<AddressSideBarInterface> = ({ data, dispatchMapCenter }) => {
     return (
         <Main>
             <Title>
                 <MyText variant="h6">
-                    Аптеки в
-                    <span style={{ color: ThemeMain.palette.primary.main }}>
-                        якутске
-                    </span>
+                    Аптеки в<span style={{ color: ThemeMain.palette.primary.main }}>якутске</span>
                 </MyText>
             </Title>
             {data.map((item: any, index: number) => (
-                <CusMenuItem
-                    onClick={() => dispatchMapCenter(item.location)}
-                    key={index}
-                >
+                <CusMenuItem onClick={() => dispatchMapCenter(item.location)} key={index}>
                     <MyText
                         variant="h6"
                         sx={{

@@ -4,7 +4,7 @@ export const work = api.injectEndpoints({
     endpoints: (build) => ({
         getWork: build.query({
             query: ({ city }) => ({
-                url: `api/v1/departments/`,
+                url: `api/v1/employments/`,
                 dependencies: city,
             }),
         }),

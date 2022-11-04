@@ -9,22 +9,20 @@ const PharmacyDetailWork = () => {
     const params = useParams();
 
     const { data, isLoading, error } = useGetWorkDetailQuery({ id: params.id });
+
+    console.log(data);
+
     return (
         <Box>
             {isLoading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <CircularProgress />
                 </Box>
-            ) : error ? (
+            ) : (
                 <Box>
                     <MyText variant="h4">{data.name}</MyText>
-                    <div
-                        style={{ marginTop: 20 }}
-                        dangerouslySetInnerHTML={{ __html: data.description }}
-                    ></div>
+                    <div style={{ marginTop: 20 }} dangerouslySetInnerHTML={{ __html: data.description }}></div>
                 </Box>
-            ) : (
-                ""
             )}
         </Box>
     );
