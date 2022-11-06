@@ -4,6 +4,7 @@ import cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
+import HomeIcon from "@mui/icons-material/Home";
 
 import MyContainer from "../../container";
 import ROUTES from "../../../routes";
@@ -50,12 +51,12 @@ const MobileDown = () => {
                     }}
                 >
                     <IconButton onClick={() => navigate(ROUTES.HOME)}>
-                        <img src="/img/darhboard.png" alt="" />
+                        <img src="/img/darhboard.svg" alt="" />
                     </IconButton>
                     <IconButton
                         onClick={() => navigate(ROUTES.SEARCH_PAGE_MOBILE)}
                     >
-                        <img src="/img/Component17.png" alt="" />
+                        <img src="/img/component17.svg" alt="" />
                     </IconButton>
                     <IconButton
                         onClick={() => {
@@ -64,7 +65,7 @@ const MobileDown = () => {
                                 : dispatch(openLoginModal(true));
                         }}
                     >
-                        <img src="/img/Favorite_light.png" alt="" />
+                        <img src="/img/favorite-light.svg" alt="" />
                     </IconButton>
                     <IconButton
                         onClick={() => {
@@ -86,7 +87,7 @@ const MobileDown = () => {
                         }}
                     >
                         <StyledBadge badgeContent={jwttoken ? count : 0}>
-                            <img src="/img/Bag_light.png" alt="" />
+                            <img src="/img/bag-light.svg" alt="" />
                         </StyledBadge>
                     </IconButton>
                 </Box>
