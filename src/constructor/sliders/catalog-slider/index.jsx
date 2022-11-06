@@ -26,7 +26,13 @@ function SampleNextArrow(props) {
     const { style, onClick } = props;
     return (
         <ArrowNext style={{ ...style }} onClick={onClick}>
-            <Box style={{ display: "flex", alignItems: "center", height: "100%" }}>
+            <Box
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: "100%",
+                }}
+            >
                 <IconButton>
                     <ChevronRightIcon />
                 </IconButton>
@@ -39,7 +45,13 @@ function SamplePrevArrow(props) {
     const { style, onClick } = props;
     return (
         <ArrowBack style={{ ...style }} onClick={onClick}>
-            <Box style={{ display: "flex", alignItems: "center", height: "100%" }}>
+            <Box
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: "100%",
+                }}
+            >
                 <IconButton>
                     <ChevronLeftIcon />
                 </IconButton>
@@ -55,7 +67,7 @@ const ProductCardsSlider = ({ data }) => {
         infinite: true,
         speed: 500,
         slidesToScroll: 2,
-        slidesToShow: 2,
+        slidesToShow: 1,
         variableWidth: true,
         swipeToSlide: true,
         prevArrow: <SamplePrevArrow />,

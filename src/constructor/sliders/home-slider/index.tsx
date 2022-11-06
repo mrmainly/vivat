@@ -27,7 +27,7 @@ const HomeSliderBox = styled(Box)(({ theme }) => ({
         height: 300,
     },
     [theme.breakpoints.down("sm")]: {
-        height: 200,
+        height: 180,
     },
 }));
 
@@ -64,7 +64,13 @@ function SampleNextArrow(props: any) {
     const { style, onClick } = props;
     return (
         <ArrowNext style={{ ...style }} onClick={onClick}>
-            <Box style={{ display: "flex", alignItems: "center", height: "100%" }}>
+            <Box
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: "100%",
+                }}
+            >
                 <IconButton>
                     <ChevronRightIcon />
                 </IconButton>
@@ -77,7 +83,13 @@ function SamplePrevArrow(props: any) {
     const { style, onClick } = props;
     return (
         <ArrowBack style={{ ...style }} onClick={onClick}>
-            <Box style={{ display: "flex", alignItems: "center", height: "100%" }}>
+            <Box
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: "100%",
+                }}
+            >
                 <IconButton>
                     <ChevronLeftIcon />
                 </IconButton>
@@ -109,13 +121,22 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
                 <Box key={index} sx={{ width: "100%" }}>
                     <HomeSliderBox
                         sx={{
-                            background: item.banner_image ? `url(${item.banner_image})` : `url(/img/Frame1319-min.png)`,
+                            background: item.banner_image
+                                ? `url(${item.banner_image})`
+                                : `url(/img/Frame1319-min.png)`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
-                            backgroundPosition: "left",
+                            backgroundPosition: "center",
                         }}
                     >
-                        <BottomCustom variant="contained" size="large" id="customButton" onClick={() => navigate(`${ROUTES.STOCK_DETAIL}/${item.id}`)}>
+                        <BottomCustom
+                            variant="contained"
+                            size="large"
+                            id="customButton"
+                            onClick={() =>
+                                navigate(`${ROUTES.STOCK_DETAIL}/${item.id}`)
+                            }
+                        >
                             Посмотреть
                         </BottomCustom>
                     </HomeSliderBox>
