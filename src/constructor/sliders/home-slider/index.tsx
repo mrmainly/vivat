@@ -27,8 +27,37 @@ const HomeSliderBox = styled(Box)(({ theme }) => ({
         height: 300,
     },
     [theme.breakpoints.down("sm")]: {
-        height: 180,
+        backgroundSize: "contain",
+        backgroundPosition: "bottom",
+        borderRadius: 0,
+        marginTop: "-50px",
     },
+    [theme.breakpoints.down(570)]: {
+        marginTop: "-60px",
+    },
+    [theme.breakpoints.down(530)]: {
+        marginTop: "-90px",
+    },
+    [theme.breakpoints.down(500)]: {
+        marginTop: "-110px",
+    },
+    [theme.breakpoints.down(470)]: {
+        marginTop: "-120px",
+    },
+    [theme.breakpoints.down(400)]: {
+        marginTop: "-140px",
+    },
+    [theme.breakpoints.down(350)]: {
+        marginTop: "-160px",
+    },
+    [theme.breakpoints.down(330)]: {
+        marginTop: "-170px",
+    },
+    // [theme.breakpoints.down(570)]: {
+    //     backgroundPositionY: "bottom",
+    //     height: 250,
+    //     borderRadius: 10,
+    // },
 }));
 
 const BottomCustom = styled(Button)(({ theme }) => ({
@@ -40,7 +69,7 @@ const BottomCustom = styled(Button)(({ theme }) => ({
     [theme.breakpoints.down("sm")]: {
         fontSize: 10,
         padding: "4px 11px",
-        marginBottom: "10px",
+        position: "absolute",
         opacity: 1,
     },
 }));
@@ -118,7 +147,7 @@ const HomeSlider: React.FC<HomeSliderProps> = ({ data }) => {
     return (
         <Slider {...settings}>
             {data.map((item: any, index: number) => (
-                <Box key={index} sx={{ width: "100%" }}>
+                <Box key={index}>
                     <HomeSliderBox
                         sx={{
                             background: item.banner_image
