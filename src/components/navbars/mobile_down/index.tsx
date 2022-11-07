@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
 import MyContainer from "../../container";
 import ROUTES from "../../../routes";
@@ -51,12 +54,18 @@ const MobileDown = () => {
                     }}
                 >
                     <IconButton onClick={() => navigate(ROUTES.HOME)}>
-                        <img src="/img/darhboard.svg" alt="" />
+                        <HomeIcon
+                            style={{ color: "#55CD61" }}
+                            fontSize="large"
+                        />
                     </IconButton>
                     <IconButton
                         onClick={() => navigate(ROUTES.SEARCH_PAGE_MOBILE)}
                     >
-                        <img src="/img/component17.svg" alt="" />
+                        <SearchIcon
+                            style={{ color: "#55CD61" }}
+                            fontSize="large"
+                        />
                     </IconButton>
                     <IconButton
                         onClick={() => {
@@ -65,7 +74,10 @@ const MobileDown = () => {
                                 : dispatch(openLoginModal(true));
                         }}
                     >
-                        <img src="/img/favorite-light.svg" alt="" />
+                        <FavoriteIcon
+                            style={{ color: "#55CD61" }}
+                            fontSize="large"
+                        />
                     </IconButton>
                     <IconButton
                         onClick={() => {
@@ -87,7 +99,10 @@ const MobileDown = () => {
                         }}
                     >
                         <StyledBadge badgeContent={jwttoken ? count : 0}>
-                            <img src="/img/bag-light.svg" alt="" />
+                            <ShoppingBasketIcon
+                                style={{ color: "#55CD61" }}
+                                fontSize="large"
+                            />
                         </StyledBadge>
                     </IconButton>
                 </Box>
