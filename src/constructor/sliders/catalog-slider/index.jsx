@@ -5,7 +5,7 @@ import { styled } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-import { ProductCard, MyText } from "../../../components";
+import { ProductCard } from "../../../components";
 
 const ArrowBack = styled(Box)(({ theme }) => ({
     position: "absolute",
@@ -75,10 +75,7 @@ const ProductCardsSlider = ({ data }) => {
     };
 
     return (
-        <Box sx={{ mt: 3 }}>
-            <MyText variant="h5" style={{ marginBottom: 20 }}>
-                {data.title}
-            </MyText>
+        <Box style={{ overflow: "hidden" }}>
             <Slider {...settings}>
                 {data?.goods.map((item, index) => (
                     <ProductCard

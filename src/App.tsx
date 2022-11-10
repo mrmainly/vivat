@@ -26,11 +26,7 @@ const App = () => {
     };
 
     return (
-        <IntlProvider
-            messages={messages[currentLocale]}
-            defaultLocale={currentLocale}
-            locale={LOCALES.RUSSIAN}
-        >
+        <IntlProvider messages={messages[currentLocale]} defaultLocale={currentLocale} locale={LOCALES.RUSSIAN}>
             <LanguageContext.Provider value={{ currentLocale, changeLocale }}>
                 <BrowserRouter>
                     <Routes>
@@ -44,15 +40,7 @@ const App = () => {
                                 }
                             />
                             {PageList.map((item: any, index: number) => (
-                                <Route
-                                    key={index}
-                                    element={
-                                        <Suspense fallback={<PageLoading />}>
-                                            {item.element}
-                                        </Suspense>
-                                    }
-                                    path={item.path}
-                                />
+                                <Route key={index} element={<Suspense fallback={<PageLoading />}>{item.element}</Suspense>} path={item.path} />
                             ))}
                         </Route>
                     </Routes>
