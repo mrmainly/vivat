@@ -3,21 +3,13 @@ import React from "react";
 import { Box, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 import { MyText, Tag } from "../..";
 import { BlogCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
 
-const BlogCard: React.FC<BlogCardProps> = ({
-    description,
-    tags,
-    image,
-    views,
-    date,
-    type,
-    id,
-    name,
-}) => {
+const BlogCard: React.FC<BlogCardProps> = ({ description, tags, image, views, date, type, id, name }) => {
     const navigate = useNavigate();
 
     const Root = styled(CardActionArea)(({ theme }) => ({
@@ -73,7 +65,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
                         <MyText variant="body2" sx={{ color: "gray" }}>
                             {date}
                         </MyText>
-                        <MyText variant="body2" sx={{ color: "gray" }}>
+                        <MyText variant="body2" sx={{ color: "gray", display: "flex", alignItems: "center" }}>
+                            <RemoveRedEyeIcon fontSize="small" />
                             {views}
                         </MyText>
                     </Box>

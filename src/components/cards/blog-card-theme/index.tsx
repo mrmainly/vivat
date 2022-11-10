@@ -3,19 +3,13 @@ import React from "react";
 import { Box, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 import { MyText } from "../..";
 import { BlogCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
 
-const BlogCardTheme: React.FC<BlogCardProps> = ({
-    description,
-    image,
-    views,
-    date,
-    type,
-    id,
-}) => {
+const BlogCardTheme: React.FC<BlogCardProps> = ({ description, image, views, date, type, id }) => {
     const navigate = useNavigate();
 
     const Root = styled(CardActionArea)(({ theme }) => ({
@@ -69,9 +63,7 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({
                 <MyText variant="body2" sx={{ color: "gray" }}>
                     {date}
                 </MyText>
-                <MyText variant="h6">
-                    Что нужно знать о аллергии? фыф фывфы вфывфы
-                </MyText>
+                <MyText variant="h6">Что нужно знать о аллергии? фыф фывфы вфывфы</MyText>
                 <TextWrapper>
                     <div
                         style={{ fontSize: 17 }}
@@ -80,9 +72,7 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({
                         }}
                     ></div>
                 </TextWrapper>
-                <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                ></Box>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}></Box>
             </Main>
         </Root>
     );

@@ -1,6 +1,7 @@
 import { Box, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 import { MyText, Tag } from "../../../components";
 import { useGetBlogDetailQuery } from "../../../services/BlogService";
@@ -11,7 +12,7 @@ const Root = styled(Box)(({ theme }) => ({
     justifyContent: "start",
     width: "100%",
     flexDirection: "column",
-    paddingTop: 50,
+
     paddingBottom: 150,
     [theme.breakpoints.down("sm")]: {
         flexDirection: "column",
@@ -47,46 +48,27 @@ const BlogDetail = () => {
                         sx={{
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
-
+                            marginBottom: 1,
                             overflow: "hidden",
                         }}
                     >
                         {data.name}
                     </MyText>
-                    {data.author ? (
-                        <MyText
-                            variant="h6"
-                            sx={{ mt: 1, mb: 1, color: "gray" }}
-                        >
-                            {`${data.author.last_name} ${data.author.first_name} ${data.author.patronymic}`}
-                        </MyText>
-                    ) : (
-                        "Нет автора"
-                    )}
+
                     <Tag>{data.tags.name}</Tag>
-                    <Img
-                        src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`}
-                        alt=""
-                    />
+                    <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`} alt="" />
                     <Box sx={{ display: "flex", color: "gray" }}>
                         <MyText variant="body1" sx={{ mr: 8 }}>
                             {data.date}
                         </MyText>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <img
-                                src="/img/View.png"
-                                style={{ width: 20, height: 20 }}
-                                alt=""
-                            />
+                            <RemoveRedEyeIcon fontSize="small" />
                             <MyText variant="body1" sx={{ ml: 0.5 }}>
                                 {data.views}
                             </MyText>
                         </Box>
                     </Box>
-                    <div
-                        style={{ marginTop: 20, width: "90%" }}
-                        dangerouslySetInnerHTML={{ __html: data.description }}
-                    ></div>
+                    <div style={{ marginTop: 20, width: "90%" }} dangerouslySetInnerHTML={{ __html: data.description }}></div>
                 </>
             ) : (
                 ""
