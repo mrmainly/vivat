@@ -11,10 +11,7 @@ import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
 import { useTransferBasketMutation } from "../../../services/BasketService";
-import {
-    useAddedFavoriteMutation,
-    useDeleteFavoriteMutation,
-} from "../../../services/FavoritesService";
+import { useAddedFavoriteMutation, useDeleteFavoriteMutation } from "../../../services/FavoritesService";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -33,10 +30,23 @@ const ImgItem = styled(Box)({
     width: "100%",
     height: 170,
     boxShadow: "1px 1px 11px -3px rgba(34, 60, 80, 0.2)",
-    cursor: "pointer",
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+});
+
+const Name = styled(MyText)({
+    marginTop: 20,
+    fontFamily: "Montserrat",
+    color: "#202020",
+    fontWeight: "bold",
+    height: 70,
+    overflow: "hidden",
+    cursor: "pointer",
+    "&:hover": {
+        textDecoration: "underline",
+    },
+    transition: "all 1s ease",
 });
 
 const CombinedBox = styled(Box)({
@@ -47,15 +57,7 @@ const CombinedBox = styled(Box)({
     width: "100%",
 });
 
-const ProductCard: React.FC<GoodsCardProps> = ({
-    img,
-    specialText,
-    id,
-    name,
-    producer,
-    fav,
-    stocks,
-}) => {
+const ProductCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks }) => {
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
     const [transferBasketId] = useTransferBasketMutation();
@@ -79,16 +81,9 @@ const ProductCard: React.FC<GoodsCardProps> = ({
                     toast.success("Товар добавлен в корзину");
                 } else {
                     if (res.error.data.errors[0] === "NotRecept False") {
-                        toast.error(
-                            "Это лекарственное средство отпускается по рецепту"
-                        );
-                    } else if (
-                        res.error.data.errors[0] ===
-                        "item.count more than stocks.qty"
-                    ) {
-                        toast.error(
-                            "Кол-во товаров в вашей корзине на данный момент превышает кол-во товаров на складе"
-                        );
+                        toast.error("Это лекарственное средство отпускается по рецепту");
+                    } else if (res.error.data.errors[0] === "item.count more than stocks.qty") {
+                        toast.error("Кол-во товаров в вашей корзине на данный момент превышает кол-во товаров на складе");
                     } else {
                         toast.error("Товар не найден");
                     }
@@ -109,27 +104,17 @@ const ProductCard: React.FC<GoodsCardProps> = ({
         <Root>
             <ImgItem
                 sx={{
-                    backgroundImage: img
-                        ? `url(data:image/jpeg;base64,${img})`
-                        : "url(/img/Frame1319-min.png)",
+                    backgroundImage: img ? `url(data:image/jpeg;base64,${img})` : "url(/img/Frame1319-min.png)",
                 }}
+            ></ImgItem>
+            <Name
+                variant="body1"
                 onClick={() => {
                     navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`);
                 }}
-            ></ImgItem>
-            <MyText
-                variant="body1"
-                sx={{
-                    mt: 2,
-                    fontFamily: "Montserrat",
-                    color: "#202020",
-                    fontWeight: "bold",
-                    height: 70,
-                    overflow: "hidden",
-                }}
             >
                 {name}...
-            </MyText>
+            </Name>
             <MyText
                 variant="body2"
                 sx={{
@@ -185,37 +170,22 @@ const ProductCard: React.FC<GoodsCardProps> = ({
                     sx={{ width: 130 }}
                     size="medium"
                     onClick={() => {
-                        jwttoken
-                            ? TransferBasket()
-                            : toast.error(
-                                  "данная операция доступно только при авторизации"
-                              );
+                        jwttoken ? TransferBasket() : toast.error("данная операция доступно только при авторизации");
                     }}
                 >
                     В корзину
                 </MyButton>
 
                 {fav?.is_fav ? (
-                    <IconButton
-                        size="small"
-                        sx={{ mr: 1 }}
-                        onClick={deleteFavorite}
-                    >
-                        <FavoriteIcon
-                            sx={{ color: "#55CD61" }}
-                            fontSize="large"
-                        />
+                    <IconButton size="small" sx={{ mr: 1 }} onClick={deleteFavorite}>
+                        <FavoriteIcon sx={{ color: "#55CD61" }} fontSize="large" />
                     </IconButton>
                 ) : (
                     <IconButton
                         size="small"
                         sx={{ mr: 1 }}
                         onClick={() => {
-                            jwttoken
-                                ? addedFavorite()
-                                : toast.error(
-                                      "данная операция доступно только при авторизации"
-                                  );
+                            jwttoken ? addedFavorite() : toast.error("данная операция доступно только при авторизации");
                         }}
                     >
                         <img src="/img/Favorite_light.png" alt="" />

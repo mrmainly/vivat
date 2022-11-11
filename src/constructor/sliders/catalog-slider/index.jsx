@@ -68,7 +68,6 @@ const ProductCardsSlider = ({ data }) => {
         centerPadding: "0px",
         infinite: true,
         speed: 500,
-
         variableWidth: true,
         swipeToSlide: true,
         // prevArrow: <SamplePrevArrow />,

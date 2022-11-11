@@ -2,9 +2,16 @@ import { useState, useEffect } from "react";
 import { Tab, Tabs, Box, Typography } from "@mui/material";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 import { CatalogSlider } from "../../../constructor";
 import { SkeletonCatalogSlider } from "../../../components";
+
+const AntTabs = styled(Tabs)({
+    "& .MuiTabs-indicator": {
+        backgroundColor: "#55CD61",
+    },
+});
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -48,11 +55,11 @@ const CatalogSliders = ({ data, loading }) => {
                 ))
             ) : (
                 <>
-                    <Tabs value={currentTab} onChange={handleChange} variant="scrollable" allowScrollButtonsMobile aria-label="scrollable force tabs example" style={{ marginBottom: 20 }}>
+                    <AntTabs value={currentTab} onChange={handleChange} variant="scrollable" allowScrollButtonsMobile aria-label="scrollable force tabs example" style={{ marginBottom: 20 }}>
                         {data?.results?.map((item, index) => (
-                            <Tab label={item.title} key={index} />
+                            <Tab label={item.title} key={index} style={{ color: "#55CD61" }} />
                         ))}
-                    </Tabs>
+                    </AntTabs>
                     <SwipeableViews index={currentTab} onChangeIndex={handleChange} axis={theme.direction === "rtl" ? "x-reverse" : "x"}>
                         {data?.results?.map((item, index) => (
                             <TabPanel key={index}>
