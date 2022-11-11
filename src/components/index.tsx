@@ -43,6 +43,7 @@ import BasketFormSideBars from "./sidebars/basket-form-sidebars";
 import PageLoading from "./laodings/PageLoading";
 import SkeletonCatalogSlider from "./skeletons/skeleton-catalog-slider";
 import SkeletonAdvetage from "./skeletons/skeleton-advetage";
+import NewsSliderCard from "./cards/news-slider-card";
 
 export {
     Header,
@@ -89,4 +90,5 @@ export {
     WarningDeleteProfileModal,
     SkeletonCatalogSlider,
     SkeletonAdvetage,
+    NewsSliderCard,
 };

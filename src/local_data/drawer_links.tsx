@@ -34,7 +34,7 @@ const drawer_links = [
 
     {
         label: <FormattedMessage id="news" />,
-        to: ROUTES.BLOG,
+        to: ROUTES.BLOG_THEME,
     },
     {
         label: <FormattedMessage id="stock" />,

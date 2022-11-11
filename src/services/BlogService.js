@@ -3,7 +3,7 @@ import { api } from "./api";
 export const blog = api.injectEndpoints({
     endpoints: (build) => ({
         getBlog: build.query({
-            query: ({ query, type }) => `api/v1/blogs/${type == "query" ? (query ? `?query=${query}` : "") : `?tags_query=${query}`}`,
+            query: ({ query, type }) => `api/v1/blogs/${query ? `?query=${query}` : ""}`,
             providesTags: ["Blog"],
         }),
         getBlogDetail: build.query({

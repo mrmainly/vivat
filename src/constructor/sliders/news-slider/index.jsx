@@ -5,23 +5,21 @@ import { styled } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-import { ProductCard } from "../../../components";
+import { NewsSliderCard } from "../../../components";
 
 const ArrowBack = styled(Box)(({ theme }) => ({
     position: "absolute",
     zIndex: 1,
-    left: "0",
-    height: 420,
-    background: "rgba(224, 218, 221, 0.36)",
+    left: "-50px",
+    height: "100%",
 }));
 
 const ArrowNext = styled(Box)(({ theme }) => ({
     zIndex: 1,
-    right: "0",
+    right: "-50px",
     position: "absolute",
-    height: 420,
+    height: "100%",
     top: 0,
-    background: "rgba(224, 218, 221, 0.36)",
 }));
 
 function SampleNextArrow(props) {
@@ -62,38 +60,29 @@ function SamplePrevArrow(props) {
     );
 }
 
-const ProductCardsSlider = ({ data }) => {
+const NewsSlider = ({ data }) => {
     const settings = {
         dots: false,
         centerPadding: "0px",
         infinite: true,
         speed: 500,
-
+        slidesToScroll: 1,
+        slidesToShow: 1,
         variableWidth: true,
         swipeToSlide: true,
-        // prevArrow: <SamplePrevArrow />,
-        // nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,
+        nextArrow: <SampleNextArrow />,
     };
 
     return (
-        <Box style={{ overflow: "hidden" }}>
+        <Box>
             <Slider {...settings}>
-                {data?.goods.map((item, index) => (
-                    <ProductCard
-                        key={index}
-                        id={item.id}
-                        stocks={item.stocks}
-                        specialText={item.specialText}
-                        img={item?.esphoto[0]?.fileData}
-                        description={item.description}
-                        name={item.name}
-                        producer={item.producer}
-                        fav={item.fav}
-                    />
+                {data?.map((item, index) => (
+                    <NewsSliderCard key={index} id={item.id} image={item.image} date={item.date} title={item.name} />
                 ))}
             </Slider>
         </Box>
     );
 };
 
-export default ProductCardsSlider;
+export default NewsSlider;

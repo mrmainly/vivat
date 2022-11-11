@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Tab, Tabs, Box } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Tab, Tabs, Box, Typography } from "@mui/material";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 
@@ -16,17 +16,19 @@ function TabPanel(props) {
     );
 }
 
-function a11yProps(index) {
-    return {
-        id: `full-width-tab-${index}`,
-        "aria-controls": `full-width-tabpanel-${index}`,
-    };
-}
-
 const CatalogSliders = ({ data, loading }) => {
     const [currentTab, setCurrentTab] = useState(0);
+    const [mobileView, setMobileView] = useState(false);
 
     const theme = useTheme();
+
+    useEffect(() => {
+        const setResponsiveness = () => {
+            return window.innerWidth < 994 ? setMobileView(true) : setMobileView(false);
+        };
+        setResponsiveness();
+        window.addEventListener("resize", () => setResponsiveness());
+    }, []);
 
     if (loading) {
         return <SkeletonCatalogSlider />;
@@ -37,18 +39,29 @@ const CatalogSliders = ({ data, loading }) => {
     };
     return (
         <Box style={{ marginTop: 50 }}>
-            <Tabs value={currentTab} onChange={handleChange} variant="scrollable" allowScrollButtonsMobile aria-label="scrollable force tabs example" style={{ marginBottom: 20 }}>
-                {data?.results?.map((item, index) => (
-                    <Tab label={item.title} key={index} />
-                ))}
-            </Tabs>
-            <SwipeableViews index={currentTab} onChangeIndex={handleChange} axis={theme.direction === "rtl" ? "x-reverse" : "x"}>
-                {data?.results?.map((item, index) => (
-                    <TabPanel>
-                        <CatalogSlider data={item} key={index} />
-                    </TabPanel>
-                ))}
-            </SwipeableViews>
+            {mobileView ? (
+                data?.results?.map((item, index) => (
+                    <Box style={{ marginTop: 30 }} key={index}>
+                        <Typography style={{ marginBottom: 10, fontWeight: 600, fontSize: 18 }}>{item.title}</Typography>
+                        <CatalogSlider data={item} />
+                    </Box>
+                ))
+            ) : (
+                <>
+                    <Tabs value={currentTab} onChange={handleChange} variant="scrollable" allowScrollButtonsMobile aria-label="scrollable force tabs example" style={{ marginBottom: 20 }}>
+                        {data?.results?.map((item, index) => (
+                            <Tab label={item.title} key={index} />
+                        ))}
+                    </Tabs>
+                    <SwipeableViews index={currentTab} onChangeIndex={handleChange} axis={theme.direction === "rtl" ? "x-reverse" : "x"}>
+                        {data?.results?.map((item, index) => (
+                            <TabPanel key={index}>
+                                <CatalogSlider data={item} />
+                            </TabPanel>
+                        ))}
+                    </SwipeableViews>
+                </>
+            )}
         </Box>
     );
 };

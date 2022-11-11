@@ -25,6 +25,7 @@ const Img = styled("img")(({ theme }) => ({
     marginTop: 15,
     marginBottom: 15,
     borderRadius: 12,
+    height: "auto",
     [theme.breakpoints.down("md")]: {
         width: "100%",
     },
@@ -35,44 +36,42 @@ const BlogDetail = () => {
 
     const { data, isLoading } = useGetBlogDetailQuery({ id: params.id });
 
+    if (isLoading) {
+        return (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
+
     return (
         <Root>
-            {isLoading ? (
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-                    <CircularProgress />
-                </Box>
-            ) : data ? (
-                <>
-                    <MyText
-                        variant="h5"
-                        sx={{
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            marginBottom: 1,
-                            overflow: "hidden",
-                        }}
-                    >
-                        {data.name}
-                    </MyText>
+            <MyText
+                variant="h5"
+                sx={{
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    marginBottom: 1,
+                    overflow: "hidden",
+                }}
+            >
+                {data.name}
+            </MyText>
 
-                    <Tag>{data.tags.name}</Tag>
-                    <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`} alt="" />
-                    <Box sx={{ display: "flex", color: "gray" }}>
-                        <MyText variant="body1" sx={{ mr: 8 }}>
-                            {data.date}
-                        </MyText>
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <RemoveRedEyeIcon fontSize="small" />
-                            <MyText variant="body1" sx={{ ml: 0.5 }}>
-                                {data.views}
-                            </MyText>
-                        </Box>
-                    </Box>
-                    <div style={{ marginTop: 20, width: "90%" }} dangerouslySetInnerHTML={{ __html: data.description }}></div>
-                </>
-            ) : (
-                ""
-            )}
+            {/* <Tag>{data.tags.name}</Tag> */}
+            <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`} alt="" />
+            <Box sx={{ display: "flex", color: "gray" }}>
+                <MyText variant="body1" sx={{ mr: 8 }}>
+                    {data.date}
+                </MyText>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <RemoveRedEyeIcon fontSize="small" />
+                    <MyText variant="body1" sx={{ ml: 0.5 }}>
+                        {data.views}
+                    </MyText>
+                </Box>
+            </Box>
+            <div style={{ marginTop: 20, width: "90%" }} dangerouslySetInnerHTML={{ __html: data.description }}></div>
         </Root>
     );
 };
