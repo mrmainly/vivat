@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Box, IconButton } from "@mui/material";
 import Slider from "react-slick";
 import { styled } from "@mui/material";
@@ -61,15 +62,31 @@ function SamplePrevArrow(props) {
 }
 
 const NewsSlider = ({ data }) => {
+    const [slidesToShow, setSlidesToShow] = useState(4);
+
+    useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth < 1100 && window.innerWidth >= 800) {
+                setSlidesToShow(3);
+            } else if (window.innerWidth < 800 && window.innerWidth >= 500) {
+                setSlidesToShow(2);
+            } else if (window.innerWidth < 500) {
+                setSlidesToShow(1);
+            } else {
+                setSlidesToShow(4);
+            }
+        }
+        handleResize();
+        window.addEventListener("resize", handleResize);
+    }, []);
+
     const settings = {
         dots: false,
         centerPadding: "0px",
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToScroll: 1,
-        slidesToShow: 1,
-        variableWidth: true,
-        swipeToSlide: true,
+        slidesToShow,
         prevArrow: <SamplePrevArrow />,
         nextArrow: <SampleNextArrow />,
     };

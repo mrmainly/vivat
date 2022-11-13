@@ -9,18 +9,14 @@ const Root = styled(CardActionArea)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "start",
-    width: 300,
-    maxHeight: 350,
+    width: "98%",
+    height: 350,
     borderRadius: 10,
     backgroundColor: "white",
-    marginRight: 20,
+
     cursor: "pointer",
     "&:hover #Title": {
         color: "#07ab44",
-    },
-    [theme.breakpoints.down("sm")]: {
-        width: 250,
-        height: 300,
     },
 }));
 
@@ -42,6 +38,8 @@ const Title = styled(Typography)(({ theme }) => ({
     marginTop: 5,
     fontSize: 16,
     transition: "all 0.5s ease",
+
+    height: 45,
 }));
 
 const Description = styled(Typography)(({ theme }) => ({
