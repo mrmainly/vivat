@@ -9,7 +9,15 @@ import { BlogCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
 import "./blog_card_theme.css";
 
-const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, preview, name }) => {
+const BlogCardTheme: React.FC<BlogCardProps> = ({
+    image,
+    views,
+    date,
+    type,
+    id,
+    preview,
+    name,
+}) => {
     const navigate = useNavigate();
 
     const Root = styled(CardActionArea)(({ theme }) => ({
@@ -21,10 +29,6 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, 
             boxShadow: "0px 0px 20px rgba(0,0,0,0.8)",
         },
         transition: "all 1s ease",
-        [theme.breakpoints.down("sm")]: {
-            flexDirection: "column",
-            justifyContent: "center",
-        },
     }));
 
     const Img = styled("img")(({ theme }) => ({
@@ -34,7 +38,7 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, 
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         [theme.breakpoints.down("sm")]: {
-            height: 150,
+            height: 300,
         },
         borderBottom: "1px solid #DFDEDE",
     }));
@@ -55,10 +59,16 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, 
                 <MyText variant="body2" sx={{ color: "gray" }}>
                     {date}
                 </MyText>
-                <Typography className="title" style={{ fontSize: 20, height: 63 }}>
+                <Typography
+                    className="title"
+                    style={{ fontSize: 20, height: 63 }}
+                >
                     {name}
                 </Typography>
-                <Typography className="description_blog" style={{ marginTop: 8 }}>
+                <Typography
+                    className="description_blog"
+                    style={{ marginTop: 8 }}
+                >
                     {preview}
                 </Typography>
             </Main>

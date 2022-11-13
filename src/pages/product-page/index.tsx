@@ -149,7 +149,7 @@ const ProductPage = () => {
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
                     <>
-                        {data?.results?.length && (
+                        {data?.results?.length > 0 && (
                             <WrapperBox>
                                 <Pagination
                                     page={currentPage}
@@ -199,7 +199,7 @@ const ProductPage = () => {
                             data={data?.results}
                             loading={isFetching}
                         />
-                        {data?.results?.length && (
+                        {data?.results?.length > 0 && (
                             <Pagination
                                 count={countNumber}
                                 page={currentPage}

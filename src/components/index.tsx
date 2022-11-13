@@ -45,6 +45,7 @@ import SkeletonCatalogSlider from "./skeletons/skeleton-catalog-slider/DesctopVe
 import SkeletonAdvetage from "./skeletons/skeleton-advetage";
 import NewsSliderCard from "./cards/news-slider-card";
 import SkeletonNewsSlider from "./skeletons/skeleton-news-slider";
+import BlogThemeSkeleton from "./skeletons/blog-theme-skeleton";
 
 export {
     Header,
@@ -93,4 +94,5 @@ export {
     SkeletonAdvetage,
     NewsSliderCard,
     SkeletonNewsSlider,
+    BlogThemeSkeleton,
 };
