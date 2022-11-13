@@ -41,9 +41,10 @@ import SkeletonProductDetail from "./skeletons/catalog-card-detail-skeleton";
 import SkeletonBlog from "./skeletons/blog-skeleton";
 import BasketFormSideBars from "./sidebars/basket-form-sidebars";
 import PageLoading from "./laodings/PageLoading";
-import SkeletonCatalogSlider from "./skeletons/skeleton-catalog-slider";
+import SkeletonCatalogSlider from "./skeletons/skeleton-catalog-slider/DesctopVersion";
 import SkeletonAdvetage from "./skeletons/skeleton-advetage";
 import NewsSliderCard from "./cards/news-slider-card";
+import SkeletonNewsSlider from "./skeletons/skeleton-news-slider";
 
 export {
     Header,
@@ -91,4 +92,5 @@ export {
     SkeletonCatalogSlider,
     SkeletonAdvetage,
     NewsSliderCard,
+    SkeletonNewsSlider,
 };

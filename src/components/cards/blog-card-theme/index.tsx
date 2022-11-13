@@ -3,13 +3,13 @@ import React from "react";
 import { Box, CardActionArea } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 import { MyText } from "../..";
 import { BlogCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
+import "./blog_card_theme.css";
 
-const BlogCardTheme: React.FC<BlogCardProps> = ({ description, image, views, date, type, id }) => {
+const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, min_description }) => {
     const navigate = useNavigate();
 
     const Root = styled(CardActionArea)(({ theme }) => ({
@@ -39,7 +39,6 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({ description, image, views, dat
     }));
 
     const TextWrapper = styled(Box)(({ theme }) => ({
-        overflow: "hidden",
         height: 98,
         marginTop: 8,
         [theme.breakpoints.down("sm")]: {
@@ -64,14 +63,7 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({ description, image, views, dat
                     {date}
                 </MyText>
                 <MyText variant="h6">Что нужно знать о аллергии? фыф фывфы вфывфы</MyText>
-                <TextWrapper>
-                    <div
-                        style={{ fontSize: 17 }}
-                        dangerouslySetInnerHTML={{
-                            __html: description,
-                        }}
-                    ></div>
-                </TextWrapper>
+                <TextWrapper className="description">{min_description}</TextWrapper>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}></Box>
             </Main>
         </Root>

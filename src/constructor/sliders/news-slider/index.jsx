@@ -90,12 +90,13 @@ const NewsSlider = ({ data }) => {
         prevArrow: <SamplePrevArrow />,
         nextArrow: <SampleNextArrow />,
     };
+    console.log(data);
 
     return (
         <Box>
             <Slider {...settings}>
                 {data?.map((item, index) => (
-                    <NewsSliderCard key={index} id={item.id} image={item.image} date={item.date} title={item.name} />
+                    <NewsSliderCard key={index} id={item.id} image={item.image} date={item.date} title={item.name} min_description={item.preview} />
                 ))}
             </Slider>
         </Box>

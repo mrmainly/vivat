@@ -1,5 +1,6 @@
 import { NewsSlider } from "../../../constructor";
 import ROUTES from "../../../routes";
+import { SkeletonNewsSlider } from "../../../components";
 
 import { Box, Typography, MenuItem } from "@mui/material";
 import { styled } from "@mui/system";
@@ -18,14 +19,14 @@ const TitleBox = styled(Box)(({ theme }) => ({
 
 const Title = styled(Typography)(({ theme }) => ({
     fontWeight: "600",
-    fontSize: 20,
+    fontSize: 23,
 }));
 
 const WrapperNewsSlider = ({ data, loading }) => {
     const navigate = useNavigate();
 
     if (loading) {
-        return <>isLoading</>;
+        return <SkeletonNewsSlider />;
     }
     return (
         <div>

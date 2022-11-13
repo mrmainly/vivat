@@ -21,9 +21,7 @@ const HomeSecondSlider: React.FC<HomeSecondSliderProps> = ({ title, data, loadin
 
     return (
         <Box>
-            <MyText variant="h5" sx={{ mb: 2 }}>
-                {title}
-            </MyText>
+            <MyText sx={{ mb: 2, fontWeight: 600, fontSize: 23 }}>{title}</MyText>
             {data?.results.map((item: any, index: number) => (
                 <Grid container key={index}>
                     <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>

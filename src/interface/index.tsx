@@ -149,7 +149,7 @@ interface WorkCardProps {
 }
 
 interface BlogCardProps {
-    description?: any;
+    min_description?: string;
     views?: number | string;
     image?: string;
     date?: string;
@@ -157,6 +157,7 @@ interface BlogCardProps {
     type?: string;
     id?: number;
     name?: string;
+    description?: any;
 }
 
 interface StockCardProps {

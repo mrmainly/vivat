@@ -9,7 +9,7 @@ const Root = styled(CardActionArea)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "start",
-    width: "98%",
+    width: "95%",
     height: 350,
     borderRadius: 10,
     backgroundColor: "white",
@@ -53,7 +53,7 @@ const NewsSliderCard = ({ id, date, title, image, min_description }) => {
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
             <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${image}`} />
-            <Box style={{ padding: 5 }}>
+            <Box style={{ padding: 5, width: "95%" }}>
                 <DateText>{date}</DateText>
                 <Title className="description" id="Title">
                     {title}

@@ -57,7 +57,15 @@ const CatalogSliders = ({ data, loading }) => {
                 <>
                     <AntTabs value={currentTab} onChange={handleChange} variant="scrollable" allowScrollButtonsMobile aria-label="scrollable force tabs example" style={{ marginBottom: 20 }}>
                         {data?.results?.map((item, index) => (
-                            <Tab label={item.title} key={index} style={{ color: "#55CD61" }} />
+                            <Tab
+                                label={item.title}
+                                key={index}
+                                style={{
+                                    fontWeight: 600,
+                                    transition: "all 0.5s ease",
+                                    color: index === currentTab ? "#55CD61" : "black",
+                                }}
+                            />
                         ))}
                     </AntTabs>
                     <SwipeableViews index={currentTab} onChangeIndex={handleChange} axis={theme.direction === "rtl" ? "x-reverse" : "x"}>
