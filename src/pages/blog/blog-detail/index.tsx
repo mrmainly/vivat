@@ -21,7 +21,7 @@ const Root = styled(Box)(({ theme }) => ({
 }));
 
 const Img = styled("img")(({ theme }) => ({
-    width: "80%",
+    width: 500,
     marginTop: 15,
     marginBottom: 15,
     borderRadius: 12,

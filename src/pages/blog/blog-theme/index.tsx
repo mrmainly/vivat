@@ -37,19 +37,19 @@ const ThemeBlog = () => {
                 <Typography
                     sx={{
                         fontWeight: 600,
-                        fontSize: 20,
-                        marginBottom: 1,
+                        fontSize: 23,
+                        marginBottom: 3,
                     }}
                 >
                     Новости и статьи
                 </Typography>
             </Box>
-            <Grid container>
-                <Grid item xs={12}>
-                    {data?.results.map((item: any, index: number) => (
+            <Grid container spacing={2}>
+                {data?.results.map((item: any, index: number) => (
+                    <Grid item xs={4}>
                         <BlogCardTheme {...item} key={index} />
-                    ))}
-                </Grid>
+                    </Grid>
+                ))}
             </Grid>
         </Box>
     );

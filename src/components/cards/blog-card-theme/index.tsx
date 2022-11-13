@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, CardActionArea } from "@mui/material";
+import { Box, CardActionArea, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
@@ -9,17 +9,18 @@ import { BlogCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
 import "./blog_card_theme.css";
 
-const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, min_description }) => {
+const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, preview, name }) => {
     const navigate = useNavigate();
 
     const Root = styled(CardActionArea)(({ theme }) => ({
         display: "flex",
         background: "#FFFFFF",
-        borderRadius: "12px 0",
-        justifyContent: "start",
-        width: "100%",
-        flexDirection: "row",
-        marginTop: 10,
+        borderRadius: 12,
+        flexDirection: "column",
+        "&:hover": {
+            boxShadow: "0px 0px 20px rgba(0,0,0,0.8)",
+        },
+        transition: "all 1s ease",
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column",
             justifyContent: "center",
@@ -27,33 +28,25 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, 
     }));
 
     const Img = styled("img")(({ theme }) => ({
-        height: 210,
+        height: 250,
         objectFit: "cover",
-        width: 200,
+        width: "100%",
         borderTopLeftRadius: 10,
-        borderTopRightRadius: type == "v2" ? 10 : "",
+        borderTopRightRadius: 10,
         [theme.breakpoints.down("sm")]: {
-            width: "100%",
             height: 150,
         },
-    }));
-
-    const TextWrapper = styled(Box)(({ theme }) => ({
-        height: 98,
-        marginTop: 8,
-        [theme.breakpoints.down("sm")]: {
-            height: 120,
-            paddingRight: 10,
-        },
+        borderBottom: "1px solid #DFDEDE",
     }));
 
     const Main = styled(Box)(({ theme }) => ({
         display: "flex",
         flexDirection: "column",
-        minHeight: 180,
-        padding: 10,
-        width: "100%",
-        marginLeft: 15,
+        height: 190,
+        paddingTop: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
+        width: "95%",
     }));
     return (
         <Root onClick={() => navigate(`${ROUTES.BLOG_DETAIL}/${id}`)}>
@@ -62,9 +55,12 @@ const BlogCardTheme: React.FC<BlogCardProps> = ({ image, views, date, type, id, 
                 <MyText variant="body2" sx={{ color: "gray" }}>
                     {date}
                 </MyText>
-                <MyText variant="h6">Что нужно знать о аллергии? фыф фывфы вфывфы</MyText>
-                <TextWrapper className="description">{min_description}</TextWrapper>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}></Box>
+                <Typography className="title" style={{ fontSize: 20, height: 63 }}>
+                    {name}
+                </Typography>
+                <Typography className="description_blog" style={{ marginTop: 8 }}>
+                    {preview}
+                </Typography>
             </Main>
         </Root>
     );

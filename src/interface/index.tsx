@@ -149,7 +149,7 @@ interface WorkCardProps {
 }
 
 interface BlogCardProps {
-    min_description?: string;
+    preview?: string;
     views?: number | string;
     image?: string;
     date?: string;
