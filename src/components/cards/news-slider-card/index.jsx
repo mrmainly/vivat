@@ -58,7 +58,7 @@ const NewsSliderCard = ({ id, date, title, image, min_description }) => {
                 <Title className="description" id="Title">
                     {title}
                 </Title>
-                <Description className="description">{min_description ? min_description : "В данной новости нету короткого описания"}</Description>
+                <Description className="description">{min_description}</Description>
             </Box>
         </Root>
     );

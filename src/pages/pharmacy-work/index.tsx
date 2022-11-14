@@ -72,7 +72,7 @@ const PharmacyWork = () => {
                         {data?.results?.length > 0 ? (
                             data.results.map((item: any, index: number) => (
                                 <Grid item key={index} lg={6} xl={6} md={6} sm={12} xs={12}>
-                                    <WorkCard id={item.id} title={item.name} city={item.city} isFetching={isFetching} />
+                                    <WorkCard id={item.id} title={item.name} city={item.city} isFetching={isFetching} description={item.preview} />
                                 </Grid>
                             ))
                         ) : (

@@ -147,6 +147,7 @@ interface WorkCardProps {
     city: any;
     id: number;
     isFetching?: boolean;
+    description?: string;
 }
 
 interface BlogCardProps {

@@ -1,5 +1,5 @@
 import React from "react";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +7,7 @@ import { MyText } from "../..";
 import ThemeMain from "../../../theme";
 import { WorkCardProps } from "../../../interface";
 import ROUTES from "../../../routes";
+import "./work_card.css";
 
 const Root = styled(CardActionArea)(({ theme }) => ({
     display: "flex",
@@ -19,7 +20,7 @@ const Root = styled(CardActionArea)(({ theme }) => ({
     width: "100%",
 }));
 
-const WorkCard: React.FC<WorkCardProps> = ({ title, city, id, isFetching }) => {
+const WorkCard: React.FC<WorkCardProps> = ({ title, city, id, isFetching, description }) => {
     const navigate = useNavigate();
 
     return (
@@ -27,9 +28,12 @@ const WorkCard: React.FC<WorkCardProps> = ({ title, city, id, isFetching }) => {
             <MyText variant="h6" sx={{ color: ThemeMain.palette.primary.main }}>
                 {title}
             </MyText>
-            <MyText variant="body1" sx={{ color: "#343434" }}>
+            <MyText variant="body1" sx={{ color: "#343434", marginTop: 1 }}>
                 Город: {city.name}
             </MyText>
+            <Typography variant="body1" sx={{ color: "#343434", marginTop: 1 }} className="description_work">
+                {description}
+            </Typography>
         </Root>
     );
 };

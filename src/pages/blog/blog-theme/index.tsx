@@ -1,15 +1,5 @@
 import { useState } from "react";
-import {
-    Box,
-    CircularProgress,
-    Grid,
-    Typography,
-    Select,
-    MenuItem,
-    FormControl,
-    InputLabel,
-    Pagination,
-} from "@mui/material";
+import { Box, CircularProgress, Grid, Typography, Select, MenuItem, FormControl, InputLabel, Pagination } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { BlogCardTheme, BlogThemeSkeleton } from "../../../components";
@@ -46,7 +36,7 @@ const ThemeBlog = () => {
         currentPage: currentPage,
     });
 
-    let countNumber = Math.ceil(data?.count / 20);
+    let countNumber = Math.ceil(data?.count / 12);
 
     const orderingList = [
         {
@@ -58,7 +48,7 @@ const ThemeBlog = () => {
             value: "-date",
         },
         {
-            label: "Популярное сайчас",
+            label: "Популярное сейчас",
             value: "-popularity",
         },
         {
@@ -85,15 +75,8 @@ const ThemeBlog = () => {
                     Новости и статьи
                 </Typography>
                 <Search size="small">
-                    <InputLabel id="demo-simple-select-label">
-                        Сортировка
-                    </InputLabel>
-                    <Select
-                        size="small"
-                        label="Сортировка"
-                        value={ordering}
-                        onChange={handleOrdering}
-                    >
+                    <InputLabel id="demo-simple-select-label">Сортировка</InputLabel>
+                    <Select size="small" label="Сортировка" value={ordering} onChange={handleOrdering}>
                         {orderingList.map((item, index) => (
                             <MenuItem value={item.value} key={index}>
                                 {item.label}
@@ -114,15 +97,7 @@ const ThemeBlog = () => {
             ) : (
                 <Grid container spacing={2}>
                     {data?.results.map((item: any, index: number) => (
-                        <Grid
-                            item
-                            xl={4}
-                            lg={4}
-                            md={4}
-                            sm={6}
-                            xs={12}
-                            key={index}
-                        >
+                        <Grid item xl={4} lg={4} md={4} sm={6} xs={12} key={index}>
                             <BlogCardTheme {...item} />
                         </Grid>
                     ))}
