@@ -10,8 +10,6 @@ const PharmacyDetailWork = () => {
 
     const { data, isLoading, error } = useGetWorkDetailQuery({ id: params.id });
 
-    console.log(data);
-
     return (
         <Box>
             {isLoading ? (
@@ -21,7 +19,9 @@ const PharmacyDetailWork = () => {
             ) : (
                 <Box>
                     <MyText variant="h4">{data.name}</MyText>
-                    <div style={{ marginTop: 20 }} dangerouslySetInnerHTML={{ __html: data.description }}></div>
+                    <Box style={{ width: "100%", minHeight: 800, background: "white", paddingLeft: 20, paddingTop: 5, marginTop: 20 }}>
+                        <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+                    </Box>
                 </Box>
             )}
         </Box>

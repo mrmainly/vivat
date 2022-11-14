@@ -30,11 +30,7 @@ const Stock = () => {
                     </Grid>
                 ))}
             </Grid>
-            <Pagination
-                style={{ marginTop: 20 }}
-                count={countNumber}
-                onChange={(event, value) => setCurrentPage(value)}
-            />
+            <Pagination style={{ marginTop: 20 }} count={countNumber} onChange={(event, value) => setCurrentPage(value)} />
         </Box>
     );
 };

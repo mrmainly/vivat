@@ -19,16 +19,16 @@ const Root = styled(CardActionArea)(({ theme }) => ({
     width: "100%",
 }));
 
-const WorkCard: React.FC<WorkCardProps> = ({ title, city, id }) => {
+const WorkCard: React.FC<WorkCardProps> = ({ title, city, id, isFetching }) => {
     const navigate = useNavigate();
 
     return (
-        <Root onClick={() => navigate(`${ROUTES.PHARMACY_DETAIL_WORK}/${id}`)}>
+        <Root onClick={() => navigate(`${ROUTES.PHARMACY_DETAIL_WORK}/${id}`)} style={{ opacity: isFetching ? 0.5 : 1 }}>
             <MyText variant="h6" sx={{ color: ThemeMain.palette.primary.main }}>
                 {title}
             </MyText>
             <MyText variant="body1" sx={{ color: "#343434" }}>
-                {city.name}
+                Город: {city.name}
             </MyText>
         </Root>
     );

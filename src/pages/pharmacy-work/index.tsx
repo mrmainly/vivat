@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Grid, FormControl, Select, MenuItem, FormControlLabel, InputLabel, CircularProgress } from "@mui/material";
+import { Box, Grid, FormControl, Select, MenuItem, FormControlLabel, InputLabel, CircularProgress, Pagination } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { FormattedMessage } from "react-intl";
@@ -10,7 +10,6 @@ import { useGetWorkQuery } from "../../services/WorkService";
 import { useGetCityQuery } from "../../services/CityService";
 
 const Main = styled(Box)(({ theme }) => ({
-    marginLeft: 30,
     width: "100%",
     minHeight: 800,
     [theme.breakpoints.down("md")]: {
@@ -21,26 +20,18 @@ const Main = styled(Box)(({ theme }) => ({
 
 const PharmacyWork = () => {
     const [city, setCity] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const { data, isFetching } = useGetWorkQuery({ city: city });
+    const { data, isFetching, isLoading } = useGetWorkQuery({ city: city, currentPage: currentPage });
     const { data: cities, isFetching: isCitiesLoading } = useGetCityQuery("");
 
-    console.log(data);
+    let countNumber = Math.ceil(data?.count / 10);
 
-    if (isFetching || isCitiesLoading) {
-        return (
-            <Box
-                sx={{
-                    mt: 4,
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                }}
-            >
-                <CircularProgress />
-            </Box>
-        );
-    }
+    // if (isFetching || isCitiesLoading) {
+    //     return (
+
+    //     );
+    // }
 
     return (
         <InfoBlog title={<FormattedMessage id="vacancy" />}>
@@ -53,40 +44,52 @@ const PharmacyWork = () => {
                             <InputLabel>
                                 <FormattedMessage id="cities" />
                             </InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                label={<FormattedMessage id="cities" />}
-                                defaultValue={cities[0]?.name}
-                                // value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                            >
-                                {cities.map((item: any, index: number) => (
+                            <Select labelId="demo-simple-select-label" id="demo-simple-select" label={<FormattedMessage id="cities" />} value={city} onChange={(e) => setCity(e.target.value)}>
+                                {cities?.map((item: any, index: number) => (
                                     <MenuItem value={item.name} key={index}>
                                         {item.name}
                                     </MenuItem>
                                 ))}
-                                <MenuItem value={""}>
-                                    <FormattedMessage id="all_cities" />
-                                </MenuItem>
+                                <MenuItem value="">Все города</MenuItem>
                             </Select>
                         </FormControl>
                     }
                 />
-
-                <Grid container spacing={2} sx={{ mt: 2 }}>
-                    {data?.results?.length > 0 ? (
-                        data.results.map((item: any, index: number) => (
-                            <Grid item key={index} lg={6} xl={6} md={6} sm={12} xs={12}>
-                                <WorkCard id={item.id} title={item.name} city={item.city} />
-                            </Grid>
-                        ))
-                    ) : (
-                        <MyText sx={{ ml: 4.2, mt: 2 }}>
-                            <FormattedMessage id="no_vacancy" />
-                        </MyText>
-                    )}
-                </Grid>
+                {isLoading ? (
+                    <Box
+                        sx={{
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: 800,
+                        }}
+                    >
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <Grid container spacing={2} sx={{ mt: 2 }}>
+                        {data?.results?.length > 0 ? (
+                            data.results.map((item: any, index: number) => (
+                                <Grid item key={index} lg={6} xl={6} md={6} sm={12} xs={12}>
+                                    <WorkCard id={item.id} title={item.name} city={item.city} isFetching={isFetching} />
+                                </Grid>
+                            ))
+                        ) : (
+                            <MyText sx={{ ml: 4.2, mt: 2 }}>
+                                <FormattedMessage id="no_vacancy" />
+                            </MyText>
+                        )}
+                    </Grid>
+                )}
+                <Pagination
+                    page={currentPage}
+                    count={countNumber}
+                    onChange={(event, value) => {
+                        setCurrentPage(value);
+                    }}
+                    style={{ marginTop: 30 }}
+                />
             </Main>
         </InfoBlog>
     );
