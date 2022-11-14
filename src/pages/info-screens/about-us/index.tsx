@@ -77,7 +77,7 @@ const AboutUs = () => {
         },
         {
             first: <FormattedMessage id="phoneNumber_mail" />,
-            second: "725-013 (офис}, farmvivat@mail.ru",
+            second: "725-013, farmvivat@mail.ru",
         },
         {
             first: "Лицензия:",
@@ -112,9 +112,7 @@ const AboutUs = () => {
                                     <TableCell component="th" scope="row">
                                         {row.first}
                                     </TableCell>
-                                    <TableCell align="left">
-                                        {row.second}
-                                    </TableCell>
+                                    <TableCell align="left">{row.second}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

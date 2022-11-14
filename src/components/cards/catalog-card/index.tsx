@@ -74,8 +74,8 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
                 if (res.data) {
                     toast.success("Товар добавлен в корзину");
                 } else {
-                    if (res.error.data.errors[0] === "NotRecept False") {
-                        toast.error("Это лекарственное средство отпускается по рецепту");
+                    if (res.error.data.errors[0] === "Товар отпускается только по рецепту врача") {
+                        toast.error("Товар отпускается только по рецепту врача");
                     } else if (res.error.data.errors[0] === "item.count more than stocks.qty") {
                         toast.error("Кол-во товаров в вашей корзине на данный момент превышает кол-во товаров на складе");
                     } else {

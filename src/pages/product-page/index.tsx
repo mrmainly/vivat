@@ -1,13 +1,5 @@
 import { useState, useReducer } from "react";
-import {
-    Box,
-    Grid,
-    Pagination,
-    Select,
-    MenuItem,
-    FormControl,
-    InputLabel,
-} from "@mui/material";
+import { Box, Grid, Pagination, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { styled } from "@mui/system";
 import { useLocation } from "react-router-dom";
 import { Sling as Hamburger } from "hamburger-react";
@@ -85,7 +77,7 @@ const formReducer = (state: any, action: any) => {
 const ProductPage = () => {
     const [currentPage, setCurrentPage] = useState<any>(1);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [sort, setSort] = useState("");
+    const [sort, setSort] = useState("priceSale");
 
     const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
@@ -140,12 +132,7 @@ const ProductPage = () => {
             </MyText>
             <Grid container spacing={2}>
                 <Grid lg={3} xl={3} md={3} sm={0} xs={0} item>
-                    <CatalogFilterSideBar
-                        open={drawerOpen}
-                        setOpen={setDrawerOpen}
-                        formState={formState}
-                        formDispatch={formDispatch}
-                    />
+                    <CatalogFilterSideBar open={drawerOpen} setOpen={setDrawerOpen} formState={formState} formDispatch={formDispatch} />
                 </Grid>
                 <Grid lg={9} xl={9} md={9} sm={12} xs={12} item>
                     <>
@@ -160,23 +147,10 @@ const ProductPage = () => {
                                 />
                                 <BoxInside>
                                     <SelectDesktop size="small">
-                                        <InputLabel id="demo-simple-select-label">
-                                            Сортировка
-                                        </InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            label="Сортировка"
-                                            value={sort}
-                                            onChange={(e) =>
-                                                setSort(e.target.value)
-                                            }
-                                        >
+                                        <InputLabel id="demo-simple-select-label">Сортировка</InputLabel>
+                                        <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Сортировка" value={sort} onChange={(e) => setSort(e.target.value)}>
                                             {sortName.map((item, index) => (
-                                                <MenuItem
-                                                    value={item.value}
-                                                    key={index}
-                                                >
+                                                <MenuItem value={item.value} key={index}>
                                                     {item.label}
                                                 </MenuItem>
                                             ))}
@@ -187,18 +161,12 @@ const ProductPage = () => {
                                             setDrawerOpen(true);
                                         }}
                                     >
-                                        <Hamburger
-                                            toggled={drawerOpen}
-                                            color="#55CD61"
-                                        />
+                                        <Hamburger toggled={drawerOpen} color="#55CD61" />
                                     </ButtonShow>
                                 </BoxInside>
                             </WrapperBox>
                         )}
-                        <MainCardsConstructor
-                            data={data?.results}
-                            loading={isFetching}
-                        />
+                        <MainCardsConstructor data={data?.results} loading={isFetching} />
                         {data?.results?.length > 0 && (
                             <Pagination
                                 count={countNumber}

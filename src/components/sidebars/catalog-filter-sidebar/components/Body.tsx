@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-    Box,
-    Checkbox,
-    FormControlLabel,
-    TextField,
-    Slider,
-} from "@mui/material";
+import { Box, Checkbox, FormControlLabel, TextField, Slider } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { MyText, BorderLine } from "../../..";
@@ -31,10 +25,7 @@ interface CatalogFilterSideBarProps {
     formDispatch: any;
 }
 
-const Body: React.FC<CatalogFilterSideBarProps> = ({
-    formState,
-    formDispatch,
-}) => {
+const Body: React.FC<CatalogFilterSideBarProps> = ({ formState, formDispatch }) => {
     const [minPrice, setMinPrice] = useState(formState.min_price);
     const [maxPrice, setMaxPrice] = useState(formState.max_price);
     const [producer, setProducer] = useState("");
@@ -55,11 +46,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
             payload: { value: value, name: name },
         });
     };
-    const handleChange = (
-        event: Event,
-        newValue: any | number[],
-        activeThumb: any
-    ) => {
+    const handleChange = (event: Event, newValue: any | number[], activeThumb: any) => {
         if (!Array.isArray(newValue)) {
             return;
         }
@@ -79,46 +66,17 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
         <Main>
             <Box sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                 <MyText variant="body1">Отпуск из аптек</MyText>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={formState.notRecept}
-                            name="notRecept"
-                            onChange={(e) => handleCheckbox(e, "checkbox")}
-                        />
-                    }
-                    label="Без рецепта"
-                />
+                <FormControlLabel control={<Checkbox checked={formState.notRecept} name="notRecept" onChange={(e) => handleCheckbox(e, "checkbox")} />} label="Без рецепта" />
             </Box>
             <BorderLine sx={{ mt: "-5px" }} />
             <Box sx={{ p: 2 }}>
                 <MyText variant="body1">Наличие товара</MyText>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={formState.ordering_qty}
-                            name="ordering_qty"
-                            onChange={(e) => handleCheckbox(e, "checkbox")}
-                        />
-                    }
-                    label="ул. Лермонтова, 38"
-                />
+                <FormControlLabel control={<Checkbox checked={formState.ordering_qty} name="ordering_qty" onChange={(e) => handleCheckbox(e, "checkbox")} />} label="ул. Лермонтова, 38" />
             </Box>
             <BorderLine sx={{ mt: "-5px" }} />
             <Box sx={{ p: 2 }}>
-                <MyText variant="body1">
-                    Жизненно необходимые и важнейшие лекарственные препараты
-                </MyText>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={formState.jnvls}
-                            name="jnvls"
-                            onChange={(e) => handleCheckbox(e, "checkbox")}
-                        />
-                    }
-                    label="Да"
-                />
+                <MyText variant="body1">Жизненно необходимые и важнейшие лекарственные препараты</MyText>
+                <FormControlLabel control={<Checkbox checked={formState.jnvls} name="jnvls" onChange={(e) => handleCheckbox(e, "checkbox")} />} label="Да" />
             </Box>
             <BorderLine sx={{ mt: "-5px" }} />
             <Box sx={{ padding: 2 }}>
@@ -131,14 +89,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             variant="outlined"
                             label="Мин"
                             value={minPrice}
-                            onChange={(e) =>
-                                setMinPrice(
-                                    Math.min(
-                                        Number(e.target.value),
-                                        maxPrice - minDistance
-                                    )
-                                )
-                            }
+                            onChange={(e) => setMinPrice(Math.min(Number(e.target.value), maxPrice - minDistance))}
                             inputProps={{
                                 min: 0,
                                 style: { textAlign: "center" },
@@ -147,10 +98,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                                 handleInput(minPrice, "min_price");
                             }}
                             sx={{ mr: 0.5 }}
-                            onKeyDown={(e) =>
-                                e.key === "Enter" &&
-                                handleInput(minPrice, "min_price")
-                            }
+                            onKeyDown={(e) => e.key === "Enter" && handleInput(minPrice, "min_price")}
                         />
                         <InputNumber
                             size="small"
@@ -158,14 +106,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             label="Макс"
                             variant="outlined"
                             value={maxPrice}
-                            onChange={(e) =>
-                                setMaxPrice(
-                                    Math.max(
-                                        Number(e.target.value),
-                                        minPrice + minDistance
-                                    )
-                                )
-                            }
+                            onChange={(e) => setMaxPrice(Math.max(Number(e.target.value), minPrice + minDistance))}
                             inputProps={{
                                 min: 0,
                                 style: { textAlign: "center" },
@@ -174,10 +115,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                             onBlur={() => {
                                 handleInput(maxPrice, "max_price");
                             }}
-                            onKeyDown={(e) =>
-                                e.key === "Enter" &&
-                                handleInput(maxPrice, "max_price")
-                            }
+                            onKeyDown={(e) => e.key === "Enter" && handleInput(maxPrice, "max_price")}
                         />
                     </Box>
                     <Slider
@@ -203,9 +141,7 @@ const Body: React.FC<CatalogFilterSideBarProps> = ({
                     onBlur={() => {
                         handleInput(producer, "producer");
                     }}
-                    onKeyDown={(e) =>
-                        e.key === "Enter" && handleInput(producer, "producer")
-                    }
+                    onKeyDown={(e) => e.key === "Enter" && handleInput(producer, "producer")}
                 />
             </Box>
         </Main>
