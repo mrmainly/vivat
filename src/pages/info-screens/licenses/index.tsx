@@ -10,10 +10,12 @@ const Licenses = () => {
                     <Box
                         sx={{
                             display: "flex",
-                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "column",
                         }}
                     >
-                        <img src="/img/license.jpg" alt="" />
+                        <img src="/img/licens1.png" alt="" />
+                        <img src="/img/licens2.png" alt="" style={{ marginTop: "-100px" }} />
                     </Box>
                 </Box>
             </InfoBlog>
