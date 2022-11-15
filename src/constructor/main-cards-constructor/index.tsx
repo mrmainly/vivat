@@ -4,12 +4,7 @@ import { Box, Grid } from "@mui/material";
 import { MainCardsConstructorProps } from "../../interface";
 import { MyText, CatalogCard, SkeletonCatalogVersion } from "../../components";
 
-const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
-    data,
-    title,
-    loading,
-    ...props
-}) => {
+const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({ data, title, loading, ...props }) => {
     const skeletonData = 20;
 
     return (
@@ -20,29 +15,13 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                     Array(skeletonData)
                         .fill(0)
                         .map((item, index) => (
-                            <Grid
-                                item
-                                lg={3}
-                                xl={3}
-                                md={4}
-                                sm={4}
-                                xs={12}
-                                key={index}
-                            >
+                            <Grid item lg={3} xl={3} md={4} sm={4} xs={12} key={index}>
                                 <SkeletonCatalogVersion />
                             </Grid>
                         ))
                 ) : data?.length ? (
                     data?.map((item: any, index: number) => (
-                        <Grid
-                            item
-                            lg={3}
-                            xl={3}
-                            md={4}
-                            sm={4}
-                            xs={12}
-                            key={index}
-                        >
+                        <Grid item lg={3} xl={3} md={4} sm={4} xs={12} key={index}>
                             <CatalogCard
                                 id={item.id}
                                 stocks={item.stocks}
@@ -57,9 +36,7 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({
                     ))
                 ) : (
                     <Box sx={{ ml: 3 }}>
-                        <MyText variant="h6">
-                            На данный момент нет лекарств
-                        </MyText>
+                        <MyText variant="h6">На данный момент нет лекарств</MyText>
                     </Box>
                 )}
             </Grid>

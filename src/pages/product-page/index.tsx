@@ -100,6 +100,8 @@ const ProductPage = () => {
         }
     }
 
+    console.log("dtaa", data);
+
     let countNumber = Math.ceil(data?.count / 20);
 
     const sortName = [

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
 import { useTransferBasketMutation } from "../../../services/BasketService";
 import { useAddedFavoriteMutation, useDeleteFavoriteMutation } from "../../../services/FavoritesService";
+import "./catalog-card.css";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -104,19 +105,18 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
                     navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`);
                 }}
             ></ImgItem>
-            <MyText
-                variant="body1"
-                sx={{
-                    mt: 2,
-                    fontFamily: "Montserrat",
-                    color: "#202020",
-                    fontWeight: "bold",
-                    height: 70,
-                    overflow: "hidden",
-                }}
-            >
-                {name}...
-            </MyText>
+            <Box style={{ height: 70, marginTop: 5 }}>
+                <Typography
+                    sx={{
+                        fontFamily: "Montserrat",
+                        color: "#202020",
+                        fontWeight: "bold",
+                    }}
+                    className="description_catalog"
+                >
+                    {name}
+                </Typography>
+            </Box>
             <MyText
                 variant="body2"
                 sx={{
@@ -130,7 +130,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
             </MyText>
             {stocks || stocks.qty === 0 ? (
                 <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
-                    В наличии
+                    В наличии: {stocks.qty} шт
                 </MyText>
             ) : (
                 <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>

@@ -12,6 +12,7 @@ interface MyTextProps {
     variant?: any;
     style?: any;
     onClick?: () => void;
+    className?: string;
 }
 
 interface ModalAndDrawer {
