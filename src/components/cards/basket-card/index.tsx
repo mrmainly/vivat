@@ -31,7 +31,10 @@ const ImgBox = styled("img")(({ theme }) => ({
     borderRadius: 9,
     cursor: "pointer",
     objectFit: "contain",
-    width: "100%",
+    width: 180,
+    [theme.breakpoints.down("sm")]: {
+        width: "100%",
+    },
 }));
 
 const InfoBox = styled(Box)(({ theme }) => ({
@@ -84,6 +87,7 @@ const ImgWrapper = styled(Box)(({ theme }) => ({
     alignItems: "center",
     justifyContent: "center",
     padding: 5,
+    marginTop: "-5px",
     [theme.breakpoints.down("sm")]: {
         height: 250,
         width: "100%",
