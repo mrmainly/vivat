@@ -57,7 +57,7 @@ const CombinedBox = styled(Box)({
     width: "100%",
 });
 
-const ProductCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks }) => {
+const ProductCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks, notRecept }) => {
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
     const [transferBasketId] = useTransferBasketMutation();
@@ -126,15 +126,18 @@ const ProductCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
             >
                 {producer}
             </MyText>
-            {stocks || stocks.qty === 0 ? (
-                <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
-                    В наличии
+            {stocks?.qty > 0 ? (
+                <MyText variant="body2" sx={{ color: "#55CD61", mt: 1 }}>
+                    В наличии: {stocks.qty} шт
                 </MyText>
             ) : (
-                <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>
+                <MyText variant="body2" sx={{ color: "red", mt: 1 }}>
                     Нет в наличии
                 </MyText>
             )}
+            <MyText variant="body2" style={{ color: "#55CD61" }}>
+                {notRecept ? "Без рецепта" : "С рецептом"}
+            </MyText>
             <CombinedBox>
                 <Box sx={{ display: "flex" }}>
                     {stocks ? (

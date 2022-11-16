@@ -102,6 +102,7 @@ interface MainCardsConstructorProps {
     loading?: any;
     status?: any;
     setStatus?: any;
+    isFetching?: boolean;
 }
 
 interface ProfileSideBarProps {
@@ -129,14 +130,7 @@ interface GoodsCardProps {
     fav?: any;
     stocks?: any;
     notRecept?: boolean;
-    // barcodes?: number;
-    // code?: string;
-    // mmmEn?: string;
-    // mnnRu?: string;
-    // name?: string;
-    // producer?: string;
-    // refId?: number;
-    // rv?: string;
+    isFetching?: boolean;
 }
 
 interface ProductSliderProps {

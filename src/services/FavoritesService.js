@@ -13,11 +13,7 @@ export const favoriotes = api.injectEndpoints({
                     method: "POST",
                 };
             },
-            invalidatesTags: [
-                { type: "Favorites" },
-                { type: "Promotion" },
-                { type: "Baskets" },
-            ],
+            invalidatesTags: [{ type: "Favorites" }, { type: "Promotion" }, { type: "Baskets" }],
         }),
         addedFavorite: build.mutation({
             query({ id }) {
@@ -26,12 +22,7 @@ export const favoriotes = api.injectEndpoints({
                     method: "POST",
                 };
             },
-            invalidatesTags: [
-                { type: "Favorites" },
-                { type: "Products" },
-                { type: "Product_detail" },
-                { type: "Promotion" },
-            ],
+            invalidatesTags: [{ type: "Favorites" }, { type: "Products" }, { type: "Product_detail" }, { type: "Promotion" }],
         }),
         deleteFavorite: build.mutation({
             query({ id }) {
@@ -40,12 +31,7 @@ export const favoriotes = api.injectEndpoints({
                     method: "DELETE",
                 };
             },
-            invalidatesTags: [
-                { type: "Products" },
-                { type: "Favorites" },
-                { type: "Product_detail" },
-                { type: "Promotion" },
-            ],
+            invalidatesTags: [{ type: "Products" }, { type: "Favorites" }, { type: "Product_detail" }, { type: "Promotion" }],
         }),
     }),
 });

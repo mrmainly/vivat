@@ -88,6 +88,7 @@ const ProductCardsSlider = ({ data }) => {
                         name={item.name}
                         producer={item.producer}
                         fav={item.fav}
+                        notRecept={item.NotReceptGood}
                     />
                 ))}
             </Slider>

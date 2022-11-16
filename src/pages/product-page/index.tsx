@@ -86,7 +86,7 @@ const ProductPage = () => {
 
     const { id, title } = state;
 
-    const { data, isFetching } = useGetProductsQuery({
+    const { data, isFetching, isLoading } = useGetProductsQuery({
         id,
         currentPage,
         formState,
@@ -99,8 +99,6 @@ const ProductPage = () => {
             setTimeout(backToTop, 0);
         }
     }
-
-    console.log("dtaa", data);
 
     let countNumber = Math.ceil(data?.count / 20);
 
@@ -168,7 +166,7 @@ const ProductPage = () => {
                                 </BoxInside>
                             </WrapperBox>
                         )}
-                        <MainCardsConstructor data={data?.results} loading={isFetching} />
+                        <MainCardsConstructor data={data?.results} loading={isLoading} isFetching={isFetching} />
                         {data?.results?.length > 0 && (
                             <Pagination
                                 count={countNumber}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Box, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/system";
@@ -52,7 +52,7 @@ const CombinedBox = styled(Box)({
     width: "100%",
 });
 
-const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks, notRecept }) => {
+const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks, notRecept, isFetching }) => {
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
     const [transferBasketId] = useTransferBasketMutation();
@@ -181,19 +181,12 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
                 >
                     В корзину
                 </MyButton>
-
                 {fav?.is_fav ? (
-                    <IconButton size="small" sx={{ mr: 1 }} onClick={deleteFavorite}>
+                    <IconButton size="small" sx={{ mr: 1 }} className={isFetching ? "fuvLoadingIcon" : ""} onClick={deleteFavorite}>
                         <FavoriteIcon sx={{ color: "#55CD61" }} fontSize="large" />
                     </IconButton>
                 ) : (
-                    <IconButton
-                        size="small"
-                        sx={{ mr: 1 }}
-                        onClick={() => {
-                            jwttoken ? addedFavorite() : toast.error("данная операция доступно только при авторизации");
-                        }}
-                    >
+                    <IconButton size="small" sx={{ mr: 1 }} onClick={addedFavorite} className={isFetching ? "fuvLoadingIcon" : ""}>
                         <img src="/img/Favorite_light.png" alt="" />
                     </IconButton>
                 )}
