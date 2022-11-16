@@ -52,7 +52,7 @@ const CombinedBox = styled(Box)({
     width: "100%",
 });
 
-const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks }) => {
+const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks, notRecept }) => {
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
     const [transferBasketId] = useTransferBasketMutation();
@@ -117,26 +117,29 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
                     {name}
                 </Typography>
             </Box>
-            <MyText
-                variant="body2"
-                sx={{
-                    color: "#2F80ED",
-                    mt: 0.5,
-                    height: 40,
-                    overflow: "hidden",
-                }}
-            >
-                {producer}
-            </MyText>
-            {stocks || stocks.qty === 0 ? (
-                <MyText variant="body2" sx={{ color: "#55CD61", mt: 0.5 }}>
+            <Box style={{ height: 42, marginTop: 5 }}>
+                <MyText
+                    variant="body2"
+                    sx={{
+                        color: "#2F80ED",
+                    }}
+                    className="producer"
+                >
+                    {producer}
+                </MyText>
+            </Box>
+            {stocks?.qty > 0 ? (
+                <MyText variant="body2" sx={{ color: "#55CD61", mt: 1 }}>
                     В наличии: {stocks.qty} шт
                 </MyText>
             ) : (
-                <MyText variant="body2" sx={{ color: "red", mt: 0.5 }}>
+                <MyText variant="body2" sx={{ color: "red", mt: 1 }}>
                     Нет в наличии
                 </MyText>
             )}
+            <MyText variant="body2" style={{ color: "#55CD61" }}>
+                {notRecept ? "Без рецепта" : "С рецептом"}
+            </MyText>
             <CombinedBox>
                 <Box sx={{ display: "flex" }}>
                     {stocks ? (
@@ -164,6 +167,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
                     )}
                 </Box>
             </CombinedBox>
+
             <MyText variant="body2" sx={{ color: "#EB5757" }}>
                 {specialText}
             </MyText>

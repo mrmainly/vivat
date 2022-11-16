@@ -10,10 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 import { MyText } from "../..";
 import ROUTES from "../../../routes";
-import {
-    useDeleteBasketMutation,
-    usePatchBasketCountMutation,
-} from "../../../services/BasketService";
+import { useDeleteBasketMutation, usePatchBasketCountMutation } from "../../../services/BasketService";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -100,13 +97,7 @@ interface BasketProps {
     price_one_goods?: number;
 }
 
-const BasketCard: React.FC<BasketProps> = ({
-    price,
-    GoodsCode,
-    id,
-    count,
-    price_one_goods,
-}) => {
+const BasketCard: React.FC<BasketProps> = ({ price, GoodsCode, id, count, price_one_goods }) => {
     const [deleteBasketId] = useDeleteBasketMutation();
     const [patchBasketCount] = usePatchBasketCountMutation();
 
@@ -117,9 +108,7 @@ const BasketCard: React.FC<BasketProps> = ({
             patchBasketCount({ id, newCount })
                 .then((res: any) => {
                     if (res.error) {
-                        toast.error(
-                            "Количество товара на данный момент нельзя изменить"
-                        );
+                        toast.error("Количество товара на данный момент нельзя изменить");
                     }
                 })
                 .catch((error) => {
@@ -144,13 +133,9 @@ const BasketCard: React.FC<BasketProps> = ({
         <Root>
             <ImgBox
                 sx={{
-                    backgroundImage: GoodsCode?.esphoto[0]?.fileData
-                        ? `url(data:image/jpeg;base64,${GoodsCode?.esphoto[0].fileData})`
-                        : "url(/img/vivat_background.png)",
+                    backgroundImage: GoodsCode?.esphoto[0] ? `url(data:image/jpeg;base64,${GoodsCode?.esphoto[0].fileData})` : "url(/img/Frame1319-min.png)",
                 }}
-                onClick={() =>
-                    navigate(`${ROUTES.PRODUCT_DETAIL}/${GoodsCode?.id}`)
-                }
+                onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${GoodsCode?.id}`)}
             ></ImgBox>
             <InfoBox>
                 <Box
@@ -167,7 +152,6 @@ const BasketCard: React.FC<BasketProps> = ({
                         <CloseIcon />
                     </IconButtonMobile>
                 </Box>
-
                 <MyText variant="body2">
                     Производитель:
                     <span style={{ marginLeft: 15 }}>{GoodsCode.producer}</span>

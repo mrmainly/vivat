@@ -31,6 +31,7 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({ data, title
                                 name={item.name}
                                 producer={item.producer}
                                 fav={item.fav}
+                                notRecept={item.NotReceptGood}
                             />
                         </Grid>
                     ))

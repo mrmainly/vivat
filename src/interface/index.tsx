@@ -128,6 +128,7 @@ interface GoodsCardProps {
     qty?: number;
     fav?: any;
     stocks?: any;
+    notRecept?: boolean;
     // barcodes?: number;
     // code?: string;
     // mmmEn?: string;
