@@ -30,6 +30,8 @@ const ImgBox = styled("img")(({ theme }) => ({
     height: "100%",
     borderRadius: 9,
     cursor: "pointer",
+    objectFit: "contain",
+    width: "100%",
 }));
 
 const InfoBox = styled(Box)(({ theme }) => ({
