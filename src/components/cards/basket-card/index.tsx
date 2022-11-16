@@ -21,23 +21,15 @@ const Root = styled(Box)(({ theme }) => ({
     padding: 16,
     [theme.breakpoints.down("sm")]: {
         flexDirection: "column",
-        minHeight: 400,
+        height: "auto",
+        marginBottom: 20,
     },
 }));
 
-const ImgBox = styled(Box)(({ theme }) => ({
+const ImgBox = styled("img")(({ theme }) => ({
     height: "100%",
     borderRadius: 9,
-    filter: "drop-shadow(2px 3px 8px rgba(0, 0, 0, 0.1))",
-    width: 300,
-    backgroundSize: "contain",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
     cursor: "pointer",
-    [theme.breakpoints.down("sm")]: {
-        height: 250,
-        width: "100%",
-    },
 }));
 
 const InfoBox = styled(Box)(({ theme }) => ({
@@ -78,6 +70,21 @@ const CountWrapper = styled(Box)(({ theme }) => ({
     alignItems: "end",
     [theme.breakpoints.down("sm")]: {
         alignItems: "center",
+    },
+}));
+
+const ImgWrapper = styled(Box)(({ theme }) => ({
+    width: 290,
+    background: "white",
+    height: "100%",
+    filter: "drop-shadow(2px 3px 8px rgba(0, 0, 0, 0.1))",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    [theme.breakpoints.down("sm")]: {
+        height: 250,
+        width: "100%",
     },
 }));
 
@@ -131,12 +138,12 @@ const BasketCard: React.FC<BasketProps> = ({ price, GoodsCode, id, count, price_
 
     return (
         <Root>
-            <ImgBox
-                sx={{
-                    backgroundImage: GoodsCode?.esphoto[0] ? `url(data:image/jpeg;base64,${GoodsCode?.esphoto[0].fileData})` : "url(/img/Frame1319-min.png)",
-                }}
-                onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${GoodsCode?.id}`)}
-            ></ImgBox>
+            <ImgWrapper>
+                <ImgBox
+                    src={GoodsCode?.esphoto[0] ? `data:image/jpeg;base64,${GoodsCode?.esphoto[0].fileData}` : "/img/Frame1319-min.png"}
+                    onClick={() => navigate(`${ROUTES.PRODUCT_DETAIL}/${GoodsCode?.id}`)}
+                />
+            </ImgWrapper>
             <InfoBox>
                 <Box
                     sx={{
