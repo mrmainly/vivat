@@ -103,6 +103,7 @@ interface MainCardsConstructorProps {
     status?: any;
     setStatus?: any;
     isFetching?: boolean;
+    type?: string;
 }
 
 interface ProfileSideBarProps {

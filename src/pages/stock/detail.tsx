@@ -50,29 +50,15 @@ const StockDetail = () => {
                                     alignItems: "center",
                                 }}
                             >
-                                <MyText
-                                    variant="body2"
-                                    sx={{ color: "#a1a1a1" }}
-                                >
+                                <MyText variant="body2" sx={{ color: "#a1a1a1" }}>
                                     {data.date_start}
                                 </MyText>
-                                <MyText
-                                    sx={{ color: "#a1a1a1", ml: 0.5, mr: 0.5 }}
-                                >
-                                    {"-"}
-                                </MyText>
-                                <MyText
-                                    variant="body2"
-                                    sx={{ color: "#a1a1a1" }}
-                                >
+                                <MyText sx={{ color: "#a1a1a1", ml: 0.5, mr: 0.5 }}>{"-"}</MyText>
+                                <MyText variant="body2" sx={{ color: "#a1a1a1" }}>
                                     {data.date_end}
                                 </MyText>
                             </Box>
-                            <MyText
-                                variant="h5"
-                                sx={{ color: ThemeMain.palette.primary.main }}
-                                sm={18}
-                            >
+                            <MyText variant="h5" sx={{ color: ThemeMain.palette.primary.main }} sm={18}>
                                 {data.name}
                             </MyText>
                             <div
@@ -86,10 +72,7 @@ const StockDetail = () => {
                             ></div>
                         </Grid>
                     </Grid>
-                    <MainCardsConstructor
-                        title="Товары, участвующие в акции"
-                        data={data.goods}
-                    />
+                    <MainCardsConstructor title="Товары, участвующие в акции" data={data.goods} />
                 </>
             )}
         </Box>

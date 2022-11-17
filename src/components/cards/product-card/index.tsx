@@ -11,7 +11,7 @@ import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
 import { useTransferBasketMutation } from "../../../services/BasketService";
-import { useAddedFavoriteMutation, useDeleteFavoriteMutation } from "../../../services/FavoritesService";
+import { useAddedFavoriteMutation, useDeleteFavoriteInProductMutation } from "../../../services/FavoritesService";
 
 const Root = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -58,11 +58,14 @@ const CombinedBox = styled(Box)({
 });
 
 const ProductCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks, notRecept }) => {
+    // const [favStatus, setFavStatus] = useState(false);
+    // const [cartId, setCardId] = useState();
+
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
     const [transferBasketId] = useTransferBasketMutation();
-    const [addedTransferId] = useAddedFavoriteMutation();
-    const [deleteFavoriteId] = useDeleteFavoriteMutation();
+    const [addedTransferId, { isLoading: isAddedFavoriteLoading }] = useAddedFavoriteMutation();
+    const [deleteFavoriteId, { isLoading: isDeteleFavoriteLoading }] = useDeleteFavoriteInProductMutation();
 
     const addedFavorite = () => {
         addedTransferId({ id })
@@ -179,21 +182,27 @@ const ProductCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
                     В корзину
                 </MyButton>
 
-                {fav?.is_fav ? (
-                    <IconButton size="small" sx={{ mr: 1 }} onClick={deleteFavorite}>
+                {/* {favStatus ? (
+                    <IconButton
+                        size="small"
+                        sx={{ mr: 1 }}
+                        onClick={switchFav}
+                        className={isAddedFavoriteLoading || isDeteleFavoriteLoading ? "fuvLoadingIcon" : ""}
+                        disabled={isAddedFavoriteLoading || isDeteleFavoriteLoading ? true : false}
+                    >
                         <FavoriteIcon sx={{ color: "#55CD61" }} fontSize="large" />
                     </IconButton>
                 ) : (
                     <IconButton
                         size="small"
                         sx={{ mr: 1 }}
-                        onClick={() => {
-                            jwttoken ? addedFavorite() : toast.error("данная операция доступно только при авторизации");
-                        }}
+                        onClick={switchFav}
+                        className={isAddedFavoriteLoading || isDeteleFavoriteLoading ? "fuvLoadingIcon" : ""}
+                        disabled={isAddedFavoriteLoading || isDeteleFavoriteLoading ? true : false}
                     >
                         <img src="/img/Favorite_light.png" alt="" />
                     </IconButton>
-                )}
+                )} */}
             </CombinedBox>
         </Root>
     );

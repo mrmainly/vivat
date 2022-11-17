@@ -22,7 +22,7 @@ export const favoriotes = api.injectEndpoints({
                     method: "POST",
                 };
             },
-            invalidatesTags: [{ type: "Favorites" }, { type: "Products" }, { type: "Product_detail" }, { type: "Promotion" }],
+            invalidatesTags: [{ type: "Favorites" }, { type: "Product_detail" }, { type: "Promotion" }],
         }),
         deleteFavorite: build.mutation({
             query({ id }) {
@@ -31,7 +31,16 @@ export const favoriotes = api.injectEndpoints({
                     method: "DELETE",
                 };
             },
-            invalidatesTags: [{ type: "Products" }, { type: "Favorites" }, { type: "Product_detail" }, { type: "Promotion" }],
+            invalidatesTags: [{ type: "Favorites" }, { type: "Product_detail" }, { type: "Promotion" }, { type: "Products" }],
+        }),
+        deleteFavoriteInProduct: build.mutation({
+            query({ id }) {
+                return {
+                    url: `api/v1/favorites/delete/${id}`,
+                    method: "DELETE",
+                };
+            },
+            invalidatesTags: [{ type: "Favorites" }, { type: "Product_detail" }, { type: "Promotion" }],
         }),
     }),
 });
@@ -41,5 +50,6 @@ export const {
     useTransferFavoriteMutation,
     useAddedFavoriteMutation,
     useDeleteFavoriteMutation,
+    useDeleteFavoriteInProductMutation,
     // useTransferToBasketMutation,
 } = favoriotes;

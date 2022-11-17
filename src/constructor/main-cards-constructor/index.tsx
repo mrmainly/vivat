@@ -4,7 +4,7 @@ import { Box, Grid } from "@mui/material";
 import { MainCardsConstructorProps } from "../../interface";
 import { MyText, CatalogCard, SkeletonCatalogVersion } from "../../components";
 
-const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({ data, title, loading, isFetching, ...props }) => {
+const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({ data, title, loading, ...props }) => {
     const skeletonData = 20;
 
     return (
@@ -27,12 +27,12 @@ const MainCardsConstructor: React.FC<MainCardsConstructorProps> = ({ data, title
                                 stocks={item.stocks}
                                 specialText={item.specialText}
                                 img={item?.esphoto[0]?.fileData}
-                                description={item.description}
+                                // description={item.description}
                                 name={item.name}
                                 producer={item.producer}
                                 fav={item.fav}
                                 notRecept={item.NotReceptGood}
-                                isFetching={isFetching}
+                                type="product"
                             />
                         </Grid>
                     ))

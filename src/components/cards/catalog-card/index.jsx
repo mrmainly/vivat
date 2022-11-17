@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Box, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/system";
@@ -7,32 +7,11 @@ import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import cookie from "js-cookie";
 
-import { GoodsCardProps } from "../../../interface";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
 import { useTransferBasketMutation } from "../../../services/BasketService";
-import { useAddedFavoriteMutation, useDeleteFavoriteMutation } from "../../../services/FavoritesService";
+import { useAddedFavoriteMutation, useDeleteFavoriteInProductMutation } from "../../../services/FavoritesService";
 import "./catalog-card.css";
-
-const Root = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "start",
-    alignItems: "start",
-    padding: 10,
-    background: "#FFFFFF",
-    margin: "0 auto",
-    width: "90%",
-    "&:hover": {
-        boxShadow: "0px 0px 20px rgba(0,0,0,0.8)",
-    },
-    transition: "all 1s ease",
-    height: 400,
-    overflow: "hidden",
-    [theme.breakpoints.down("sm")]: {
-        width: "92%",
-    },
-}));
 
 const ImgItem = styled(Box)({
     width: "100%",
@@ -52,18 +31,44 @@ const CombinedBox = styled(Box)({
     width: "100%",
 });
 
-const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, producer, fav, stocks, notRecept, isFetching }) => {
+const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRecept, type }) => {
+    const Root = styled(Box)(({ theme }) => ({
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "start",
+        alignItems: "start",
+        padding: 10,
+        background: "#FFFFFF",
+        margin: "0 auto",
+        width: type === "catalog" ? 200 : "90%",
+        "&:hover": {
+            boxShadow: type === "catalog" ? "" : "0px 0px 20px rgba(0,0,0,0.8)",
+        },
+        transition: "all 1s ease",
+        height: 400,
+        overflow: "hidden",
+        marginRight: type === "catalog" ? 10 : 0,
+        [theme.breakpoints.down("sm")]: {
+            width: type === "catalog" ? 200 : "92%",
+        },
+    }));
+
+    const [favStatus, setFavStatus] = useState(false);
+    const [cartId, setCardId] = useState();
+
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
     const [transferBasketId] = useTransferBasketMutation();
-    const [addedTransferId] = useAddedFavoriteMutation();
-    const [deleteFavoriteId] = useDeleteFavoriteMutation();
+    const [addedTransferId, { isLoading: isAddedFavoriteLoading }] = useAddedFavoriteMutation();
+    const [deleteFavoriteId, { isLoading: isDeteleFavoriteLoading }] = useDeleteFavoriteInProductMutation();
 
     const addedFavorite = () => {
-        addedTransferId({ id })
-            .then((res: any) => {
+        addedTransferId({ id: cartId })
+            .then((res) => {
                 if (res.error) {
                     toast.error("Товар не добавлен в избранное");
+                } else {
+                    setFavStatus(!favStatus);
                 }
             })
             .catch((error) => toast.error("Товар не добавлен в избранное"));
@@ -71,7 +76,7 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
 
     const TransferBasket = () => {
         transferBasketId({ id })
-            .then((res: any) => {
+            .then((res) => {
                 if (res.data) {
                     toast.success("Товар добавлен в корзину");
                 } else {
@@ -88,11 +93,25 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
     };
 
     const deleteFavorite = () => {
-        deleteFavoriteId({ id: fav?.fav_id }).then((res: any) => {
+        deleteFavoriteId({ id: cartId }).then((res) => {
             if (res.error) {
                 toast.error("Товар не удален");
+            } else {
+                setFavStatus(!favStatus);
             }
         });
+    };
+
+    useEffect(() => {
+        setFavStatus(fav?.is_fav);
+        setCardId(id);
+    }, [fav?.is_fav]);
+
+    const switchFav = () => {
+        if (favStatus) {
+        } else {
+            addedFavorite();
+        }
     };
 
     return (
@@ -181,12 +200,24 @@ const CatalogCard: React.FC<GoodsCardProps> = ({ img, specialText, id, name, pro
                 >
                     В корзину
                 </MyButton>
-                {fav?.is_fav ? (
-                    <IconButton size="small" sx={{ mr: 1 }} className={isFetching ? "fuvLoadingIcon" : ""} onClick={deleteFavorite}>
+                {favStatus ? (
+                    <IconButton
+                        size="small"
+                        sx={{ mr: 1 }}
+                        onClick={deleteFavorite}
+                        className={isAddedFavoriteLoading || isDeteleFavoriteLoading ? "fuvLoadingIcon" : ""}
+                        disabled={isAddedFavoriteLoading || isDeteleFavoriteLoading ? true : false}
+                    >
                         <FavoriteIcon sx={{ color: "#55CD61" }} fontSize="large" />
                     </IconButton>
                 ) : (
-                    <IconButton size="small" sx={{ mr: 1 }} onClick={addedFavorite} className={isFetching ? "fuvLoadingIcon" : ""}>
+                    <IconButton
+                        size="small"
+                        sx={{ mr: 1 }}
+                        onClick={switchFav}
+                        className={isAddedFavoriteLoading || isDeteleFavoriteLoading ? "fuvLoadingIcon" : ""}
+                        disabled={isAddedFavoriteLoading || isDeteleFavoriteLoading ? true : false}
+                    >
                         <img src="/img/Favorite_light.png" alt="" />
                     </IconButton>
                 )}

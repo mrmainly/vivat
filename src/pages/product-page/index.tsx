@@ -166,7 +166,7 @@ const ProductPage = () => {
                                 </BoxInside>
                             </WrapperBox>
                         )}
-                        <MainCardsConstructor data={data?.results} loading={isLoading} isFetching={isFetching} />
+                        <MainCardsConstructor data={data?.results} loading={isFetching} />
                         {data?.results?.length > 0 && (
                             <Pagination
                                 count={countNumber}
