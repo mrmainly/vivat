@@ -1,4 +1,4 @@
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
@@ -88,11 +88,15 @@ const Footer = () => {
                     href: ROUTES.BLOG,
                 },
                 {
-                    label: <FormattedMessage id="medication_booking" />,
+                    label: (
+                        <FormattedMessage id="medication_booking" />
+                    ),
                     href: ROUTES.BOOKING,
                 },
                 {
-                    label: <FormattedMessage id="payment_receipt_order" />,
+                    label: (
+                        <FormattedMessage id="payment_receipt_order" />
+                    ),
                     href: ROUTES.PAYMENT_RECEIVING,
                 },
             ],
@@ -109,7 +113,9 @@ const Footer = () => {
                     href: ROUTES.VACANCY,
                 },
                 {
-                    label: <FormattedMessage id="human_resource_department" />,
+                    label: (
+                        <FormattedMessage id="human_resource_department" />
+                    ),
                     href: ROUTES.STAFF_DEPARTMENT,
                 },
             ],
@@ -122,11 +128,15 @@ const Footer = () => {
                     href: ROUTES.MANUFACTURERS,
                 },
                 {
-                    label: <FormattedMessage id="advertising_in_website" />,
+                    label: (
+                        <FormattedMessage id="advertising_in_website" />
+                    ),
                     href: ROUTES.ADVERTISING,
                 },
                 {
-                    label: <FormattedMessage id="technical_support" />,
+                    label: (
+                        <FormattedMessage id="technical_support" />
+                    ),
                     href: ROUTES.TECHNICAL_SUPPORT,
                 },
             ],
@@ -179,20 +189,37 @@ const Footer = () => {
                                                 to={item.href}
                                                 key={index}
                                                 style={{
-                                                    lineHeight: "200%",
-                                                    textDecoration: "none",
-                                                    color: "#828282",
-                                                    width: "max-width",
+                                                    textDecoration:
+                                                        "none",
                                                 }}
                                             >
-                                                {item.label}
+                                                <Typography
+                                                    sx={{
+                                                        lineHeight:
+                                                            "200%",
+                                                        textDecoration:
+                                                            "none",
+                                                        color: "#828282",
+                                                        width: "max-width",
+                                                        transition:
+                                                            "all 500ms ease",
+                                                        "&:hover": {
+                                                            fontWeight:
+                                                                "bold",
+                                                        },
+                                                    }}
+                                                >
+                                                    {item.label}
+                                                </Typography>
                                             </Link>
                                         ) : (
                                             <MyText
                                                 key={index}
                                                 style={{
-                                                    lineHeight: "160%",
-                                                    textDecoration: "none",
+                                                    lineHeight:
+                                                        "160%",
+                                                    textDecoration:
+                                                        "none",
                                                     color: "#686868",
                                                     width: "max-width",
                                                 }}

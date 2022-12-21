@@ -75,7 +75,12 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     return (
         <DialogTitleStyle
             {...other}
-            sx={{ m: 0, p: 2, bgcolor: "#f5f5f5", textAlign: "center" }}
+            sx={{
+                m: 0,
+                p: 2,
+                bgcolor: "#f5f5f5",
+                textAlign: "center",
+            }}
         >
             <Box
                 sx={{
@@ -103,13 +108,18 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 const SignInModal: React.FC<SignModalProps> = () => {
-    const { openLogin } = useSelector((state: any) => state.auth_modal_slice);
+    const { openLogin } = useSelector(
+        (state: any) => state.auth_modal_slice
+    );
     const [postLogin] = useLoginMutation();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { openLoginModal, openRegisterModal, openForgotPasswordModal } =
-        authModalSlice.actions;
+    const {
+        openLoginModal,
+        openRegisterModal,
+        openForgotPasswordModal,
+    } = authModalSlice.actions;
 
     const { register, handleSubmit } = useForm({
         mode: "onBlur",
@@ -146,9 +156,14 @@ const SignInModal: React.FC<SignModalProps> = () => {
                 Авторизация
             </BootstrapDialogTitle>
             <ModalContent dividers>
-                <MyText sx={{ textAlign: "center" }} variant="body1" sm={16}>
-                    Если у вас есть учётная запись, авторизуйтесь, используя
-                    адрес электронной почты (email) или телефон
+                <MyText
+                    sx={{ textAlign: "center" }}
+                    variant="body1"
+                    sm={16}
+                >
+                    Если у вас есть учётная запись, авторизуйтесь,
+                    используя адрес электронной почты (email) или
+                    телефон
                 </MyText>
                 <FormWrapper>
                     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -182,7 +197,9 @@ const SignInModal: React.FC<SignModalProps> = () => {
                             }}
                             onClick={() => {
                                 dispatch(openLoginModal(false));
-                                dispatch(openForgotPasswordModal(true));
+                                dispatch(
+                                    openForgotPasswordModal(true)
+                                );
                             }}
                         >
                             Забыли пароль?

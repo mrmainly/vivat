@@ -26,11 +26,19 @@ function createData(first: any, second: any, third: any) {
 const PaymentReceiving = () => {
     const array = [
         {
-            title: <FormattedMessage id="payment_receipt_order_4_1" />,
-            columns: [<FormattedMessage id="payment_receipt_order_4_1_1" />, <FormattedMessage id="payment_receipt_order_4_1_2" />, <FormattedMessage id="payment_receipt_order_4_1_3" />],
+            title: (
+                <FormattedMessage id="payment_receipt_order_4_1" />
+            ),
+            columns: [
+                <FormattedMessage id="payment_receipt_order_4_1_1" />,
+                <FormattedMessage id="payment_receipt_order_4_1_2" />,
+                <FormattedMessage id="payment_receipt_order_4_1_3" />,
+            ],
         },
         {
-            title: <FormattedMessage id="payment_receipt_order_4_2" />,
+            title: (
+                <FormattedMessage id="payment_receipt_order_4_2" />
+            ),
             columns: [
                 <FormattedMessage id="payment_receipt_order_4_2_1" />,
                 <FormattedMessage id="payment_receipt_order_4_2_2" />,
@@ -41,13 +49,25 @@ const PaymentReceiving = () => {
         },
     ];
     const rows = [
-        createData(<FormattedMessage id="payment_receipt_order_3_2_1" />, <FormattedMessage id="payment_receipt_order_3_2_2" />, <FormattedMessage id="payment_receipt_order_3_2_3" />),
-        createData(<FormattedMessage id="payment_receipt_order_3_3_1" />, <FormattedMessage id="payment_receipt_order_3_3_2" />, <FormattedMessage id="payment_receipt_order_3_3_3" />),
+        createData(
+            <FormattedMessage id="payment_receipt_order_3_2_1" />,
+            <FormattedMessage id="payment_receipt_order_3_2_2" />,
+            <FormattedMessage id="payment_receipt_order_3_2_3" />
+        ),
+        createData(
+            <FormattedMessage id="payment_receipt_order_3_3_1" />,
+            <FormattedMessage id="payment_receipt_order_3_3_2" />,
+            <FormattedMessage id="payment_receipt_order_3_3_3" />
+        ),
     ];
 
     return (
         <div>
-            <InfoBlog title={<FormattedMessage id="payment_receipt_order" />}>
+            <InfoBlog
+                title={
+                    <FormattedMessage id="payment_receipt_order" />
+                }
+            >
                 <MyText variant="body2">
                     <FormattedMessage id="payment_receipt_order_1" />
                 </MyText>
@@ -67,24 +87,38 @@ const PaymentReceiving = () => {
                     </li>
                 </ol>
 
-                {/* <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
+                <MyText
+                    variant="body1"
+                    sx={{ mt: 3.2, fontWeight: 600 }}
+                >
                     <FormattedMessage id="payment_receipt_order_3" />
                 </MyText>
                 <CustomTableContainer>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <Table
+                        sx={{ minWidth: 650 }}
+                        aria-label="simple table"
+                    >
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ backgroundColor: "#E4FFE3" }}>
+                                <TableCell
+                                    sx={{
+                                        backgroundColor: "#E4FFE3",
+                                    }}
+                                >
                                     <FormattedMessage id="payment_receipt_order_3_1_1" />
                                 </TableCell>
                                 <TableCell
-                                    sx={{ backgroundColor: "#E4FFE3" }}
+                                    sx={{
+                                        backgroundColor: "#E4FFE3",
+                                    }}
                                     align="left"
                                 >
                                     <FormattedMessage id="payment_receipt_order_3_1_2" />
                                 </TableCell>
                                 <TableCell
-                                    sx={{ backgroundColor: "#E4FFE3" }}
+                                    sx={{
+                                        backgroundColor: "#E4FFE3",
+                                    }}
                                     align="left"
                                 >
                                     <FormattedMessage id="payment_receipt_order_3_1_3" />
@@ -96,13 +130,18 @@ const PaymentReceiving = () => {
                                 <TableRow
                                     key={row.first}
                                     sx={{
-                                        "&:last-child td, &:last-child th": {
-                                            border: 0,
-                                            backgroundColor: "#EDF1F4",
-                                        },
+                                        "&:last-child td, &:last-child th":
+                                            {
+                                                border: 0,
+                                                backgroundColor:
+                                                    "#EDF1F4",
+                                            },
                                     }}
                                 >
-                                    <TableCell component="th" scope="row">
+                                    <TableCell
+                                        component="th"
+                                        scope="row"
+                                    >
                                         {row.first}
                                     </TableCell>
                                     <TableCell align="left">
@@ -122,8 +161,25 @@ const PaymentReceiving = () => {
                 <MyText variant="body2" sx={{ mt: 3.2 }}>
                     <FormattedMessage id="payment_receipt_order_3_5" />
                 </MyText>
+                <MyText variant="body2" sx={{ mt: 3.2 }}>
+                    Доставка товаров, не перечисленных в п.2 Правил
+                    выдачи разрешения на осуществление розничной
+                    торговли безрецептурных лекарственных препаратов
+                    для медицинского применения дистанционным
+                    способом, осуществления такой торговли и доставки
+                    указанных лекарственных препаратов гражданам,
+                    утвержденных Постановлением Правительства РФ от 16
+                    мая 2020 г. N 697 производится без ограничений
+                </MyText>
+                <MyText variant="body2" sx={{ mt: 3.2 }}>
+                    Заказы собирает заведующий аптеки: Торопова Марина
+                    Константиновна . Телефон: +79142801313
+                </MyText>
 
-                <MyText variant="body1" sx={{ mt: 3.2, fontWeight: 600 }}>
+                <MyText
+                    variant="body1"
+                    sx={{ mt: 3.2, fontWeight: 600 }}
+                >
                     <FormattedMessage id="payment_receipt_order_4" />
                 </MyText>
                 {array.map((item, index) => (
@@ -144,7 +200,7 @@ const PaymentReceiving = () => {
                             ))}
                         </Box>
                     </Box>
-                ))} */}
+                ))}
             </InfoBlog>
         </div>
     );

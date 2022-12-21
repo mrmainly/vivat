@@ -19,29 +19,56 @@ import { PageLoading } from "./components";
 const LazyHome = lazy(() => import("./pages/home"));
 
 const App = () => {
-    const [currentLocale, setCurrentLocale] = useState(LOCALES.RUSSIAN);
+    const [currentLocale, setCurrentLocale] = useState(
+        LOCALES.RUSSIAN
+    );
 
     const changeLocale = (localeCode: string) => {
         setCurrentLocale(localeCode);
     };
 
     return (
-        <IntlProvider messages={messages[currentLocale]} defaultLocale={currentLocale} locale={LOCALES.RUSSIAN}>
-            <LanguageContext.Provider value={{ currentLocale, changeLocale }}>
+        <IntlProvider
+            messages={messages[currentLocale]}
+            defaultLocale={currentLocale}
+            locale={LOCALES.RUSSIAN}
+        >
+            <LanguageContext.Provider
+                value={{ currentLocale, changeLocale }}
+            >
                 <BrowserRouter>
                     <Routes>
-                        <Route path={ROUTES.HOME} element={<Layout />}>
+                        <Route
+                            path={ROUTES.HOME}
+                            element={<Layout />}
+                        >
                             <Route
                                 index
                                 element={
-                                    <Suspense fallback={<PageLoading />}>
+                                    <Suspense
+                                        fallback={<PageLoading />}
+                                    >
                                         <LazyHome />
                                     </Suspense>
                                 }
                             />
-                            {PageList.map((item: any, index: number) => (
-                                <Route key={index} element={<Suspense fallback={<PageLoading />}>{item.element}</Suspense>} path={item.path} />
-                            ))}
+                            {PageList.map(
+                                (item: any, index: number) => (
+                                    <Route
+                                        key={index}
+                                        element={
+                                            <Suspense
+                                                fallback={
+                                                    <PageLoading />
+                                                }
+                                            >
+                                                {item.element}
+                                            </Suspense>
+                                        }
+                                        path={item.path}
+                                    />
+                                )
+                            )}
                         </Route>
                     </Routes>
                 </BrowserRouter>

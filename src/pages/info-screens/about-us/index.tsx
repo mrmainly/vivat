@@ -12,6 +12,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 
 const AboutUs = () => {
+    const navigation = () => {
+        window.location.href =
+            "https://roszdravnadzor.gov.ru/about/structure/territorial/22";
+    };
+
     const data = {
         title: <FormattedMessage id="organization_details" />,
         columns: [
@@ -68,7 +73,9 @@ const AboutUs = () => {
         },
         { first: "БИК:", second: "049805609" },
         {
-            first: <FormattedMessage id="organization_head_position" />,
+            first: (
+                <FormattedMessage id="organization_head_position" />
+            ),
             second: <FormattedMessage id="general_directior" />,
         },
         {
@@ -81,7 +88,7 @@ const AboutUs = () => {
         },
         {
             first: "Лицензия:",
-            second: <FormattedMessage id="license_number" />,
+            second: "Л042-01179-14/00168376 от  14.06.2019",
         },
     ];
     return (
@@ -92,27 +99,54 @@ const AboutUs = () => {
                 </MyText>
                 <Box sx={{ mt: 1.6 }}>
                     {data.columns.map((item, index) => (
-                        <MyText variant="body2" sx={{ mt: 1.6 }} key={index}>
+                        <MyText
+                            variant="body2"
+                            sx={{ mt: 1.6 }}
+                            key={index}
+                        >
                             {item}
                         </MyText>
                     ))}
                 </Box>
+                <MyText
+                    sx={{
+                        mt: 1,
+                        color: "#E54D2B",
+                        fontWeight: 600,
+                        cursor: "pointer",
+                    }}
+                    onClick={navigation}
+                >
+                    Уполномоченные федеральные органы исполнительной
+                    власти, осуществляющие контроль за розничной
+                    реализацией лекарственных средств "дистанционным
+                    способом"
+                </MyText>
                 <TableContainer sx={{ mt: 3.6 }}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <Table
+                        sx={{ minWidth: 650 }}
+                        aria-label="simple table"
+                    >
                         <TableBody>
                             {rows.map((row, index) => (
                                 <TableRow
                                     key={index}
                                     sx={{
-                                        "&:last-child td, &:last-child th": {
-                                            border: 0,
-                                        },
+                                        "&:last-child td, &:last-child th":
+                                            {
+                                                border: 0,
+                                            },
                                     }}
                                 >
-                                    <TableCell component="th" scope="row">
+                                    <TableCell
+                                        component="th"
+                                        scope="row"
+                                    >
                                         {row.first}
                                     </TableCell>
-                                    <TableCell align="left">{row.second}</TableCell>
+                                    <TableCell align="left">
+                                        {row.second}
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

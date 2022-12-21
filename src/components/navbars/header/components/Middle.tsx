@@ -27,7 +27,11 @@ const Middle = () => {
         <MidleBar>
             <MidleBarItem>
                 <MenuItem onClick={() => navigate(ROUTES.HOME)}>
-                    <img src="/img/Frame60.png" style={{ height: 90 }} alt="" />
+                    <img
+                        src="/img/Frame60.png"
+                        style={{ height: 90 }}
+                        alt=""
+                    />
                 </MenuItem>
             </MidleBarItem>
             <MidleBarItem sx={{ width: "100%", ml: 2, mr: 2 }}>
@@ -40,7 +44,10 @@ const Middle = () => {
                     <img src="/img/Frame3.png" alt="" />
                     <Box>
                         <MyText>Якутск</MyText>
-                        <MyText variant="body2" sx={{ color: "#999999" }}>
+                        <MyText
+                            variant="body2"
+                            sx={{ color: "#999999" }}
+                        >
                             Город
                         </MyText>
                     </Box>
@@ -55,10 +62,19 @@ const Middle = () => {
                     <img src="/img/Frame212.png" alt="" />
                     <Box>
                         <MyText>Лермонтова 38</MyText>
-                        <MyText variant="body2" sx={{ color: "#999999" }}>
+                        <MyText
+                            variant="body2"
+                            sx={{ color: "#999999" }}
+                        >
                             Адрес аптеки
                         </MyText>
                     </Box>
+                </Box>
+                <Box sx={{ ml: 3, mt: 0.5 }}>
+                    <MyText>08:00-24:00</MyText>
+                    <MyText sx={{ color: "#999999" }}>
+                        ежедневно, без выходных
+                    </MyText>
                 </Box>
             </MidleBarItem>
             <MidleBarItem>
@@ -67,7 +83,11 @@ const Middle = () => {
                     style={{ height: 103, width: 92 }}
                     alt=""
                 />
-                <img src="/img/Frame949.png" style={{ height: 90 }} alt="" />
+                <img
+                    src="/img/Frame949.png"
+                    style={{ height: 90 }}
+                    alt=""
+                />
             </MidleBarItem>
         </MidleBar>
     );
