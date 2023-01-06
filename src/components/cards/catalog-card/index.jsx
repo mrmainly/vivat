@@ -10,7 +10,10 @@ import cookie from "js-cookie";
 import { MyText, MyButton } from "../..";
 import ROUTES from "../../../routes";
 import { useTransferBasketMutation } from "../../../services/BasketService";
-import { useAddedFavoriteMutation, useDeleteFavoriteInProductMutation } from "../../../services/FavoritesService";
+import {
+    useAddedFavoriteMutation,
+    useDeleteFavoriteInProductMutation,
+} from "../../../services/FavoritesService";
 import "./catalog-card.css";
 
 const ImgItem = styled(Box)({
@@ -31,7 +34,17 @@ const CombinedBox = styled(Box)({
     width: "100%",
 });
 
-const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRecept, type }) => {
+const CatalogCard = ({
+    img,
+    specialText,
+    id,
+    name,
+    producer,
+    fav,
+    stocks,
+    notRecept,
+    type,
+}) => {
     const Root = styled(Box)(({ theme }) => ({
         display: "flex",
         flexDirection: "column",
@@ -42,7 +55,10 @@ const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRec
         margin: "0 auto",
         width: type === "catalog" ? 200 : "90%",
         "&:hover": {
-            boxShadow: type === "catalog" ? "" : "0px 0px 20px rgba(0,0,0,0.8)",
+            boxShadow:
+                type === "catalog"
+                    ? ""
+                    : "0px 0px 20px rgba(0,0,0,0.8)",
         },
         transition: "all 1s ease",
         height: 400,
@@ -59,8 +75,10 @@ const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRec
     const navigate = useNavigate();
     const jwttoken = cookie.get("jwttoken");
     const [transferBasketId] = useTransferBasketMutation();
-    const [addedTransferId, { isLoading: isAddedFavoriteLoading }] = useAddedFavoriteMutation();
-    const [deleteFavoriteId, { isLoading: isDeteleFavoriteLoading }] = useDeleteFavoriteInProductMutation();
+    const [addedTransferId, { isLoading: isAddedFavoriteLoading }] =
+        useAddedFavoriteMutation();
+    const [deleteFavoriteId, { isLoading: isDeteleFavoriteLoading }] =
+        useDeleteFavoriteInProductMutation();
 
     const addedFavorite = () => {
         addedTransferId({ id: cartId })
@@ -71,7 +89,9 @@ const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRec
                     setFavStatus(!favStatus);
                 }
             })
-            .catch((error) => toast.error("Товар не добавлен в избранное"));
+            .catch((error) =>
+                toast.error("Товар не добавлен в избранное")
+            );
     };
 
     const TransferBasket = () => {
@@ -80,10 +100,20 @@ const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRec
                 if (res.data) {
                     toast.success("Товар добавлен в корзину");
                 } else {
-                    if (res.error.data.errors[0] === "Товар отпускается только по рецепту врача") {
-                        toast.error("Товар отпускается только по рецепту врача");
-                    } else if (res.error.data.errors[0] === "item.count more than stocks.qty") {
-                        toast.error("Кол-во товаров в вашей корзине на данный момент превышает кол-во товаров на складе");
+                    if (
+                        res.error.data.errors[0] ===
+                        "Товар отпускается только по рецепту врача"
+                    ) {
+                        toast.error(
+                            "Товар отпускается только по рецепту врача"
+                        );
+                    } else if (
+                        res.error.data.errors[0] ===
+                        "item.count more than stocks.qty"
+                    ) {
+                        toast.error(
+                            "Кол-во товаров в вашей корзине на данный момент превышает кол-во товаров на складе"
+                        );
                     } else {
                         toast.error("Товар не найден");
                     }
@@ -118,7 +148,9 @@ const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRec
         <Root>
             <ImgItem
                 sx={{
-                    backgroundImage: img ? `url(data:image/jpeg;base64,${img})` : "url(/img/Frame1319-min.png)",
+                    backgroundImage: img
+                        ? `url(data:image/jpeg;base64,${img})`
+                        : "url(/img/Frame1319-min.png)",
                 }}
                 onClick={() => {
                     navigate(`${ROUTES.PRODUCT_DETAIL}/${id}`);
@@ -148,7 +180,10 @@ const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRec
                 </MyText>
             </Box>
             {stocks?.qty > 0 ? (
-                <MyText variant="body2" sx={{ color: "#55CD61", mt: 1 }}>
+                <MyText
+                    variant="body2"
+                    sx={{ color: "#55CD61", mt: 1 }}
+                >
                     В наличии: {stocks.qty} шт
                 </MyText>
             ) : (
@@ -195,7 +230,11 @@ const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRec
                     sx={{ width: 130 }}
                     size="medium"
                     onClick={() => {
-                        jwttoken ? TransferBasket() : toast.error("данная операция доступно только при авторизации");
+                        jwttoken
+                            ? TransferBasket()
+                            : toast.error(
+                                  "данная операция доступно только при авторизации"
+                              );
                     }}
                 >
                     В корзину
@@ -205,18 +244,41 @@ const CatalogCard = ({ img, specialText, id, name, producer, fav, stocks, notRec
                         size="small"
                         sx={{ mr: 1 }}
                         onClick={deleteFavorite}
-                        className={isAddedFavoriteLoading || isDeteleFavoriteLoading ? "fuvLoadingIcon" : ""}
-                        disabled={isAddedFavoriteLoading || isDeteleFavoriteLoading ? true : false}
+                        className={
+                            isAddedFavoriteLoading ||
+                            isDeteleFavoriteLoading
+                                ? "fuvLoadingIcon"
+                                : ""
+                        }
+                        disabled={
+                            isAddedFavoriteLoading ||
+                            isDeteleFavoriteLoading
+                                ? true
+                                : false
+                        }
                     >
-                        <FavoriteIcon sx={{ color: "#55CD61" }} fontSize="large" />
+                        <FavoriteIcon
+                            sx={{ color: "#55CD61" }}
+                            fontSize="large"
+                        />
                     </IconButton>
                 ) : (
                     <IconButton
                         size="small"
                         sx={{ mr: 1 }}
                         onClick={switchFav}
-                        className={isAddedFavoriteLoading || isDeteleFavoriteLoading ? "fuvLoadingIcon" : ""}
-                        disabled={isAddedFavoriteLoading || isDeteleFavoriteLoading ? true : false}
+                        className={
+                            isAddedFavoriteLoading ||
+                            isDeteleFavoriteLoading
+                                ? "fuvLoadingIcon"
+                                : ""
+                        }
+                        disabled={
+                            isAddedFavoriteLoading ||
+                            isDeteleFavoriteLoading
+                                ? true
+                                : false
+                        }
                     >
                         <img src="/img/Favorite_light.png" alt="" />
                     </IconButton>

@@ -66,7 +66,7 @@ const ProductCardsSlider = ({ data }) => {
     const settings = {
         dots: false,
         centerPadding: "0px",
-        infinite: true,
+        infinite: false,
         speed: 500,
         variableWidth: true,
         swipeToSlide: true,

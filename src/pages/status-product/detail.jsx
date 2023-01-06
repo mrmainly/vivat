@@ -3,7 +3,11 @@ import { Box, Grid, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 
-import { StatusCard, MyText, StatusPaymentError } from "../../components";
+import {
+    StatusCard,
+    MyText,
+    StatusPaymentError,
+} from "../../components";
 import ThemeMain from "../../theme";
 import { useGetOrderMeDetailQuery } from "../../services/ProductsService";
 import { deliveryChoise, statusChoise } from "../../constants";
@@ -37,18 +41,26 @@ const StatusProductDetail = () => {
     };
 
     useEffect(() => {
-        if (!data?.transactions[0].is_payed) {
+        if (data?.transactions[0].is_payed === false) {
             handleOpen();
         }
     }, []);
 
     if (isLoading) {
         return (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mt: 5,
+                }}
+            >
                 <CircularProgress />
             </Box>
         );
     }
+
+    console.log("dat", data);
 
     return (
         <>
@@ -72,7 +84,10 @@ const StatusProductDetail = () => {
                         <Box sx={{ display: "flex" }}>
                             <MyText>Статус доставки</MyText>&nbsp;
                             <MyText
-                                sx={{ color: ThemeMain.palette.primary.main }}
+                                sx={{
+                                    color: ThemeMain.palette.primary
+                                        .main,
+                                }}
                             >
                                 {deliveryChoise[data?.delivery_type]}
                             </MyText>
@@ -97,7 +112,10 @@ const StatusProductDetail = () => {
                                     title={item.GoodsCode.name}
                                     price={item.price}
                                     producer={item.GoodsCode.producer}
-                                    img={item.GoodsCode?.esphoto[0]?.fileData}
+                                    img={
+                                        item.GoodsCode?.esphoto[0]
+                                            ?.fileData
+                                    }
                                     id={item?.GoodsCode.id}
                                 />
                             </Grid>
@@ -105,11 +123,14 @@ const StatusProductDetail = () => {
                     </Grid>
                     <Info>
                         <TextWrapper>
-                            <MyText variant="body1">Текущий статус:</MyText>
+                            <MyText variant="body1">
+                                Текущий статус:
+                            </MyText>
                             <MyText
                                 variant="body1"
                                 sx={{
-                                    color: ThemeMain.palette.primary.main,
+                                    color: ThemeMain.palette.primary
+                                        .main,
                                     marginLeft: 1,
                                 }}
                             >
@@ -117,7 +138,9 @@ const StatusProductDetail = () => {
                             </MyText>
                         </TextWrapper>
                         <TextWrapper>
-                            <MyText variant="body1">Сумма заказа </MyText>
+                            <MyText variant="body1">
+                                Сумма заказа{" "}
+                            </MyText>
                             <MyText
                                 variant="body1"
                                 sx={{

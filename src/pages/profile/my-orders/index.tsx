@@ -33,10 +33,12 @@ const MyOrders = () => {
 
     return (
         <Main>
-            <ProfileSideBar title={<FormattedMessage id="my_orders" />} />
+            <ProfileSideBar
+                title={<FormattedMessage id="my_orders" />}
+            />
             <Box sx={{ mt: 6.3, width: "100%" }}>
                 <MyOrdersTable
-                    data={data}
+                    data={data.results}
                     navigate_to={ROUTES.MY_ORDERS_DETAIL}
                 />
             </Box>

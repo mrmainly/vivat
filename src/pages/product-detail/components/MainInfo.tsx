@@ -1,6 +1,11 @@
 import React from "react";
 
-import { Grid, Box, IconButton, CircularProgress } from "@mui/material";
+import {
+    Grid,
+    Box,
+    IconButton,
+    CircularProgress,
+} from "@mui/material";
 import { styled } from "@mui/system";
 import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -76,7 +81,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                     toast.error("Товар не добавлен в избранное");
                 }
             })
-            .catch(() => toast.error("Товар не добавлен в избранное"));
+            .catch(() =>
+                toast.error("Товар не добавлен в избранное")
+            );
     };
 
     const TransferBasket = () => {
@@ -85,7 +92,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                 if (res.data) {
                     toast.success("Товар добавлен в корзину");
                 } else {
-                    if (res.error.data.errors[0] === "NotRecept False") {
+                    if (
+                        res.error.data.errors[0] === "NotRecept False"
+                    ) {
                         toast.error(
                             "Это лекарственное средство отпускается по рецепту"
                         );
@@ -98,11 +107,13 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
     };
 
     const deleteFavorite = () => {
-        deleteFavoriteId({ id: data.fav?.fav_id }).then((res: any) => {
-            if (res.error) {
-                toast.error("Товар не удален");
+        deleteFavoriteId({ id: data.fav?.fav_id }).then(
+            (res: any) => {
+                if (res.error) {
+                    toast.error("Товар не удален");
+                }
             }
-        });
+        );
     };
 
     const array = [
@@ -125,8 +136,9 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                 <Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
                     <ItemImg
                         sx={{
-                            backgroundImage: data?.esphoto[0]?.fileData
-                                ? `url(data:image/jpeg;base64,${data.esphoto[0]?.fileData})`
+                            backgroundImage: data?.esphoto[0]
+                                ?.fileData
+                                ? `url(data:image/jpeg;base64,${data.esphoto[1]?.fileData})`
                                 : "url(/img/vivat_background.png)",
                         }}
                     ></ItemImg>
@@ -140,7 +152,8 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                             <MyText
                                 variant="body1"
                                 sx={{
-                                    color: ThemeMain.palette.primary.main,
+                                    color: ThemeMain.palette.primary
+                                        .main,
                                     mt: 2,
                                     mb: 2,
                                 }}
@@ -150,7 +163,11 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                         ) : (
                             <MyText
                                 variant="body1"
-                                sx={{ color: "#FE5860", mt: 2, mb: 2 }}
+                                sx={{
+                                    color: "#FE5860",
+                                    mt: 2,
+                                    mb: 2,
+                                }}
                             >
                                 Товара нет в наличии
                             </MyText>
@@ -165,12 +182,15 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                                     <Span
                                         key={index}
                                         onClick={() =>
-                                            navigate(ROUTES.PRODUCT_PAGE, {
-                                                state: {
-                                                    id: item.id,
-                                                    title: item.name,
-                                                },
-                                            })
+                                            navigate(
+                                                ROUTES.PRODUCT_PAGE,
+                                                {
+                                                    state: {
+                                                        id: item.id,
+                                                        title: item.name,
+                                                    },
+                                                }
+                                            )
                                         }
                                     >
                                         {item.name}
@@ -186,7 +206,10 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                             >
                                 {item.label}
                                 <span
-                                    style={{ marginLeft: 15, color: "black" }}
+                                    style={{
+                                        marginLeft: 15,
+                                        color: "black",
+                                    }}
                                 >
                                     {item.value}
                                 </span>
@@ -229,11 +252,15 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                                 sx={{
                                     display: "flex",
                                     mt: 1,
-                                    color: ThemeMain.palette.primary.main,
+                                    color: ThemeMain.palette.primary
+                                        .main,
                                 }}
                             >
                                 <LocalShippingIcon />
-                                <MyText variant="body1" sx={{ ml: 2 }}>
+                                <MyText
+                                    variant="body1"
+                                    sx={{ ml: 2 }}
+                                >
                                     Доставка доступна
                                 </MyText>
                             </Box>
@@ -247,7 +274,10 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                             >
                                 <LocalShippingIcon />
 
-                                <MyText variant="body1" sx={{ ml: 2 }}>
+                                <MyText
+                                    variant="body1"
+                                    sx={{ ml: 2 }}
+                                >
                                     Нет доставки
                                 </MyText>
                             </Box>
