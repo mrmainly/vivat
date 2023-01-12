@@ -35,18 +35,6 @@ const PaymentReceiving = () => {
                 <FormattedMessage id="payment_receipt_order_4_1_3" />,
             ],
         },
-        {
-            title: (
-                <FormattedMessage id="payment_receipt_order_4_2" />
-            ),
-            columns: [
-                <FormattedMessage id="payment_receipt_order_4_2_1" />,
-                <FormattedMessage id="payment_receipt_order_4_2_2" />,
-                <FormattedMessage id="payment_receipt_order_4_2_3" />,
-                <FormattedMessage id="payment_receipt_order_4_2_4" />,
-                <FormattedMessage id="payment_receipt_order_4_2_5" />,
-            ],
-        },
     ];
     const rows = [
         createData(

@@ -34,11 +34,19 @@ const Img = styled("img")(({ theme }) => ({
 const BlogDetail = () => {
     const params = useParams();
 
-    const { data, isLoading } = useGetBlogDetailQuery({ id: params.id });
+    const { data, isLoading } = useGetBlogDetailQuery({
+        id: params.id,
+    });
 
     if (isLoading) {
         return (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mt: 5,
+                }}
+            >
                 <CircularProgress />
             </Box>
         );
@@ -59,7 +67,10 @@ const BlogDetail = () => {
             </MyText>
 
             {/* <Tag>{data.tags.name}</Tag> */}
-            <Img src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`} alt="" />
+            <Img
+                src={`http://xn----7sbbagaytx2c4ad.xn--p1ai${data.image}`}
+                alt=""
+            />
             <Box sx={{ display: "flex", color: "gray" }}>
                 <MyText variant="body1" sx={{ mr: 8 }}>
                     {data.date}
@@ -71,7 +82,10 @@ const BlogDetail = () => {
                     </MyText>
                 </Box>
             </Box>
-            <div style={{ marginTop: 20, width: "90%" }} dangerouslySetInnerHTML={{ __html: data.description }}></div>
+            <div
+                style={{ marginTop: 20, width: "90%" }}
+                dangerouslySetInnerHTML={{ __html: data.description }}
+            ></div>
         </Root>
     );
 };
