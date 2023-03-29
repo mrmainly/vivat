@@ -36,6 +36,8 @@ interface InputProps {
         shrink: boolean;
     };
     defaultValue?: any;
+    error?: any;
+    helperText?: any;
 }
 
 interface FormProps {
@@ -43,6 +45,7 @@ interface FormProps {
     sx?: SxProps;
     onSubmit?: any;
     style?: React.CSSProperties;
+    noValidate?: any;
 }
 
 interface ButtonProps {

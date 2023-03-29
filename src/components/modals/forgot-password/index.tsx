@@ -69,7 +69,12 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     return (
         <DialogTitleStyle
             {...other}
-            sx={{ m: 0, p: 2, bgcolor: "#f5f5f5", textAlign: "center" }}
+            sx={{
+                m: 0,
+                p: 2,
+                bgcolor: "#f5f5f5",
+                textAlign: "center",
+            }}
         >
             <Box
                 sx={{
@@ -108,8 +113,10 @@ const ForgotPasswordModal = () => {
         (state: any) => state.auth_modal_slice
     );
     const dispatch = useDispatch();
-    const { openForgotPasswordModal, openLoginModal } = authModalSlice.actions;
-    const [togglePhoneAndMail] = useForgotPasswordChangePhoneAndMailMutation();
+    const { openForgotPasswordModal, openLoginModal } =
+        authModalSlice.actions;
+    const [togglePhoneAndMail] =
+        useForgotPasswordChangePhoneAndMailMutation();
     const [postForgotV1] = useForgotPasswordV1Mutation();
     const [postForgotV2] = useForgotPasswordV2Mutation();
     const [postForgotV3] = useForgotPasswordV3Mutation();
@@ -118,7 +125,11 @@ const ForgotPasswordModal = () => {
 
     const [toggle, setToggle] = useState("Email");
 
-    const { register, handleSubmit } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         mode: "onBlur",
     });
 
@@ -235,10 +246,14 @@ const ForgotPasswordModal = () => {
                             }}
                         >
                             <Form onSubmit={handleSubmit(verify)}>
-                                <Input label="Код" {...register("code")} />
+                                <Input
+                                    label="Код"
+                                    {...register("code")}
+                                />
                                 <MenuItem
                                     sx={{
-                                        color: ThemeMain.palette.primary.main,
+                                        color: ThemeMain.palette
+                                            .primary.main,
                                     }}
                                     onClick={() => resend_code()}
                                 >
@@ -246,7 +261,10 @@ const ForgotPasswordModal = () => {
                                 </MenuItem>
                                 {/* <Input label="Пароль" type="password" />
                                 <Input label="Подтверждение пароля" type="password" /> */}
-                                <MyButton style={{ marginTop: 10 }} fullWidth>
+                                <MyButton
+                                    style={{ marginTop: 10 }}
+                                    fullWidth
+                                >
                                     Продолжить
                                 </MyButton>
                             </Form>
@@ -267,7 +285,9 @@ const ForgotPasswordModal = () => {
                                 alignItems: "center",
                             }}
                         >
-                            <Form onSubmit={handleSubmit(resetPassword)}>
+                            <Form
+                                onSubmit={handleSubmit(resetPassword)}
+                            >
                                 <Input
                                     label="Пароль"
                                     type="password"
@@ -278,7 +298,10 @@ const ForgotPasswordModal = () => {
                                     type="password"
                                     {...register("forgot_password")}
                                 />
-                                <MyButton style={{ marginTop: 10 }} fullWidth>
+                                <MyButton
+                                    style={{ marginTop: 10 }}
+                                    fullWidth
+                                >
                                     Продолжить
                                 </MyButton>
                             </Form>
@@ -289,14 +312,9 @@ const ForgotPasswordModal = () => {
                 {firstForm && (
                     <ModalContent dividers>
                         <MyText sx={{ textAlign: "center" }}>
-                            Чтобы восстановить пароль, введите Вашу электронную
-                            почту
+                            Чтобы восстановить пароль, введите Вашу
+                            электронную почту
                         </MyText>
-                        <ToggleButton
-                            sx={{ mt: 2 }}
-                            toggleState={toggle}
-                            setToggleState={setToggle}
-                        />
                         <MyText sx={{ textAlign: "center", mt: 2 }}>
                             {toggle === "phone"
                                 ? "Для подтверждения номера телефона вам поступит СМС сообщение с кодом"
@@ -314,8 +332,19 @@ const ForgotPasswordModal = () => {
                                 {toggle === "Email" ? (
                                     <Input
                                         label="Электронная почта"
-                                        {...register("email")}
-                                        required
+                                        {...register("email", {
+                                            required:
+                                                "Электронная почта обязательное поле",
+                                            pattern: {
+                                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                                message:
+                                                    "Не корректные данные электронной почты",
+                                            },
+                                        })}
+                                        error={!!errors.email}
+                                        helperText={
+                                            errors?.email?.message
+                                        }
                                     />
                                 ) : (
                                     <InputMask
@@ -334,7 +363,10 @@ const ForgotPasswordModal = () => {
                                         )}
                                     </InputMask>
                                 )}
-                                <MyButton style={{ marginTop: 10 }} fullWidth>
+                                <MyButton
+                                    style={{ marginTop: 10 }}
+                                    fullWidth
+                                >
                                     Восстановить пароль
                                 </MyButton>
                             </Form>

@@ -66,7 +66,12 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
     return (
         <DialogTitleStyle
-            sx={{ m: 0, p: 2, bgcolor: "#f5f5f5", textAlign: "center" }}
+            sx={{
+                m: 0,
+                p: 2,
+                bgcolor: "#f5f5f5",
+                textAlign: "center",
+            }}
             {...other}
         >
             <Box
@@ -105,14 +110,19 @@ const SignUpModal: React.FC<SignModalProps> = () => {
     const { openRegister } = useSelector(
         (state: any) => state.auth_modal_slice
     );
-    const { openLoginModal, openRegisterModal } = authModalSlice.actions;
+    const { openLoginModal, openRegisterModal } =
+        authModalSlice.actions;
     const [postRegisterV1] = useRegisterV1Mutation();
     const [postRegisterV2] = useRegisterV2Mutation();
     const [postRegsiterV3] = useRegisterV3Mutation();
 
     const dispatch = useDispatch();
 
-    const { register, handleSubmit } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         mode: "onBlur",
     });
 
@@ -145,7 +155,7 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                 first_name: data.first_name,
                 last_name: data.last_name,
                 patronymic: data.patronymic,
-                email: data.email,
+                phone: data.phone,
                 birth_date: data.birth_date,
             })
                 .then((res: any) => {
@@ -200,13 +210,19 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                                     зарегистрирован. Необходимо{" "}
                                     <span
                                         style={{
-                                            color: ThemeMain.palette.primary
-                                                .main,
+                                            color: ThemeMain.palette
+                                                .primary.main,
                                             cursor: "pointer",
                                         }}
                                         onClick={() => {
-                                            dispatch(openRegisterModal(false));
-                                            dispatch(openLoginModal(true));
+                                            dispatch(
+                                                openRegisterModal(
+                                                    false
+                                                )
+                                            );
+                                            dispatch(
+                                                openLoginModal(true)
+                                            );
                                         }}
                                     >
                                         авторизоваться.
@@ -215,31 +231,38 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                             ) : (
                                 ""
                             )}
-                            <Form onSubmit={handleSubmit(onSubmit)}>
-                                <InputMask
-                                    mask="79999999999"
-                                    disabled={false}
-                                    {...register("phone")}
-                                    required
-                                >
-                                    {() => (
-                                        <Input
-                                            {...register("phone")}
-                                            id="phone"
-                                            label="Телефон"
-                                            required
-                                        />
-                                    )}
-                                </InputMask>
+                            <Form
+                                onSubmit={handleSubmit(onSubmit)}
+                                noValidate
+                            >
+                                <Input
+                                    label="Электронная почта"
+                                    {...register("email", {
+                                        required:
+                                            "Электронная почта обязательное поле",
+                                        pattern: {
+                                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                            message:
+                                                "Не корректные данные электронной почты",
+                                        },
+                                    })}
+                                    error={!!errors.email}
+                                    helperText={
+                                        errors?.email?.message
+                                    }
+                                />
                                 <FormControlLabel
                                     sx={{ mt: 1.5 }}
-                                    control={<Checkbox defaultChecked />}
+                                    control={
+                                        <Checkbox defaultChecked />
+                                    }
                                     label={
                                         <MyText>
                                             Я соглашаюсь с{" "}
                                             <span
                                                 style={{
-                                                    color: ThemeMain.palette
+                                                    color: ThemeMain
+                                                        .palette
                                                         .primary.main,
                                                 }}
                                             >
@@ -249,7 +272,10 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                                         </MyText>
                                     }
                                 />
-                                <MyButton style={{ marginTop: 20 }} fullWidth>
+                                <MyButton
+                                    style={{ marginTop: 20 }}
+                                    fullWidth
+                                >
                                     Получить код
                                 </MyButton>
                             </Form>
@@ -267,14 +293,25 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                                 paddingBottom: 2,
                             }}
                         >
-                            {passwordText ? <p>Пароль не подошел</p> : ""}
-                            <Form onSubmit={handleSubmit(onSubmitVerify)}>
+                            {passwordText ? (
+                                <p>Пароль не подошел</p>
+                            ) : (
+                                ""
+                            )}
+                            <Form
+                                onSubmit={handleSubmit(
+                                    onSubmitVerify
+                                )}
+                            >
                                 <Input
-                                    label="SMS код"
+                                    label="EMAIL код"
                                     {...register("code")}
                                     required
                                 />
-                                <MyButton style={{ marginTop: 10 }} fullWidth>
+                                <MyButton
+                                    style={{ marginTop: 10 }}
+                                    fullWidth
+                                >
                                     Ввести пароль
                                 </MyButton>
                             </Form>
@@ -292,8 +329,16 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                                 paddingBottom: 2,
                             }}
                         >
-                            {passwordText ? <p>Пароль не подошел</p> : ""}
-                            <Form onSubmit={handleSubmit(onSubmitPassword)}>
+                            {passwordText ? (
+                                <p>Пароль не подошел</p>
+                            ) : (
+                                ""
+                            )}
+                            <Form
+                                onSubmit={handleSubmit(
+                                    onSubmitPassword
+                                )}
+                            >
                                 <Input
                                     label="Имя"
                                     {...register("first_name")}
@@ -310,8 +355,8 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                                     required
                                 />
                                 <Input
-                                    label="E-mail"
-                                    {...register("email")}
+                                    label="Номер телефона"
+                                    {...register("phone")}
                                     required
                                 />
                                 <Input
@@ -336,7 +381,10 @@ const SignUpModal: React.FC<SignModalProps> = () => {
                                     required
                                 />
 
-                                <MyButton style={{ marginTop: 10 }} fullWidth>
+                                <MyButton
+                                    style={{ marginTop: 10 }}
+                                    fullWidth
+                                >
                                     Завершить
                                 </MyButton>
                             </Form>

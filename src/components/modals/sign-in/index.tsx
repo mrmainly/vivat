@@ -121,11 +121,13 @@ const SignInModal: React.FC<SignModalProps> = () => {
         openForgotPasswordModal,
     } = authModalSlice.actions;
 
-    const { register, handleSubmit } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         mode: "onBlur",
     });
-
-    console.log("asd");
 
     const onSubmit = (data: any) => {
         postLogin({ ...data })
@@ -162,31 +164,35 @@ const SignInModal: React.FC<SignModalProps> = () => {
                     sm={16}
                 >
                     Если у вас есть учётная запись, авторизуйтесь,
-                    используя адрес электронной почты (email) или
-                    телефон
+                    используя адрес электронной почты (email)
                 </MyText>
                 <FormWrapper>
-                    <Form onSubmit={handleSubmit(onSubmit)}>
-                        <InputMask
-                            mask="79999999999"
-                            disabled={false}
-                            {...register("username")}
-                            required
-                        >
-                            {() => (
-                                <Input
-                                    {...register("username")}
-                                    id="phone"
-                                    label="Телефон"
-                                    required
-                                />
-                            )}
-                        </InputMask>
+                    <Form
+                        onSubmit={handleSubmit(onSubmit)}
+                        noValidate
+                    >
+                        <Input
+                            label="Электронная почта"
+                            {...register("username", {
+                                required:
+                                    "Электронная почта обязательное поле",
+                                pattern: {
+                                    value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                    message:
+                                        "Не корректные данные электронной почты",
+                                },
+                            })}
+                            error={!!errors.username}
+                            helperText={errors?.username?.message}
+                        />
                         <Input
                             label="Пароль"
-                            {...register("password")}
+                            {...register("password", {
+                                required: "Пароль обязательное поле",
+                            })}
                             type="password"
-                            required
+                            error={!!errors.password}
+                            helperText={errors?.password?.message}
                         />
                         <MenuItem
                             sx={{

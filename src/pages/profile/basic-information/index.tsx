@@ -39,6 +39,8 @@ const BasicInformation = () => {
         mode: "onBlur",
     });
 
+    console.log("data", data);
+
     const [patchAccountUser] = usePatchAccountUserMutation();
 
     const onSubmit = (data: any) => {
@@ -72,13 +74,20 @@ const BasicInformation = () => {
             <Box sx={{ mt: 6.3, width: "100%" }}>
                 <ProfileForm onSubmit={handleSubmit(onSubmit)}>
                     {isFetching ? (
-                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                            }}
+                        >
                             <SkeletonBasicInformation />
                         </Box>
                     ) : (
                         <>
                             <InputProfile
-                                label={<FormattedMessage id="surname" />}
+                                label={
+                                    <FormattedMessage id="surname" />
+                                }
                                 fullWidth
                                 defaultValue={data.last_name}
                                 {...register("last_name")}
@@ -91,14 +100,18 @@ const BasicInformation = () => {
                                 {...register("first_name")}
                             />
                             <InputProfile
-                                label={<FormattedMessage id="patronymic" />}
+                                label={
+                                    <FormattedMessage id="patronymic" />
+                                }
                                 margin="normal"
                                 fullWidth
                                 defaultValue={data.patronymic}
                                 {...register("patronymic")}
                             />
                             <InputProfile
-                                label={<FormattedMessage id="phone_number" />}
+                                label={
+                                    <FormattedMessage id="phone_number" />
+                                }
                                 margin="normal"
                                 fullWidth
                                 value={data.phone}
@@ -109,10 +122,12 @@ const BasicInformation = () => {
                                 margin="normal"
                                 fullWidth
                                 defaultValue={data.email}
-                                {...register("email")}
+                                disabled
                             />
                             <InputProfile
-                                label={<FormattedMessage id="birth_date" />}
+                                label={
+                                    <FormattedMessage id="birth_date" />
+                                }
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -122,7 +137,10 @@ const BasicInformation = () => {
                                 defaultValue={data.birth_date}
                                 {...register("birth_date")}
                             />
-                            <MyButton style={{ marginTop: 15 }} fullWidth>
+                            <MyButton
+                                style={{ marginTop: 15 }}
+                                fullWidth
+                            >
                                 Сохранить
                             </MyButton>
                         </>
