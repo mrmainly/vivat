@@ -138,7 +138,7 @@ const MainInfo: React.FC<MainInfoProps> = ({ data, isFetching }) => {
                         sx={{
                             backgroundImage: data?.esphoto[0]
                                 ?.fileData
-                                ? `url(data:image/jpeg;base64,${data.esphoto[1]?.fileData})`
+                                ? `url(data:image/jpeg;base64,${data.esphoto[0]?.fileData})`
                                 : "url(/img/vivat_background.png)",
                         }}
                     ></ItemImg>
